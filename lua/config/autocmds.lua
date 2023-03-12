@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- Delete undesired spaces
+-- Delete undesired spaces on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("spaces"),
   callback = function()
