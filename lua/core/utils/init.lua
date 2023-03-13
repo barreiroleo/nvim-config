@@ -16,8 +16,11 @@ M.get_root = require("core.utils.get_root")
 -- Used by Lazygit
 M.float_term = require("core.utils.float_term")
 
--- Shorthand to declare a keymap
--- Used by all keymaps declaration under config/keymaps
+--- Bind keymap to action
+---@param mode string: '', 'n', 'v', 'x', 'i', etc
+---@param lhs table<string>: modes
+---@param rhs string | function: action
+---@param opts table<boolean>: defaults { noremap = true, silent = true}
 M.map = function(mode, lhs, rhs, opts)
     opts = opts or {}
     opts.silent = opts.silent ~= false
@@ -30,5 +33,10 @@ end
 function M.has(plugin)
     return require("lazy.core.config").plugins[plugin] ~= nil
 end
+
+-- TODO: Migrate to Lua and proper keymap
+require("core.utils.search_replace_v")
+require("core.utils.HighlightRepeats")
+require("core.utils.ToggleWrap")
 
 return M
