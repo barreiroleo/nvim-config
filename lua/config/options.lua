@@ -73,3 +73,5 @@ end
 -- Fix markdown indentation settings
 vim.g.markdown_folding = 1 -- Enable the markdown plugin
 vim.g.markdown_recommended_style = 0 -- expandtab will be set by default
+-- Fix tex recognized as latex instead of plaintex
+vim.g.tex_flavor = "latex"
