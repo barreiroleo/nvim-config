@@ -23,43 +23,46 @@ local CatppuccinAfter = function()
     })
 end
 
-return {
-    { "catppuccin/nvim", name = "catppuccin",
-    lazy = false,
-    priority = 1000,
-    opts = {
-        flavour_dark = 'mocha',
-        transparent_background = true,
-        term_colors = true,
-        dim_inactive = {
-            enabled = false,
-            shade = 'dark',
-            percentage = 0,
+local catppuccin_opt = {
+    flavour_dark = 'mocha',
+    transparent_background = true,
+    term_colors = true,
+    dim_inactive = {
+        enabled = false,
+        shade = 'dark',
+        percentage = 0,
+    },
+    integrations = {
+        cmp = true,
+        symbols_outline = true,
+        telescope = true,
+        treesitter = true,
+        treesitter_context = true,
+        ts_rainbow = true,
+        -- Special integrations, see https://github.com/catppuccin/nvim#special-integrations
+        dap = {
+            enabled = true,
+            enable_ui = true,
         },
-        integrations = {
-            cmp = true,
-            symbols_outline = true,
-            telescope = true,
-            treesitter = true,
-            treesitter_context = true,
-            ts_rainbow = true,
-            -- Special integrations, see https://github.com/catppuccin/nvim#special-integrations
-            dap = {
-                enabled = true,
-                enable_ui = true,
-            },
-            indent_blankline = {
-                enabled = true,
-                colored_indent_levels = true,
-            },
-        },
-        custom_highlights = {
-            CursorLine = { bg = "#181825" }, -- Mocha: Mantle
+        indent_blankline = {
+            enabled = true,
+            colored_indent_levels = true,
         },
     },
-    config = function()
-        vim.cmd.colorscheme "catppuccin-mocha"
-        CatppuccinAfter()
-    end,
+    custom_highlights = {
+        CursorLine = { bg = "#181825" }, -- Mocha: Mantle
+    },
 }
+
+return {
+    { "catppuccin/nvim", name = "catppuccin",
+        enabled = false,
+        lazy = false,
+        priority = 1000,
+        opts = catppuccin_opt,
+        config = function()
+            vim.cmd.colorscheme("catppuccin-mocha")
+            CatppuccinAfter()
+        end,
+    }
 }

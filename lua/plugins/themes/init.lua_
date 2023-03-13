@@ -1,0 +1,98 @@
+local M = {}
+
+M.loaded = { name = {}, callback = {} }
+M.lualine = 'auto'
+
+M.themes = {
+    catpuccin = {
+        name = 'catppuccin',
+        callback = function()
+            require('configs.themes.catppuccin').setup()
+            local color = require('configs.themes.catppuccin').colors
+            -- Customize navic highlights
+            require('configs.themes.navic').create_highlight(color.Navic.bg, color.Navic.fg, color.Navic.fg)
+
+            -- Customize lualine theme
+            local lualine_theme = require 'lualine.themes.catppuccin'
+            lualine_theme.normal.c.bg = color.Lualine.normal_c_bg
+            lualine_theme.inactive.c.bg = color.Lualine.inactive_c_bg
+
+            -- TreesitterContext
+            vim.api.nvim_set_hl(0, 'TreesitterContext', {
+                bg = color.Std.mantle, fg = color.Std.surface0, underline = false
+            })
+            vim.api.nvim_set_hl(0, 'TreesitterContextLineNumber', {
+                bg = color.Std.mantle, fg = color.Std.surface0, underline = false,
+            })
+            vim.api.nvim_set_hl(0, 'TreesitterContextBottom', {
+                bg = color.Std.mantle, fg = color.Std.crust, underline = true,
+            })
+
+            M.lualine = lualine_theme
+        end,
+    },
+
+    edge = {
+        name = 'edge',
+        callback = function()
+            require('configs.themes.edge').setup()
+        end,
+    },
+
+    sonokai = {
+        name = 'sonokai',
+        callback = function()
+            require('configs.themes.sonokai').setup()
+        end,
+    },
+
+    gruvbox_material = {
+        name = 'gruvbox_material',
+        callback = function()
+            require('configs.themes.gruvbox').gruvbox_material()
+            M.lualine = 'gruvbox'
+        end,
+    },
+
+    gruvbox_community = {
+        name = 'gruvbox_community',
+        callback = function()
+            require('configs.themes.gruvbox').gruvbox_community()
+            M.lualine = 'gruvbox'
+        end,
+    },
+
+    tokyo = {
+        name = 'tokyo',
+        callback = function()
+            require("configs.themes.tokyo").setup()
+            M.lualine = 'tokyonight'
+        end
+    },
+
+    test = {
+        name = 'test',
+        callback = function()
+            print 'Hello'
+        end,
+    },
+}
+
+M.setup = function(theme)
+    if vim.g.theme_loaded then
+        return
+    end
+
+    M.loaded = theme
+    M.loaded.callback()
+    vim.g.theme_loaded = true
+end
+
+-- function test()
+--     vim.g.theme_loaded = false
+--     M.setup(M.themes.catpuccin)
+--     -- P(M.loaded)
+-- end
+--
+-- test()
+return M
