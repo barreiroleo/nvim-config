@@ -24,13 +24,17 @@ local CatppuccinAfter = function()
 end
 
 local catppuccin_opt = {
-    flavour_dark = 'mocha',
+    flavour = 'mocha',
+    background = {
+        light = "latte",
+        dark = "mocha"
+    },
     transparent_background = true,
-    term_colors = true,
+    term_colors = false,
     dim_inactive = {
         enabled = false,
         shade = 'dark',
-        percentage = 0,
+        percentage = 0.15,
     },
     integrations = {
         cmp = true,
@@ -56,12 +60,12 @@ local catppuccin_opt = {
 
 return {
     { "catppuccin/nvim", name = "catppuccin",
-        enabled = false,
+        enabled = true,
         lazy = false,
         priority = 1000,
         opts = catppuccin_opt,
         config = function()
-            vim.cmd.colorscheme("catppuccin-mocha")
+            vim.cmd.colorscheme("catppuccin")
             CatppuccinAfter()
         end,
     }
