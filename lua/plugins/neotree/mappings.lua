@@ -1,4 +1,6 @@
-local mappings = {
+local Mappings = {}
+
+Mappings.window = {
     ["S"] = "open_split",
     ["s"] = "open_vsplit",
     -- ["S"] = "split_with_window_picker",
@@ -22,4 +24,4 @@ local mappings = {
 }
 
 
-return mappings
+return Mappings

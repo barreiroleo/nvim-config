@@ -1,25 +1,25 @@
-local renderers = require("plugins.neotree.renderers")
 local commands  = require("plugins.neotree.commands")
 local mappings  = require("plugins.neotree.mappings")
+local renderers = require("plugins.neotree.renderers")
 
 local opts = {
-    popup_border_style = "rounded",
-    source_selector = {
-        winbar = false,
-        statusline = true
-    },
     default_component_configs = {
         indent = {
             with_expanders = true
         },
     },
-    renderers = renderers,
-    window = {
-        position = "left",
-        width = 35,
-        mappings = mappings,
+
+    event_handlers = {
+        { event = "neo_tree_buffer_enter",
+            handler = function(arg)
+                vim.opt.number = true
+                vim.opt.relativenumber = true
+            end,
+        }
     },
+
     filesystem = {
+        bind_to_cwd = false,
         commands = commands,
         filtered_items = {
             visible = false,
@@ -34,18 +34,26 @@ local opts = {
         follow_current_file = true,
         use_libuv_file_watcher = true -- OS level file watchers
     },
+
     git_status = {
         window = {
             position = "right",
         }
     },
-    event_handlers = {
-        { event = "neo_tree_buffer_enter",
-            handler = function(arg)
-                vim.opt.number = true
-                vim.opt.relativenumber = true
-            end,
-        }
+
+    popup_border_style = "rounded",
+
+    renderers = renderers,
+
+    source_selector = {
+        winbar = false,
+        statusline = true
+    },
+
+    window = {
+        position = "left",
+        width = 35,
+        mappings = mappings.window,
     },
 }
 
