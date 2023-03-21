@@ -21,9 +21,6 @@ return{
             }
         },
         config = function()
-            require('telescope').load_extension('fzf')
-            require('telescope').load_extension('file_browser')
-
             map("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Telescope find by file name" })
             map("n", "<leader>fg", ":Telescope live_grep<CR>",  { desc = "Telescope find by text" })
             map("n", "<leader>fb", ":Telescope buffers<CR>",    { desc = "Telescope buffers list" })
@@ -51,6 +48,14 @@ return{
 
             -- File browser
             map("n", "<leader>fe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {desc = "Telescope toogle file browser" })
+
+            vim.api.nvim_create_autocmd('User', {
+                pattern = 'LazyDone',
+                callback = function()
+                    require('telescope').load_extension('fzf')
+                    require('telescope').load_extension('file_browser')
+                end
+            })
         end
     }
 }
