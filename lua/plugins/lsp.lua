@@ -1,4 +1,27 @@
 return {
+    { "neovim/nvim-lspconfig",
+        -- event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
+            { "WhoIsSethDaniel/mason-tool-installer.nvim" },
+            { "jose-elias-alvarez/null-ls.nvim" },
+            { "j-hui/fidget.nvim",
+                opts = {
+                    window = { blend = 0 },
+                    sources = { ["null-ls"] = { ignore = true } },
+                }
+            },
+
+            { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+            { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+            { "hrsh7th/cmp-nvim-lsp",
+                cond = function() return require("core.utils").has("nvim-cmp") end
+            },
+        },
+        event = "VeryLazy",
+        config = function() require "core.lsp" end,
+    },
     { 'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
         dependencies = {
