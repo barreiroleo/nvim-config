@@ -6,3 +6,9 @@
 require("config.keymaps.general")
 require("config.keymaps.interface")
 require("config.keymaps.behaviour")
+
+local opts = { noremap = true, silent = true }
+-- vim.api.nvim_set_keymap('n', '<leader>e',  ":lua vim.diagnostic.open_float()<CR>",  opts)
+-- vim.api.nvim_set_keymap('n', '[d',        ":lua vim.diagnostic.goto_prev()<CR>",   opts)
+-- vim.api.nvim_set_keymap('n', ']d',        ":lua vim.diagnostic.goto_next()<CR>",   opts)
+-- vim.api.nvim_set_keymap('n', '<leader>q',  ":lua vim.diagnostic.setloclist()<CR>",  opts)

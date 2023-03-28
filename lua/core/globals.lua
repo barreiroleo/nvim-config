@@ -1,7 +1,7 @@
-LOG = require("core.utils.log").warn
+LOG =  require("core.utils.log").warn
 
 P = function(v)
-    vim.notify(vim.inspect(v), vim.log.levels.WARN)
+    vim.notify(vim.inspect(v) .. "\n", vim.log.levels.WARN)
     return v
 end
 

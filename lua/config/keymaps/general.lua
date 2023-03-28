@@ -22,8 +22,9 @@ map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Search
+map({ "n", "v" }, "/", "/\\v", { desc = "Search with regex by default" })
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-map({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
+map({ "n", "x" }, "fw", "*N", { desc = "Search word under cursor" })
 map('n', 'n', 'nzz', { desc = "Next search result and center" })
 map('n', 'N', 'Nzz', { desc = "Prev search result and center" })
 
