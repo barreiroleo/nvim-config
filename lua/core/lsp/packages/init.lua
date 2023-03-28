@@ -35,6 +35,9 @@ Pack.dap = {
     "js-debug-adapter", "chrome-debug-adapter", "firefox-debug-adapter", -- Js / Ts
 }
 
+-- TODO: Would be nice migrate to a config like { "eslint_d", { code_action, diagnostics } }
+-- Using the key and values to build something like null_ls.builtins[sourcetype][tool]
+-- Check: github.com/jinzhongjia/neovim-config/blob/lsp/lua/plugin-config/mason/null-ls/list.lua
 local off_lsp = {
     null_ls.builtins.code_actions.refactoring, -- Refactoring plug
     null_ls.builtins.diagnostics.trail_space,  -- Highlight trail_space
