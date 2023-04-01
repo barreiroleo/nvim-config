@@ -1,5 +1,5 @@
 -- Themes: latte, frappe, macchiato, mocha
--- ~/.local/share/nvim/site/pack/packer/start/catppuccin/lua/catppuccin/palettes/mocha.lua | base, mantle, crust
+-- ~/.local/share/nvim/lazy/catppuccin/lua/catppuccin/palettes/mocha.lua | base, mantle, crust
 local flavour_dark = 'mocha'
 local flavour_light = 'latte'
 
