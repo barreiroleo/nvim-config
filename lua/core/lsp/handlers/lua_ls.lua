@@ -1,3 +1,5 @@
+local def_opts = require("core.lsp.opts")
+
 local M = {}
 
 M.settings = {
@@ -25,8 +27,12 @@ M.settings = {
 }
 
 M.opts = {
+    on_attach = function(client, bufnr)
+        print("Loading lua_ls")
+        def_opts.on_attach(client, bufnr)
+    end,
+    capabilities = def_opts.capabilities,
     settings = M.settings,
 }
-
 
 return M.opts
