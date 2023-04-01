@@ -1,4 +1,5 @@
 require "config.options"
+require "core.globals"
 
 -- autocmds and keymaps can wait to load
 vim.api.nvim_create_autocmd("User", {
@@ -7,7 +8,6 @@ vim.api.nvim_create_autocmd("User", {
   callback = function()
     require "config.autocmds"
     require "config.keymaps"
-    require "core.globals"
   end,
 })
 

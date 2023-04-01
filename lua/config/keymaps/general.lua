@@ -2,6 +2,7 @@ local util_has = require("core.utils").has
 local map = require("core.utils").map
 
 map("n", "<leader><leader>x", require("core.utils").save_and_exec, { desc = "Save and execute the current file" })
+map("n", "<leader>m", "<cmd>messages<cr>", { desc = "Open vim messages" })
 
 map('', '<leader>z', '<cmd>call ToggleWrap()<cr>',{ desc = "Toggle line wrap" })
 map('n', '<F7>', 'gg=G<C-o>', { desc = "Reindent file"})

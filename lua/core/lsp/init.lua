@@ -31,6 +31,6 @@ require("null-ls").setup {
     sources = null_sources,
 }
 
--- Config lsp diagnostic UI
--- require("core.lsp.diagnostics")
+-- Config LSP related UI
+require("core.lsp.ui")
 -- require("core.lsp.format")
