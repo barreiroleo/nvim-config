@@ -63,6 +63,10 @@ opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
 opt.termguicolors = true -- True color support
 opt.winminwidth = 5 -- Minimum window width
+-- opt.listchars:append("space:⋅ ")
+-- opt.listchars:append("eol:↴")
+opt.listchars:append("tab:» ")
+
 if vim.fn.has("nvim-0.9.0") == 1 then opt.splitkeep = "screen" end
 
 -- Open links with gx on WSL
