@@ -13,6 +13,10 @@ local on_attach = function(_, bufnr)
     -- map('n', '<F6>', function() require("core.functions.FormatNull").FormatNull() end,  {buffer = bufnr})
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<F6>',      ":lua vim.lsp.buf.format()<CR>",      opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'v', '<F6>',      ":'<,'>:lua vim.lsp.buf.range_formatting()<CR>",  opts)
+
+    map('n', 'gpd', require("core.lsp.utils.peek").PeekDefinition, { buffer = bufnr })
+    map('n', 'gpD', require("core.lsp.utils.peek").PeekDeclaration, { buffer = bufnr })
+    map('n', 'gpi', require("core.lsp.utils.peek").PeekImplementation, { buffer = bufnr })
 end
 
 return on_attach

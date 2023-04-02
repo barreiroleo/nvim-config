@@ -24,6 +24,7 @@ opt.wrap = false -- Disable line wrap
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect" -- List of options for Insert mode completion
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
+opt.foldenable = false -- Foolds open by default
 opt.foldmethod = "expr" -- Folding based on treesitter
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.mouse = "a" -- Enable mouse mode

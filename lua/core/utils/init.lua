@@ -17,8 +17,8 @@ M.get_root = require("core.utils.get_root")
 M.float_term = require("core.utils.float_term")
 
 --- Bind keymap to action
----@param mode string: '', 'n', 'v', 'x', 'i', etc
----@param lhs table<string>: modes
+---@param mode table<string> | string: '', 'n', 'v', 'x', 'i', etc
+---@param lhs table<string> | string: modes
 ---@param rhs string | function: action
 ---@param opts table<boolean>: defaults { noremap = true, silent = true}
 M.map = function(mode, lhs, rhs, opts)
