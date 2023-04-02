@@ -1,13 +1,13 @@
 local keymaps = {}
 
-keymaps.TS_basics = {
+keymaps.basics = {
     init_selection    = "gnn",
     node_incremental  = "grn",
     scope_incremental = "grc",
     node_decremental  = "grm",
 }
 
-keymaps.TS_refactor = {
+keymaps.refactor = {
     smart_rename = {
         smart_rename = "grr",
     },
@@ -20,7 +20,7 @@ keymaps.TS_refactor = {
     }
 }
 
-keymaps.TS_textobjects = {
+keymaps.textobjects = {
     select = {
         -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
