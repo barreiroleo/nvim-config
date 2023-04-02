@@ -29,6 +29,23 @@ local on_attach_navic = function(client, bufnr)
     end
 end
 
+-- Open the target of a textDocument/definition and textDocument/declaration
+-- request in a floating window
+local preview_location_callback = function(_, result)
+    if result == nil or vim.tbl_isempty(result) then
+        return nil
+    end
+    vim.lsp.util.preview_location(result[1])
+end
+function PeekDefinition()
+    local params = vim.lsp.util.make_position_params()
+    return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+end
+function PeekDeclaration()
+    local params = vim.lsp.util.make_position_params()
+    return vim.lsp.buf_request(0, 'textDocument/declaration', params, preview_location_callback)
+end
+
 -- Export opts
 M.capabilities = get_capabilities()
 
