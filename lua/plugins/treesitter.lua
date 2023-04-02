@@ -1,21 +1,7 @@
 local basics      = require("plugins.treesitter.TS-basics")
 local textobjects = require("plugins.treesitter.TS-textobjects")
 local refactor    = require("plugins.treesitter.TS-refactor")
-
-local parsers = {
-    "bash",
-    "c", "cpp", "c_sharp", "make", "cmake", "meson",
-    "lua", "python", "rust", "go", "java",
-    "latex", "bibtex", "markdown",
-
-    "http", "html", "css", "scss",
-    "javascript", "jsdoc", "tsx", "typescript",
-    "php", "phpdoc",
-
-    "regex", "dockerfile", "hjson", "toml", "yaml",
-    "diff", "gitattributes", "gitignore",
-    "help", "vim",
-}
+local parsers     = require("plugins.treesitter.TS-parsers")
 
 local treesitter_opts = {
     -- Install parsers synchronously (only `ensure_installed`)
@@ -46,7 +32,12 @@ return{
             { "nvim-treesitter/nvim-treesitter-textobjects" },
             { "nvim-treesitter/nvim-treesitter-refactor" },
             { "p00f/nvim-ts-rainbow" },
-        }
-        -- config = function() require("configs.treesitter").setup() end,
+            { "nvim-treesitter/nvim-treesitter-context",
+                opts = { mode = 'topline' }
+            }
+        },
+        config = function()
+            require("nvim-treesitter.configs").setup(treesitter_opts)
+        end
     },
 }
