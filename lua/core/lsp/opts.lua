@@ -3,11 +3,7 @@ local M = {}
 
 -- Extends completion capabilities if has cpm_nvim_lsp
 local get_capabilities = function()
-    if util_has("cmp_nvim_lsp") then
-        return require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-    else
-        return vim.lsp.protocol.make_client_capabilities()
-    end
+    return require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 end
 
 -- Show signature hint as you type
