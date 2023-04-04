@@ -34,12 +34,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd("FileType", {
     group = augroup("close_with_q"),
     pattern = {
-        "help", -- <cmd>h help
-        "man",  -- <cmd>Man Tmux
-        "notify", -- <cmd>messages
-        "qf", -- Quickfix
-        "query", -- :InspectTree
-        -- "PlenaryTestPopup", "lspinfo", "spectre_panel", "startuptime", "tsplayground",
+        -- Vim native: <cmd>help, <cmd>Man, <cmd>messages, Quickfix
+        "help", "man", "notify", "qf", "lspinfo",
+        -- Treesitter: <cmd>InspectTree,
+        "query", "tsplayground",
+        -- Spectre search and replace
+        "spectre_panel",
+        -- Others
+        "PlenaryTestPopup", "startuptime",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

@@ -12,7 +12,7 @@ local get_custom_handlers = function()
          local server = file:match("^(.+)%.lua$")
          if server and not server:match("^init$") then
             local opts = require("core.lsp.handlers." .. server)
-            -- P({file, server, opts})
+            -- LOG({file, server, opts})
             handlers[server] = function()
                 require('lspconfig')[server].setup(opts)
             end

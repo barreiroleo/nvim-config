@@ -35,9 +35,6 @@ if not util_has("trouble.nvim") then
     map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 end
 
--- toggle options
-map("n", "<leader>ud", require("core.utils").toggle_diagnostics, { desc = "Toggle Diagnostics" })
-
 -- lazygit
 map("n", "<leader>gg", function() require("core.utils").float_term({ "lazygit" }, { cwd = require("core.utils").get_root() }) end, { desc = "Lazygit (root dir)" })
 map("n", "<leader>gG", function() require("core.utils").float_term({ "lazygit" }) end, { desc = "Lazygit (cwd)" })
@@ -51,3 +48,10 @@ end
 map("n", "<leader>ft", function() require("core.utils").float_term(nil, { cwd = require("core.utils").get_root() }) end, { desc = "Terminal (root dir)" })
 map("n", "<leader>fT", function() require("core.utils").float_term() end, { desc = "Terminal (cwd)" })
 map("t", "<esc><esc>", "<c-\\><c-n>", {desc = "Enter Normal Mode"})
+
+-- Diagnostics
+map("n", "<leader>ud", require("core.utils").toggle_diagnostics, { desc = "Toggle Diagnostics" })
+-- map('n', '<leader>e', ":lua vim.diagnostic.open_float()<CR>",    { desc = "Open diagnostics in float" })
+map('n', '[d', ":lua vim.diagnostic.goto_prev()<CR>",            { desc = "Go to previous diagnostics" })
+map('n', ']d', ":lua vim.diagnostic.goto_next()<CR>",            { desc = "Go to next diagnostics" })
+map('n', '<leader>q', ":lua vim.diagnostic.setloclist()<CR>",    { desc = "Location of diagnostics" })

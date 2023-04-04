@@ -32,7 +32,7 @@ end
 
 M.opts = {
     on_attach = function(client, bufnr)
-        P("Loading arduino_ls")
+        LOG("Loading arduino_ls")
         def_opts.on_attach(client, bufnr)
     end,
     capabilities = def_opts.capabilities,

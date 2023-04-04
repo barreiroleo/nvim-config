@@ -59,7 +59,7 @@ M.opts = {
     on_attach = function(client, bufnr)
         print("Loading clangd")
         def_opts.on_attach(client, bufnr)
-        P('require("configs.dap.gdb")')
+        LOG('require("configs.dap.gdb")')
     end,
     capabilities = def_opts.capabilities,
     commands = M.commands,
