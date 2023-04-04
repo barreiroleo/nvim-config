@@ -5,7 +5,7 @@ local treesitter_opts = {
 
     require("plugins.treesitter.ts-textobjects"),
     require("plugins.treesitter.ts-refactor"),
-    require("plugins.treesitter.ts-playground")
+    require("plugins.treesitter.ts-playground"),
 }
 
 return{
@@ -16,8 +16,11 @@ return{
             { "nvim-treesitter/nvim-treesitter-refactor" },
             { "p00f/nvim-ts-rainbow" },
             { "nvim-treesitter/nvim-treesitter-context",
-                opts = { mode = 'topline' }
-            }
+                config = function()
+                    require("treesitter-context").setup { mode = 'topline' }
+                end
+            },
+            { "windwp/nvim-ts-autotag", config = true }
         },
         config = function()
             require("nvim-treesitter.configs").setup(treesitter_opts)
