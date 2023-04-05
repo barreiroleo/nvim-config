@@ -1,0 +1,11 @@
+# "allow" - Don't check for this lint
+# "warn" - Warn for this lint
+# "deny" - Error for this lint
+
+std="lua51+vim"
+
+[rules]
+global_usage = "warn"
+multiple_statements = "allow"
+shadowing = "warn"
+unused_variable = "warn"
