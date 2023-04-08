@@ -48,9 +48,9 @@ local keymaps_debug = {
     { "n", "dC",    ":lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<CR>", { desc = "DAP: Conditional Breakpoint" } },
     { "n", "dt",    ":lua require'dap'.toggle_breakpoint()<CR>",                           { desc = "DAP: Toggle Breakpoint" } },
 
-    { "n", "dE",    ":lua require'dapui'.eval(vim.fn.input '[Expression] > ')<CR>",        { desc = "DAP: Evaluate Input" } },
-    { "v", "de",    ":lua require'dapui'.eval()<CR>",                                      { desc = "DAP: Evaluate" } },
-    { "n", "dr",    ":lua require'dap'.repl.toggle()<CR>",                                 { desc = "DAP: Toggle Repl" } },
+    { "n",          "dE",    ":lua require'dapui'.eval(vim.fn.input '[Expression] > ')<CR>", { desc = "DAP: Evaluate Input" } },
+    { { "n", "v" }, "de",    ":lua require'dapui'.eval()<CR>",                             { desc = "DAP: Evaluate" } },
+    { "n",          "dr",    ":lua require'dap'.repl.toggle()<CR>",                        { desc = "DAP: Toggle Repl" } },
 
     { "n", "dU",    ":lua require'dapui'.toggle()<CR>",                                    { desc = "DAP: Toggle UI" } },
     { "n", "dd",    ":lua require'dap'.disconnect()<CR>",                                  { desc = "DAP: Disconnect" } },

@@ -18,6 +18,8 @@ M.save_and_exec = function()
   local current_file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
   vim.notify(string.format("File %s Sourced", current_file_name), vim.log.levels.INFO, { title = "Core utils" })
 
+  -- If has nightly with Lua module loader
+  if vim.loader then vim.loader.reset(vim.api.nvim_buf_get_name(0)) end
   vim.cmd("silent w")
   vim.cmd("message clear")
   vim.cmd(command)
