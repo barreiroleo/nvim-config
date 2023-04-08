@@ -27,12 +27,15 @@ Pack.lsp = {
     "yamlls",                                  -- YAML
 }
 
+-- Use dap adapter names, not mason.nvim package names.
+-- See the keys in require("mason-nvim-dap.mappings.source")
 Pack.dap = {
-    "bash-debug-adapter",   -- Bash
-    "cpptools", "codelldb", -- C / C++
-    "netcoredbg",           -- C#
-    "debugpy",              -- Python
-    "js-debug-adapter", "chrome-debug-adapter", "firefox-debug-adapter", -- Js / Ts
+    'bash',
+    'coreclr',             -- netcoredbg
+    'cppdbg', 'codelldb',  -- Cpptool, codelldb
+    'javadbg', 'javatest', -- Java
+    'node2', 'js', 'chrome', 'firefox',
+    'python',              --debugpy
 }
 
 -- TODO: Would be nice migrate to a config like { "eslint_d", { code_action, diagnostics } }
