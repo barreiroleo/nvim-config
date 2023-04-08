@@ -40,6 +40,8 @@ vim.api.nvim_create_autocmd("FileType", {
         "query", "tsplayground",
         -- Spectre search and replace
         "spectre_panel",
+        -- Debug REPL
+        "dap-repl",
         -- Others
         "PlenaryTestPopup", "startuptime",
     },

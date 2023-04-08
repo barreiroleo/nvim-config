@@ -10,6 +10,11 @@ vim.o.pumheight = 10 -- Limit number of suggestions
 cmp.event:on('confirm_done', require("nvim-autopairs.completion.cmp").on_confirm_done({ map_char = { tex = '' } }))
 
 cmp.setup {
+    enabled = function()
+        return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+            or require("cmp_dap").is_dap_buffer()
+    end,
+
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -48,6 +53,12 @@ cmp.setup {
         }),
     }
 }
+
+cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    sources = {
+        { name = "dap" },
+    },
+})
 
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),

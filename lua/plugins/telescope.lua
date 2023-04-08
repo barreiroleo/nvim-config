@@ -4,6 +4,7 @@ return{
             { "nvim-lua/plenary.nvim"},
             { "nvim-telescope/telescope-fzf-native.nvim" },
             { "nvim-telescope/telescope-file-browser.nvim" },
+            { "nvim-telescope/telescope-dap.nvim" }
         },
         opts = {
             defaults = {
@@ -53,5 +54,15 @@ return{
         keys = {
             {"<leader>fe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "Telescope toogle file browser"}
         },
+    },
+    { "nvim-telescope/telescope-dap.nvim",
+        config = function() require('telescope').load_extension('dap') end,
+        keys = {
+            { "<leader>fdcm", ":Telescope dap commands<cr>",         desc = "Telescope dap commands" },
+            { "<leader>fdcf", ":Telescope dap configurations<cr>",   desc = "Telescope dap configurations" },
+            { "<leader>fdb",  ":Telescope dap list_breakpoints<cr>", desc = "Telescope dap list breakpoints" },
+            { "<leader>fdv",  ":Telescope dap variables<cr>",        desc = "Telescope dap variables" },
+            { "<leader>fdf",  ":Telescope dap frames<cr>",           desc = "Telescope dap frames" },
+        }
     }
 }
