@@ -1,38 +1,54 @@
--- This file contains the color definition for all the modifications for individual plugins.
--- It's like a repository. Fetch this file from a particular plugin like:
---     require("plugins.themes.colorhub").SpecificPlugin
--- will return a table with the color definition depending on the actual
--- colorscheme or a nil value in case of there isn't a color definition for the
--- current colorscheme. That can be used for example
---     local colors = require("plugins.theme.colorhub").Navic
---     if colors then bg = colors.bg end
+-- This file is a repository that contains the custom colors used around my config.
+--
+-- Each color scheme or theme installed should execute the update function to update the repository.
+--      require("plugins.themes.colorscheme").update("colors_name")
+--
+-- At the moment the colors are defined here but in the future would be nice if each theme could provide its own override.
+--
+-- The usage inner the plugins could be as follows: get the specific plugin function and use it afterward.
+--       local get_colors = require("plugins.themes.colorscheme").get_Navic
+--       -- In some setup next
+--       colors = get_colors()
+-- The specific functions must return the data scheme that needs the plugins to configure.
 
 local M = {}
+local _ = {}
 
-M.CursorLine_bg = nil
-M.Navic = nil
-M.Lualine = nil
-M.Context = nil
+_.CursorLine_bg = nil
+_.Navic = { bg = "#11111B", fg = "#CDD6F4", fg_icon = "#CDD6F4" }
+_.Lualine = nil
+_.Context = { ['TC'] = nil, ['TC_LineNumber'] = nil, ['TC_Bottom'] = nil }
 
-if vim.g.colors_name == "catppuccin" then
-    local flavour = require("catppuccin").flavour
-    local palette = require('catppuccin.palettes').get_palette(flavour)
-    M.CursorLine = {
-        bg = palette.mantle
-    }
-    M.Navic = {
-        bg = palette.crust,
-        fg = palette.text,
-        fg_icon = palette.peach,
-    }
-    M.Lualine = {
-        normal_c_bg = palette.crust,
-        inactive_c_bg = palette.mantle
-    }
-    M.Context = {
-        bg = palette.mantle,
-        fg = palette.text,
-    }
+
+function M.update(theme)
+    theme = theme or vim.g.colors_name
+
+    if vim.g.colors_name == 'catppuccin' then
+        local flavour = require('catppuccin').flavour
+        local palette = require('catppuccin.palettes').get_palette(flavour)
+        _.CursorLine = {
+            bg = palette.mantle,
+        }
+        _.Navic = {
+            bg = palette.mantle,
+            fg = palette.text,
+            fg_icon = palette.peach,
+        }
+        _.Lualine = {
+            normal_c_bg = palette.crust,
+            inactive_c_bg = palette.mantle,
+        }
+        _.Context = {
+            ["TC"] = { bg = palette.mantle },
+            ["TC_Bottom"] = { bg = palette.mantle },
+            ["TC_LineNumber"] = { bg = palette.mantle, fg = palette.surface0 }
+        }
+    end
 end
+
+function M.get_CursorLine() return _.CursorLine_bg end
+function M.get_Navic() return _.Navic end
+function M.get_Lualine() return _.Lualine end
+function M.get_Context() return _.Context end
 
 return M

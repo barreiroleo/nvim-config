@@ -1,5 +1,5 @@
 local navic = require("nvim-navic")
-local theme = require("plugins.themes.colorhub").Lualine
+local get_colors = require("plugins.themes.colorhub").get_Lualine
 
 local M = { }
 
@@ -41,7 +41,7 @@ M.winbar = {
 }
 
 M.options = {
-    theme = theme,
+    theme = get_colors(),
     component_separators = '|',
     section_separators = { left = '', right = '' },
     disabled_filetypes = { 'neo-tree', 'TelescopePrompt', 'packer', 'toggleterm' },

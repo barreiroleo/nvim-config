@@ -3,9 +3,10 @@
 local flavour_dark = 'mocha'
 local flavour_light = 'latte'
 
+
 local AutoLightDark = function()
     vim.api.nvim_create_autocmd('OptionSet', {
-        group = vim.api.nvim_create_augroup("CatpuccinAfterUser", { clear = true }),
+        group = vim.api.nvim_create_augroup("CatppuccinAfterUser", { clear = true }),
         pattern = 'background',
         callback = function()
             vim.cmd('Catppuccin ' .. (vim.v.option_new == 'light' and flavour_light or flavour_dark))
@@ -15,10 +16,11 @@ end
 
 local CatppuccinAfter = function()
     vim.api.nvim_create_autocmd("User", {
-        group = vim.api.nvim_create_augroup("CatpuccinAfterUser", { clear = true }),
+        group = vim.api.nvim_create_augroup("CatppuccinAfterUser", { clear = true }),
         pattern = "VeryLazy",
         callback = function()
             AutoLightDark()
+            require("plugins.ui.ts-context").set_tscontext_hl()
         end,
     })
 end
@@ -63,9 +65,10 @@ return {
         enabled = true,
         lazy = false,
         priority = 1000,
-        opts = catppuccin_opt,
         config = function()
+            require("catppuccin").setup(catppuccin_opt)
             vim.cmd.colorscheme("catppuccin")
+            require("plugins.themes.colorhub").update("catppuccin")
             CatppuccinAfter()
         end,
     }
