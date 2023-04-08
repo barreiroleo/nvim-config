@@ -31,11 +31,11 @@ M.winbar = {
     -- Placing a empty secction, the solid background continues to the end.
     -- On lualine issues a new interface for colors has been proposed.
     active_winbar = {
-        lualine_c = { 'filename', { navic.get_location, cond = navic.is_available } },
+        lualine_c = { 'filename', { function() return navic.get_location() end, cond = navic.is_available } },
         lualine_x = { '" "' },
     },
     inactive_winbar = {
-        lualine_c = { 'filename', { navic.get_location, cond = navic.is_available } },
+        lualine_c = { 'filename', { function() return navic.get_location() end, cond = navic.is_available } },
         lualine_x = { '" "' },
     },
 }
@@ -51,7 +51,7 @@ M.options = {
 
 return {
     { "nvim-lualine/lualine.nvim",
-        enabled = false,
+        enabled = true,
         event = "VeryLazy",
         dependencies = {
             {"SmiteshP/nvim-navic"},

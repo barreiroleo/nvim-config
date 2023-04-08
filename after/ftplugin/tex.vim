@@ -55,5 +55,3 @@ setlocal conceallevel=0
 
 set textwidth=100
 set colorcolumn=100
-
-echo "Hello tex.vim"

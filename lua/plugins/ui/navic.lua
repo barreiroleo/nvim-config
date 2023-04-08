@@ -1,4 +1,5 @@
 local M = {}
+
 --- Create the highlights for navic
 ---@param bg string "#181825" | "#11111B"
 ---@param fg string "#94E2D5" | "#CDD6F4"
@@ -37,15 +38,23 @@ M.create_highlight = function (bg, fg, fg_icon)
     vim.api.nvim_set_hl(0, "NavicSeparator",          {default = true, bg = bg, fg = fg})
 end
 
-M.setup = function()
-    require("nvim-navic").setup {
+M.config = function()
+    require('nvim-navic').setup {
         highlight = true,
-        separator = "|",
+        separator = '|',
         depth_limit = 0,
-        depth_limit_indicator = "..",
+        depth_limit_indicator = '..',
     }
+
+    vim.api.nvim_create_autocmd('User', {
+        group = vim.api.nvim_create_augroup('NavicAfterUser', { clear = true }),
+        pattern = 'VeryLazy',
+        callback = function()
+            require('plugins.ui.navic').create_highlight()
+        end,
+    })
 end
 
 -- M.create_highlight("#FF0000")
--- M.setup()
+
 return M
