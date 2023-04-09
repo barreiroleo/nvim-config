@@ -16,9 +16,7 @@ return{
             { "nvim-treesitter/nvim-treesitter-refactor" },
             { "p00f/nvim-ts-rainbow" },
             { "nvim-treesitter/nvim-treesitter-context",
-                config = function()
-                    require("treesitter-context").setup { mode = 'topline' }
-                end
+                opts = { mode = 'topline' }
             },
             { "windwp/nvim-ts-autotag", config = true }
         },

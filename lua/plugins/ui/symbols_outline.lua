@@ -1,5 +1,3 @@
-local map = require("core.utils").map
-
 local keymaps = {
     close          = { "q" },
     goto_location  = "<Cr>",
@@ -9,6 +7,7 @@ local keymaps = {
     rename_symbol  = "r",
     code_actions   = "a",
 }
+
 return {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",

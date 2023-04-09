@@ -12,6 +12,22 @@ return {
         config = function () require("core.dap") end
     },
 
+    -- Refactoring
+    { "ThePrimeagen/refactoring.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
+        },
+        keys = {
+            { "<leader>rr", "<cmd>lua require('refactoring').select_refactor()<CR>", mode = { "n", "v" }, desc = "Refactoring: Select refactor" },
+        },
+        opts = {
+            prompt_func_return_type = { cpp = true, c = true },     -- prompt for return type
+            prompt_func_param_type = { cpp = true, c = true },      -- prompt for function parameters
+        }
+    },
+
     -- Testing
     { "nvim-neotest/neotest",
         dependencies = {

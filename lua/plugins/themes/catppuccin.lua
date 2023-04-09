@@ -3,7 +3,6 @@
 local flavour_dark = 'mocha'
 local flavour_light = 'latte'
 
-
 local AutoLightDark = function()
     vim.api.nvim_create_autocmd('OptionSet', {
         group = vim.api.nvim_create_augroup("CatppuccinAfterUser", { clear = true }),
@@ -20,7 +19,7 @@ local CatppuccinAfter = function()
         pattern = "VeryLazy",
         callback = function()
             AutoLightDark()
-            require("plugins.ui.ts-context").set_tscontext_hl()
+            require("plugins.treesitter.ts-context").set_tscontext_hl()
         end,
     })
 end
