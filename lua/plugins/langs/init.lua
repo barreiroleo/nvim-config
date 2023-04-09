@@ -1,8 +1,8 @@
 return {
     -- Java
-    { 'mfussenegger/nvim-jdtls' },
+    { 'mfussenegger/nvim-jdtls', ft = "java" },
     -- Rust
-    { 'rust-lang/rust.vim' },
+    { 'rust-lang/rust.vim', ft = "rust" },
 
     -- Markdown
     { import = "plugins.langs.markdown" },

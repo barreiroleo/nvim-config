@@ -4,16 +4,31 @@ return{
             { "nvim-lua/plenary.nvim"},
             { "nvim-telescope/telescope-fzf-native.nvim" },
             { "nvim-telescope/telescope-file-browser.nvim" },
-            { "nvim-telescope/telescope-dap.nvim" }
+            { "nvim-telescope/telescope-dap.nvim" },
+            { "AckslD/nvim-neoclip.lua" },
+            { "Badhi/vim-p4-files" }
         },
-        opts = {
-            defaults = {
-                theme = "ivy",
-                winblend = 10
+        config = function()
+            local actions = require("telescope.actions")
+            require("telescope").setup {
+                defaults = {
+                    theme = "ivy",
+                    winblend = 10,
+                    mappings = {
+                        i = {
+                            ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+                        },
+                        n = {
+                            ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+                            ["<C-n>"] = actions.cycle_history_next,
+                            ["<C-p>"] = actions.cycle_history_prev,
+                        },
+                    },
+                }
             }
-        },
+        end,
         keys = {
-            { "<leader>fp", function() require("telescope.builtin").find_files( { cwd = require("lazy.core.config").options.root }) end,
+            { "<leader>flp", function() require("telescope.builtin").find_files( { cwd = require("lazy.core.config").options.root }) end,
                 desc = "Find plugin files"
             },
 
@@ -41,28 +56,46 @@ return{
             {"<leader>fldws", ":Telescope lsp_dynamic_workspace_symbols<CR>", desc = "Telescope LSP dynamically list workspace symbols"},
 
             {"<leader>fldg", ":Telescope diagnostics<CR>", desc = "Telescope LSP list diagnostics"},
-
-        },
+        }
     },
 
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make",
+        lazy = true,
         config = function() require('telescope').load_extension('fzf') end,
-        lazy = true
     },
+
     { "nvim-telescope/telescope-file-browser.nvim",
-        config = function() require('telescope').load_extension('file_browser') end,
         keys = {
-            {"<leader>fe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "Telescope toogle file browser"}
+            { "<leader>fe", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "Telescope toogle file browser" }
         },
+        config = function() require('telescope').load_extension('file_browser') end
     },
+
     { "nvim-telescope/telescope-dap.nvim",
-        config = function() require('telescope').load_extension('dap') end,
         keys = {
             { "<leader>fdcm", ":Telescope dap commands<cr>",         desc = "Telescope dap commands" },
             { "<leader>fdcf", ":Telescope dap configurations<cr>",   desc = "Telescope dap configurations" },
             { "<leader>fdb",  ":Telescope dap list_breakpoints<cr>", desc = "Telescope dap list breakpoints" },
             { "<leader>fdv",  ":Telescope dap variables<cr>",        desc = "Telescope dap variables" },
             { "<leader>fdf",  ":Telescope dap frames<cr>",           desc = "Telescope dap frames" },
-        }
+        },
+        config = function() require('telescope').load_extension('dap') end
+    },
+
+    { "AckslD/nvim-neoclip.lua",
+        keys = {
+            { "<leader>fc", ":Telescope neoclip<cr>", desc = "Telescope clipboard history" }
+        },
+        config = function ()
+            require('neoclip').setup()
+            require('telescope').load_extension('neoclip')
+        end
+    },
+
+    { "Badhi/vim-p4-files",
+        keys = {
+            { "<leader>fp", ":Telescope vim_p4_files<cr>", desc = "Telescope query files in P4" }
+        },
+        config = function() require('telescope').load_extension('vim_p4_files') end
     }
 }
