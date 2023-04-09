@@ -1,8 +1,11 @@
 return {
     { "windwp/nvim-autopairs",
+        event = { "BufNewFile", "BufReadPre" },
         opts = { check_ts = true }
     },
-    { "mbbill/undotree" },
+    { "mbbill/undotree",
+        event = { "BufNewFile", "BufReadPre" },
+    },
     { "junegunn/vim-easy-align",
         keys = {
             { "ga", "<Plug>(EasyAlign)", mode = "n", desc = "EasyAlign in visual mode: e.g. vipga" },
@@ -10,11 +13,18 @@ return {
         }
     },
     { "folke/todo-comments.nvim",
+        event = { "BufNewFile", "BufReadPre" },
         dependencies = "nvim-lua/plenary.nvim",
     },
-    { "tpope/vim-repeat" },
-    { "zef/vim-cycle" },
-    { "numToStr/Comment.nvim" },
+    { "tpope/vim-repeat",
+        event = { "BufNewFile", "BufReadPre" },
+    },
+    { "zef/vim-cycle",
+        event = { "BufNewFile", "BufReadPre" },
+    },
+    { "numToStr/Comment.nvim",
+        event = { "BufNewFile", "BufReadPre" },
+    },
     { "windwp/nvim-spectre",
         keys = {
             { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
@@ -22,6 +32,7 @@ return {
     },
 
     { "tpope/vim-surround",
+        event = { "BufNewFile", "BufReadPre" },
         config = function()
             vim.cmd [[
                 autocmd FileType tex let b:surround_{char2nr("q")} = "`\r'"

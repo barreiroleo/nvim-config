@@ -32,7 +32,8 @@ local opts = {
         },
         group_empty_dirs = true,
         follow_current_file = true,
-        use_libuv_file_watcher = true -- OS level file watchers
+        use_libuv_file_watcher = true, -- OS level file watchers
+        hijack_netrw_behavior = "open_current"
     },
 
     git_status = {

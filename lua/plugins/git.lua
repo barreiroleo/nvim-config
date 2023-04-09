@@ -1,5 +1,6 @@
 return {
     { "TimUntersberger/neogit",
+        event = { "BufNewFile", "BufReadPre" },
         dependencies = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
@@ -19,6 +20,7 @@ return {
     },
 
     { "lewis6991/gitsigns.nvim",
+        event = { "BufNewFile", "BufReadPre" },
         opts = {
             -- toggle line blame with "toggle_current_line_blame = true"
             current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`

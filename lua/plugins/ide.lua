@@ -3,6 +3,7 @@ local map = require("core.utils").map
 return {
     -- Debugger
     { "mfussenegger/nvim-dap",
+        event = { "BufNewFile", "BufReadPre" },
         dependencies = {
             { "jay-babu/mason-nvim-dap.nvim" },
             { "rcarriga/nvim-dap-ui" },
@@ -14,7 +15,7 @@ return {
 
     -- Refactoring
     { "ThePrimeagen/refactoring.nvim",
-        event = "VeryLazy",
+        event = { "BufNewFile", "BufReadPre" },
         dependencies = {
             { "nvim-lua/plenary.nvim" },
             { "nvim-treesitter/nvim-treesitter" }
@@ -30,6 +31,7 @@ return {
 
     -- Testing
     { "nvim-neotest/neotest",
+        event = { "BufNewFile", "BufReadPre" },
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
@@ -51,11 +53,13 @@ return {
 
     -- Databases
     { "tpope/vim-dadbod",
+        event = { "BufNewFile", "BufReadPre" },
         dependencies = { "kristijanhusak/vim-dadbod-ui" }
     },
 
     -- Docs generation
     { "danymat/neogen",
+        event = { "BufNewFile", "BufReadPre" },
         dependencies = "nvim-treesitter/nvim-treesitter",
         config = function()
             require("neogen").setup({ snippet_engine = "luasnip" })

@@ -23,7 +23,7 @@ return {
                 opts = { experimental = { pathStrict = true } }
             },
         },
-        event = { "BufReadPre", "BufNewFile" },
+        event = { "BufNewFile", "BufReadPre" },
         config = function() require "core.lsp" end,
     },
 }

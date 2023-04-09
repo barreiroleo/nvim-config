@@ -1,5 +1,6 @@
 return {
     { "folke/trouble.nvim",
+        event = { "BufNewFile", "BufReadPre" },
         dependencies = "kyazdani42/nvim-web-devicons",
     },
     {'SmiteshP/nvim-navic',
@@ -7,6 +8,7 @@ return {
         lazy = true
     },
     { "norcalli/nvim-colorizer.lua",
+        event = { "BufNewFile", "BufReadPre" },
         opts = { "md", "tex", "json", "css", "javascript", "html", "python", "lua" }
     },
 

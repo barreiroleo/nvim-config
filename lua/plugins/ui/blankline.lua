@@ -1,6 +1,6 @@
 return {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
+    event = { "BufNewFile", "BufReadPre" },
     config = function()
         -- vim.cmd([[ highlight IndentBlanklineChar guifg=#00FF00 gui=nocombine ]])     -- No active highlight.
         vim.cmd([[ highlight IndentBlanklineContextChar guifg=#909090 gui=nocombine ]]) -- Active highlight.

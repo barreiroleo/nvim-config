@@ -10,6 +10,7 @@ local treesitter_opts = {
 
 return{
     { "nvim-treesitter/nvim-treesitter",
+        event = { "BufNewFile", "BufReadPre" },
         build = ":TSUpdate",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-textobjects" },
