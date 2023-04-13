@@ -4,4 +4,5 @@ return {
     { import = "plugins.themes.gruvbox" },
     { import = "plugins.themes.sonokai" },
     { import = "plugins.themes.tokyo" },
+    { import = "plugins.themes.monokai" },
 }

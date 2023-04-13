@@ -44,6 +44,11 @@ function M.update(theme)
             ["TC_LineNumber"] = { bg = palette.mantle, fg = palette.surface0 }
         }
     end
+
+    if vim.g.colors_name == "monokai-pro" then
+        _.Lualine = 'monokai-pro'
+    end
+
 end
 
 function M.get_CursorLine() return _.CursorLine_bg end
