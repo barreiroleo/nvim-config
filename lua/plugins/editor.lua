@@ -15,6 +15,7 @@ return {
     { "folke/todo-comments.nvim",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = "nvim-lua/plenary.nvim",
+        config = true,
     },
     { "tpope/vim-repeat",
         event = { "BufNewFile", "BufReadPre" },
@@ -24,6 +25,7 @@ return {
     },
     { "numToStr/Comment.nvim",
         event = { "BufNewFile", "BufReadPre" },
+        config = true,
     },
     { "windwp/nvim-spectre",
         keys = {

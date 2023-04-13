@@ -61,9 +61,9 @@ return {
     { "danymat/neogen",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = "nvim-treesitter/nvim-treesitter",
-        config = function()
-            require("neogen").setup({ snippet_engine = "luasnip" })
-            map("n", "<leader>dg", ":lua require('neogen').generate()<CR>", { desc = "Neogen: Generate docs" })
-        end
+        keys = {
+            { "<leader>dg", ":lua require('neogen').generate()<CR>", mode = { "n", "v" }, desc = "Neogen: Generate docs" }
+        },
+        opts = { snippet_engine = "luasnip" }
     }
 }
