@@ -6,7 +6,7 @@ M.settings = {
     Lua = {
         diagnostics = {
             -- Recognize `vim` global
-            globals = { 'vim' },
+            globals = { 'vim', "LOG", "P" },
         },
         workspace = {
             -- Make the server aware of Neovim runtime files.

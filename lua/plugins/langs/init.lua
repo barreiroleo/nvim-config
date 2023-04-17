@@ -12,13 +12,15 @@ return {
     -- Rust
     { 'rust-lang/rust.vim', ft = "rust" },
 
+    -- Writing
+    { import = "plugins.langs.ltex_extra" },
     -- Markdown
     { import = "plugins.langs.markdown" },
     -- Latex
     { import = "plugins.langs.latex" },
-
-    -- { "~/develop/proyects/plugins/ltex_extra.nvim" },
-    { "barreiroleo/ltex_extra.nvim",
-        ft = { "markdown", "tex" }
+    -- PlantUML
+    { "scrooloose/vim-slumlord",
+        dependencies = "aklt/plantuml-syntax",
+        ft = { "puml", "uml" }
     },
 }

@@ -32,20 +32,24 @@ return {
     -- Testing
     { "nvim-neotest/neotest",
         event = { "BufNewFile", "BufReadPre" },
+        ft = {"cpp", "c", "h", "hpp", "python", "vim", "lua" },
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim",
+            "nvim-neotest/neotest-plenary",
             { "nvim-neotest/neotest-vim-test",
                 dependencies = "vim-test/vim-test"
-            }
+            },
         },
         config = function()
-            require('neotest').setup {
+            require("neotest").setup {
                 adapters = {
-                    require 'neotest-vim-test' {
-                        allow_file_types = { 'cpp' }
-                    },
+                    require("neotest-plenary"),
+                    -- require("neotest-vim-test")({
+                    --     allow_file_types = { 'cpp' },
+                    --     ignore_file_types = { "python", "vim", "lua" },
+                    -- }),
                 },
             }
         end

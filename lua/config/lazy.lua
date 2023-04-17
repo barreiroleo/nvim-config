@@ -11,6 +11,11 @@ require("lazy").setup({
         -- { "LazyVim/LazyVim", import = "lazyvim.plugins.extras.ui.mini-animate" },
         { import = "plugins" },
     },
+    dev = {
+        path = "~/develop/plugins/",  -- directory where are local plugins
+        patterns = { "barreiroleo" }, -- plugins that match these patterns will use local versions
+        fallback = false,             -- Fallback to git when local plugin doesn't exist
+    },
     defaults = { lazy = false, version = false },
     install = { colorscheme = { "habamax" } },
     checker = { enabled = true },

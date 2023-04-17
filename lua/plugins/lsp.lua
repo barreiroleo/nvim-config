@@ -20,7 +20,10 @@ return {
                 config = true
             },
             { "folke/neodev.nvim",
-                opts = { experimental = { pathStrict = true } }
+                opts = {
+                    library = { plugins = { "neotest" }, types = true },
+                    experimental = { pathStrict = true }
+                }
             },
         },
         event = { "BufNewFile", "BufReadPre" },

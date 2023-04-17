@@ -19,6 +19,9 @@ local get_custom_handlers = function()
             if server == "jdtls" then
                 handlers[server] = function() P("Skip jdtls from lspconfig") end
             end
+            if server == "ltex" then
+                handlers[server] = function() P("Skip ltex from lspconfig") end
+            end
         end
     end
     return handlers
