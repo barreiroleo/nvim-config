@@ -16,14 +16,10 @@ local get_custom_handlers = function()
             handlers[server] = function()
                 require('lspconfig')[server].setup(opts)
             end
-            if server == "jdtls" then
-                handlers[server] = function() P("Skip jdtls from lspconfig") end
-            end
-            if server == "ltex" then
-                handlers[server] = function() P("Skip ltex from lspconfig") end
-            end
         end
     end
+    handlers["jdtls"] = function() end
+    handlers["ltex"] = function() end
     return handlers
 end
 

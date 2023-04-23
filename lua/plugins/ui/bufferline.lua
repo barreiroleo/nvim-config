@@ -9,7 +9,7 @@ end
 
 return {
     "akinsho/bufferline.nvim",
-    version = "v2.*",
+    -- version = "v3.*",
     event = { "BufNewFile", "BufReadPre" },
     dependencies = { "kyazdani42/nvim-web-devicons" },
     opts = {

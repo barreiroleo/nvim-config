@@ -1,6 +1,7 @@
 return {
     -- Java
     { 'mfussenegger/nvim-jdtls', ft = "java",
+        enable = true,
         config = function()
             local config = {
                 cmd = { vim.fn.stdpath("data") .. '/mason/bin/jdtls' },
