@@ -29,6 +29,9 @@ return {
         }
     },
 
+    -- Make
+    { "tpope/vim-dispatch", event = { "VeryLazy" } },
+
     -- Testing
     { "nvim-neotest/neotest",
         event = { "BufNewFile", "BufReadPre" },
@@ -58,7 +61,7 @@ return {
     -- Databases
     { "tpope/vim-dadbod",
         event = { "BufNewFile", "BufReadPre" },
-        dependencies = { "kristijanhusak/vim-dadbod-ui" }
+        dependencies = { "kristijanhusak/vim-dadbod-ui", "kristijanhusak/vim-dadbod-completion" }
     },
 
     -- Docs generation

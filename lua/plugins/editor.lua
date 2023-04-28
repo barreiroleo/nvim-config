@@ -49,5 +49,16 @@ return {
                 autocmd FileType tex let b:surround_96 = "`\r'"
             ]]
         end
+    },
+
+    { "ThePrimeagen/harpoon",
+        keys = {
+            { "<leader>a", function() require("harpoon.mark").add_file() end,        desc = "Harpoon: Add file" },
+            { "<leader>w", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon: Toggle quick menu" },
+            { "<leader>1", function() require("harpoon.ui").nav_file(1) end,         desc = "Harpoon: Navigate to 1" },
+            { "<leader>2", function() require("harpoon.ui").nav_file(2) end,         desc = "Harpoon: Navigate to 2" },
+            { "<leader>3", function() require("harpoon.ui").nav_file(3) end,         desc = "Harpoon: Navigate to 3" },
+            { "<leader>4", function() require("harpoon.ui").nav_file(4) end,         desc = "Harpoon: Navigate to 4" },
+        }
     }
 }

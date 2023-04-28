@@ -50,3 +50,7 @@ vim.cmd[[
         setl bt=nofile bh=wipe nobl nomod
     endfunction
 ]]
+-- command: sioyek --inverse-search "echo %1 %2 %3" ~/develop/proyects/pps/build/main.pdf
+-- produce file line col: /mnt/sdb1/Estudio/2020 UTN/Practicas supervisadas/PPS/src/./ch-02/Actividades.tex 16 0
+-- DROP_TEX("/mnt/sdb1/Estudio/2020 UTN/Practicas supervisadas/PPS/src/./ch-02/Actividades.tex", 16, 0)
+
