@@ -23,7 +23,7 @@ _.Context = { ['TC'] = nil, ['TC_LineNumber'] = nil, ['TC_Bottom'] = nil }
 function M.update(theme)
     theme = theme or vim.g.colors_name
 
-    if vim.g.colors_name == 'catppuccin' then
+    if string.match(vim.g.colors_name, "catppuccin") then
         local flavour = require('catppuccin').flavour
         local palette = require('catppuccin.palettes').get_palette(flavour)
         _.CursorLine = {

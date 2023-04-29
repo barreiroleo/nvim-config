@@ -14,7 +14,11 @@ return {
             },
         },
         opts = require 'plugins.neotree.opts',
-        init = function() vim.g.neo_tree_remove_legacy_commands = true end,
+        init = function()
+            vim.g.neo_tree_remove_legacy_commands = true
+            -- vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+        end,
         deactivate = function() vim.cmd [[Neotree close]] end,
     }
 }
