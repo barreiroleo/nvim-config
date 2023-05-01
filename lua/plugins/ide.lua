@@ -30,7 +30,9 @@ return {
     },
 
     -- Make
-    { "tpope/vim-dispatch", event = { "VeryLazy" } },
+    { "tpope/vim-dispatch",
+        cmd = { "Dispatch", "Make" }
+    },
 
     -- Testing
     { "nvim-neotest/neotest",
