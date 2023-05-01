@@ -1,44 +1,29 @@
-local function cmd_backsearch (file, line, CR_char)
-    local cmd = "nvim --server " .. vim.v.servername .. " --remote-send " .. string.format("\":lua DROP_TEX(%s,%s)%s\"", file, line, CR_char)
-    -- %f = tex, %l = line, %p = pdf
+local M = {}
+
+function M.cmd_backsearch (file, line, col)
+    local drop_cmd = string.format(":lua require('%s').drop_tex('%s', %s, %s)<CR>", "core.lsp.utils.texlab_cmd", file, line, col or 0)
+    local cmd = string.format("\"nvim --server %s --remote-send \\%q\\\"", vim.v.servername, drop_cmd)
     return cmd
 end
 
-local SearchCmds = {
-    evincesyn = {
-        executable = "evince-synctex",
-        args = { "--forward", "%l", "--pdffile", "%p", "--texfile", "%f", "--cmd", cmd_backsearch("%f", "%l", "\r") }
-    },
-    zathura = {
-        executable = "zathura",
-        args = { "-x", cmd_backsearch("'%{input}'", "%{line}", "<CR>"),
-            "--synctex-forward", "%l:1:%f", "%p" }
-    },
-    sioyek = {
-        executable = "sioyek",
-        args = { "--inverse-search", cmd_backsearch("'%1'", "%2", "\r"), -- %1 file, %2 line
-            "--forward-search-file", "%f", "--forward-search-line", "%l", "%p" }
-    },
-}
+-- Launch vim at position listen at server:
+-- nvim --listen /tmp/nvim.latex src/main.tex -c ":call cursor(29,8)"
+function M.drop_tex(file, line, col)
+    file, line, col = vim.fs.normalize(file), line or 0, col or 0
+    -- HACK: There's an issue with sioyek. Remove it when will fixed.
+    file = string.gsub(file, "/./", "/")
+    file = string.gsub(file, " ", "\\ ")
+    vim.cmd(string.format(":drop %s|call cursor(%s, %s)", file, line, col))
+end
 
-local BuildCmds = {
-    latexmk = {
-        executable = "latexmk",
-        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f", "-output-directory=../build" },
-        onSave = true,
-        forwardSearchAfter = true
-    },
-    tectonic = {
-        executable = "tectonic",
-        args = { "-X", "compile", "%f", "--keep-logs", "--keep-intermediates", "--synctex", "--outdir build" },
-        onSave = true,
-        forwardSearchAfter = false
-    }
-}
+-- -- TEST: Build backsearch command
+-- M.cmd_backsearch("%1", "%2", "%3")
 
-local M = {
-    forwardSearch = SearchCmds,
-    build = BuildCmds
-}
+-- -- TEST: Drop text
+-- local args = {
+--     file = "~/develop/proyects/pps/src/./ch-02/Actividades.tex",
+--     pos = {16, 10}
+-- }
+-- M.drop_tex(args.file, args.pos[1], args.pos[2])
 
 return M
