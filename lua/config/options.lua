@@ -10,7 +10,7 @@ vim.g.maplocalleader = ","
 
 local opt = vim.opt
 
-vim.cmd.language("en_US.utf8")
+-- vim.cmd.language("en_US.utf8")
 -- Editing
 opt.expandtab = true -- Use spaces instead of tabs
 opt.shiftround = true -- Round indent to a multiple of shiftwidth

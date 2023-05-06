@@ -14,52 +14,45 @@ local AutoLightDark = function()
     })
 end
 
-local catppuccin_opt = {
-    flavour = 'mocha',
-    background = {
-        light = "latte",
-        dark = "mocha"
-    },
-    transparent_background = true,
-    term_colors = false,
-    dim_inactive = {
-        enabled = false,
-        shade = 'dark',
-        percentage = 0.15,
-    },
-    integrations = {
-        cmp = true,
-        symbols_outline = true,
-        telescope = true,
-        treesitter = true,
-        treesitter_context = true,
-        ts_rainbow = true,
-        -- Special integrations, see https://github.com/catppuccin/nvim#special-integrations
-        dap = {
-            enabled = true,
-            enable_ui = true,
+function setup_colorhub()
+    local palette = require('catppuccin.palettes').get_palette(flavour_dark)
+    local Lualine = require 'lualine.themes.catppuccin'
+    Lualine.inactive.c.bg = palette.mantle
+    Lualine.normal.c.bg = palette.mantle
+    require("plugins.themes.colorhub").setup {
+        CursorLine = { bg = palette.base },
+        Lualine = Lualine,
+        Navic = {
+            bg = palette.mantle,
+            fg = palette.text,
+            fg_icon = palette.peach,
         },
-        indent_blankline = {
-            enabled = true,
-            colored_indent_levels = true,
-        },
-    },
-    custom_highlights = {
-        CursorLine = { bg = "#181825" }, -- Mocha: Mantle
-    },
-}
+        TSContext = {
+            ['TC'] = { bg = palette.mantle },
+            ['TC_Bottom'] = { bg = palette.mantle },
+            ['TC_LineNumber'] = { bg = palette.mantle, fg = palette.surface1 },
+        }
+    }
+end
 
 return {
-    { "catppuccin/nvim", name = "catppuccin",
-        enabled = true,
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("catppuccin").setup(catppuccin_opt)
-            vim.cmd.colorscheme("catppuccin")
-            require("plugins.themes.colorhub").update("catppuccin")
-            require("plugins.treesitter.ts-context").setup()
-            AutoLightDark()
-        end,
-    }
+    "catppuccin/nvim",
+    name = "catppuccin",
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    config = function()
+        require("catppuccin").setup {
+            flavour = 'mocha',
+            background = {
+                light = flavour_light,
+                dark = flavour_dark
+            },
+            transparent_background = true,
+            -- Special integrations https://github.com/catppuccin/nvim#special-integrations
+        }
+        vim.cmd.colorscheme("catppuccin-" .. flavour_dark)
+        setup_colorhub()
+        AutoLightDark()
+    end,
 }

@@ -4,7 +4,12 @@ return {
         dependencies = "kyazdani42/nvim-web-devicons",
     },
     {'SmiteshP/nvim-navic',
-        config = require("plugins.ui.navic").config,
+        opts = {
+            highlight = true,
+            separator = ' > ',
+            depth_limit = 0,
+            depth_limit_indicator = '..',
+        },
         lazy = true
     },
     { "norcalli/nvim-colorizer.lua",
