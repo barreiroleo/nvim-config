@@ -62,8 +62,11 @@ return {
 
     -- Databases
     { "tpope/vim-dadbod",
-        event = { "BufNewFile", "BufReadPre" },
-        dependencies = { "kristijanhusak/vim-dadbod-ui", "kristijanhusak/vim-dadbod-completion" }
+        dependencies = {
+            "kristijanhusak/vim-dadbod-ui",
+            "kristijanhusak/vim-dadbod-completion"
+        },
+        cmd = { "DB", "DBUI" }
     },
 
     -- Docs generation

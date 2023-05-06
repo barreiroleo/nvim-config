@@ -34,10 +34,14 @@ function M.update(theme)
             fg = palette.text,
             fg_icon = palette.peach,
         }
-        _.Lualine = {
-            normal_c_bg = palette.crust,
-            inactive_c_bg = palette.mantle,
-        }
+
+        -- TODO: fix order of excecution. Lualine is excecuting before catppuccin
+        _.Lualine = require("lualine.themes.catppuccin")
+        _.Lualine.normal.c.bg = palette.crust
+        _.Lualine.inactive_c_bg = palette.mantle
+        -- vim.api.nvim_set_hl(0, 'lualine_c_normal', { bg = palette.base, fg = palette.text })
+        -- vim.api.nvim_set_hl(0, 'lualine_c_inactive', { bg = palette.mantle, fg = palette.overlay0 })
+
         _.Context = {
             ["TC"] = { bg = palette.mantle },
             ["TC_Bottom"] = { bg = palette.mantle },

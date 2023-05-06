@@ -42,6 +42,8 @@ vim.api.nvim_create_autocmd("FileType", {
         "spectre_panel",
         -- Debug REPL
         "dap-repl",
+        -- dadbod UI
+        "dbui", "dbout",
         -- Others
         "PlenaryTestPopup", "startuptime",
     },

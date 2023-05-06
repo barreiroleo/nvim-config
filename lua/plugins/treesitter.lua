@@ -1,13 +1,3 @@
-local treesitter_opts = {
-    unpack(require("plugins.treesitter.ts-basics")),
-
-    require("plugins.treesitter.ts-parsers"),
-
-    require("plugins.treesitter.ts-textobjects"),
-    require("plugins.treesitter.ts-refactor"),
-    require("plugins.treesitter.ts-playground"),
-}
-
 return{
     { "nvim-treesitter/nvim-treesitter",
         event = { "BufNewFile", "BufReadPre" },
@@ -25,7 +15,7 @@ return{
             { "windwp/nvim-ts-autotag", config = true }
         },
         config = function()
-            require("nvim-treesitter.configs").setup(treesitter_opts)
+            require("nvim-treesitter.configs").setup(require("plugins.treesitter.opts"))
         end
     },
 }
