@@ -19,7 +19,7 @@ Pack.lsp = {
     "ltex", "texlab",                          -- Latex
     "lua_ls",                                  -- Lua
     "marksman",                                -- Markdown
-    "pyright",                                 -- Python
+    "pyright", "ruff_lsp",                     -- Python
     "rust_analyzer",                           -- Rust
     "sqlls",                                   -- SQL
     "taplo",                                   -- TOML
@@ -46,13 +46,11 @@ local off_lsp = {
     null_ls.builtins.diagnostics.trail_space,  -- Highlight trail_space
     null_ls.builtins.code_actions.gitsigns,    -- Code actions for gitsigns plug
     null_ls.builtins.diagnostics.commitlint,   -- Check conventional commit format
-    -- ["editorconfig_checker"] = null_ls.builtins.diagnostics.editorconfig_checker,
 
     -- BASH
     ["beautysh"] = null_ls.builtins.formatting.beautysh,
     ["shellcheck"] = null_ls.builtins.code_actions.shellcheck,
     ["shfmt"] = null_ls.builtins.formatting.shfmt,
-    -- null_ls.builtins.formatting.shellharden,
 
     -- C / C++ / C#
     ["clang-format"] = null_ls.builtins.formatting.clang_format.with {
@@ -64,12 +62,12 @@ local off_lsp = {
     null_ls.builtins.diagnostics.cppcheck,
 
     -- CMake / Make
-    -- ["checkmake"] = null_ls.builtins.diagnostics.checkmake,
+    -- null_ls.builtins.diagnostics.checkmake,
     -- ["cmake_lint"] = null_ls.builtins.diagnostics.cmake_lint,
     -- ["cmake_format"] = null_ls.builtins.formatting.cmake_format,
 
     -- C#
-    -- ["csharpier"] = null_ls.builtins.formatting.csharpier,
+    ["csharpier"] = null_ls.builtins.formatting.csharpier,
 
     -- Docker
      ["hadolint"] = null_ls.builtins.diagnostics.hadolint,
@@ -84,7 +82,6 @@ local off_lsp = {
     ["jsonlint"] = null_ls.builtins.diagnostics.jsonlint,
 
     -- Lua
-    -- ["luacheck"] = null_ls.builtins.diagnostics.luacheck,
     ["selene"] = null_ls.builtins.diagnostics.selene,
     ["stylua"] = null_ls.builtins.formatting.stylua,
 
@@ -92,21 +89,22 @@ local off_lsp = {
     ["markdownlint"] = null_ls.builtins.diagnostics.markdownlint,
     -- ["ocdc"] = null_ls.builtins.formatting.ocdc, -- Changelog formatter
 
-    -- Python
-    -- ["autopep8"] = null_ls.builtins.formatting.autopep8,
-    ["black"] = null_ls.builtins.formatting.black,
-    ["mypy"] = null_ls.builtins.diagnostics.mypy, -- Type checker
-    ["pylint"] = null_ls.builtins.diagnostics.pylint, -- Linter, offer refactors.
-    ["vulture"] = null_ls.builtins.diagnostics.vulture, -- Finds unused code
-    null_ls.builtins.diagnostics.pydocstyle, -- Check compliance with Python docstrings conventions
+    -- Python:
+    -- ruff linter as lsp. Don't cover pylint yet
+    ["mypy"] = null_ls.builtins.diagnostics.mypy,       -- Type checker
+    ["pylint"] = null_ls.builtins.diagnostics.pylint,   -- Linter and refactors
+    ["vulture"] = null_ls.builtins.diagnostics.vulture, -- Dead code analysis
+    ["yapf"] = null_ls.builtins.formatting.yapf.with {
+        extra_args = { "--style={based_on_style: pep8, indent_width: 4}" }
+    },
 
     -- Rust
-    null_ls.builtins.formatting.rustfmt,
+    ["rustfmt"] = null_ls.builtins.formatting.rustfmt,
 
     -- Latex
-    -- ["bibclean"] = null_ls.builtins.formatting.bibclean,
+    -- null_ls.builtins.formatting.bibclean,
     -- null_ls.builtins.diagnostics.chktex,
-    null_ls.builtins.formatting.latexindent,
+    ["latexindent"] = null_ls.builtins.formatting.latexindent,
 
     -- VimL
     ["vint"] = null_ls.builtins.diagnostics.vint,

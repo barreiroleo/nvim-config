@@ -64,9 +64,18 @@ return {
     { "tpope/vim-dadbod",
         dependencies = {
             "kristijanhusak/vim-dadbod-ui",
-            "kristijanhusak/vim-dadbod-completion"
+            "kristijanhusak/vim-dadbod-completion",
+            "hrsh7th/nvim-cmp",
         },
-        cmd = { "DB", "DBUI" }
+        cmd = { "DB", "DBUI", "DBUIFindBuffer" },
+        config = function ()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = { "sql", "mysql", "plsql" },
+                callback = function()
+                    require('cmp').setup.buffer({ sources = { { name = 'vim-dadbod-completion' } } })
+                end,
+            })
+        end
     },
 
     -- Docs generation

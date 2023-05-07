@@ -28,5 +28,6 @@ return {
         },
         event = { "BufNewFile", "BufReadPre" },
         config = function() require "core.lsp" end,
+        cmd = { "Mason", "MasonInstall" }
     },
 }
