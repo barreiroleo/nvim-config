@@ -106,6 +106,14 @@ local off_lsp = {
     -- null_ls.builtins.diagnostics.chktex,
     ["latexindent"] = null_ls.builtins.formatting.latexindent,
 
+    -- SQL
+    ["sqlfluff"] = null_ls.builtins.diagnostics.sqlfluff.with({
+        extra_args = { "--dialect", "sqlite" }, -- mandatory
+    }),
+    null_ls.builtins.formatting.sqlfluff.with({
+        extra_args = { "--dialect", "sqlite" },
+    }),
+
     -- VimL
     ["vint"] = null_ls.builtins.diagnostics.vint,
 }

@@ -11,8 +11,6 @@ local on_attach = function(_, bufnr)
     map('n', '<leader>rn', vim.lsp.buf.rename,               { buffer = bufnr })
     map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
 
-    map('n', 'gqf', require("core.lsp.utils.format"), { buffer = bufnr, desc = "LSP: Format the whole file, use null-ls if available" })
-
     map('n', 'gpd', require("core.lsp.utils.peek").PeekDefinition, { buffer = bufnr })
     map('n', 'gpD', require("core.lsp.utils.peek").PeekDeclaration, { buffer = bufnr })
     map('n', 'gpi', require("core.lsp.utils.peek").PeekImplementation, { buffer = bufnr })

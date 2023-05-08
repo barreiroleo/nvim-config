@@ -1,6 +1,7 @@
 local util_has = require("core.utils").has
 local map = require("core.utils").map
 
+map('n', 'gqf', require("core.lsp.utils.format"), { desc = "LSP: Format the whole file, use null-ls if available" })
 map("n", "<leader><leader>x", require("core.utils").save_and_exec, { desc = "Save and execute the current file" })
 map("n", "<leader>m", "<cmd>messages<cr>", { desc = "Open vim messages" })
 
