@@ -20,7 +20,6 @@ function setup_colorhub()
     Lualine.inactive.c.bg = palette.mantle
     Lualine.normal.c.bg = palette.mantle
     require("plugins.themes.colorhub").setup {
-        CursorLine = { bg = palette.base },
         Lualine = Lualine,
         Navic = {
             bg = palette.mantle,
