@@ -1,5 +1,3 @@
-local map = require("core.utils").map
-
 return {
     -- Debugger
     { "mfussenegger/nvim-dap",
