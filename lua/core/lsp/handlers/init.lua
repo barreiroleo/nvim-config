@@ -18,7 +18,7 @@ local get_custom_handlers = function()
             end
         end
     end
-    handlers["jdtls"] = function() end
+    -- handlers["jdtls"] = function() end
     handlers["ltex"] = function() end
     return handlers
 end

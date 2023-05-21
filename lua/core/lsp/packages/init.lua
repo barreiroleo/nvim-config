@@ -55,7 +55,7 @@ local off_lsp = {
     -- C / C++ / C#
     ["clang-format"] = null_ls.builtins.formatting.clang_format.with {
         -- BTDS_Yes: Always break after template declaration
-        extra_args = { '-style', '{BasedOnStyle: Google, IndentWidth: 4, AlwaysBreakTemplateDeclarations: Yes}' },
+        extra_args = { '-style', '{BasedOnStyle: Google, IndentWidth: 4, AlwaysBreakTemplateDeclarations: Yes, ColumnLimit: 100}' },
     },
     ["cpplint"] = null_ls.builtins.diagnostics.cpplint,
     null_ls.builtins.diagnostics.clang_check,
