@@ -54,8 +54,12 @@ local off_lsp = {
 
     -- C / C++ / C#
     ["clang-format"] = null_ls.builtins.formatting.clang_format.with {
-        -- BTDS_Yes: Always break after template declaration
-        extra_args = { '-style', '{BasedOnStyle: Google, IndentWidth: 4, AlwaysBreakTemplateDeclarations: Yes, ColumnLimit: 100}' },
+        -- InheritParentConfig Not a real style, but allows to use the .clang-format file from the parent directory (or
+        -- its parent if there is none). If there is no parent file found it falls back to the fallback style, and
+        -- applies the changes to that. With this option you can overwrite some parts of your main style for your
+        -- subdirectories. This is also possible through the command line, e.g.: --style={BasedOnStyle:
+        -- InheritParentConfig, ColumnLimit: 20}
+        extra_args = { '-style', '{BasedOnStyle: InheritParentConfig, ColumnLimit: 120}' },
     },
     ["cpplint"] = null_ls.builtins.diagnostics.cpplint,
     null_ls.builtins.diagnostics.clang_check,
