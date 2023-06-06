@@ -13,7 +13,7 @@ return {
         },
         cmd = 'Neotree',
         keys = {
-            { '<leader>e', "<cmd>lua require('neo-tree.command').execute { toggle = true, dir = vim.loop.cwd() }<CR>",
+            { '<leader>e', "<cmd>lua require('neo-tree.command').execute { toggle = true, dir = vim.uv.cwd() }<CR>",
                 desc = 'Explorer NeoTree (cwd)',
             },
         },
