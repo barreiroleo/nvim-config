@@ -21,11 +21,6 @@ function setup_colorhub()
     Lualine.normal.c.bg = palette.mantle
     require("plugins.themes.colorhub").setup {
         Lualine = Lualine,
-        Navic = {
-            bg = palette.mantle,
-            fg = palette.text,
-            fg_icon = palette.peach,
-        },
         TSContext = {
             ['TC'] = { bg = palette.mantle },
             ['TC_Bottom'] = { bg = palette.mantle },
