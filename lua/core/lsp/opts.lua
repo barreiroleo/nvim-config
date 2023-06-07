@@ -22,13 +22,6 @@ local on_attach_signature = function(_, bufnr)
     end
 end
 
--- Show code context in statusline/winbar
-local on_attach_navic = function(client, bufnr)
-    if util_has("nvim-navic") and client.server_capabilities.documentSymbolProvider then
-        require('nvim-navic').attach(client, bufnr)
-    end
-end
-
 -- Export opts
 M.capabilities = get_capabilities()
 
@@ -41,7 +34,6 @@ M.on_attach = function(client, bufnr)
 
     -- Plugs attach
     on_attach_signature(client, bufnr)
-    on_attach_navic(client, bufnr)
 end
 
 return M

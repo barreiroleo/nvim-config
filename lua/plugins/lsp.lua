@@ -12,7 +12,6 @@ return {
                     sources = { ["null-ls"] = { ignore = true } },
                 }
             },
-            { "SmiteshP/nvim-navic" },
             { "ray-x/lsp_signature.nvim" },
 
             { "folke/neoconf.nvim",
