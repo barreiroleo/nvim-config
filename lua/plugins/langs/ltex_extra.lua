@@ -14,7 +14,7 @@ local ltex_opts = {
 return {
     "barreiroleo/ltex_extra.nvim",
     -- dir = "~/develop/ltex_extra.nvim",
-    -- dev = false,
+    dev = false,
     ft = { "markdown", "tex" },
     opts = {
         init_check = true,                 -- boolean : whether to load dictionaries on startup
