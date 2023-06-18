@@ -8,6 +8,7 @@ return {
         opts = { "md", "tex", "json", "css", "javascript", "html", "python", "lua" }
     },
     { "Bekaboo/dropbar.nvim" },
+    { "dstein64/nvim-scrollview" },
 
     { import = "plugins.ui.blankline" },
     { import = "plugins.ui.bufferline" },

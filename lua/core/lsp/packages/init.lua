@@ -59,7 +59,7 @@ local off_lsp = {
         -- applies the changes to that. With this option you can overwrite some parts of your main style for your
         -- subdirectories. This is also possible through the command line, e.g.: --style={BasedOnStyle:
         -- InheritParentConfig, ColumnLimit: 20}
-        extra_args = { '-style', '{BasedOnStyle: InheritParentConfig, ColumnLimit: 120}' },
+        extra_args = { '-style', '{BasedOnStyle: InheritParentConfig, ColumnLimit: 120, IndentWidth: 4}' },
     },
     ["cpplint"] = null_ls.builtins.diagnostics.cpplint,
     null_ls.builtins.diagnostics.clang_check,
