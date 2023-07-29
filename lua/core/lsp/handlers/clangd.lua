@@ -21,24 +21,21 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
     end
 end
 
+-- NOTE: Clangd help: ~/.local/share/nvim/mason/packages/clangd/clangd_16.0.2/bin/clangd --help-hidden
+
 M.cmd = {
     'clangd',
     '--all-scopes-completion',
-    '--suggest-missing-includes',
     '--background-index',
-    -- '--pch-storage=disk',
-    '--cross-file-rename',
-    -- '--log=info',
-    -- '--completion-style=detailed',
-    '--enable-config', -- clangd 11+ supports reading from .clangd configuration file
-    -- '--clang-tidy',
+    '--clang-tidy',
+    "--clang-tidy-checks=-*, clang-analyzer-*, concurrency-*, cppcoreguidelines-*, hicpp-*, llvm-*, llvmlibc-*, misc-*, modernize-*,-modernize-use-trailing-return-type, mpi-*, performance-*, portability-*, readability-*",
+    '--completion-style=bundled',
+    '--enable-config',
+    "--header-insertion-decorators",
+    "--header-insertion=iwyu",
+    "--use-dirty-headers",
     '--offset-encoding=utf-16', --temporary fix for null-ls
-    -- "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
-    -- "--fallback-style=Google",
-    -- "--header-insertion=never",
-    -- "--query-driver=<list-of-white-listed-complers>"
- }
-
+}
 
 M.commands = {
     ClangdSwitchSourceHeader = {
