@@ -27,6 +27,14 @@ return {
         }
     },
 
+    -- TaskRunner
+    { "stevearc/overseer.nvim",
+        opts = {
+            task_lists = { direction = "right" },
+            templates = { "builtin", "user.cpp_build", "user.run_script" }
+        }
+    },
+
     -- Make
     { "tpope/vim-dispatch",
         cmd = { "Dispatch", "Make" }
@@ -40,8 +48,8 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim",
-            "nvim-neotest/neotest-plenary",
-            { "nvim-neotest/neotest-vim-test",
+            { "nvim-neotest/neotest-plenary",
+                "nvim-neotest/neotest-vim-test",
                 dependencies = "vim-test/vim-test"
             },
         },
@@ -49,10 +57,9 @@ return {
             require("neotest").setup {
                 adapters = {
                     require("neotest-plenary"),
-                    -- require("neotest-vim-test")({
-                    --     allow_file_types = { 'cpp' },
-                    --     ignore_file_types = { "python", "vim", "lua" },
-                    -- }),
+                    require("neotest-vim-test") {
+                        allow_file_types = { 'cpp' },
+                    },
                 },
             }
         end
