@@ -9,7 +9,7 @@ vim.diagnostic.config {
             max = vim.diagnostic.severity.ERROR
         },
         source = "if_many",
-        prefix = '■' -- Could be '●', '▎', 'x'
+        prefix = '■' -- Could be '●', '▎', 'x', '⯀'
     },
     float = { source = "if_many" },
     signs = true,

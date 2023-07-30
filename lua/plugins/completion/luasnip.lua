@@ -1,15 +1,16 @@
 local types = require("luasnip.util.types")
 
-require("luasnip").config.setup({
-    history = true,
-    update_events = "InsertLeave",
-    region_check_events = "InsertEnter",
-    delete_check_events = "TextChanged,InsertLeave",
+require('luasnip').config.setup {
+    history = false,
+    region_check_events = { 'InsertLeave', 'InsertEnter' },
+    delete_check_events = { 'InsertLeave', 'InsertEnter', 'TextChanged' },
     ext_opts = {
-        [types.choiceNode] = { active = { virt_text = { { "●", "GruvboxOrange" } } } },
-        [types.insertNode] = { active = { virt_text = { { "●", "GruvboxBlue" } } } }
+        [types.insertNode] = { unvisited = { hl_mode = 'combine', virt_text = { { '⯀', 'Conceal' } }, virt_text_pos = 'inline' }, },
+        [types.choiceNode] = { active    = { hl_mode = 'combine', virt_text = { { '⯀', 'Conceal' } }, virt_text_pos = 'inline' }, },
+        [types.exitNode]   = { unvisited = { hl_mode = 'combine', virt_text = { { '⯀', 'Conceal' } }, virt_text_pos = 'inline' }, },
+        [types.snippet]    = { active    = { hl_mode = 'combine', virt_text = { { '■ ','Conceal' } }, virt_text_pos = 'inline' } },
     },
-})
+}
 
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_vscode").lazy_load({ paths = "./snippets" })

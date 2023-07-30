@@ -28,6 +28,7 @@ return {
         event = "InsertEnter",
         config = function ()
             require("plugins.completion.luasnip")
-        end
+            vim.keymap.set("n", "<Esc>", require("luasnip").unlink_current, {desc = "[Snip] Cancel the current snippet"})
+        end,
     }
 }
