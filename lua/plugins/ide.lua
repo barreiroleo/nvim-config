@@ -80,6 +80,11 @@ return {
                     require('cmp').setup.buffer({ sources = { { name = 'vim-dadbod-completion' } } })
                 end,
             })
+            vim.g.dbs = {
+                ['dev-mysql'] = 'mysql://root:root@127.0.0.1',
+                ['dev-redis'] = 'redis://',
+                ['dev-sqlite'] = 'sqlite:db.sqlite3',
+            }
         end
     },
 
