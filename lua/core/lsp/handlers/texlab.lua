@@ -60,8 +60,8 @@ M.settings = {
 M.opts = {
     on_attach = function(client, bufnr)
         print("Loading texlab")
-        vim.fn.serverstart("/tmp/nvim.latex")
         def_opts.on_attach(client, bufnr)
+        vim.fn.serverstart("/tmp/nvim.latex")
     end,
     capabilities = def_opts.capabilities,
     filetypes = M.filetypes,
