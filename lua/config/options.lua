@@ -37,6 +37,8 @@ opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
+opt.mousemoveevent = true
+
 
 -- Keymaps: Avoid <esc> delay. Also set escape-time 0 in tmux
 opt.timeout = true    -- for mappings

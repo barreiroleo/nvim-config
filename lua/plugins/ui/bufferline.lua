@@ -1,37 +1,54 @@
-local diagnostics_indicator = function(count, level, diagnostics_dict, context)
-    local s = " "
-    for e, n in pairs(diagnostics_dict) do
-        local sym = e == "error" and " " or (e == "warning" and " " or "")
-        s = s .. n .. sym
-    end
-    return s
-end
-
 return {
-    "akinsho/bufferline.nvim",
-    -- version = "v3.*",
-    event = { "BufNewFile", "BufReadPre" },
-    dependencies = { "kyazdani42/nvim-web-devicons" },
-    opts = {
-        options = {
-            max_name_length = 15,
-            tab_size = 15,
-            separator_style = { "|", "|" }, -- [focused and unfocused].
-            sort_by = "relative_directory",
-            -- For ⁸·₂ (ordinal and buffer_id)
-            -- numbers = "both",
-            numbers = function(opts)
-                return string.format("%s·%s", opts.raise(opts.id), opts.lower(opts.ordinal))
-            end,
-            offsets = {
-                {
-                    filetype = "neo-tree",
-                    text = "Explorer",
-                    text_align = "left",
+    'akinsho/bufferline.nvim',
+    event = { 'BufNewFile', 'BufReadPre' },
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    config = function()
+        require('bufferline').setup {
+            options = {
+                indicator = { style = 'underline' },
+                -- indicator = { icon = '░', style = 'icon' },
+                separator_style = { '|', '|' },
+
+                offsets = {
+                    {
+                        filetype = 'neo-tree',
+                        text = 'File Explorer',
+                        highlight = 'Directory',
+                        separator = true,
+                        text_align = 'left',
+                    },
+                },
+
+                groups = {
+                    options = { toggle_hidden_on_enter = true },
+                    items = {
+                        require('bufferline.groups').builtin.ungrouped,
+                        {
+                            name = 'Tests',
+                            matcher = function(buf)
+                                return buf.name:match '%test' or buf.name:match '%spec'
+                            end,
+                        },
+                        {
+                            name = 'Docs',
+                            matcher = function(buf)
+                                return buf.name:match '%.md' or buf.name:match '%.txt'
+                            end,
+                        },
+                    },
+                },
+
+                -- TODO: Show pin/unpin
+                hover = {
+                    enabled = true,
+                    delay = 200,
+                    reveal = { 'close' },
                 },
             },
-            diagnostics = "nvim_lsp",
-            diagnostics_indicator = diagnostics_indicator,
-        },
+        }
+    end,
+    keys = {
+        { '<leader>bad', '<cmd>BufferLineCloseOthers<cr>', desc = 'Bufferline: Close all other visible buffers' },
+        { '<leader>bp', '<cmd>BufferLineTogglePin<cr>', desc = 'Bufferline: Toggle pin buffer' },
     },
 }

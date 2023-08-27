@@ -71,7 +71,7 @@ local off_lsp = {
     -- ["cmake_format"] = null_ls.builtins.formatting.cmake_format,
 
     -- C#
-    ["csharpier"] = null_ls.builtins.formatting.csharpier,
+    -- ["csharpier"] = null_ls.builtins.formatting.csharpier,
 
     -- Docker
      ["hadolint"] = null_ls.builtins.diagnostics.hadolint,
