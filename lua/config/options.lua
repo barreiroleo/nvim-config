@@ -72,9 +72,23 @@ opt.listchars:append("tab:» ")
 
 if vim.fn.has("nvim-0.9.0") == 1 then opt.splitkeep = "screen" end
 
--- Open links with gx on WSL
+-- WSL Specific configs
 if vim.fn.has("wsl") == 1 then
+    -- Open links with gx
     vim.g.netrw_browsex_viewer = "cmd.exe /C start"
+    -- Clipboard
+    vim.g.clipboard = {
+        name = 'WslClipboard',
+        copy = {
+            ['+'] = 'clip.exe',
+            ['*'] = 'clip.exe',
+        },
+        paste = {
+            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0,
+    }
 end
 
 -- Test

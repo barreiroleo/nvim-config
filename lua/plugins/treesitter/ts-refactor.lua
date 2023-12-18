@@ -9,7 +9,7 @@ local M = {
     },
     -- Highlights the block from the current scope where the cursor is.
     highlight_current_scope = {
-        enable = true
+        enable = false
     },
     -- Renames the symbol under the cursor within the current scope (and current file).
     smart_rename = {
