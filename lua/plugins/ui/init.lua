@@ -13,5 +13,5 @@ return {
     { import = "plugins.ui.blankline" },
     { import = "plugins.ui.bufferline" },
     { import = "plugins.ui.lualine" },
-    { import = "plugins.ui.symbols_outline" },
+    { import = "plugins.ui.outline" },
 }
