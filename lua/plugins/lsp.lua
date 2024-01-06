@@ -4,12 +4,17 @@ return {
             { "williamboman/mason.nvim" },
             { "williamboman/mason-lspconfig.nvim" },
             { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-            { "jose-elias-alvarez/null-ls.nvim" },
+            { "nvimtools/none-ls.nvim" },
 
             { "j-hui/fidget.nvim",
                 opts = {
-                    window = { blend = 0 },
-                    sources = { ["null-ls"] = { ignore = true } },
+                    progress = {
+                        suppress_on_insert = true,
+                        -- ignore = { "null-ls" },
+                    },
+                    notification = {
+                        window = { winblend = 100 }
+                    }
                 }
             },
             { "ray-x/lsp_signature.nvim" },

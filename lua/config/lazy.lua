@@ -7,8 +7,9 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
     spec = {
-        -- To test imports
-        -- { "LazyVim/LazyVim", import = "lazyvim.plugins.extras.ui.mini-animate" },
+        -- { "LazyVim/LazyVim"},
+        -- { import = "lazyvim.plugins.extras.lang.cmake" },
+        -- { import = "lazyvim.plugins.extras.lang.clangd" },
         { import = "plugins" },
     },
     dev = {

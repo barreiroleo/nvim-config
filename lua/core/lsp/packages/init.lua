@@ -53,20 +53,12 @@ local off_lsp = {
     ["shfmt"] = null_ls.builtins.formatting.shfmt,
 
     -- C / C++ / C#
-    ["clang-format"] = null_ls.builtins.formatting.clang_format.with {
-        -- InheritParentConfig Not a real style, but allows to use the .clang-format file from the parent directory (or
-        -- its parent if there is none). If there is no parent file found it falls back to the fallback style, and
-        -- applies the changes to that. With this option you can overwrite some parts of your main style for your
-        -- subdirectories. This is also possible through the command line, e.g.: --style={BasedOnStyle:
-        -- InheritParentConfig, ColumnLimit: 20}
-        extra_args = { '-style', '{BasedOnStyle: InheritParentConfig, ColumnLimit: 120, IndentWidth: 4}' },
-    },
-    ["cpplint"] = null_ls.builtins.diagnostics.cpplint,
+    -- ["cpplint"] = null_ls.builtins.diagnostics.cpplint,
     null_ls.builtins.diagnostics.clang_check,
     null_ls.builtins.diagnostics.cppcheck,
 
     -- CMake / Make
-    -- null_ls.builtins.diagnostics.checkmake,
+    null_ls.builtins.diagnostics.checkmake,
     -- ["cmake_lint"] = null_ls.builtins.diagnostics.cmake_lint,
     -- ["cmake_format"] = null_ls.builtins.formatting.cmake_format,
 

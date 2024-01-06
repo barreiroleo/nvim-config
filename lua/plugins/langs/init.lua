@@ -13,6 +13,11 @@ return {
     -- Rust
     { 'rust-lang/rust.vim', ft = "rust" },
 
+    { "Civitasv/cmake-tools.nvim", lazy = true,
+        ft = { "cmake", "make", "c", "cpp" },
+        cmd = { "CMakeGenerate", "CMakeBuild", "CMakeRun", "CMakeRunTest" }
+    },
+
     -- Writing
     { import = "plugins.langs.ltex_extra" },
     -- Markdown
@@ -20,9 +25,11 @@ return {
     -- Latex
     { import = "plugins.langs.latex" },
     -- PlantUML
-    { 'scrooloose/vim-slumlord', ft = { 'puml', 'uml', 'md' } },
-    {
-        'weirongxu/plantuml-previewer.vim',
+    { 'scrooloose/vim-slumlord', lazy = true,
+        ft = { 'puml', 'uml', 'md' }
+    },
+    { 'weirongxu/plantuml-previewer.vim', lazy = true,
+        ft = { 'puml', 'uml', 'md' },
         dependencies = {
             'tyru/open-browser.vim',
             'aklt/plantuml-syntax',

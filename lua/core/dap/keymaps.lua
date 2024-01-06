@@ -23,24 +23,20 @@ local keymaps_global = {
     { 'n', "<S-F8>",       breakpoint_kinds["condition"],                 { desc = "DAP: Breakpoint condition" } },
     { 'n', "<leader><F8>", breakpoint_kinds["log"],                       { desc = "DAP: Breakpoint log" } },
 
-    { 'n', "<F9>",         ":lua require('dap').continue()<CR>",          { desc = "DAP: Start" } },
-    { 'n', '<F5>',         ":lua require'osv'.run_this()<CR>",            { desc = "DAP: (vimkind) debug this file" } },
-    { 'n', '<S-F5>',       ":lua require'osv'.launch({port = 8086})<CR>", { desc = "DAP: (vimkind) launch server, attach from another nvim" } },
+    { 'n', "<F5>",         ":lua require('dap').continue()<CR>",          { desc = "DAP: Start" } },
+    -- { 'n', '<F5>',         ":lua require'osv'.run_this()<CR>",            { desc = "DAP: (vimkind) debug this file" } },
+    -- { 'n', '<S-F5>',       ":lua require'osv'.launch({port = 8086})<CR>", { desc = "DAP: (vimkind) launch server, attach from another nvim" } },
 }
 
 ---Keymaps for the buffer when debug session is started
 ---@type Mapping
 local keymaps_debug = {
     -- TODO: Replace <leader> with real key
-    { 'n', "<F9>",  ":lua require'dap'.continue()<CR>",                                    { desc = "DAP: Continue" } },
-    { "n", "dc",    ":lua require'dap'.continue()<CR>",                                    { desc = "DAP: Continue" } },
+    { 'n', "<F5>",  ":lua require'dap'.continue()<CR>",                                    { desc = "DAP: Continue" } },
     { "n", "db",    ":lua require'dap'.step_back()<CR>",                                   { desc = "DAP: Step Back" } },
-    { 'n', "<F10>", ":lua require'dap'.step_into()<CR>",                                   { desc = "DAP: Step Into" } },
-    { "n", "di",    ":lua require'dap'.step_into()<CR>",                                   { desc = "DAP: Step Into" } },
-    { 'n', "<F11>", ":lua require'dap'.step_over()<CR>",                                   { desc = "DAP: Step Over" } },
-    { "n", "do",    ":lua require'dap'.step_over()<CR>",                                   { desc = "DAP: Step Over" } },
+    { 'n', "<F11>", ":lua require'dap'.step_into()<CR>",                                   { desc = "DAP: Step Into" } },
+    { 'n', "<F10>", ":lua require'dap'.step_over()<CR>",                                   { desc = "DAP: Step Over" } },
     { 'n', "<F12>", ":lua require'dap'.step_out()<CR>",                                    { desc = "DAP: Step Out" } },
-    { "n", "du",    ":lua require'dap'.step_out()<CR>",                                    { desc = "DAP: Step Out" } },
     { "n", "dR",    ":lua require'dap'.run_to_cursor()<CR>",                               { desc = "DAP: Run to Cursor" } },
     { "n", "dp",    ":lua require'dap'.pause.toggle()<CR>",                                { desc = "DAP: Pause" } },
     { "n", "dq",    ":lua require'dap'.close()<CR>",                                       { desc = "DAP: Quit" } },
