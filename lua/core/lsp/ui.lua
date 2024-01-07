@@ -4,6 +4,7 @@ local M = {}
 -- Diagnostic message display. Error lens
 vim.diagnostic.config {
     virtual_text = {
+        spacing = 4,
         severity = {
             min = vim.diagnostic.severity.WARN,
             max = vim.diagnostic.severity.ERROR

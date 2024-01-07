@@ -3,9 +3,24 @@ return {
     { "mfussenegger/nvim-dap",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = {
-            { "jay-babu/mason-nvim-dap.nvim" },
-            { "rcarriga/nvim-dap-ui" },
-            { "theHamsta/nvim-dap-virtual-text" },
+            { "rcarriga/nvim-dap-ui",
+                -- stylua: ignore
+                keys = {
+                    { "<leader>du", function() require("dapui").toggle({}) end,  desc = "Dap UI" },
+                    { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
+                },
+            },
+            { "jay-babu/mason-nvim-dap.nvim",
+                cmd = { "DapInstall", "DapUninstall" }
+            },
+            { "theHamsta/nvim-dap-virtual-text",
+                opts = {
+                    enabled = true,
+                    commented = true,
+                    clear_on_continue = true,
+                    virt_text_pos = "eol"
+                }
+            },
             { "jbyuki/one-small-step-for-vimkind" },
         },
         config = function () require("core.dap") end

@@ -5,55 +5,43 @@ local M = {}
 local keymaps_backup = {}
 
 ---@class Mapping
----@field mode string The mode in which the key mapping should work
----@field key string The key combination that triggers the action
----@field action string The code that should be executed when the key combination is triggered
----@field opts table A table that include metadata about the key mapping, such as a description
-
-local breakpoint_kinds = {
-    ["toggle"] = ":lua require('dap').toggle_breakpoint()<CR>",
-    ["condition"] = ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-    ["log"]   = ":lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>"
-}
 
 ---Keymaps for global use
 ---@type Mapping
 local keymaps_global = {
-    { 'n', "<F8>",         breakpoint_kinds["toggle"],                    { desc = "DAP: Breakpoint toggle" } },
-    { 'n', "<S-F8>",       breakpoint_kinds["condition"],                 { desc = "DAP: Breakpoint condition" } },
-    { 'n', "<leader><F8>", breakpoint_kinds["log"],                       { desc = "DAP: Breakpoint log" } },
+    { 'n', "<F9>",  function() require('dap').toggle_breakpoint() end, { desc = "DAP: Breakpoint toggle" } },
 
-    { 'n', "<F5>",         ":lua require('dap').continue()<CR>",          { desc = "DAP: Start" } },
-    -- { 'n', '<F5>',         ":lua require'osv'.run_this()<CR>",            { desc = "DAP: (vimkind) debug this file" } },
-    -- { 'n', '<S-F5>',       ":lua require'osv'.launch({port = 8086})<CR>", { desc = "DAP: (vimkind) launch server, attach from another nvim" } },
+    { 'n', "<F5>",  function() require 'dap'.continue() end,           { desc = "DAP: Continue" } },
+    { 'n', "<F11>", function() require 'dap'.step_into() end,          { desc = "DAP: Step Into" } },
+    { 'n', "<F10>", function() require 'dap'.step_over() end,          { desc = "DAP: Step Over" } },
+    { 'n', "<F12>", function() require 'dap'.step_out() end,           { desc = "DAP: Step Out" } },
+    -- { 'n', '<F5>',   function() require 'osv'.run_this() end,              { desc = "DAP: (vimkind) debug this file" } },
+    -- { 'n', '<S-F5>', function() require 'osv'.launch({ port = 8086 }) end, { desc = "DAP: (vimkind) launch server, attach from another nvim" } },
 }
 
 ---Keymaps for the buffer when debug session is started
 ---@type Mapping
 local keymaps_debug = {
     -- TODO: Replace <leader> with real key
-    { 'n', "<F5>",  ":lua require'dap'.continue()<CR>",                                    { desc = "DAP: Continue" } },
-    { "n", "db",    ":lua require'dap'.step_back()<CR>",                                   { desc = "DAP: Step Back" } },
-    { 'n', "<F11>", ":lua require'dap'.step_into()<CR>",                                   { desc = "DAP: Step Into" } },
-    { 'n', "<F10>", ":lua require'dap'.step_over()<CR>",                                   { desc = "DAP: Step Over" } },
-    { 'n', "<F12>", ":lua require'dap'.step_out()<CR>",                                    { desc = "DAP: Step Out" } },
-    { "n", "dR",    ":lua require'dap'.run_to_cursor()<CR>",                               { desc = "DAP: Run to Cursor" } },
-    { "n", "dp",    ":lua require'dap'.pause.toggle()<CR>",                                { desc = "DAP: Pause" } },
-    { "n", "dq",    ":lua require'dap'.close()<CR>",                                       { desc = "DAP: Quit" } },
+    { "n",          "dC",  function() require 'dap'.set_breakpoint(vim.fn.input '[Condition] > ') end,                 { desc = "DAP: Conditional Breakpoint" } },
+    { 'n',          "dLC", function() require 'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = "DAP: Breakpoint log" } },
+    { "n",          "dt",  function() require 'dap'.toggle_breakpoint() end,                                           { desc = "DAP: Toggle Breakpoint" } },
 
-    { "n", "dC",    ":lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<CR>", { desc = "DAP: Conditional Breakpoint" } },
-    { "n", "dt",    ":lua require'dap'.toggle_breakpoint()<CR>",                           { desc = "DAP: Toggle Breakpoint" } },
+    { "n",          "db",  function() require 'dap'.step_back() end,                                                   { desc = "DAP: Step Back" } },
+    { "n",          "dR",  function() require 'dap'.run_to_cursor() end,                                               { desc = "DAP: Run to Cursor" } },
+    { "n",          "dp",  function() require 'dap'.pause.toggle() end,                                                { desc = "DAP: Pause" } },
 
-    { "n",          "dE",    ":lua require'dapui'.eval(vim.fn.input '[Expression] > ')<CR>", { desc = "DAP: Evaluate Input" } },
-    { { "n", "v" }, "de",    ":lua require'dapui'.eval()<CR>",                             { desc = "DAP: Evaluate" } },
-    { "n",          "dr",    ":lua require'dap'.repl.toggle()<CR>",                        { desc = "DAP: Toggle Repl" } },
+    { "n",          "dq",  function() require 'dap'.close() end,                                                       { desc = "DAP: Quit" } },
+    { "n",          "dr",  function() require 'dap'.repl.toggle() end,                                                 { desc = "DAP: Toggle Repl" } },
+    { "n",          "dE",  function() require 'dapui'.eval(vim.fn.input '[Expression] > ') end,                        { desc = "DAP: Evaluate Input" } },
+    { { "n", "v" }, "de",  function() require 'dapui'.eval() end,                                                      { desc = "DAP: Evaluate" } },
+    { "n",          "dU",  function() require 'dapui'.toggle() end,                                                    { desc = "DAP: Toggle UI" } },
 
-    { "n", "dU",    ":lua require'dapui'.toggle()<CR>",                                    { desc = "DAP: Toggle UI" } },
-    { "n", "dd",    ":lua require'dap'.disconnect()<CR>",                                  { desc = "DAP: Disconnect" } },
-    { "n", "dg",    ":lua require'dap'.session()<CR>",                                     { desc = "DAP: Get Session" } },
-    { "n", "dh",    ":lua require'dap.ui.widgets'.hover()<CR>",                            { desc = "DAP: Hover Variables" } },
-    { "n", "dS",    ":lua require'dap.ui.widgets'.scopes()<CR>",                           { desc = "DAP: Scopes" } },
-    { "n", "dx",    ":lua require'dap'.terminate()<CR>",                                   { desc = "DAP: Terminate" } },
+    { "n",          "dd",  function() require 'dap'.disconnect() end,                                                  { desc = "DAP: Disconnect" } },
+    { "n",          "dg",  function() require 'dap'.session() end,                                                     { desc = "DAP: Get Session" } },
+    { "n",          "dx",  function() require 'dap'.terminate() end,                                                   { desc = "DAP: Terminate" } },
+    { "n",          "dh",  function() require 'dap.ui.widgets'.hover() end,                                            { desc = "DAP: Hover Variables" } },
+    { "n",          "dS",  function() require 'dap.ui.widgets'.scopes() end,                                           { desc = "DAP: Scopes" } },
 }
 
 ---Backup the exististing keymaps before replace it
@@ -71,7 +59,6 @@ M.set_keymaps = function(keymaps)
 end
 
 
----@param keymaps Mapping[]
 M.set_debug_keymaps = function()
     M.backup_keymaps(keymaps_debug)
     M.set_keymaps(keymaps_debug)
