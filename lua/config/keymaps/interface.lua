@@ -10,7 +10,7 @@ else
     map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 end
 map("n", "<leader><Tab>", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map('n', '<leader>bd', '<cmd>bdelete<CR>', { desc = "Buffer delete" })
+vim.keymap.set("n", "<leader>bd", function() require('bufdelete').bufwipeout(0) end, { desc = "Buffer delete" })
 
 -- Tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })

@@ -38,6 +38,7 @@ opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.mousemoveevent = true
+opt.bufhidden = "delete"
 
 
 -- Keymaps: Avoid <esc> delay. Also set escape-time 0 in tmux
@@ -53,7 +54,7 @@ opt.incsearch=true -- While typing show where the pattern
 opt.smartcase = true -- Don't ignore case with capitals
 
 -- Visual
-opt.colorcolumn="100,120"
+opt.colorcolumn = "100"
 opt.cursorline = true -- Enable highlighting of the current line
 opt.laststatus = 2 -- Status line in all windows
 opt.list = true -- Show some invisible characters (tabs...

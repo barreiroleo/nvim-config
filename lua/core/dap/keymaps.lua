@@ -23,25 +23,25 @@ local keymaps_global = {
 ---@type Mapping
 local keymaps_debug = {
     -- TODO: Replace <leader> with real key
-    { "n",          "dC",  function() require 'dap'.set_breakpoint(vim.fn.input '[Condition] > ') end,                 { desc = "DAP: Conditional Breakpoint" } },
-    { 'n',          "dLC", function() require 'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = "DAP: Breakpoint log" } },
-    { "n",          "dt",  function() require 'dap'.toggle_breakpoint() end,                                           { desc = "DAP: Toggle Breakpoint" } },
+    { "n",          ",dC",  function() require 'dap'.set_breakpoint(vim.fn.input '[Condition] > ') end,                 { desc = "DAP: Conditional Breakpoint" } },
+    { 'n',          ",dLC", function() require 'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = "DAP: Breakpoint log" } },
+    { "n",          ",dt",  function() require 'dap'.toggle_breakpoint() end,                                           { desc = "DAP: Toggle Breakpoint" } },
 
-    { "n",          "db",  function() require 'dap'.step_back() end,                                                   { desc = "DAP: Step Back" } },
-    { "n",          "dR",  function() require 'dap'.run_to_cursor() end,                                               { desc = "DAP: Run to Cursor" } },
-    { "n",          "dp",  function() require 'dap'.pause.toggle() end,                                                { desc = "DAP: Pause" } },
+    { "n",          ",db",  function() require 'dap'.step_back() end,                                                   { desc = "DAP: Step Back" } },
+    { "n",          ",dR",  function() require 'dap'.run_to_cursor() end,                                               { desc = "DAP: Run to Cursor" } },
+    { "n",          ",dp",  function() require 'dap'.pause.toggle() end,                                                { desc = "DAP: Pause" } },
 
-    { "n",          "dq",  function() require 'dap'.close() end,                                                       { desc = "DAP: Quit" } },
-    { "n",          "dr",  function() require 'dap'.repl.toggle() end,                                                 { desc = "DAP: Toggle Repl" } },
-    { "n",          "dE",  function() require 'dapui'.eval(vim.fn.input '[Expression] > ') end,                        { desc = "DAP: Evaluate Input" } },
-    { { "n", "v" }, "de",  function() require 'dapui'.eval() end,                                                      { desc = "DAP: Evaluate" } },
-    { "n",          "dU",  function() require 'dapui'.toggle() end,                                                    { desc = "DAP: Toggle UI" } },
+    { "n",          ",dq",  function() require 'dap'.close() end,                                                       { desc = "DAP: Quit" } },
+    { "n",          ",dr",  function() require 'dap'.repl.toggle() end,                                                 { desc = "DAP: Toggle Repl" } },
+    { "n",          ",dE",  function() require 'dapui'.eval(vim.fn.input '[Expression] > ') end,                        { desc = "DAP: Evaluate Input" } },
+    { { "n", "v" }, ",de",  function() require 'dapui'.eval() end,                                                      { desc = "DAP: Evaluate" } },
+    { "n",          ",dU",  function() require 'dapui'.toggle() end,                                                    { desc = "DAP: Toggle UI" } },
 
-    { "n",          "dd",  function() require 'dap'.disconnect() end,                                                  { desc = "DAP: Disconnect" } },
-    { "n",          "dg",  function() require 'dap'.session() end,                                                     { desc = "DAP: Get Session" } },
-    { "n",          "dx",  function() require 'dap'.terminate() end,                                                   { desc = "DAP: Terminate" } },
-    { "n",          "dh",  function() require 'dap.ui.widgets'.hover() end,                                            { desc = "DAP: Hover Variables" } },
-    { "n",          "dS",  function() require 'dap.ui.widgets'.scopes() end,                                           { desc = "DAP: Scopes" } },
+    { "n",          ",dd",  function() require 'dap'.disconnect() end,                                                  { desc = "DAP: Disconnect" } },
+    { "n",          ",dg",  function() require 'dap'.session() end,                                                     { desc = "DAP: Get Session" } },
+    { "n",          ",dx",  function() require 'dap'.terminate() end,                                                   { desc = "DAP: Terminate" } },
+    { "n",          ",dh",  function() require 'dap.ui.widgets'.hover() end,                                            { desc = "DAP: Hover Variables" } },
+    { "n",          ",dS",  function() require 'dap.ui.widgets'.scopes() end,                                           { desc = "DAP: Scopes" } },
 }
 
 ---Backup the exististing keymaps before replace it
