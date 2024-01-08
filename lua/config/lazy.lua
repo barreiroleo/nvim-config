@@ -17,9 +17,7 @@ require("lazy").setup({
         patterns = { "barreiroleo" }, -- plugins that match these patterns will use local versions
         fallback = false,             -- Fallback to git when local plugin doesn't exist
     },
-    defaults = { lazy = false, version = false },
     install = { colorscheme = { "habamax" } },
-    checker = { enabled = true },
     performance = {
         rtp = {
             disabled_plugins = {

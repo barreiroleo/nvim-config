@@ -1,8 +1,8 @@
 return {
-    { "tmux-plugins/vim-tmux",
-        event = { "BufNewFile", "BufReadPre" },
+    { 'tmux-plugins/vim-tmux', lazy = true,
+        ft = { 'tmux' }
     },
-    { "lambdalisue/suda.vim",
-        event = { "BufNewFile", "BufReadPre" },
+    { 'lambdalisue/suda.vim', lazy = true,
+        cmd = { 'SudaWrite', 'SudaRead' }
     },
 }

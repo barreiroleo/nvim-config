@@ -43,10 +43,13 @@ return {
     },
 
     -- TaskRunner
-    { "stevearc/overseer.nvim",
+    { "stevearc/overseer.nvim", lazy = true,
         opts = {
             task_lists = { direction = "right" },
             templates = { "builtin", "user.cpp_build", "user.run_script" }
+        },
+        cmd = { "OverseerOpen", "OverseerLoadBundle", "OverseerRunCmd", "OverseerRun",
+            "OverseerInfo", "OverseerBuild", "OverseerQuickAction", "OverseerTaskAction"
         }
     },
 

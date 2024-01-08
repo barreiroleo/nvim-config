@@ -74,8 +74,6 @@ if vim.fn.has("nvim-0.9.0") == 1 then opt.splitkeep = "screen" end
 
 -- WSL Specific configs
 if vim.fn.has("wsl") == 1 then
-    -- Open links with gx
-    vim.g.netrw_browsex_viewer = "cmd.exe /C start"
     -- Clipboard
     vim.g.clipboard = {
         name = 'WslClipboard',
