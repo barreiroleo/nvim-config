@@ -1,22 +1,9 @@
 return {
-    { "TimUntersberger/neogit",
+    { "tpope/vim-fugitive",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = {
-            "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
-            "nvim-lua/plenary.nvim",
         },
-        opts = {
-            signs = {
-                -- { CLOSED, OPENED }
-                section = { "", "" },
-                item = { "", "" },
-                hunk = { "", "" },
-            },
-            integrations = {
-                diffview = true
-            }
-        }
     },
 
     { "lewis6991/gitsigns.nvim",
