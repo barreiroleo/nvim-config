@@ -2,9 +2,10 @@
 -- ~/.local/share/nvim/lazy/catppuccin/lua/catppuccin/palettes/mocha.lua | base, mantle, crust
 local flavour_dark = 'mocha'
 local flavour_light = 'latte'
+local transparent = true
 
 -- AutoLightDark switch colorscheme
-local AutoLightDark = function()
+local function AutoLightDark()
     vim.api.nvim_create_autocmd('OptionSet', {
         group = vim.api.nvim_create_augroup("CatppuccinAfterUser", { clear = true }),
         pattern = 'background',
@@ -14,19 +15,17 @@ local AutoLightDark = function()
     })
 end
 
-function setup_colorhub()
+---@param _transparent boolean
+local function setup_tscontext_hl(_transparent)
     local palette = require('catppuccin.palettes').get_palette(flavour_dark)
-    local Lualine = require 'lualine.themes.catppuccin'
-    Lualine.inactive.c.bg = palette.mantle
-    Lualine.normal.c.bg = palette.mantle
-    require("plugins.themes.colorhub").setup {
-        Lualine = Lualine,
-        TSContext = {
-            ['TC'] = { bg = palette.mantle },
-            ['TC_Bottom'] = { bg = palette.mantle },
-            ['TC_LineNumber'] = { bg = palette.mantle, fg = palette.surface1 },
-        }
+    if _transparent then palette.bg = palette.base else palette.bg = palette.crust end
+    ---@type TSContext_hl
+    local TSContext_hl = {
+        ['TC'] = { bg = palette.bg },
+        ['TC_Bottom'] = { bg = palette.bg },
+        ['TC_LineNumber'] = { bg = palette.bg, fg = palette.surface1 },
     }
+    require('plugins.treesitter.ts-context').setup(TSContext_hl)
 end
 
 return {
@@ -37,16 +36,16 @@ return {
     priority = 1000,
     config = function()
         require("catppuccin").setup {
-            flavour = 'mocha',
+            flavour = flavour_dark,
             background = {
                 light = flavour_light,
                 dark = flavour_dark
             },
-            transparent_background = true,
+            transparent_background = transparent,
             -- Special integrations https://github.com/catppuccin/nvim#special-integrations
         }
         vim.cmd.colorscheme("catppuccin-" .. flavour_dark)
-        setup_colorhub()
+        setup_tscontext_hl(transparent)
         AutoLightDark()
     end,
 }

@@ -20,6 +20,7 @@ return {
     { "tpope/vim-repeat",
         event = { "BufNewFile", "BufReadPre" },
     },
+    { "zef/vim-cycle" },
     { "numToStr/Comment.nvim",
         event = { "BufNewFile", "BufReadPre" },
         config = true,

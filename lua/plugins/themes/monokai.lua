@@ -18,7 +18,6 @@ return{
         config = function()
             require("monokai-pro").setup(monokai_opts)
             vim.cmd.colorscheme("monokai-pro")
-            require("plugins.themes.colorhub").setup()
         end,
     }
 }

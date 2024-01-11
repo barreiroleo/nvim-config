@@ -4,6 +4,7 @@ return {
         dependencies = {
             "sindrets/diffview.nvim",
         },
+        cmd = { "Git" }
     },
 
     { "lewis6991/gitsigns.nvim",

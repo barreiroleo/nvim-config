@@ -1,4 +1,3 @@
-local theme = require("plugins.themes.colorhub").Lualine
 local M = { }
 
 M.diff_source = function()
@@ -24,7 +23,7 @@ M.statusline = {
 }
 
 M.options = {
-    theme = theme,
+    theme = "catppuccin",
     component_separators = '|',
     section_separators = { left = '', right = '' },
     disabled_filetypes = { 'neo-tree', 'TelescopePrompt', 'packer', 'toggleterm' },

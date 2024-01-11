@@ -8,7 +8,7 @@ else
     vim.keymap.set({ "n" }, "<S-h>", "<cmd>bprevious<cr>", { desc = "Buffer: Prev buffer" })
     vim.keymap.set({ "n" }, "<S-l>", "<cmd>bnext<cr>",     { desc = "Buffer: Next buffer" })
 end
-vim.keymap.set({ "n" }, "<leader>bd", function() require('bufdelete').bufwipeout(0) end, { desc = "Buffer delete" })
+vim.keymap.set({ "n" }, "<leader>bd", "<cmd>bdelete<cr>", { desc = "Buffer delete" })
 
 -- Tabs
 vim.keymap.set({ "n" }, "<leader><leader><tab>", "<cmd>tabnew<cr>", { desc = "Tabs: New Tab" })

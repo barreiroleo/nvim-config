@@ -57,6 +57,11 @@ return {
     { "tpope/vim-dispatch",
         cmd = { "Dispatch", "Make" }
     },
+    { "Civitasv/cmake-tools.nvim", lazy = true,
+        ft = { "cmake", "make", "c", "cpp" },
+        cmd = { "CMakeGenerate", "CMakeBuild", "CMakeRun", "CMakeRunTest" }
+    },
+
 
     -- Testing
     { "nvim-neotest/neotest",
