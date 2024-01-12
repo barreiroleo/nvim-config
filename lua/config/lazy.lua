@@ -24,9 +24,9 @@ require("lazy").setup({
                 "gzip",
                 "matchit",
                 "matchparen",
-                -- "netrwPlugin", -- Needed to open urls with gx
+                "netrwPlugin", -- Needed to open urls with gx
                 "tarPlugin",
-                -- "tohtml", -- needed to export lines with :tohtml
+                "tohtml", -- needed to export lines with :tohtml
                 "tutor",
                 "zipPlugin",
             },

@@ -7,7 +7,6 @@ local M = {}
 
 --- @param TSContext_hl TSContext_hl
 local function set_tscontext_hl(TSContext_hl)
-    LOG(TSContext_hl)
     vim.api.nvim_set_hl(0, 'TreesitterContext', { bg = TSContext_hl["TC"].bg })
     vim.api.nvim_set_hl(0, 'TreesitterContextBottom', { bg = TSContext_hl["TC_Bottom"].bg })
     vim.api.nvim_set_hl(0, 'TreesitterContextLineNumber', {
