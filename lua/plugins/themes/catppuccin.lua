@@ -29,11 +29,7 @@ local function setup_tscontext_hl(_transparent)
 end
 
 return {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    enabled = true,
-    lazy = false,
-    priority = 1000,
+    "catppuccin/nvim", name = "catppuccin", lazy = false, priority = 1000, enabled = false,
     config = function()
         require("catppuccin").setup {
             flavour = flavour_dark,

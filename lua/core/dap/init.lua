@@ -43,10 +43,7 @@ for _, config in pairs(adapters) do
     dap.adapters = vim.tbl_extend("error", dap.adapters, config)
 end
 
--- FIX: tbl_extend doesn't work properly
-local codelldb_cppdbg = {}
-codelldb_cppdbg = vim.list_extend(codelldb_cppdbg, codelldb.configurations)
-codelldb_cppdbg = vim.list_extend(codelldb_cppdbg, cppdbg.configurations)
+local codelldb_cppdbg = vim.list_extend(codelldb.configurations, cppdbg.configurations)
 dap.configurations = {
     bash = bashdb.configurations,
     cpp = codelldb_cppdbg,

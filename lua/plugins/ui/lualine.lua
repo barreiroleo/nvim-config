@@ -23,7 +23,6 @@ M.statusline = {
 }
 
 M.options = {
-    theme = "catppuccin",
     component_separators = '|',
     section_separators = { left = '', right = '' },
     disabled_filetypes = { 'neo-tree', 'TelescopePrompt', 'packer', 'toggleterm' },

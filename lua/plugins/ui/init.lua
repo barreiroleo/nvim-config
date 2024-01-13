@@ -12,7 +12,6 @@ return {
     { 'dstein64/nvim-scrollview', lazy = true,
         event = { 'BufNewFile', 'BufReadPre' }
     },
-    { 'famiu/bufdelete.nvim' },
     { import = 'plugins.ui.blankline' },
     { import = 'plugins.ui.bufferline' },
     { import = 'plugins.ui.lualine' },
