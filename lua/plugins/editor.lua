@@ -49,14 +49,23 @@ return {
         end
     },
 
-    { "ThePrimeagen/harpoon",
-        keys = {
-            { "<leader>a", function() require("harpoon.mark").add_file() end,        desc = "Harpoon: Add file" },
-            { "<leader>w", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon: Toggle quick menu" },
-            { "<leader>1", function() require("harpoon.ui").nav_file(1) end,         desc = "Harpoon: Navigate to 1" },
-            { "<leader>2", function() require("harpoon.ui").nav_file(2) end,         desc = "Harpoon: Navigate to 2" },
-            { "<leader>3", function() require("harpoon.ui").nav_file(3) end,         desc = "Harpoon: Navigate to 3" },
-            { "<leader>4", function() require("harpoon.ui").nav_file(4) end,         desc = "Harpoon: Navigate to 4" },
-        }
+    { "ThePrimeagen/harpoon", branch = "harpoon2",
+        dependencies = "nvim-lua/plenary.nvim",
+        config = function ()
+            local harpoon = require("harpoon")
+            harpoon:setup()
+
+            vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end, { desc = "Harpoon: Append" })
+            vim.keymap.set("n", "<leader>we", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon: Toogle quick menu" })
+
+            vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon: Select 1" })
+            vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon: Select 2" })
+            vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon: Select 3" })
+            vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "Harpoon: Select 4" })
+
+            -- Toggle previous & next buffers stored within Harpoon list
+            vim.keymap.set("n", "<leader>wd", function() harpoon:list():prev() end, { desc = "Harpoon: Previous" })
+            vim.keymap.set("n", "<leader>wf", function() harpoon:list():next() end, { desc = "Harpoon: Next" })
+        end
     }
 }

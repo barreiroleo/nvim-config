@@ -28,12 +28,12 @@ keymaps.textobjects = {
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
     },
-    swap_next = {
-        ["<leader>a"] = "@parameter.inner",
-    },
-    swap_previous = {
-        ["<leader>A"] = "@parameter.inner",
-    },
+    -- swap_next = {
+    --     ["<leader>a"] = "@parameter.inner",
+    -- },
+    -- swap_previous = {
+    --     ["<leader>A"] = "@parameter.inner",
+    -- },
     goto_next_start = {
         ["]m"] = "@function.outer",
         ["]]"] = "@class.outer",
