@@ -8,9 +8,11 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
+
 local opt = vim.opt
 
 -- vim.cmd.language("en_US.utf8")
+opt.exrc = true        -- Auto exec {.nvim.lua, .nvimrc, .exrc} in the current dir
 -- Editing
 opt.expandtab = true   -- Use spaces instead of tabs
 opt.shiftround = true  -- Round indent to a multiple of shiftwidth

@@ -6,6 +6,8 @@ M.save_and_exec = function()
         lua = 'luafi %',
         vim = 'source %',
         python = '!python %',
+        cpp = 'Make run',
+        sh = "!bash %"
     }
 
     local ft = vim.api.nvim_get_option_value('filetype', {buf = 0})
