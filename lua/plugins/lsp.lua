@@ -25,8 +25,7 @@ return {
             },
             { "folke/neodev.nvim",
                 opts = {
-                    library = { plugins = { "neotest" }, types = true },
-                    experimental = { pathStrict = true }
+                    library = { plugins = { "nvim-treesitter", "neotest", "plenary.nvim" } },
                 }
             },
         },
