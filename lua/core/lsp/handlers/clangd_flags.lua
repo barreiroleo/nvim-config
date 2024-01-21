@@ -17,14 +17,13 @@ local compilation_flags = {
 local feature = {
     '--all-scopes-completion=false',
     '--clang-tidy=true',
-    '--completion-parse=' .. pick_str { "always", "auto", "never" },    -- TEST: Default auto (https://github.com/llvm/llvm-project/blob/0f80f5e362fb43a9335bd154c5f7976a96e32cfc/clang-tools-extra/clangd/CodeComplete.h#L121)
-    '--completion-style=' .. pick_str { "detailed", "bundled" },        -- TEST: Non def
+    '--completion-parse=auto',                                          -- Run parser if preamble are ready. Otherwise, text-based completion.
+    '--completion-style=bundled',                                       -- Pack overloads for instance
 
-    '--debug-origin=true',                                              -- TEST: Def false
     '--fallback-style=webkit',                                          -- "{BasedOnStyle: LLVM, IndentWidth: 4}" is incompatible with .clang-format files
-    '--header-insertion-decorators=' .. pick_str { "true", "false" },   -- https://github.com/hrsh7th/nvim-cmp/issues/999#issuecomment-1130074680
     '--hidden-features',                                                -- TEST: Def false - Enable hidden features mostly useful to clangd developers
     '--import-insertions=true',                                         -- TEST: Def false - If header insertion is enabled, add #import directives when accepting code completions or fixing includes in Objective-C code
+    '--header-insertion-decorators=false',                              -- https://github.com/hrsh7th/nvim-cmp/issues/999#issuecomment-1130074680
     '--include-ineligible-results=true',                                -- TEST: Def false - Include ineligible completion results (e.g. private members)
     '--ranking-model=' .. pick_str { "heuristics", "decision_forest" }, -- TEST: Def decision_forest - Model to use to rank code-completion items
 }
