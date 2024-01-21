@@ -22,6 +22,14 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
     end,
 })
 
+-- Create a new window when deleting the last buffer
+vim.api.nvim_create_autocmd({ "BufDelete" }, {
+    group = augroup("LastBuffer"),
+    callback = function()
+        vim.cmd("if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 0 | enew | endif")
+    end,
+})
+
 -- Delete undesired spaces on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     group = augroup("spaces"),

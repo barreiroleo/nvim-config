@@ -8,6 +8,9 @@ return {
         opts = { 'md', 'tex', 'json', 'css', 'javascript', 'html', 'python', 'lua' },
         cmd = {"ColorizerAttachToBuffer"}
     },
+    { "RRethy/vim-illuminate", lazy = true,
+        event = "VeryLazy"
+    },
     { 'Bekaboo/dropbar.nvim' },
     { 'dstein64/nvim-scrollview', lazy = true,
         event = { 'BufNewFile', 'BufReadPre' }

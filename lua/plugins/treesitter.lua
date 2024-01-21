@@ -6,8 +6,6 @@ return{
             ts_update()
         end,
         dependencies = {
-            { "nvim-treesitter/nvim-treesitter-textobjects" },
-            { "nvim-treesitter/nvim-treesitter-refactor" },
             { "p00f/nvim-ts-rainbow" },
             { "nvim-treesitter/nvim-treesitter-context",
                 opts = { mode = 'topline' }

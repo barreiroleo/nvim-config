@@ -40,6 +40,7 @@ opt.updatetime = 200               -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.mousemoveevent = true
 opt.bufhidden = "delete"
+opt.shortmess:append("A") -- Avoid ATTENTION message whenfound a swap file
 
 
 -- Keymaps: Avoid <esc> delay. Also set escape-time 0 in tmux
@@ -97,8 +98,6 @@ if vim.fn.has("wsl") == 1 then
 end
 
 -- Test
--- opt.shortmess:append { W = true, I = true, c = true } -- Avoid |hit-enter| prompts in some cases
--- if vim.fn.has("nvim-0.9.0") == 1 then opt.shortmess:append { C = true } end
 -- Fix markdown indentation settings
 vim.g.markdown_folding = 1           -- Enable the markdown plugin
 vim.g.markdown_recommended_style = 0 -- expandtab will be set by default
