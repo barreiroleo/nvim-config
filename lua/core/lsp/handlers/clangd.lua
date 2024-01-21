@@ -1,7 +1,11 @@
 local def_opts = require("core.lsp.opts")
+local clangd_flags = require("core.lsp.handlers.clangd_flags")
+
 local M = {}
 
-local function switch_source_header_splitcmd(bufnr, splitcmd)
+---@param bufnr integer
+---@param splitcmd string
+local function switch_source_header(bufnr, splitcmd)
     bufnr = require 'lspconfig'.util.validate_bufnr(bufnr)
     local clangd_client = require 'lspconfig'.util.get_active_client_by_name(bufnr, 'clangd')
     local params = { uri = vim.uri_from_bufnr(bufnr) }
@@ -23,32 +27,20 @@ end
 
 -- NOTE: Clangd help: ~/.local/share/nvim/mason/packages/clangd/clangd_16.0.2/bin/clangd --help-hidden
 
-M.cmd = {
-    'clangd',
-    '--all-scopes-completion',
-    '--background-index',
-    '--clang-tidy',
-    "--clang-tidy-checks=-*, clang-analyzer-*, concurrency-*, cppcoreguidelines-*, hicpp-*, llvm-*, llvmlibc-*, misc-*, modernize-*,-modernize-use-trailing-return-type, mpi-*, performance-*, portability-*, readability-*",
-    '--completion-style=bundled',
-    '--enable-config',
-    "--header-insertion-decorators",
-    "--header-insertion=iwyu",
-    "--use-dirty-headers",
-    '--offset-encoding=utf-16', --temporary fix for null-ls
-}
+M.cmd = clangd_flags.flags
 
 M.commands = {
     ClangdSwitchSourceHeader = {
-        function() switch_source_header_splitcmd(0, "edit") end,
+        function() switch_source_header(0, "edit") end,
         description = "Open source/header in current buffer",
     },
-    ClangdSwitchSourceHeaderVSplit = {
-        function() switch_source_header_splitcmd(0, "vsplit") end,
+    ClangdSwitchSourceHeaderSplit = {
+        function() switch_source_header(0, "vsplit") end,
         description = "Open source/header in a new vsplit",
     },
-    ClangdSwitchSourceHeaderSplit = {
-        function() switch_source_header_splitcmd(0, "split") end,
-        description = "Open source/header in a new split",
+    ClangdPrintFlags = {
+        function () P({clangd_flags.randomized, clangd_flags.flags}) end,
+        description = "Print the clangd flags"
     }
 }
 
@@ -56,6 +48,9 @@ M.opts = {
     on_attach = function(client, bufnr)
         print("Loading clangd")
         def_opts.on_attach(client, bufnr)
+        vim.keymap.set({ "n", "i" }, "<A-o>", function() switch_source_header(0, "edit") end,
+            { desc = "Clang: Switch source/header" })
+
     end,
     capabilities = def_opts.capabilities,
     commands = M.commands,

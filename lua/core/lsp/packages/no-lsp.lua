@@ -41,7 +41,6 @@ return{
     ["jsonlint"] = null_ls.builtins.diagnostics.jsonlint,
 
     -- Lua
-    ["selene"] = null_ls.builtins.diagnostics.selene,
     ["stylua"] = null_ls.builtins.formatting.stylua,
 
     -- Markdown
