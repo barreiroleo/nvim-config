@@ -11,8 +11,11 @@ local function ToggleFocus()
         require("neo-tree.command").execute({ dir = vim.uv.cwd() })
     else
         -- P({ "Going pos: ", vim.api.nvim_win_get_number(prev_pos.win), prev_pos.cursor })
-        vim.api.nvim_set_current_win(prev_pos.win)
-        vim.api.nvim_win_set_cursor(prev_pos.win, prev_pos.cursor)
+        local function callback()
+            vim.api.nvim_set_current_win(prev_pos.win)
+            vim.api.nvim_win_set_cursor(prev_pos.win, prev_pos.cursor)
+        end
+        local res, err = pcall(callback)
     end
 end
 
