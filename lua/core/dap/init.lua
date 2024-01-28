@@ -3,6 +3,7 @@ local codelldb = require("core.dap.config.codelldb")
 local cppdbg = require("core.dap.config.cppdbg")
 local nlua = require("core.dap.config.nlua")
 local python = require('core.dap.config.python')
+local netcoredbg = require('core.dap.config.netcoredbg')
 
 require('nvim-dap-virtual-text').setup()
 require('dapui').setup()
@@ -35,8 +36,9 @@ local adapters = {
     bashdb.adapters,
     codelldb.adapters,
     cppdbg.adapters,
+    netcoredbg.adapters,
     nlua.adapters,
-    python.adapters
+    python.adapters,
 }
 
 for _, config in pairs(adapters) do
@@ -46,9 +48,10 @@ end
 local codelldb_cppdbg = vim.list_extend(codelldb.configurations, cppdbg.configurations)
 dap.configurations = {
     bash = bashdb.configurations,
-    cpp = codelldb_cppdbg,
     c = codelldb_cppdbg,
-    rust = codelldb_cppdbg,
+    cpp = codelldb_cppdbg,
+    cs = netcoredbg.configurations,
     lua = nlua.configurations,
     python = python.configurations,
+    rust = codelldb_cppdbg,
 }
