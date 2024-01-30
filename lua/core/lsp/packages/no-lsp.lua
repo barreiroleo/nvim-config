@@ -16,8 +16,9 @@ return{
     ["shfmt"] = null_ls.builtins.formatting.shfmt,
 
     -- C / C++ / C#
-    -- ["cpplint"] = null_ls.builtins.diagnostics.cpplint,
-    null_ls.builtins.diagnostics.clang_check,
+    null_ls.builtins.diagnostics.clang_check.with{
+        command = "clang-check-19"
+    },
     null_ls.builtins.diagnostics.cppcheck,
 
     -- CMake / Make
