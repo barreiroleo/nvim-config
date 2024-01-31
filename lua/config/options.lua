@@ -70,11 +70,9 @@ opt.number = true         -- Print line number
 opt.pumblend = 10         -- Popup blend
 opt.pumheight = 10        -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
-opt.signcolumn = "yes"    -- Always show the signcolumn, otherwise it would shift the text each time
 opt.splitbelow = true     -- New hor. splits goes under the current win instead of below.
 opt.splitright = true     -- New ver. splits goes right the current win instead of left.
 opt.splitkeep = "screen"
-opt.termguicolors = true  -- True color support
 opt.winminwidth = 5       -- Minimum window width
 -- opt.listchars:append("space:⋅ ")
 -- opt.listchars:append("eol:↴")

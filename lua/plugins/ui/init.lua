@@ -12,9 +12,6 @@ return {
         event = "VeryLazy"
     },
     { 'Bekaboo/dropbar.nvim' },
-    { 'dstein64/nvim-scrollview', lazy = true,
-        event = { 'BufNewFile', 'BufReadPre' }
-    },
     { import = 'plugins.ui.blankline' },
     { import = 'plugins.ui.bufferline' },
     { import = 'plugins.ui.lualine' },
