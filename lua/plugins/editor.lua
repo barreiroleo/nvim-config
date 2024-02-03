@@ -6,12 +6,6 @@ return {
     { "mbbill/undotree",
         event = { "BufNewFile", "BufReadPre" },
     },
-    { "junegunn/vim-easy-align",
-        keys = {
-            { "ga", "<Plug>(EasyAlign)", mode = "n", desc = "EasyAlign in visual mode: e.g. vipga" },
-            { "ga", "<Plug>(EasyAlign)", mode = "x", desc = "EasyAlign for a motion/text object (e.g. gaip)" }
-        }
-    },
     { "folke/todo-comments.nvim",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = "nvim-lua/plenary.nvim",

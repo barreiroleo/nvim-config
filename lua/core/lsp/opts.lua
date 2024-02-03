@@ -28,7 +28,6 @@ M.capabilities = get_capabilities()
 M.on_attach = function(client, bufnr)
     -- print("Default on_attach")
     require("core.lsp.keymaps")(client, bufnr)
-    require("core.lsp.ui").float_diagnostic(client, bufnr)
     require("core.lsp.utils.peek").create_commands(client, bufnr)
 
     -- Plugs attach

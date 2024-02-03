@@ -1,5 +1,5 @@
 return {
-    { "dhruvasagar/vim-table-mode" },
+    -- { "dhruvasagar/vim-table-mode" },
 
     -- FIX: If the plug not load at :MarkdownPreview, check for tslib asserts at :messages and run
     -- vim.fn["mkdp#util#install"]()

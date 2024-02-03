@@ -1,5 +1,5 @@
 return {
-    { "lervag/vimtex",
+    { "lervag/vimtex", enabled = false,
         ft = { "tex" },
         config = function()
             -- vim.g.vimtex_view_method = "sioyek"
@@ -10,8 +10,4 @@ return {
             vim.g.vimtex_format_enabled = true
         end,
     },
-
-    { "jbyuki/nabla.nvim",
-        ft = { "markdown", "tex" }
-    }
 }

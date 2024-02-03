@@ -7,7 +7,9 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', 'K',          vim.lsp.buf.hover,                { buffer = bufnr })
     vim.keymap.set('n', '<C-k>',      vim.lsp.buf.signature_help,       { buffer = bufnr })
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,               { buffer = bufnr })
-    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
+    -- Testing actions-preview
+    -- vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
+
 
     vim.keymap.set('n', 'gpd', require("core.lsp.utils.peek").PeekDefinition, { buffer = bufnr })
     vim.keymap.set('n', 'gpD', require("core.lsp.utils.peek").PeekDeclaration, { buffer = bufnr })

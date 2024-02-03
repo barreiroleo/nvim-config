@@ -34,12 +34,24 @@ return {
             { "nvim-treesitter/nvim-treesitter" }
         },
         keys = {
-            { "<leader>rr", "<cmd>lua require('refactoring').select_refactor()<CR>", mode = { "n", "v" }, desc = "Refactoring: Select refactor" },
+            { "<leader>rr", function() require('refactoring').select_refactor() end, mode = { "n", "v" }, desc = "Refactoring: Select refactor" },
         },
         opts = {
             prompt_func_return_type = { cpp = true, c = true },     -- prompt for return type
             prompt_func_param_type = { cpp = true, c = true },      -- prompt for function parameters
         }
+    },
+    { "aznhe21/actions-preview.nvim",
+        event = "LspAttach",
+        config = function()
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local bufnr = args.buf
+                    local run = require("actions-preview").code_actions
+                    vim.keymap.set({ "v", "n" }, "<leader>ca", run, { buffer = bufnr })
+                end,
+            })
+        end
     },
 
     -- TaskRunner
@@ -57,11 +69,6 @@ return {
     { "tpope/vim-dispatch",
         cmd = { "Dispatch", "Make" }
     },
-    { "Civitasv/cmake-tools.nvim", lazy = true,
-        ft = { "cmake", "make", "c", "cpp" },
-        cmd = { "CMakeGenerate", "CMakeBuild", "CMakeRun", "CMakeRunTest" }
-    },
-
 
     -- Testing
     { "nvim-neotest/neotest",
@@ -70,7 +77,6 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim",
             { "nvim-neotest/neotest-plenary",
                 "nvim-neotest/neotest-vim-test",
                 dependencies = "vim-test/vim-test"
@@ -89,7 +95,7 @@ return {
     },
 
     -- Databases
-    { "tpope/vim-dadbod",
+    { "tpope/vim-dadbod", enabled = false,
         dependencies = {
             "kristijanhusak/vim-dadbod-ui",
             "kristijanhusak/vim-dadbod-completion",

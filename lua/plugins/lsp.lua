@@ -18,16 +18,6 @@ return {
                 }
             },
             { "ray-x/lsp_signature.nvim" },
-
-            { "folke/neoconf.nvim",
-                cmd = "Neoconf",
-                config = true
-            },
-            { "folke/neodev.nvim",
-                opts = {
-                    library = { plugins = { "nvim-treesitter", "neotest", "plenary.nvim" } },
-                }
-            },
         },
         event = { "BufNewFile", "BufReadPre" },
         config = function() require "core.lsp" end,

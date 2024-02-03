@@ -28,9 +28,6 @@ return {
             'nvim-lua/plenary.nvim',
             'kyazdani42/nvim-web-devicons',
             'MunifTanjim/nui.nvim',
-            { 's1n7ax/nvim-window-picker',
-                opts = { selection_chars = 'qel123', }
-            }
         },
         cmd = 'Neotree',
         keys = {
