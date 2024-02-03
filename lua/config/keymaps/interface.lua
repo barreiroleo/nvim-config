@@ -1,13 +1,6 @@
-local util_has = require("core.utils").has
-
 -- Buffers
-if util_has("bufferline.nvim") then
-    vim.keymap.set({ "n" }, "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Buffer: Prev buffer" })
-    vim.keymap.set({ "n" }, "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Buffer: Next buffer" })
-else
-    vim.keymap.set({ "n" }, "<S-h>", "<cmd>bprevious<cr>", { desc = "Buffer: Prev buffer" })
-    vim.keymap.set({ "n" }, "<S-l>", "<cmd>bnext<cr>",     { desc = "Buffer: Next buffer" })
-end
+vim.keymap.set({ "n" }, "<S-h>", "<cmd>bprevious<cr>", { desc = "Buffer: Prev buffer" })
+vim.keymap.set({ "n" }, "<S-l>", "<cmd>bnext<cr>",     { desc = "Buffer: Next buffer" })
 vim.keymap.set({ "n" }, "<leader>bd", "<cmd>bdelete<cr>", { desc = "Buffer delete" })
 
 -- Tabs

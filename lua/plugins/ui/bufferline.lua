@@ -46,6 +46,8 @@ return {
                 },
             },
         }
+        vim.keymap.set({ "n" }, "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Buffer: Prev buffer" })
+        vim.keymap.set({ "n" }, "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Buffer: Next buffer" })
     end,
     keys = {
         { '<leader>bad', '<cmd>BufferLineCloseOthers<cr>', desc = 'Bufferline: Close all other visible buffers' },

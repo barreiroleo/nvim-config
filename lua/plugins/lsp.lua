@@ -17,7 +17,23 @@ return {
                     }
                 }
             },
-            { "ray-x/lsp_signature.nvim" },
+            { "ray-x/lsp_signature.nvim",
+                config = function()
+                    vim.api.nvim_create_autocmd("LspAttach", {
+                        callback = function(args)
+                            local bufnr = args.buf
+                            require "lsp_signature".on_attach({
+                                -- handler_opts = {
+                                --     border = "none"
+                                -- },
+                                -- auto_close_after = 5,
+                                -- transparency = 10,
+                                -- toggle_key = '<C-e>'
+                            }, bufnr)
+                        end,
+                    })
+                end
+            },
         },
         event = { "BufNewFile", "BufReadPre" },
         config = function() require "core.lsp" end,

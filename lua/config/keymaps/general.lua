@@ -1,5 +1,3 @@
-local util_has = require("core.utils").has
-
 vim.keymap.set('n', 'gqf', require("core.lsp.utils.format"),                  { desc = "LSP: Format the whole file, use null-ls if available" })
 vim.keymap.set("n", "<leader><leader>x", require("core.utils").save_and_exec, { desc = "Save and execute the current file" })
 vim.keymap.set("n", "<leader><leader>c", ":<up>",                             { desc = "Run previous command" })
@@ -26,10 +24,8 @@ vim.keymap.set('n', 'n', 'nzz',                            { desc = "Next search
 vim.keymap.set('n', 'N', 'Nzz',                            { desc = "Prev search result and center" })
 
 
-if not util_has("trouble.nvim") then
-    vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
-    vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
-end
+vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
+vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 vim.keymap.set("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
