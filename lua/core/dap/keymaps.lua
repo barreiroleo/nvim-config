@@ -10,6 +10,7 @@ local keymaps_backup = {}
 ---@type Mapping
 local keymaps_global = {
     { 'n', "<F9>",  function() require('dap').toggle_breakpoint() end, { desc = "DAP: Breakpoint toggle" } },
+    { 'n', "<F6>",  function() require('dap').goto_() end,             { desc = "DAP: Goto line" } },
 
     { 'n', "<F5>",  function() require 'dap'.continue() end,           { desc = "DAP: Continue" } },
     { 'n', "<F11>", function() require 'dap'.step_into() end,          { desc = "DAP: Step Into" } },

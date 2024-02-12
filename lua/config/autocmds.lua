@@ -52,6 +52,8 @@ vim.api.nvim_create_autocmd("FileType", {
         "dap-repl",
         -- dadbod UI
         "dbui", "dbout",
+        -- NeoTest
+        "neotest-output", "neotest-summary",
         -- Others
         "PlenaryTestPopup", "startuptime",
     },

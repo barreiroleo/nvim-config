@@ -29,10 +29,6 @@ return {
     -- Refactoring
     { "ThePrimeagen/refactoring.nvim",
         event = { "BufNewFile", "BufReadPre" },
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-treesitter/nvim-treesitter" }
-        },
         keys = {
             { "<leader>rr", function() require('refactoring').select_refactor() end, mode = { "n", "v" }, desc = "Refactoring: Select refactor" },
         },
@@ -72,26 +68,31 @@ return {
 
     -- Testing
     { "nvim-neotest/neotest",
-        event = { "BufNewFile", "BufReadPre" },
-        ft = {"cpp", "c", "h", "hpp", "python", "vim", "lua" },
+        event = "LspAttach",
+        keys = {
+            { "<leader>tt", function() require("neotest").run.run() end,        { desc = "[Neotest] Run nearest test" } },
+            { "<leader>ts", function() require("neotest").summary.toggle() end, { desc = "[Neotest] Toggle summary" } }
+        },
         dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            { "nvim-neotest/neotest-plenary",
-                "nvim-neotest/neotest-vim-test",
-                dependencies = "vim-test/vim-test"
-            },
+            "nvim-neotest/neotest-plenary",
+            "alfaix/neotest-gtest",
+            "nvim-neotest/neotest-vim-test",
+            "vim-test/vim-test",
         },
         config = function()
             require("neotest").setup {
                 adapters = {
                     require("neotest-plenary"),
+                    require("neotest-gtest").setup({}),
                     require("neotest-vim-test") {
-                        allow_file_types = { 'cpp' },
+                        allow_file_types = { 'c', 'cpp' },
                     },
                 },
+                loglevel = 1
             }
-        end
+        end,
+
+
     },
 
     -- Databases
@@ -120,7 +121,6 @@ return {
     -- Docs generation
     { "danymat/neogen",
         event = { "BufNewFile", "BufReadPre" },
-        dependencies = "nvim-treesitter/nvim-treesitter",
         keys = {
             { "<leader>dg", ":lua require('neogen').generate()<CR>", mode = { "n", "v" }, desc = "Neogen: Generate docs" }
         },
