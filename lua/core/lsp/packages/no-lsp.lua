@@ -11,14 +11,9 @@ return{
     null_ls.builtins.diagnostics.commitlint,   -- Check conventional commit format
 
     -- BASH
-    ["beautysh"] = null_ls.builtins.formatting.beautysh,
-    ["shellcheck"] = null_ls.builtins.code_actions.shellcheck,
     ["shfmt"] = null_ls.builtins.formatting.shfmt,
 
     -- C / C++ / C#
-    null_ls.builtins.diagnostics.clang_check.with{
-        command = "clang-check-19"
-    },
     null_ls.builtins.diagnostics.cppcheck,
 
     -- CMake / Make
@@ -26,20 +21,8 @@ return{
     -- ["cmake_lint"] = null_ls.builtins.diagnostics.cmake_lint,
     -- ["cmake_format"] = null_ls.builtins.formatting.cmake_format,
 
-    -- C#
-    -- ["csharpier"] = null_ls.builtins.formatting.csharpier,
-
     -- Docker
     ["hadolint"] = null_ls.builtins.diagnostics.hadolint,
-
-    -- HTML / JS
-    -- ["prettierd"] = null_ls.builtins.formatting.prettierd, -- TSServer is better
-    ["eslint_d"] = null_ls.builtins.code_actions.eslint_d, null_ls.builtins.diagnostics.eslint_d , -- null_ls.builtins.formatting.eslint_d,
-
-    -- Json
-    ["fixjson"] = null_ls.builtins.formatting.fixjson,
-    ["jq"] = null_ls.builtins.formatting.jq,
-    ["jsonlint"] = null_ls.builtins.diagnostics.jsonlint,
 
     -- Lua
     ["stylua"] = null_ls.builtins.formatting.stylua,
@@ -52,18 +35,9 @@ return{
     -- ruff linter as lsp. Don't cover pylint yet
     ["mypy"] = null_ls.builtins.diagnostics.mypy,       -- Type checker
     ["pylint"] = null_ls.builtins.diagnostics.pylint,   -- Linter and refactors
-    ["vulture"] = null_ls.builtins.diagnostics.vulture, -- Dead code analysis
     ["yapf"] = null_ls.builtins.formatting.yapf.with {
         extra_args = { "--style={based_on_style: pep8, indent_width: 4}" }
     },
-
-    -- Rust
-    ["rustfmt"] = null_ls.builtins.formatting.rustfmt,
-
-    -- Latex
-    -- null_ls.builtins.formatting.bibclean,
-    -- null_ls.builtins.diagnostics.chktex,
-    ["latexindent"] = null_ls.builtins.formatting.latexindent,
 
     -- SQL
     ["sqlfluff"] = null_ls.builtins.diagnostics.sqlfluff.with({
