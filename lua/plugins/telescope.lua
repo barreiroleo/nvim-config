@@ -1,13 +1,12 @@
 return{
     { "nvim-telescope/telescope.nvim",
         dependencies = {
-            { "nvim-lua/plenary.nvim"},
+            "nvim-lua/plenary.nvim",
         },
         config = function()
             local actions = require("telescope.actions")
             require("telescope").setup {
                 defaults = {
-                    theme = "ivy",
                     winblend = 10,
                     mappings = {
                         i = {
@@ -23,6 +22,7 @@ return{
                 pickers = { colorscheme = { enable_preview = true } }
             }
         end,
+        cmd = {"Telescope"},
         keys = {
             { "<leader>flp", function() require("telescope.builtin").find_files( { cwd = require("lazy.core.config").options.root }) end,
                 desc = "Find plugin files"
@@ -51,6 +51,6 @@ return{
             {"<leader>fldws", ":Telescope lsp_dynamic_workspace_symbols<CR>", desc = "Telescope LSP dynamically list workspace symbols"},
 
             {"<leader>fldg", ":Telescope diagnostics<CR>", desc = "Telescope LSP list diagnostics"},
-        }
+        },
     },
 }

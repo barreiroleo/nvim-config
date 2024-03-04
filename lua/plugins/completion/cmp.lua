@@ -20,13 +20,24 @@ cmp.setup {
             luasnip.lsp_expand(args.body)
         end,
     },
+    completion = {
+        completeopt = 'menu,menuone,noinsert'
+    },
 
     window = {
         -- completion = cmp.config.window.bordered(),
         -- documentation = cmp.config.window.bordered(),
     },
 
-    mapping = cmp.mapping.preset.insert(cmp_mapping),
+    mapping = cmp.mapping.preset.insert({
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        ['<C-e>'] = cmp.mapping.close(),
+        -- ['<CR>'] = cmp.mapping.confirm({ completeopt = 'menu,menuone,noinsert' }),
+        ['<Tab>'] = cmp.mapping.confirm { select = true },
+        ['<CR>'] = cmp.mapping.confirm { select = true },
+        ['<C-Space>'] = cmp.mapping.complete(),
+    }),
 
     sources = {
         { name = 'nvim_lsp' },
