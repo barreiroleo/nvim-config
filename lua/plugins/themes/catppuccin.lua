@@ -25,7 +25,7 @@ local function setup_tscontext_hl(_transparent)
         ['TC_Bottom'] = { bg = palette.bg },
         ['TC_LineNumber'] = { bg = palette.bg, fg = palette.surface1 },
     }
-    require('plugins.treesitter.ts-context').setup(TSContext_hl)
+    require('plugins.themes.ts-context').setup(TSContext_hl)
 end
 
 return {
