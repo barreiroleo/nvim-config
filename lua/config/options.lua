@@ -27,9 +27,6 @@ opt.wrap = false       -- Disable line wrap
 opt.clipboard = "unnamedplus"             -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect" -- List of options for Insert mode completion
 opt.confirm = true                        -- Confirm to save changes before exiting modified buffer
-opt.foldenable = false                    -- Foolds open by default
-opt.foldmethod = "expr"                   -- Folding based on treesitter
-opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.mouse = "a"                           -- Enable mouse mode
 opt.nrformats = "alpha,hex,bin"           --Support systems for increment/decrements <C-x>: 0b01 0x1 a1
 opt.scrolloff = 4                         -- Lines of context
@@ -40,7 +37,6 @@ opt.updatetime = 200               -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.mousemoveevent = true
 opt.bufhidden = "delete"
-opt.shortmess:append("A") -- Avoid ATTENTION message whenfound a swap file
 
 
 -- Keymaps: Avoid <esc> delay. Also set escape-time 0 in tmux

@@ -2,8 +2,6 @@ local cmp     = require "cmp"
 local luasnip = require "luasnip"
 local lspkind = require "lspkind"
 
-local cmp_mapping = require("plugins.completion.keymaps").cmp
-
 vim.o.pumheight = 10 -- Limit number of suggestions
 
 -- Insert '(' after select function or method. Via nvim-autopair + nvim-cmp.
@@ -25,18 +23,41 @@ cmp.setup {
     },
 
     window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
 
     mapping = cmp.mapping.preset.insert({
+        ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
-        ['<C-e>'] = cmp.mapping.close(),
-        -- ['<CR>'] = cmp.mapping.confirm({ completeopt = 'menu,menuone,noinsert' }),
-        ['<Tab>'] = cmp.mapping.confirm { select = true },
-        ['<CR>'] = cmp.mapping.confirm { select = true },
-        ['<C-Space>'] = cmp.mapping.complete(),
+        -- Cancel autocompletion and luasnip jumps
+        ['<C-e>'] = cmp.mapping(function (fallback)
+            if cmp.visible() then
+                cmp.close()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.unlink_current()
+            else fallback()
+            end
+        end),
+        -- Insert completion or jump next snippet node
+        ['<Tab>'] = cmp.mapping(
+            function(fallback)
+                if cmp.visible() then
+                    cmp.confirm()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                else fallback()
+                end
+            end, { 'i', 's' }),
+        -- Jump previous snippet node
+        ['<S-Tab>'] = cmp.mapping(
+            function(fallback)
+                if luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                else fallback()
+                end
+            end, { 'i', 's' }),
     }),
 
     sources = {
