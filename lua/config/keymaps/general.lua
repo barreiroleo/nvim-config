@@ -1,4 +1,3 @@
-vim.keymap.set('n', 'gqf', require("core.lsp.utils.format"),                  { desc = "LSP: Format the whole file, use null-ls if available" })
 vim.keymap.set("n", "<leader><leader>x", require("core.utils").save_and_exec, { desc = "Save and execute the current file" })
 vim.keymap.set("n", "<leader><leader>c", ":<up>",                             { desc = "Run previous command" })
 vim.keymap.set("n", "<leader>m", "<cmd>messages<cr>",                         { desc = "Open vim messages" })
