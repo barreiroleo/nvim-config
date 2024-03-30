@@ -33,4 +33,3 @@ require("null-ls").setup {
 
 -- Config LSP related UI
 require("core.lsp.ui")
--- require("core.lsp.format")

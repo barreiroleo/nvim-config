@@ -7,7 +7,6 @@ return {
             desc = 'Conform: Format buffer',
         },
     },
-
     opts = {
         log_level = vim.log.levels.DEBUG,
         formatters_by_ft = {
@@ -18,7 +17,6 @@ return {
             -- Customize formatters
         },
     },
-
     init = function()
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,

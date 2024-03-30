@@ -1,5 +1,6 @@
 return {
     { 'folke/trouble.nvim', lazy = true,
+        branch = "dev",
         cmd = { 'Trouble', 'TodoTrouble' },
         dependencies = 'kyazdani42/nvim-web-devicons',
     },

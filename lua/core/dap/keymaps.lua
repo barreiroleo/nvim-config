@@ -1,5 +1,3 @@
-local map = require("core.utils").map
-
 local M = {}
 
 local keymaps_backup = {}
@@ -56,7 +54,7 @@ end
 
 ---@param keymaps Mapping[]
 M.set_keymaps = function(keymaps)
-    vim.tbl_map(function(keymap) map(keymap[1], keymap[2], keymap[3], keymap[4]) end, keymaps)
+    vim.tbl_map(function(keymap) vim.keymap.set(keymap[1], keymap[2], keymap[3], keymap[4]) end, keymaps)
 end
 
 
