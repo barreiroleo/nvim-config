@@ -18,6 +18,7 @@ return {
                     "bibtex", "latex", "markdown", "mermaid",
                     "json", "jsonc", "toml", "yaml", "sql", "dockerfile",
                 },
+                ignore_install = { "javascript" },
                 auto_install = true,
                 sync_install = false,
                 highlight = {

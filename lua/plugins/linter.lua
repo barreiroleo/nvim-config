@@ -12,7 +12,7 @@ return {
             lint.linters_by_ft['json'] = { 'jsonlint' }
             lint.linters_by_ft['lua'] = { 'selene' }
             lint.linters_by_ft['cpp'] = { 'cppcheck' }
-            lint.linters_by_ft['cmake'] = { 'checkmake', 'cmake_lint' }
+            lint.linters_by_ft['cmake'] = { 'checkmake', 'cmakelint' }
             lint.linters_by_ft['markdown'] = { 'markdownlint' }
             lint.linters_by_ft['python'] = { 'mypy', 'pylint', 'vulture' }
             lint.linters_by_ft['sql'] = { 'sqlfluff' } -- args = { "--dialect", "sqlite" }, -- mandatory
