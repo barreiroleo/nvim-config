@@ -56,6 +56,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "neotest-output", "neotest-summary",
         -- Others
         "PlenaryTestPopup", "startuptime",
+        "fugitive"
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

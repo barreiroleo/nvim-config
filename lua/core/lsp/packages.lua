@@ -24,12 +24,8 @@ Pack.lsp = {
 }
 
 Pack.dap = {
-    'bash_',
-    'coreclr',                         -- netcoredbg
-    'cppdbg', 'codelldb',              -- Cpptool, codelldb
-    'javadbg', 'javatest',             -- Java
-    'node2', 'js', 'chrome', 'firefox',
-    'python',                          --debugpy
+    'coreclr',              -- netcoredbg
+    'cppdbg', 'codelldb',   -- Cpptool, codelldb
 }
 
 Pack.null_sources = {
@@ -46,7 +42,6 @@ Pack.lint_tools = {
     'selene',
     'checkmake',
     'markdownlint',
-    'mypy', 'pylint', 'vulture',
     'sqlfluff',
 }
 
