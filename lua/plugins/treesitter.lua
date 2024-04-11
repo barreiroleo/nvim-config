@@ -24,7 +24,14 @@ return {
                 highlight = {
                     enable = true,
                     disable = function(lang, bufnr)
-                        return lang == 'latex' or vim.api.nvim_buf_line_count(bufnr) > 10000
+                        local max_filesize = 100 * 1024 -- 100 KB
+                        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
+                        if ok and stats and stats.size > max_filesize then
+                            vim.notify("TS highlight disabled: max sizw", vim.log.levels.WARN)
+                            return true
+                        elseif lang == "latex" then
+                            return true
+                        end
                     end,
                     additional_vim_regex_highlighting = { 'latex' },
                 },
