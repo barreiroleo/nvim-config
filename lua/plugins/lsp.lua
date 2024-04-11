@@ -27,6 +27,9 @@ return {
                     })
                 end
             },
+
+            --- Get vim completions outside vim config path
+            { "folke/neodev.nvim", opts = {} }
         },
         event = { "BufNewFile", "BufReadPre" },
         config = function() require "core.lsp" end,
