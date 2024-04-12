@@ -29,7 +29,14 @@ return {
             },
 
             --- Get vim completions outside vim config path
-            { "folke/neodev.nvim", opts = {} }
+            { "folke/neodev.nvim",
+                opts = {
+                    override = function(_, library)
+                        library.enabled = true
+                        library.plugins = { "nvim-treesitter", "plenary.nvim" }
+                    end,
+                }
+            }
         },
         event = { "BufNewFile", "BufReadPre" },
         config = function() require "core.lsp" end,
