@@ -5,15 +5,18 @@ return{
         },
         config = function()
             local actions = require("telescope.actions")
+            local trouble = require("trouble.sources.telescope")
             require("telescope").setup {
                 defaults = {
                     winblend = 10,
                     mappings = {
                         i = {
-                            ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+                            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                            ["<C-Q>"] = actions.smart_add_to_qflist + actions.open_qflist,
                         },
                         n = {
-                            ['<A-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+                            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                            ["<A-Q>"] = actions.smart_add_to_qflist + actions.open_qflist,
                             ["<C-n>"] = actions.cycle_history_next,
                             ["<C-p>"] = actions.cycle_history_prev,
                         },

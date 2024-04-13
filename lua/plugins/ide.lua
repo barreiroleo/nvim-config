@@ -1,4 +1,10 @@
 return {
+    -- Plenary
+    {
+        "nvim-lua/plenary.nvim",
+        keys = { { "<leader><leader>t", "<Plug>PlenaryTestFile", desc = "Plenary: Test current file" } }
+    },
+
     -- Debugger
     { "mfussenegger/nvim-dap",
         event = { "BufNewFile", "BufReadPre" },

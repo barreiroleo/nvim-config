@@ -4,7 +4,7 @@ return {
         event = { 'BufNewFile', 'BufReadPre' },
         build = ':TSUpdate',
         dependencies = {
-            { 'p00f/nvim-ts-rainbow' },
+            -- { 'p00f/nvim-ts-rainbow' },
             { 'nvim-treesitter/nvim-treesitter-context', opts = { mode = 'topline' } },
             { 'windwp/nvim-ts-autotag', config = true },
         },
