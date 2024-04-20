@@ -4,8 +4,6 @@ return {
         cmd = { 'Trouble', 'TodoTrouble' },
         dependencies = 'kyazdani42/nvim-web-devicons',
     },
-    -- Better quick fix. Tab on items and zn/zN for filter the list
-    { "kevinhwang91/nvim-bqf", ft = "qf" },
     { 'norcalli/nvim-colorizer.lua', lazy = true,
         event = { 'BufNewFile', 'BufReadPre' },
         opts = { 'md', 'tex', 'json', 'css', 'javascript', 'html', 'python', 'lua' },

@@ -20,8 +20,9 @@ function M.get_opts(name)
 end
 
 -- TODO: Migrate to Lua and proper keymap
-require("core.utils.search_replace_v")
+require("core.utils.GetVisualSelection")
 require("core.utils.HighlightRepeats")
 require("core.utils.ToggleWrap")
+require("core.utils.Quickfix")
 
 return M
