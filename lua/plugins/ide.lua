@@ -2,7 +2,7 @@ return {
     -- Plenary
     {
         "nvim-lua/plenary.nvim",
-        keys = { { "<leader><leader>t", "<Plug>PlenaryTestFile", desc = "Plenary: Test current file" } }
+        keys = { { "<leader><leader>t", "<cmd>w<cr> | <Plug>PlenaryTestFile", desc = "Plenary: Test current file" } }
     },
 
     -- Debugger

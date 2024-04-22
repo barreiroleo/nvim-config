@@ -7,11 +7,13 @@ M.adapters = {
 }
 
 M.configurations = {
-    { type = 'nlua', -- Adapt to the adapter name ("dap.adapters.<name>")
+    {
+        type = 'nlua', -- Adapt to the adapter name ("dap.adapters.<name>")
         request = 'attach',
         name = "Attach to running Neovim instance at 127.0.0.1:8086",
     },
-    { type = 'nlua',
+    {
+        type = 'nlua',
         request = 'attach',
         name = "Attach to running Neovim instance at <ip><port>: ",
         host = function()
@@ -26,5 +28,13 @@ M.configurations = {
         end,
     }
 }
+
+
+---@diagnostic disable-next-line: unused-local
+vim.api.nvim_create_user_command("VimkindLuaServerStart", function(args)
+    require("osv").launch({ port = 8086 })
+end, {})
+
+vim.api.nvim_create_user_command("VimkindLuaServerStop", require("osv").stop, {})
 
 return M
