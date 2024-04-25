@@ -34,7 +34,12 @@ M.configurations = {
 vim.api.nvim_create_user_command("VimkindLuaServerStart", function(args)
     require("osv").launch({ port = 8086 })
 end, {})
-
-vim.api.nvim_create_user_command("VimkindLuaServerStop", require("osv").stop, {})
-
+---@diagnostic disable-next-line: unused-local
+vim.api.nvim_create_user_command("VimkindLuaServerRunThis", function(args)
+    require("osv").run_this()
+end, {})
+---@diagnostic disable-next-line: unused-local
+vim.api.nvim_create_user_command("VimkindLuaServerStop", function(args)
+    require("osv").stop()
+end, {})
 return M

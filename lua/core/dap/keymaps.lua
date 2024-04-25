@@ -14,8 +14,6 @@ local keymaps_global = {
     { 'n', "<F11>", function() require 'dap'.step_into() end,          { desc = "DAP: Step Into" } },
     { 'n', "<F10>", function() require 'dap'.step_over() end,          { desc = "DAP: Step Over" } },
     { 'n', "<F12>", function() require 'dap'.step_out() end,           { desc = "DAP: Step Out" } },
-    -- { 'n', '<F5>',   function() require 'osv'.run_this() end,              { desc = "DAP: (vimkind) debug this file" } },
-    -- { 'n', '<S-F5>', function() require 'osv'.launch({ port = 8086 }) end, { desc = "DAP: (vimkind) launch server, attach from another nvim" } },
 }
 
 ---Keymaps for the buffer when debug session is started
