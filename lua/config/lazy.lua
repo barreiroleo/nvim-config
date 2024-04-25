@@ -26,7 +26,7 @@ require("lazy").setup({
                 "matchparen",
                 -- "netrwPlugin", -- Needed to download the language spells automatically
                 "tarPlugin",
-                "tohtml", -- needed to export lines with :tohtml
+                -- "tohtml", -- needed to export lines with :tohtml
                 "tutor",
                 "zipPlugin",
             },

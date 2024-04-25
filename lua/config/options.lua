@@ -46,16 +46,10 @@ opt.ttimeout = true   -- for key codes
 opt.ttimeoutlen = 10  -- unnoticeable small value
 
 -- Search
-opt.hlsearch = false  -- Off by default
+opt.hlsearch = true  -- Off by default
 opt.ignorecase = true -- Ignore case
 opt.incsearch = true  -- While typing show where the pattern
 opt.smartcase = true  -- Don't ignore case with capitals
--- Highlight search results only in search mode.
-vim.api.nvim_create_autocmd("CmdlineEnter", { pattern = { "/", "\\?" }, command = "set hlsearch" })
-vim.api.nvim_create_autocmd("CmdlineLeave", { pattern = { "/", "\\?" }, command = "set nohlsearch" })
--- Disable smartcase for command line
-vim.api.nvim_create_autocmd("CmdlineEnter", { pattern = { ":" }, command = "set nosmartcase" })
-vim.api.nvim_create_autocmd("CmdlineLeave", { pattern = { ":" }, command = "set smartcase" })
 
 -- Visual
 opt.colorcolumn = "100"

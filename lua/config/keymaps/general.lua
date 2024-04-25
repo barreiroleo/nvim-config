@@ -29,9 +29,7 @@ vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 vim.keymap.set("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
 -- floating terminal
-vim.keymap.set("n", "<leader>ft", function() require("core.utils").float_term(nil,   { cwd = require("core.utils").get_root() }) end, { desc = "Terminal (root dir)" })
-vim.keymap.set("n", "<leader>fT", function() require("core.utils").float_term() end, { desc = "Terminal (cwd)" })
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>",                                     { desc = "Enter Normal Mode"})
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 -- Diagnostics
 vim.keymap.set("n", "<leader>ud", require("core.utils").toggle_diagnostics, { desc = "Toggle Diagnostics" })
