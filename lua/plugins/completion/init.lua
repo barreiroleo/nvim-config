@@ -25,9 +25,8 @@ return {
     { 'L3MON4D3/LuaSnip',
         dependencies = { 'rafamadriz/friendly-snippets' },
         event = "InsertEnter",
-        config = function ()
+        config = function()
             require("plugins.completion.luasnip")
-            vim.keymap.set("n", "<Esc>", require("luasnip").unlink_current, {desc = "[Snip] Cancel the current snippet"})
         end,
     }
 }
