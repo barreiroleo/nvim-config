@@ -16,14 +16,11 @@ vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv",        { desc = "Move down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv",        { desc = "Move up" })
 
 -- Search
-vim.keymap.set("n", "<esc>", function()
-    require("luasnip").unlink_current()
-    vim.opt.hlsearch = false
-end, { desc = "Escape and clear hlsearch and cancel the current snippet" })
-vim.keymap.set({ "n", "v" }, "/", "/\\v", { desc = "Search with regex by default" })
-vim.keymap.set({ "n", "x" }, "fw", "*N",  { desc = "Search word under cursor" })
-vim.keymap.set('n', 'n', 'nzz',           { desc = "Next search result and center" })
-vim.keymap.set('n', 'N', 'Nzz',           { desc = "Prev search result and center" })
+vim.keymap.set( "n" , "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+vim.keymap.set({ "n", "v" }, "/", "/\\v",      { desc = "Search with regex by default" })
+vim.keymap.set({ "n", "x" }, "fw", "*N",       { desc = "Search word under cursor" })
+vim.keymap.set('n', 'n', 'nzzzv',                { desc = "Next search result and center" })
+vim.keymap.set('n', 'N', 'Nzzzv',                { desc = "Prev search result and center" })
 
 
 vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
