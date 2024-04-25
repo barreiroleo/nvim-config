@@ -12,7 +12,7 @@ return {
                 dependencies = { 'L3MON4D3/LuaSnip' }
             },
         },
-        event = "InsertEnter",
+        event = { "InsertEnter", "CmdlineEnter" },
         config = function ()
             require("plugins.completion.cmp")
         end
@@ -21,7 +21,6 @@ return {
     -- Snippets engine + snippet sources
     { 'L3MON4D3/LuaSnip',
         dependencies = { 'rafamadriz/friendly-snippets' },
-        event = "InsertEnter",
         config = function()
             require("plugins.completion.luasnip")
         end,

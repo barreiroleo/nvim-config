@@ -1,6 +1,9 @@
-local cmp     = require("cmp")
-local luasnip = require("luasnip")
-local icons   = require('core.icons')
+local cmp         = require("cmp")
+local luasnip     = require("luasnip")
+local icons       = require('core.icons')
+
+vim.opt.pumblend  = 10
+vim.opt.pumheight = 10
 
 -- Insert '(' after select function or method. Via nvim-autopair + nvim-cmp.
 cmp.event:on('confirm_done', require("nvim-autopairs.completion.cmp").on_confirm_done({ map_char = { tex = '' } }))
@@ -116,14 +119,29 @@ cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
 })
 
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
+    -- view = { entries = "wildmenu", separator = "|" },
+    mapping = cmp.mapping.preset.cmdline({
+        ['<Tab>'] = {
+            c = function(_)
+                if cmp.visible() then
+                    cmp.confirm({ select = true })
+                else
+                    cmp.complete()
+                    if #cmp.get_entries() == 1 then
+                        cmp.confirm({ select = true })
+                    end
+                end
+            end,
+        }
+    }),
     sources = {
         { name = 'cmdline' },
         { name = 'path' }
     },
+    formatting = { fields = { 'abbr' }, }
 })
 
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
         { name = 'buffer' }

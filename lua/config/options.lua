@@ -11,57 +11,46 @@ vim.g.maplocalleader = ","
 -- vim.cmd.language("en_US.utf8")
 vim.opt.exrc = true        -- Auto exec {.nvim.lua, .nvimrc, .exrc} in the current dir
 -- Editing
+vim.opt.shiftwidth = 4     -- Size of an indent
+vim.opt.tabstop = 4        -- Number of spaces tabs count for
 vim.opt.expandtab = true   -- Use spaces instead of tabs
 vim.opt.shiftround = true  -- Round indent to a multiple of shiftwidth
-vim.opt.shiftwidth = 4     -- Size of an indent
 vim.opt.smartindent = true -- Insert indents automatically
-vim.opt.spelllang = { "en", "es" }
-vim.opt.tabstop = 4        -- Number of spaces tabs count for
 vim.opt.wrap = false       -- Disable line wrap
+vim.opt.spelllang = { "en", "es" }
 
 -- Behaviour
-vim.opt.clipboard = "unnamedplus"             -- Sync with system clipboard
-vim.opt.completeopt = "menu,menuone,noselect" -- List of options for Insert mode completion
-vim.opt.confirm = true                        -- Confirm to save changes before exiting modified buffer
-vim.opt.mouse = "a"                           -- Enable mouse mode
-vim.opt.nrformats = "alpha,hex,bin"           --Support systems for increment/decrements <C-x>: 0b01 0x1 a1
-vim.opt.scrolloff = 4                         -- Lines of context
-vim.opt.sidescrolloff = 4                     -- Columns of context
-vim.opt.undofile = true
-vim.opt.undolevels = 10000
-vim.opt.updatetime = 200                      -- Save swap file and trigger CursorHold
--- opt.wildmode = "longest:full,full" - FIX: Useless along the cmp module
-vim.opt.mousemoveevent = true
-vim.opt.bufhidden = "delete"
-
+vim.opt.clipboard = "unnamedplus"   -- Sync with system clipboard
+vim.opt.confirm = true              -- Confirm to save changes before exiting modified buffer
+vim.opt.mouse = "a"                 -- Enable mouse mode
+vim.opt.nrformats = "alpha,hex,bin" --Support systems for increment/decrements <C-x>: 0b01 0x1 a1
 
 -- Keymaps: Avoid <esc> delay. Also set escape-time 0 in tmux
 vim.opt.timeout = true    -- for mappings
 vim.opt.timeoutlen = 1000 -- default value
 vim.opt.ttimeout = true   -- for key codes
 vim.opt.ttimeoutlen = 10  -- unnoticeable small value
+vim.opt.updatetime = 200  -- Save swap file and trigger CursorHold
+vim.opt.undofile = true
 
 -- Search
-vim.opt.hlsearch = true  -- Off by default
 vim.opt.ignorecase = true -- Ignore case
-vim.opt.incsearch = true  -- While typing show where the pattern
 vim.opt.smartcase = true  -- Don't ignore case with capitals
 
 -- Visual
 vim.opt.colorcolumn = "100"
 vim.opt.cursorline = true     -- Enable highlighting of the current line
-vim.opt.laststatus = 2        -- Status line in all windows
-vim.opt.list = true           -- Show some invisible characters (tabs...
-vim.opt.number = true         -- Print line number
-vim.opt.pumblend = 10         -- Popup blend
-vim.opt.pumheight = 10        -- Maximum number of entries in a popup
+vim.opt.number = true
 vim.opt.relativenumber = true -- Relative line numbers
-vim.opt.splitbelow = true     -- New hor. splits goes under the current win instead of below.
-vim.opt.splitright = true     -- New ver. splits goes right the current win instead of left.
--- vim.opt.winminwidth = 5       -- Minimum window width
--- vim.opt.listchars:append("space:⋅ ")
--- vim.opt.listchars:append("eol:↴")
-vim.opt.listchars:append("tab:» ")
+vim.wo.signcolumn = "yes"
+-- Window behaviour
+vim.opt.scrolloff = 4
+vim.opt.sidescrolloff = 4
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+vim.opt.list = true
+vim.opt.listchars = { trail = '⋅', tab = '  ↦' } -- »
 
 -- WSL Specific configs
 if vim.fn.has("wsl") == 1 then
