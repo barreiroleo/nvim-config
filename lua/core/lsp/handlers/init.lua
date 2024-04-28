@@ -1,6 +1,10 @@
 local default_opts = require("core.lsp.opts")
 
-local EXCLUDED_FILES = { "init", "ltex", "clangd_flags" }
+local EXCLUDED_FILES = {
+    "init",
+    -- "ltex",
+    "clangd_flags"
+}
 
 local default_handler = function(server)
     require('lspconfig')[server].setup(default_opts)

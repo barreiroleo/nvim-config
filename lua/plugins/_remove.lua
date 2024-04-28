@@ -1,5 +1,4 @@
 return {
-    -- { 'mbbill/undotree',event = { 'BufNewFile', 'BufReadPre' } },
     -- { 'tpope/vim-repeat',event = { 'BufNewFile', 'BufReadPre' } },
 
     -- {
