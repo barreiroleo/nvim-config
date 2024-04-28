@@ -15,7 +15,7 @@ return {
         'folke/trouble.nvim',
         lazy = true,
         branch = "dev",
-        event = { 'CmdlineEnter' }
+        event = { 'VeryLazy' }
     },
     {
         'norcalli/nvim-colorizer.lua',

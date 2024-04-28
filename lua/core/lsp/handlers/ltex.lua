@@ -6,30 +6,37 @@ M.filetypes = { 'bib', 'markdown', 'org', 'plaintex', 'rst', 'rnoweb', 'tex' } -
 M.settings = {
     settings = {
         checkFrequency = 'save',
-        language = 'es-AR',
+        language = { "en-US", 'es-AR' },
         additionalRules = {
             enablePickyRules = true,
             motherTongue = 'es-AR',
         },
-    },
+    }
 }
 
-M.extra_settings = {
-    init_check = true,                 -- boolean : whether to load dictionaries on startup
-    load_langs = { 'es-AR', 'en-US' }, -- table <string> : language for witch dictionaries will be loaded
-    log_level = "error",               -- string : "none", "trace", "debug", "info", "warn", "error", "fatal"
-    path = ".ltex",                    -- string : path to store dictionaries. Relative path uses current working directory
-}
 
 M.opts = {
+    autostart = true,
     on_attach = function(client, bufnr)
-        print("Loading ltex from lspconfig")
+        vim.notify("Loading ltex from lspconfig")
         def_opts.on_attach(client, bufnr)
-        require('ltex_extra').setup(M.extra_settings)
+        require('ltex_extra').setup({
+            init_check = true,
+            load_langs = { 'es-AR', 'en-US' },
+            log_level = "error",
+            path = client.config.root_dir .. "/.ltex",
+        })
     end,
     capabilities = def_opts.capabilities,
     filetypes = M.filetypes,
     settings = { ltex = M.settings },
+    -- Look for existing `.ltex` directory first. If it doesn't exist,
+    -- look for .git/.hg directories. If everything else fails, get absolute
+    -- path to the file parent
+    root_dir = function(file_path)
+        return require("lspconfig").util.root_pattern('.ltex', '.hg', '.git')(file_path)
+            or vim.fn.fnamemodify(file_path, ':p:h')
+    end,
 }
 
 return M.opts
