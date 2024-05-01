@@ -1,4 +1,4 @@
-local on_attach = function(_, bufnr)
+local on_attach = function(bufnr)
     vim.keymap.set('n', 'gd',         vim.lsp.buf.definition,           { buffer = bufnr })
     vim.keymap.set('n', 'gD',         vim.lsp.buf.declaration,          { buffer = bufnr })
     vim.keymap.set('n', 'gi',         vim.lsp.buf.implementation,       { buffer = bufnr })

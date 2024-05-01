@@ -18,7 +18,7 @@ Pack.lsp = {
     "ltex", "texlab",                              -- Latex
     "lua_ls",                                      -- Lua
     "marksman",                                    -- Markdown
-    "pyright", "ruff_lsp",                         -- Python
+    "basedpyright",                                -- Python
     "rust_analyzer",                               -- Rust
     "sqlls",                                       -- SQL
 }

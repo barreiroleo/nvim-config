@@ -10,7 +10,6 @@ return {
             cpp = { 'cppcheck' },
             cmake = { 'checkmake', 'cmakelint' },
             markdown = { 'markdownlint' },
-            python = { 'mypy', 'pylint', 'vulture' },
             sql = { 'sqlfluff' } -- args = { "--dialect", "sqlite" }, -- mandatory
         },
         linters = {

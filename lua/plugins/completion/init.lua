@@ -19,7 +19,7 @@ return {
     },
 
     -- Snippets engine + snippet sources
-    { 'L3MON4D3/LuaSnip',
+    { 'L3MON4D3/LuaSnip', lazy = true,
         dependencies = { 'rafamadriz/friendly-snippets' },
         config = function()
             require("plugins.completion.luasnip")

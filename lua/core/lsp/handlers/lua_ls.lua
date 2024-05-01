@@ -1,7 +1,3 @@
-local def_opts = require("core.lsp.opts")
-
-local M = {}
-
 -- local function get_paths()
 --     local cwd = vim.uv.cwd()
 --     local runtime_paths = {
@@ -28,34 +24,25 @@ local M = {}
 --     return {}
 -- end
 
-M.settings = {
-    Lua = {
-        diagnostics = {
-            globals = { 'vim', "LOG", "P" },
+return {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim', "LOG", "P" },
+            },
+            -- workspace = {
+            --     -- Include all the runtime paths
+            --     -- library = vim.api.nvim_get_runtime_file("", true)
+            --     library = get_paths(),
+            --     -- checkThirdParty = false, -- Disable luv questions
+            -- },
+            completion = {
+                keywordSnippet = 'Replace',
+                callSnippet = 'Replace',
+            },
+            telemetry = {
+                enable = false,
+            },
         },
-        -- workspace = {
-        --     -- Include all the runtime paths
-        --     -- library = vim.api.nvim_get_runtime_file("", true)
-        --     library = get_paths(),
-        --     -- checkThirdParty = false, -- Disable luv questions
-        -- },
-        completion = {
-            keywordSnippet = 'Replace',
-            callSnippet = 'Replace',
-        },
-        telemetry = {
-            enable = false,
-        },
-    },
+    }
 }
-
-M.opts = {
-    on_attach = function(client, bufnr)
-        print("Loading lua_ls")
-        def_opts.on_attach(client, bufnr)
-    end,
-    capabilities = def_opts.capabilities,
-    settings = M.settings,
-}
-
-return M.opts

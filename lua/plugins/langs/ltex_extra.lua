@@ -1,5 +1,7 @@
 return {
     "barreiroleo/ltex_extra.nvim",
+    branch = "dev",
+    ft = { "markdown", "tex" },
     -- opts = {
     --     init_check = true,   -- boolean : whether to load dictionaries on startup
     --     path = ".ltex",      -- string : path to store dictionaries. Relative path uses current working directory
@@ -37,7 +39,9 @@ return {
         require("ltex_extra").setup({
             load_langs = { 'es-AR', 'en-US' }, -- table <string> : language for witch dictionaries will be loaded
             log_level = "info",                -- string : "none", "trace", "debug", "info", "warn", "error", "fatal"
-            path = find_root(),                -- string : path to store dictionaries. Relative path uses current working directory
+            -- path = find_root(),                -- string : path to store dictionaries. Relative path uses current working directory
+            path = ".ltex",                -- string : path to store dictionaries. Relative path uses current working directory
+            _use_plenary = true
         })
     end
 }

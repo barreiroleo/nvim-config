@@ -25,7 +25,7 @@ M.PeekImplementation = function()
     return vim.lsp.buf_request(0, 'textDocument/declaration', params, preview_location_callback)
 end
 
-M.create_commands = function (client, bufnr)
+M.create_commands = function(bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, "PeekDefinition", M.PeekDefinition, {})
     vim.api.nvim_buf_create_user_command(bufnr, "PeekDeclaration", M.PeekDeclaration, {})
     vim.api.nvim_buf_create_user_command(bufnr, "PeekImplementation", M.PeekImplementation, {})

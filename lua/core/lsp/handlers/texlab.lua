@@ -1,7 +1,4 @@
-local def_opts = require("core.lsp.opts")
 local cmd_backsearch = require("core.lsp.utils.texlab_cmd").cmd_backsearch
-
-local M = {}
 
 local SearchCmds = {
     -- evincesyn = {
@@ -37,35 +34,27 @@ local BuildCmds = {
         forwardSearchAfter = false
     }
 }
-M.filetypes = { 'bib', 'plaintex', 'tex' }
 
-M.settings = {
-    texlab = {
-        build = BuildCmds.latexmk,
-        forwardSearch = SearchCmds.sioyek,
-        auxDirectory = '../build',
-        chktex = {
-            onOpenAndSave = true,
-        },
-        diagnosticsDelay = 300,
-        formatterLineLength = 80, -- 0 disable
-        bibtexFormatter = 'latexindent',
-        latexFormatter = 'latexindent',
-        latexindent = {
-            modifyLineBreaks = true,
+return {
+    on_attach = function(_client, _bufnr)
+        vim.fn.serverstart("/tmp/nvim.latex")
+    end,
+    filetypes = { 'bib', 'plaintex', 'tex' },
+    settings = {
+        texlab = {
+            build = BuildCmds.latexmk,
+            forwardSearch = SearchCmds.sioyek,
+            auxDirectory = '../build',
+            chktex = {
+                onOpenAndSave = true,
+            },
+            diagnosticsDelay = 300,
+            formatterLineLength = 80, -- 0 disable
+            bibtexFormatter = 'latexindent',
+            latexFormatter = 'latexindent',
+            latexindent = {
+                modifyLineBreaks = true,
+            },
         },
     },
 }
-
-M.opts = {
-    on_attach = function(client, bufnr)
-        print("Loading texlab")
-        def_opts.on_attach(client, bufnr)
-        vim.fn.serverstart("/tmp/nvim.latex")
-    end,
-    capabilities = def_opts.capabilities,
-    filetypes = M.filetypes,
-    settings = M.settings,
-}
-
-return M.opts
