@@ -4,13 +4,11 @@ return {
         event = { 'BufNewFile', 'BufReadPre' },
         build = ':TSUpdate',
         dependencies = {
-            -- { 'p00f/nvim-ts-rainbow' },
             { 'nvim-treesitter/nvim-treesitter-context', opts = { mode = 'topline' } },
             { 'windwp/nvim-ts-autotag', config = true },
         },
         config = function()
             require('nvim-treesitter.configs').setup {
-                -- stylua: ignore
                 ensure_installed = {
                     "c", "cpp", "make", "cmake",
                     "lua", "luadoc", "vim", "vimdoc",

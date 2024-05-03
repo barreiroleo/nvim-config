@@ -4,10 +4,6 @@ local M = {}
 -- Used by a keymap <leader><leader>x
 M.save_and_exec = require("core.utils.save_and_exec")
 
----Toggle the LSP diagnostics
--- Used by a keymap <leader>ud
-M.toggle_diagnostics = require("core.utils.toggle_diagnostics")
-
 -- Return the loaded options for a plugin
 ---@param name string
 function M.get_opts(name)

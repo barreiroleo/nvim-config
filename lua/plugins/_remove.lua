@@ -1,5 +1,4 @@
 return {
-    -- { 'tpope/vim-repeat',event = { 'BufNewFile', 'BufReadPre' } },
 
     -- {
     --     'windwp/nvim-spectre',

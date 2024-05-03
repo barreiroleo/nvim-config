@@ -27,8 +27,9 @@
 return {
     settings = {
         Lua = {
+            runtime = { version = "Lua 5.1" },
             diagnostics = {
-                globals = { 'vim', "LOG", "P" },
+                globals = { "vim", "it", "describe", "before_each", "after_each", "LOG", "P" },
             },
             -- workspace = {
             --     -- Include all the runtime paths

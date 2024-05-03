@@ -75,15 +75,48 @@ require("null-ls").setup({
     sources = null_sources,
 })
 
--- Config LSP related UI
-require("core.lsp.ui")
+-- Diagnostic message display. Error lens
+vim.diagnostic.config {
+    virtual_text = {
+        spacing = 4,
+        severity = {
+            min = vim.diagnostic.severity.WARN,
+            max = vim.diagnostic.severity.ERROR
+        },
+        source = "if_many",
+        prefix = '■' -- Could be '●', '▎', 'x', '⯀'
+    },
+    float = { source = "if_many", border = "rounded" },
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+    severity_sort = true,
+}
+
+-- Diagnostic symbols in sign column (gutter)
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- Hover and signature popups rounded
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+vim.lsp.handlers["textDocument/signature_help"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserAutocmd_LspAttach", { clear = false }),
     callback = function(args)
         -- local client = vim.lsp.get_client_by_id(args.data.client_id)
         local bufnr = args.buf
-        require("core.lsp.keymaps")(bufnr)
-        require("core.lsp.utils.peek").create_commands(bufnr)
+        vim.keymap.set('n', 'gd',         vim.lsp.buf.definition,           { buffer = bufnr })
+        vim.keymap.set('n', 'gD',         vim.lsp.buf.declaration,          { buffer = bufnr })
+        vim.keymap.set('n', 'gi',         vim.lsp.buf.implementation,       { buffer = bufnr })
+        vim.keymap.set('n', 'gr',         vim.lsp.buf.references,           { buffer = bufnr })
+        vim.keymap.set('n', 'gt',         vim.lsp.buf.type_definition,      { buffer = bufnr })
+        vim.keymap.set('n', '<C-k>',      vim.lsp.buf.signature_help,       { buffer = bufnr })
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,               { buffer = bufnr })
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
     end,
 })

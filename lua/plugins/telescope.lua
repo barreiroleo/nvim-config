@@ -40,20 +40,6 @@ return{
             {"<leader>fvo", ":Telescope vim_options<CR>", desc = "Telescope vim options"},
             {"<leader>fvr", ":Telescope reloader<CR>",    desc = "Telescope vim module reloader"},
             {"<leader>fvk", ":Telescope keymaps<CR>",     desc = "Telescope vim keymaps"},
-
-            {"<leader>flr", ":Telescope lsp_references<CR>",      desc = "Telescope LSP references"},
-            {"<leader>flci", ":Telescope lsp_incoming_calls<CR>", desc = "Telescope LSP incoming calls"},
-            {"<leader>flco", ":Telescope lsp_outgoing_calls<CR>", desc = "Telescope LSP outgoing calls"},
-
-            {"<leader>flgd", ":Telescope lsp_definitions<CR>",      desc = "Telescope LSP definitions"},
-            {"<leader>flgt", ":Telescope lsp_type_definitions<CR>", desc = "Telescope LSP goto type definition"},
-            {"<leader>flgi", ":Telescope lsp_implementations<CR>",  desc = "Telescope LSP goto implementation"},
-
-            {"<leader>flds", ":Telescope lsp_document_symbols<CR>",  desc = "Telescope LSP list document symbols"},
-            {"<leader>flws", ":Telescope lsp_workspace_symbols<CR>", desc = "Telescope LSP list workspace symbols"},
-            {"<leader>fldws", ":Telescope lsp_dynamic_workspace_symbols<CR>", desc = "Telescope LSP dynamically list workspace symbols"},
-
-            {"<leader>fldg", ":Telescope diagnostics<CR>", desc = "Telescope LSP list diagnostics"},
         },
     },
 }

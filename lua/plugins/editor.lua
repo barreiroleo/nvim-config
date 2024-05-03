@@ -13,6 +13,7 @@ return {
         event = { "BufNewFile", "BufReadPre" },
         config = true,
     },
+    { 'tpope/vim-repeat',event = { 'BufNewFile', 'BufReadPre' } },
     { "tpope/vim-surround",
         event = { "BufNewFile", "BufReadPre" },
         config = function()

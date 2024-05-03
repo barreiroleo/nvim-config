@@ -1,17 +1,11 @@
-LOG =  require("core.utils.log").warn
-
 function P(v)
     vim.notify(vim.inspect(v) .. "\n", vim.log.levels.WARN)
     return v
 end
 
-function RELOAD(...)
-    return require("plenary.reload").reload_module(...)
-end
-
-function R(name)
-    RELOAD(name)
-    return require(name)
+function R(...)
+    require("plenary.reload").reload_module(...)
+    return require(...)
 end
 
 -- Command less. Usefull to inspect vim outputs in teporary buffer
