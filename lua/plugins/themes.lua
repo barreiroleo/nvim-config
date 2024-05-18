@@ -50,6 +50,7 @@ return {
                 end,
             }
             vim.cmd.colorscheme("kanagawa")
+            vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
         end,
     },
 }

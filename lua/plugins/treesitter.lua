@@ -4,7 +4,9 @@ return {
         event = { 'BufNewFile', 'BufReadPre' },
         build = ':TSUpdate',
         dependencies = {
-            { 'nvim-treesitter/nvim-treesitter-context', opts = { mode = 'topline' } },
+            { 'nvim-treesitter/nvim-treesitter-context',
+                opts = { multiline_threshold = 1, } -- Avoid showing '{' only lines
+            },
             { 'windwp/nvim-ts-autotag', config = true },
         },
         config = function()
@@ -25,7 +27,7 @@ return {
                         local max_filesize = 100 * 1024 -- 100 KB
                         local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
                         if ok and stats and stats.size > max_filesize then
-                            vim.notify("TS highlight disabled: max sizw", vim.log.levels.WARN)
+                            vim.notify("TS highlight disabled: max size", vim.log.levels.WARN)
                             return true
                         elseif lang == "latex" then
                             return true
