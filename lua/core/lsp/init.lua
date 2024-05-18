@@ -86,19 +86,25 @@ vim.diagnostic.config {
         source = "if_many",
         prefix = '■' -- Could be '●', '▎', 'x', '⯀'
     },
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.HINT] = '',
+            [vim.diagnostic.severity.INFO] = '',
+        },
+        linehl = {
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        },
+        numhl = {
+            [vim.diagnostic.severity.WARN] = 'WarningMsg',
+        },
+    },
     float = { source = "if_many", border = "rounded" },
-    signs = true,
     underline = true,
     update_in_insert = true,
     severity_sort = true,
 }
-
--- Diagnostic symbols in sign column (gutter)
-local signs = { Error = "", Warn = "", Hint = "", Info = "" }
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 
 -- Hover and signature popups rounded
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
@@ -108,15 +114,22 @@ vim.lsp.handlers["textDocument/signature_help"] = vim.lsp.with(vim.lsp.handlers.
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserAutocmd_LspAttach", { clear = false }),
     callback = function(args)
-        -- local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
         local bufnr = args.buf
-        vim.keymap.set('n', 'gd',         vim.lsp.buf.definition,           { buffer = bufnr })
-        vim.keymap.set('n', 'gD',         vim.lsp.buf.declaration,          { buffer = bufnr })
-        vim.keymap.set('n', 'gi',         vim.lsp.buf.implementation,       { buffer = bufnr })
-        vim.keymap.set('n', 'gr',         vim.lsp.buf.references,           { buffer = bufnr })
-        vim.keymap.set('n', 'gt',         vim.lsp.buf.type_definition,      { buffer = bufnr })
-        vim.keymap.set('n', '<C-k>',      vim.lsp.buf.signature_help,       { buffer = bufnr })
-        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,               { buffer = bufnr })
-        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
+        vim.keymap.set('n', 'gd',         vim.lsp.buf.definition,           { buffer = bufnr, desc = "[LSP] Go to definition"})
+        vim.keymap.set('n', 'gD',         vim.lsp.buf.declaration,          { buffer = bufnr, desc = "[LSP] Go to declaration"})
+        vim.keymap.set('n', 'gi',         vim.lsp.buf.implementation,       { buffer = bufnr, desc = "[LSP] List symbol implementations"})
+        vim.keymap.set('n', 'gr',         vim.lsp.buf.references,           { buffer = bufnr, desc = "[LSP] List symbol references"})
+        vim.keymap.set('n', 'gt',         vim.lsp.buf.type_definition,      { buffer = bufnr, desc = "[LSP] Go to type definition"})
+        vim.keymap.set('n', '<C-k>',      vim.lsp.buf.signature_help,       { buffer = bufnr, desc = "[LSP] Show symbol signature information"})
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,               { buffer = bufnr, desc = "[LSP] Rename symbol under cursor and references"})
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "[LSP] List code actions for position or range"})
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "[LSP] List code actions for position or range"})
+
+        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            vim.keymap.set("n", "<leader>th", function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            end, { buffer = bufnr, desc = "[LSP] Toggle inlay hints" })
+        end
     end,
 })

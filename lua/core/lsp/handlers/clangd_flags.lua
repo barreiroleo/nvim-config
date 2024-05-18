@@ -36,5 +36,5 @@ local protocol_and_logging = {
 
 return {
     randomized = randomized,
-    flags = vim.list_extend({ "clangd" }, vim.tbl_flatten { compilation_flags, feature, miscellaneous, protocol_and_logging })
+    flags = vim.list_extend({ "clangd" }, vim.iter({ compilation_flags, feature, miscellaneous, protocol_and_logging }):flatten():totable())
 }
