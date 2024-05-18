@@ -72,4 +72,31 @@ return {
             }
         end
     },
+
+    -- Testing
+    { "nvim-neotest/neotest",
+        event = "LspAttach",
+        keys = {
+            { "<leader>tt", function() require("neotest").run.run() end,        desc = "[Neotest] Run nearest test" },
+            { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "[Neotest] Toggle summary" }
+        },
+        dependencies = {
+            "alfaix/neotest-gtest",
+            -- "nvim-neotest/neotest-plenary",
+            -- "nvim-neotest/neotest-vim-test",
+            -- "vim-test/vim-test",
+        },
+        config = function()
+            require("neotest").setup {
+                adapters = {
+                    require("neotest-gtest").setup({}),
+                    -- require("neotest-plenary"),
+                    -- require("neotest-vim-test") {
+                    --     allow_file_types = { 'c', 'cpp' },
+                    -- },
+                },
+                loglevel = 1
+            }
+        end,
+    },
 }

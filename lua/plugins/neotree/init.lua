@@ -22,8 +22,7 @@ end
 return {
     { 'nvim-neo-tree/neo-tree.nvim',
         branch = 'main',
-        lazy = false,
-        event = "VeryLazy",
+        lazy = true,
         dependencies = {
             'nvim-lua/plenary.nvim',
             'kyazdani42/nvim-web-devicons',

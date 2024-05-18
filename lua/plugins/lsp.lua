@@ -33,7 +33,8 @@ return {
                 opts = {
                     override = function(_, library)
                         library.enabled = true
-                        library.plugins = { "nvim-treesitter", "plenary.nvim" }
+                        library.plugins = { "nvim-treesitter", "plenary.nvim", "neotypes" }
+                        library.types = true
                     end,
                 }
             }
