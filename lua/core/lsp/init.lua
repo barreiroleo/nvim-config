@@ -123,16 +123,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set('n', 'gd',         vim.lsp.buf.definition,           { buffer = bufnr, desc = "[LSP] Go to definition"})
         vim.keymap.set('n', 'gD',         vim.lsp.buf.declaration,          { buffer = bufnr, desc = "[LSP] Go to declaration"})
         vim.keymap.set('n', 'gi',         vim.lsp.buf.implementation,       { buffer = bufnr, desc = "[LSP] List symbol implementations"})
-        vim.keymap.set('n', 'gr',         vim.lsp.buf.references,           { buffer = bufnr, desc = "[LSP] List symbol references"})
+        -- vim.keymap.set('n', 'gr',         vim.lsp.buf.references,           { buffer = bufnr, desc = "[LSP] List symbol references"})
         vim.keymap.set('n', 'gt',         vim.lsp.buf.type_definition,      { buffer = bufnr, desc = "[LSP] Go to type definition"})
         vim.keymap.set('n', '<C-k>',      vim.lsp.buf.signature_help,       { buffer = bufnr, desc = "[LSP] Show symbol signature information"})
-        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,               { buffer = bufnr, desc = "[LSP] Rename symbol under cursor and references"})
-        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "[LSP] List code actions for position or range"})
-        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "[LSP] List code actions for position or range"})
+        -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,               { buffer = bufnr, desc = "[LSP] Rename symbol under cursor and references"})
+        -- vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "[LSP] List code actions for position or range"})
+        -- vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = "[LSP] List code actions for position or range"})
 
         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
             vim.keymap.set("n", "<leader>th", function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
             end, { buffer = bufnr, desc = "[LSP] Toggle inlay hints" })
         end
     end,

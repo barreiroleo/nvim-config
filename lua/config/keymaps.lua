@@ -29,10 +29,6 @@ vim.keymap.set( "n" , "<esc>", "<cmd>noh<cr><esc>",             { desc = "[Searc
 -- floating terminal
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
--- Diagnostics
-vim.keymap.set('n', '[d', ":lua vim.diagnostic.goto_prev()<CR>", { desc = "Go to previous diagnostics" })
-vim.keymap.set('n', ']d', ":lua vim.diagnostic.goto_next()<CR>", { desc = "Go to next diagnostics" })
-
 vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
