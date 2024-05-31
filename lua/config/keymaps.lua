@@ -45,7 +45,8 @@ vim.keymap.set( "n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <
 -- Buffers
 vim.keymap.set( "n" , "<S-h>", "<cmd>bprevious<cr>", { desc = "Buffer: Prev buffer" })
 vim.keymap.set( "n" , "<S-l>", "<cmd>bnext<cr>",     { desc = "Buffer: Next buffer" })
-vim.keymap.set( "n" , "<leader>bd", "<cmd>bdelete<cr>", { desc = "Buffer delete" })
+-- vim.keymap.set( "n" , "<leader>bd", "<cmd>bdelete<cr>", { desc = "Buffer delete" })
+vim.keymap.set( "n" , "<leader>bd", "<cmd>bp | bd #<cr>", { desc = "Buffer delete" })
 
 -- Tabs
 vim.keymap.set( "n" , "<leader><leader><tab>", "<cmd>tabnew<cr>", { desc = "Tabs: New Tab" })

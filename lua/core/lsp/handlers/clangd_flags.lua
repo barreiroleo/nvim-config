@@ -31,7 +31,7 @@ local miscellaneous = {
 }
 
 local protocol_and_logging = {
-    '--log=verbose', -- TEST: Def info  - Verbosity of log messages written to stderr
+    -- '--log=verbose', -- TEST: Def info  - Verbosity of log messages written to stderr
 }
 
 return {

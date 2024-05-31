@@ -95,8 +95,10 @@ vim.diagnostic.config {
         },
         linehl = {
             [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+            [vim.diagnostic.severity.WARN] = 'WarningMsg',
         },
         numhl = {
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
             [vim.diagnostic.severity.WARN] = 'WarningMsg',
         },
     },
@@ -105,6 +107,8 @@ vim.diagnostic.config {
     update_in_insert = true,
     severity_sort = true,
 }
+vim.cmd.highlight("ErrorMsg guibg=#250003 guifg=0")
+vim.cmd.highlight("WarningMsg guibg=#382b00 guifg=0")
 
 -- Hover and signature popups rounded
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
