@@ -4,10 +4,11 @@ return {
     cmd = { "ConformInfo" },
     config = function()
         require("conform").setup({
-            -- -- log_level = vim.log.levels.DEBUG,
-            -- formatters_by_ft = {
-            --     lua = { "stylua" },
-            -- },
+            -- log_level = vim.log.levels.DEBUG,
+            formatters_by_ft = {
+                rust = { "rustfmt" },
+                -- lua = { "stylua" },
+            }
         })
 
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

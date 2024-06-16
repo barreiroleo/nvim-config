@@ -90,11 +90,11 @@ vim.api.nvim_create_autocmd("BufNewFile", {
 })
 
 
--- Highlight search results only in search mode.
----@format disable-next
-vim.api.nvim_create_autocmd("CmdlineEnter", { group = augroup("HighlightSearch"), pattern = { "/", "\\?" }, command = "set hlsearch" })
----@format disable-next
-vim.api.nvim_create_autocmd("CmdlineLeave", { group = augroup("HighlightSearch"), pattern = { "/", "\\?" }, command = "set nohlsearch" })
+-- -- Highlight search results only in search mode.
+-- ---@format disable-next
+-- vim.api.nvim_create_autocmd("CmdlineEnter", { group = augroup("HighlightSearch"), pattern = { "/", "\\?" }, command = "set hlsearch" })
+-- ---@format disable-next
+-- vim.api.nvim_create_autocmd("CmdlineLeave", { group = augroup("HighlightSearch"), pattern = { "/", "\\?" }, command = "set nohlsearch" })
 
 -- Disable smartcase for command line
 ---@format disable-next

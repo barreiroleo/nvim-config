@@ -13,9 +13,8 @@ return {
     { 'Bekaboo/dropbar.nvim' },
     {
         'folke/trouble.nvim',
-        lazy = true,
-        branch = "dev",
-        event = { 'VeryLazy' }
+        cmd = "Trouble",
+        opts = {},
     },
     {
         'norcalli/nvim-colorizer.lua',
