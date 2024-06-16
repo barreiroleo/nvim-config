@@ -28,16 +28,17 @@ return {
                 end
             },
 
-            --- Get vim completions outside vim config path
-            { "folke/neodev.nvim",
-                opts = {
-                    override = function(_, library)
-                        library.enabled = true
-                        library.plugins = { "nvim-treesitter", "plenary.nvim", "neotypes" }
-                        library.types = true
-                    end,
-                }
-            }
+            -- --- Get vim completions outside vim config path
+            -- { "folke/neodev.nvim",
+            --     opts = {
+            --         override = function(_, library)
+            --             library.enabled = true
+            --             library.plugins = { "nvim-treesitter", "plenary.nvim", "neotypes" }
+            --             library.types = true
+            --         end,
+            --     }
+            -- }
+            { "folke/lazydev.nvim", ft = "lua", config = true }
         },
         event = { "BufNewFile", "BufReadPre" },
         config = function() require "core.lsp" end,

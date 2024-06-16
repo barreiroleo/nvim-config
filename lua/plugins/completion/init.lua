@@ -15,6 +15,7 @@ return {
         event = { "InsertEnter", "CmdlineEnter" },
         config = function ()
             require("plugins.completion.cmp")
+            -- require("plugins.completion.native")
         end
     },
 
