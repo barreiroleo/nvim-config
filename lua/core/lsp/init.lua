@@ -57,6 +57,10 @@ require("mason-lspconfig").setup({
                 filetypes = require("core.lsp.handlers.texlab").filetypes,
                 settings = require("core.lsp.handlers.texlab").settings,
             }
+        end,
+
+        -- Disable Rust from lsp-config cuz Rustacean
+        ["rust_analyzer"] = function(server_name)
         end
     }
 })

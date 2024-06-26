@@ -77,8 +77,9 @@ return {
     { "nvim-neotest/neotest",
         event = "LspAttach",
         keys = {
-            { "<leader>tt", function() require("neotest").run.run() end,        desc = "[Neotest] Run nearest test" },
-            { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "[Neotest] Toggle summary" }
+            { "<leader>tr", function() require("neotest").run.run() end,             desc = "[Neotest] Run nearest test" },
+            { "<leader>ts", function() require("neotest").summary.toggle() end,      desc = "[Neotest] Toggle summary" },
+            { "<leader>to", function() require("neotest").output_panel.toggle() end, desc = "[Neotest] Output panel" }
         },
         dependencies = {
             "alfaix/neotest-gtest",
@@ -90,6 +91,7 @@ return {
             require("neotest").setup {
                 adapters = {
                     require("neotest-gtest").setup({}),
+                    require('rustaceanvim.neotest')
                     -- require("neotest-plenary"),
                     -- require("neotest-vim-test") {
                     --     allow_file_types = { 'c', 'cpp' },
