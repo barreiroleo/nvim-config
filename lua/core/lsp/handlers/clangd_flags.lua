@@ -16,6 +16,7 @@ local compilation_flags = {
 }
 
 local feature = {
+    '--header-insertion=never',                                         -- Don't include headers. It's a mess on large projects
     '--all-scopes-completion=true',
     '--fallback-style=webkit',                                          -- "{BasedOnStyle: LLVM, IndentWidth: 4}" is incompatible with .clang-format files
     '--header-insertion-decorators=false',                              -- https://github.com/hrsh7th/nvim-cmp/issues/999#issuecomment-1130074680
@@ -25,7 +26,7 @@ local feature = {
 local miscellaneous = {
     '--j=8',                                           -- TEST: Unk def   - Number of async workers used by clangd. Background index also uses this many workers.
     '--pch-storage=' .. pick_str { "disk", "memory" }, -- TEST: Def disk  - Storing PCHs in memory increases memory usages, but may improve performance
-    '--sync',                                          -- TEST: Def false - Handle client requests on main thread. Background index still uses its own thread.
+    -- '--sync',                                       -- TEST: Def false - Handle client requests on main thread. Background index still uses its own thread. Disabling because incompatibility with threads
     '--use-dirty-headers=true',                        -- Use files open in the editor when parsing headers instead of reading from the disk
     '--offset-encoding=utf-16',                        -- temporary fix for null-ls
 }

@@ -83,21 +83,29 @@ return {
         },
         dependencies = {
             "alfaix/neotest-gtest",
-            -- "nvim-neotest/neotest-plenary",
+            "nvim-neotest/neotest-plenary",
             -- "nvim-neotest/neotest-vim-test",
             -- "vim-test/vim-test",
         },
         config = function()
             require("neotest").setup {
                 adapters = {
-                    require("neotest-gtest").setup({}),
-                    require('rustaceanvim.neotest')
-                    -- require("neotest-plenary"),
+                    require("neotest-gtest").setup({
+                        -- TODO: I don't like this global approach. Need to read about neotest projects settings
+                        filter_dir = function(name, _rel_path, _root)
+                            if name == "include" or name == "build" or name == "lib" then
+                                return false
+                            end
+                            return true
+                        end
+                    }),
+                    require('rustaceanvim.neotest'),
+                    require("neotest-plenary"),
                     -- require("neotest-vim-test") {
                     --     allow_file_types = { 'c', 'cpp' },
                     -- },
                 },
-                loglevel = 1
+                log_level = 1
             }
         end,
     },
