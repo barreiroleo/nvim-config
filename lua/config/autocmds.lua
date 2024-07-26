@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("FileType", {
         -- Spectre search and replace
         "spectre_panel",
         -- Debug REPL
-        "dap-repl",
+        "dap-repl", "dap-float",
         -- dadbod UI
         "dbui", "dbout",
         -- NeoTest

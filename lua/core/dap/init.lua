@@ -9,10 +9,13 @@ require('dapui').setup()
 local dap = require('dap')
 
 
+-- TODO: Merge that sh*t
 local keymaps = require("core.dap.keymaps")
 keymaps.setup()
 dap.listeners.after.event_initialized['keymaps'] = keymaps.set_debug_keymaps
 dap.listeners.after.event_terminated['keymaps'] = keymaps.restore_global_keymaps
+dap.listeners.after.event_initialized['me'] = require("core.dap.utils").keymaps_setup
+dap.listeners.after.event_terminated['me'] = require("core.dap.utils").keymaps_shutdown
 
 local function clean_and_open()
     require("dapui").open()
@@ -26,10 +29,11 @@ local function restore_and_close()
     require("gitsigns").toggle_signs(true)
     vim.diagnostic.show()
 end
-
 dap.listeners.after.event_initialized['dapui_config'] = clean_and_open
 dap.listeners.before.event_terminated['dapui_config'] = restore_and_close
 dap.listeners.before.event_exited['dapui_config'] = restore_and_close
+
+
 
 local adapters = {
     bashdb.adapters,
