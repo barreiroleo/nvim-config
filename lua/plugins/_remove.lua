@@ -6,12 +6,15 @@ return {
     --     },
     -- },
 
-    -- -- Docs generation
-    -- { "danymat/neogen",
-    --     event = { "BufNewFile", "BufReadPre" },
-    --     keys = {
-    --         { "<leader>dg", ":lua require('neogen').generate()<CR>", mode = { "n", "v" }, desc = "Neogen: Generate docs" }
-    --     },
-    --     opts = { snippet_engine = "luasnip" }
-    -- },
+
+
+    -- Docs generation
+    {
+        "danymat/neogen",
+        event = { "BufNewFile", "BufReadPre" },
+        keys = {
+            { "<leader>dg", function() require('neogen').generate() end, mode = { "n", "v" }, desc = "[Neogen] Generate docs" }
+        },
+        opts = { snippet_engine = "luasnip" }
+    },
 }

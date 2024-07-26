@@ -54,25 +54,23 @@ return {
             }
             local lsp_component = {
                 function()
-                    local msg = 'No Active Lsp'
-                    local clients = vim.lsp.get_clients({ bufnr = 0 })
-                    if next(clients) == nil then
-                        return msg
+                    local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
+                    if #attached_clients == 0 then
+                        return "No Active Lsp"
                     end
-                    local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-                    for _, client in ipairs(clients) do
-                        local filetypes = client.config.filetypes
-                        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                            return client.name
-                        end
-                    end
-                    return msg
+                    local it = vim.iter(attached_clients)
+                    it:map(function(client)
+                        local name = client.name:gsub("language.server", "ls")
+                        return name
+                    end)
+                    local names = it:filter(function(name) return name ~= "null-ls" end):totable()
+                    if #names == 0 then names = { "No LSP" } end
+                    return "[" .. table.concat(names, ",") .. "]"
                 end,
-                icon = ' ',
+                -- icon = ' ',
             }
             def_opts.options = options
             table.insert(def_opts.sections.lualine_x, 1, lsp_component)
-            table.insert(def_opts.sections.lualine_x, 1, "require'lsp-status'.status()")
             require("lualine").setup(def_opts)
         end,
     },
