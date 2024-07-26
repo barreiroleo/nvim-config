@@ -38,6 +38,7 @@ vim.opt.ignorecase = true -- Ignore case
 vim.opt.smartcase = true  -- Don't ignore case with capitals
 
 -- Visual
+vim.opt.textwidth = 100       -- Split down the current line
 vim.opt.colorcolumn = "100"
 vim.opt.cursorline = true     -- Enable highlighting of the current line
 vim.opt.number = true

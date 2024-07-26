@@ -11,6 +11,7 @@ Pack.lsp = {
     "omnisharp",                                   -- C#
     "cmake",                                       -- Cmake
     "dockerls", "docker_compose_language_service", -- Docker
+    "gopls",                                       -- Go
     "eslint", "emmet_ls", "html",                  -- HTML
     "jdtls",                                       -- Java
     "tsserver",                                    -- Js / Ts
