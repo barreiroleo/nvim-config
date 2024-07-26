@@ -5,8 +5,8 @@ local icons       = require('core.icons')
 vim.opt.pumblend  = 10
 vim.opt.pumheight = 10
 
--- Insert '(' after select function or method. Via nvim-autopair + nvim-cmp.
-cmp.event:on('confirm_done', require("nvim-autopairs.completion.cmp").on_confirm_done({ map_char = { tex = '' } }))
+-- -- Insert '(' after select function or method. Via nvim-autopair + nvim-cmp.
+-- cmp.event:on('confirm_done', require("nvim-autopairs.completion.cmp").on_confirm_done({ map_char = { tex = '' } }))
 
 cmp.setup {
     enabled = function()

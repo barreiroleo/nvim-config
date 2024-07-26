@@ -1,4 +1,3 @@
-local dap = require('dap')
 local api = vim.api
 local keymap_restore = {}
 
@@ -7,6 +6,7 @@ function M.keymaps_setup()
     for _, buf in pairs(api.nvim_list_bufs()) do
         local keymaps = api.nvim_buf_get_keymap(buf, 'n')
         for _, keymap in pairs(keymaps) do
+            ---@diagnostic disable-next-line: undefined-field
             if keymap.lhs == "K" then
                 table.insert(keymap_restore, keymap)
                 api.nvim_buf_del_keymap(buf, 'n', 'K')
@@ -28,6 +28,32 @@ function M.keymaps_shutdown()
         )
     end
     keymap_restore = {}
+end
+
+--- Open a user input to indicate the full path executable to debug.
+function M.input_executable()
+    return vim.fn.input('Ctrl-D: List matches\nCtrl-A: Complete\n Path to executable: ',
+        vim.fn.getcwd() .. "/build/", 'file')
+end
+
+function M.find_process_id()
+    local process = vim.fn.input('Process name to attach: ')
+
+    local obj = vim.system({ 'pgrep', process }, { text = true }):wait()
+    if obj.code == 0 then
+        local numbers = {}
+        for number in obj.stdout:gmatch("(%d+)") do
+            table.insert(numbers, tonumber(number))
+        end
+
+        local pid = nil
+        vim.ui.select(numbers, {
+            prompt = 'Select one process ID: ',
+            format_item = function(item) return "PID " .. item end,
+        }, function(idx) pid = idx end)
+        return pid
+    end
+    return vim.fn.input('No PID found.\nIntroduce a PID: ')
 end
 
 return M
