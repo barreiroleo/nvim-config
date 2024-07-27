@@ -1,5 +1,31 @@
 local M = {}
 
+-- TODO: nvim-dap approach. I need to take a look to improve mine
+-- function M.keymaps_setup()
+--     for _, buf in pairs(api.nvim_list_bufs()) do
+--         local keymaps = api.nvim_buf_get_keymap(buf, 'n')
+--         for _, keymap in pairs(keymaps) do
+--             if keymap.lhs == "K" then
+--                 table.insert(keymap_restore, keymap)
+--                 api.nvim_buf_del_keymap(buf, 'n', 'K')
+--             end
+--         end
+--     end
+--     api.nvim_set_keymap('n', 'K', '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
+-- end
+-- function M.keymaps_shutdown()
+--     for _, keymap in pairs(keymap_restore) do
+--         api.nvim_buf_set_keymap(
+--             keymap.buffer,
+--             keymap.mode,
+--             keymap.lhs,
+--             keymap.rhs,
+--             { silent = keymap.silent == 1 }
+--         )
+--     end
+--     keymap_restore = {}
+-- end
+
 local keymaps_backup = {}
 
 ---@class Mapping
@@ -26,7 +52,7 @@ local keymaps_debug = {
 
     { "n",          ",db",  function() require 'dap'.step_back() end,                                                   { desc = "DAP: Step Back" } },
     { "n",          ",dR",  function() require 'dap'.run_to_cursor() end,                                               { desc = "DAP: Run to Cursor" } },
-    { "n",          ",dp",  function() require 'dap'.pause.toggle() end,                                                { desc = "DAP: Pause" } },
+    { "n",          ",dp",  function() require 'dap'.pause() end,                                                { desc = "DAP: Pause" } },
 
     { "n",          ",dq",  function() require 'dap'.close() end,                                                       { desc = "DAP: Quit" } },
     { "n",          ",dr",  function() require 'dap'.repl.toggle() end,                                                 { desc = "DAP: Toggle Repl" } },
@@ -37,7 +63,7 @@ local keymaps_debug = {
     { "n",          ",dd",  function() require 'dap'.disconnect() end,                                                  { desc = "DAP: Disconnect" } },
     { "n",          ",dg",  function() require 'dap'.session() end,                                                     { desc = "DAP: Get Session" } },
     { "n",          ",dx",  function() require 'dap'.terminate() end,                                                   { desc = "DAP: Terminate" } },
-    { "n",          ",dh",  function() require 'dap.ui.widgets'.hover() end,                                            { desc = "DAP: Hover Variables" } },
+    { "n",          ",K",   function() require 'dap.ui.widgets'.hover() end,                                            { desc = "DAP: Hover Variables" } },
     { "n",          ",dS",  function() require 'dap.ui.widgets'.scopes() end,                                           { desc = "DAP: Scopes" } },
 }
 

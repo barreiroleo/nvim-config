@@ -30,7 +30,10 @@ M.configurations = {
         cwd = '${workspaceFolder}',
         stopAtEntry = true,
         setupCommands = common.setupCommands,
-        program = require("core.dap.utils").input_executable,
+        program = function()
+            return vim.fn.input('ctrl-d: list matches\nctrl-a: complete\n path to executable: ',
+                vim.fn.getcwd() .. "/build/", 'file')
+        end
     },
 
     {
