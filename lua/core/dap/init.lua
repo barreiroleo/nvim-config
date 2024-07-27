@@ -1,41 +1,44 @@
-local bashdb = require('core.dap.config.bashdb')
-local codelldb = require("core.dap.config.codelldb")
-local cppdbg = require("core.dap.config.cppdbg")
-local nlua = require("core.dap.config.nlua")
-local netcoredbg = require('core.dap.config.netcoredbg')
-
-require('nvim-dap-virtual-text').setup()
-require('dapui').setup()
-local dap = require('dap')
-
-
-local keymaps = require("core.dap.keymaps")
-keymaps.setup()
+local dap, dapui = require('dap'), require("dapui")
+require('nvim-dap-virtual-text').setup({})
+require("core.dap.keymaps").setup_global_keymaps()
+dapui.setup()
 
 local function clean_and_open()
     dapui.open()
-    keymaps.set_debug_keymaps()
+    require("core.dap.keymaps").setup_keymaps()
     require("gitsigns").toggle_signs(false)
     vim.diagnostic.hide(nil, 0)
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 end
 
 local function restore_and_close()
-    require("gitsigns").toggle_signs(true)
     vim.diagnostic.show()
+    require("gitsigns").toggle_signs(true)
+    require("core.dap.keymaps").shutdown_keymaps()
     dapui.close()
-    keymaps.restore_global_keymaps()
 end
-dap.listeners.after.event_initialized['dapui_config'] = clean_and_open
-dap.listeners.before.event_terminated['dapui_config'] = restore_and_close
-dap.listeners.before.event_exited['dapui_config'] = restore_and_close
+
+dap.listeners.before.attach.dapui_config = clean_and_open
+dap.listeners.before.launch.dapui_config = clean_and_open
+-- Me: Maybe use request instead of events fixes the ui issues when Attach PID mode
+-- dap.listeners.before.event_terminated.dapui_config = restore_and_close
+-- dap.listeners.before.event_exited.dapui_config = restore_and_close
+dap.listeners.after.terminate.dapui_config = restore_and_close
+dap.listeners.after.disconnect.dapui_config = restore_and_close
 
 
+local bashdb = require('core.dap.config.bashdb')
+local codelldb = require("core.dap.config.codelldb")
+local cppdbg = require("core.dap.config.cppdbg")
+local gdb = require("core.dap.config.gdb")
+local netcoredbg = require('core.dap.config.netcoredbg')
+local nlua = require("core.dap.config.nlua")
 
 local adapters = {
     bashdb.adapters,
     codelldb.adapters,
     cppdbg.adapters,
+    gdb.adapters,
     netcoredbg.adapters,
     nlua.adapters,
 }
@@ -44,12 +47,16 @@ for _, config in pairs(adapters) do
     dap.adapters = vim.tbl_extend("error", dap.adapters, config)
 end
 
-local codelldb_cppdbg = vim.list_extend(codelldb.configurations, cppdbg.configurations)
+local c_cpp_rust = {}
+vim.list_extend(c_cpp_rust, codelldb.configurations)
+vim.list_extend(c_cpp_rust, cppdbg.configurations)
+-- vim.list_extend(c_cpp_rust, gdb.configurations)
+
 dap.configurations = {
-    bash = bashdb.configurations,
-    c = codelldb_cppdbg,
-    cpp = codelldb_cppdbg,
-    cs = netcoredbg.configurations,
+    c = c_cpp_rust,
+    cpp = c_cpp_rust,
+    rust = c_cpp_rust,
     lua = nlua.configurations,
-    rust = codelldb_cppdbg,
+    bash = bashdb.configurations,
+    cs = netcoredbg.configurations,
 }
