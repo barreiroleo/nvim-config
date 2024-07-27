@@ -40,7 +40,7 @@ M.configurations = {
         cwd = '${workspaceFolder}',
         stopAtEntry = true,
         setupCommands = common.setupCommands,
-        pid = require("core.dap.utils").find_process_id
+        pid = require("dap.utils").pick_process_by_name
     },
 }
 

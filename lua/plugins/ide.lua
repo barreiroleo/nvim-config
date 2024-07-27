@@ -6,7 +6,7 @@ return {
     },
 
     -- Debugger
-    { "mfussenegger/nvim-dap",
+    { "barreiroleo/nvim-dap",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = {
             { "rcarriga/nvim-dap-ui",
