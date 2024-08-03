@@ -28,7 +28,7 @@ M.configurations = {
         type = 'cppdbg',
         request = 'launch',
         cwd = '${workspaceFolder}',
-        stopAtEntry = true,
+        stopAtEntry = false,
         setupCommands = common.setupCommands,
         program = function()
             return vim.fn.input('ctrl-d: list matches\nctrl-a: complete\n path to executable: ',
@@ -41,9 +41,11 @@ M.configurations = {
         type = 'cppdbg',
         request = 'attach',
         cwd = '${workspaceFolder}',
-        stopAtEntry = true,
+        stopAtEntry = false,
         setupCommands = common.setupCommands,
-        pid = require("dap.utils").pick_process_by_name
+        pid = function()
+            return require("dap.utils").pick_process({ filter = vim.fn.input("Process name: ") })
+        end
     },
 }
 

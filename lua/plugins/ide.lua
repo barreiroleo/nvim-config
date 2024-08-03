@@ -6,20 +6,13 @@ return {
     },
 
     -- Debugger
-    { "barreiroleo/nvim-dap",
+    { "mfussenegger/nvim-dap",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = {
-            { "rcarriga/nvim-dap-ui",
-                -- stylua: ignore
-                keys = {
-                    { "<leader>du", function() require("dapui").toggle({}) end,  desc = "Dap UI" },
-                    { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
-                },
-                dependencies = "nvim-neotest/nvim-nio"
-            },
-            { "jay-babu/mason-nvim-dap.nvim",
-                cmd = { "DapInstall", "DapUninstall" }
-            },
+            "rcarriga/nvim-dap-ui",
+            "nvim-neotest/nvim-nio",
+            "jay-babu/mason-nvim-dap.nvim",
+            "jbyuki/one-small-step-for-vimkind" ,
             { "theHamsta/nvim-dap-virtual-text",
                 opts = {
                     enabled = true,
@@ -28,7 +21,6 @@ return {
                     virt_text_pos = "eol"
                 }
             },
-            { "jbyuki/one-small-step-for-vimkind" },
         },
         config = function () require("core.dap") end
     },

@@ -48,7 +48,9 @@ M.configurations = {
         cwd = '${workspaceFolder}',
         stopAtEntry = true,
         setupCommands = common.setupCommands,
-        pid = require("dap.utils").pick_process_by_name
+        pid = function()
+            return require("dap.utils").pick_process({ filter = vim.fn.input("Process name: ") })
+        end
     },
 }
 

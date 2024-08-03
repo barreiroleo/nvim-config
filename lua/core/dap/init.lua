@@ -20,9 +20,6 @@ end
 
 dap.listeners.before.attach.dapui_config = clean_and_open
 dap.listeners.before.launch.dapui_config = clean_and_open
--- Me: Maybe use request instead of events fixes the ui issues when Attach PID mode
--- dap.listeners.before.event_terminated.dapui_config = restore_and_close
--- dap.listeners.before.event_exited.dapui_config = restore_and_close
 dap.listeners.after.terminate.dapui_config = restore_and_close
 dap.listeners.after.disconnect.dapui_config = restore_and_close
 

@@ -21,7 +21,10 @@ M.configurations = {
         name = '[netcoredbg] attach',
         type = 'netcoredbg',
         request = 'attach',
-        processId = require('dap.utils').pick_process,
+        -- processId = require('dap.utils').pick_process,
+        pid = function()
+            return require("dap.utils").pick_process({ filter = vim.fn.input("Process name: ") })
+        end
     },
 }
 
