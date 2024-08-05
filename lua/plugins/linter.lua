@@ -7,13 +7,11 @@ return {
             dockerfile = { 'hadolint' },
             json = { 'jsonlint' },
             lua = { 'selene' },
-            cpp = { 'cppcheck' },
-            cmake = { 'checkmake', 'cmakelint' },
+            cpp = { 'cppcheck' }, -- 'cpplint' },
             markdown = { 'markdownlint' },
             sql = { 'sqlfluff' } -- args = { "--dialect", "sqlite" }, -- mandatory
         },
-        linters = {
-        }
+        linters = { }
     },
 
     config = function(_, opts)

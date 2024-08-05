@@ -7,7 +7,11 @@ return {
             -- log_level = vim.log.levels.DEBUG,
             formatters_by_ft = {
                 rust = { "rustfmt" },
+                json = { "jq" },
                 -- lua = { "stylua" },
+            },
+            formatters = {
+                jq = {append_args = {"--indent", "4"}}
             }
         })
 

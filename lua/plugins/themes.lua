@@ -22,7 +22,7 @@ return {
         'rebelot/kanagawa.nvim',
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         config = function()
             require('kanagawa').setup {
                 compile = true,     -- enable compiling the colorscheme
@@ -58,7 +58,7 @@ return {
         'sainnhe/gruvbox-material',
         lazy = false,
         priority = 1000,
-        enabled = false,
+        enabled = true,
         config = function()
             vim.g.gruvbox_material_background = 'hard'
             vim.g.gruvbox_material_foreground = 'material'

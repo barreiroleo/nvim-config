@@ -84,5 +84,9 @@ return {
                 preview_window = { live = true },
             }
         end,
+    },
+    {
+        "chentoast/marks.nvim",
+        opts = {}
     }
 }
