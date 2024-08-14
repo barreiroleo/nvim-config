@@ -1,5 +1,6 @@
 return {
     'akinsho/bufferline.nvim',
+    enabled = false,
     event = { 'BufNewFile', 'BufReadPre' },
     dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()

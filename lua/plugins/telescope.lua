@@ -19,6 +19,7 @@ return{
                             ["<A-Q>"] = actions.smart_add_to_qflist + actions.open_qflist,
                             ["<C-n>"] = actions.cycle_history_next,
                             ["<C-p>"] = actions.cycle_history_prev,
+                            ["<C-x>"] = actions.delete_buffer
                         },
                     },
                 },

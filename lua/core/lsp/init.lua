@@ -124,12 +124,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         local bufnr = args.buf
-        vim.keymap.set('n', 'K',     vim.lsp.buf.hover,           { buffer = bufnr, desc = "[LSP] Hover symbol information"})
         vim.keymap.set('n', 'gd',    vim.lsp.buf.definition,      { buffer = bufnr, desc = "[LSP] Go to definition"})
         vim.keymap.set('n', 'gD',    vim.lsp.buf.declaration,     { buffer = bufnr, desc = "[LSP] Go to declaration"})
         vim.keymap.set('n', 'gt',    vim.lsp.buf.type_definition, { buffer = bufnr, desc = "[LSP] Go to type definition"})
         vim.keymap.set('n', 'gi',    vim.lsp.buf.implementation,  { buffer = bufnr, desc = "[LSP] List symbol implementations"})
         vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,  { buffer = bufnr, desc = "[LSP] Symbol signature information"})
+        -- vim.keymap.set('n', 'K',     vim.lsp.buf.hover,           { buffer = bufnr, desc = "[LSP] Hover symbol information"})
 
         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
             vim.keymap.set("n", "<leader>th", function()

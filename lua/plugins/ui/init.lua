@@ -10,7 +10,7 @@ end
 
 return {
     { import = 'plugins.ui.bufferline' },
-    { 'Bekaboo/dropbar.nvim' },
+    -- { 'Bekaboo/dropbar.nvim' },
     {
         'folke/trouble.nvim',
         cmd = "Trouble",
@@ -23,11 +23,11 @@ return {
         opts = { 'md', 'tex', 'json', 'css', 'javascript', 'html', 'python', 'lua' },
         cmd = { "ColorizerAttachToBuffer" }
     },
-    {
-        "RRethy/vim-illuminate",
-        lazy = true,
-        event = "VeryLazy"
-    },
+    -- {
+    --     "RRethy/vim-illuminate",
+    --     lazy = true,
+    --     event = "VeryLazy"
+    -- },
     {
         'lukas-reineke/indent-blankline.nvim',
         main = 'ibl',
@@ -49,8 +49,8 @@ return {
                 component_separators = '|',
                 section_separators = { left = '', right = '' },
                 disabled_filetypes = { 'neo-tree', 'TelescopePrompt', },
-                always_divide_middle = false,
-                globalstatus = false,
+                -- always_divide_middle = false,
+                -- globalstatus = false,
             }
             local lsp_component = {
                 function()
