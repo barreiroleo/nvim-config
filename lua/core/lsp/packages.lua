@@ -32,7 +32,7 @@ Pack.dap = {
 Pack.null_sources = {
     require("null-ls").builtins.code_actions.refactoring, -- Refactoring plug
     require("null-ls").builtins.diagnostics.trail_space,  -- Highlight trail_space
-    require("null-ls").builtins.code_actions.gitsigns,    -- Code actions for gitsigns plug
+    -- require("null-ls").builtins.code_actions.gitsigns,    -- Code actions for gitsigns plug
 }
 
 Pack.lint_tools = {

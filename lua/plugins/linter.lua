@@ -7,28 +7,28 @@ return {
             dockerfile = { 'hadolint' },
             json = { 'jsonlint' },
             lua = { 'selene' },
-            cpp = { 'cppcheck' }, -- 'cpplint' },
+            cpp = { 'cppcheck', 'cpplint'--[[CPPLINT.cfg]]},
             markdown = { 'markdownlint' },
-            sql = { 'sqlfluff' } -- args = { "--dialect", "sqlite" }, -- mandatory
+            sql = { 'sqlfluff' },
+            cmake = { 'cmakelint' }
         },
-        linters = { }
     },
 
     config = function(_, opts)
         local lint = require("lint")
 
-        local selene = vim.fs.find('selene.toml', {
-            upward = true, stop = vim.uv.os_homedir(), path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
-        })[1]
-        lint.linters["selene"].args = { "--config", selene, "--display-style", "json", "-" }
+        lint.linters["selene"].args = vim.tbl_deep_extend('force', lint.linters["selene"].args,
+            { "--config", vim.fs.find('selene.toml', {
+                upward = true, stop = vim.uv.os_homedir(), path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+            })[1] })
 
-        for name, linter in pairs(opts.linters) do
-            if type(linter) == "table" and type(lint.linters[name]) == "table" then
-                lint.linters[name] = vim.tbl_deep_extend("force", lint.linters[name], linter)
-            else
-                lint.linters[name] = linter
-            end
-        end
+        lint.linters["cpplint"].args = vim.tbl_deep_extend('force', lint.linters["cpplint"].args,
+            { "--filter=-legal/copyright,-whitespace", "--linelength=120" }
+        )
+
+        lint.linters["sqlfluff"].args = vim.tbl_deep_extend('force', lint.linters["cpplint"].args,
+            { "--dialect", "sqlite" }
+        )
 
         lint.linters_by_ft = opts.linters_by_ft
 

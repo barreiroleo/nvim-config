@@ -7,6 +7,7 @@ return {
             { "nvimtools/none-ls.nvim" },
 
             { "j-hui/fidget.nvim",
+                enabled = false,
                 opts = {
                     progress = {
                         suppress_on_insert = true,
@@ -17,7 +18,8 @@ return {
                     }
                 }
             },
-            { "ray-x/lsp_signature.nvim", enabled = true,
+            { "ray-x/lsp_signature.nvim",
+                enabled = false,
                 config = function()
                     require "lsp_signature".setup({
                         hint_enable = false,

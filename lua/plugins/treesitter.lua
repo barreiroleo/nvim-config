@@ -7,7 +7,6 @@ return {
             { 'nvim-treesitter/nvim-treesitter-context',
                 opts = { multiline_threshold = 1, } -- Avoid showing '{' only lines
             },
-            { 'windwp/nvim-ts-autotag', config = true },
         },
         config = function()
             require('nvim-treesitter.configs').setup {

@@ -8,6 +8,7 @@ return {
     },
 
     { "lewis6991/gitsigns.nvim",
+        enabled = false,
         event = { "BufNewFile", "BufReadPre" },
         opts = {
             current_line_blame = true,
