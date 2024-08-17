@@ -1,3 +1,19 @@
+---@param filename string
+---@return string
+local function find_file_root(filename)
+    ---@diagnostic disable-next-line: undefined-field
+    local stop, path = vim.uv.os_homedir(), vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+    return vim.fs.find(filename, { upward = true, stop = stop, path = path })[1]
+end
+
+---@param linters table
+---@param extra_args {linter:string, args:string[]}[]
+local function extend_args(linters, extra_args)
+    vim.iter(extra_args):each(function(linter, args)
+        linters[linter].args = vim.tbl_deep_extend('force', linters[linter].args, args)
+    end)
+end
+
 return {
     "mfussenegger/nvim-lint",
     opts = {
@@ -7,7 +23,7 @@ return {
             dockerfile = { 'hadolint' },
             json = { 'jsonlint' },
             lua = { 'selene' },
-            cpp = { 'cppcheck', 'cpplint'--[[CPPLINT.cfg]]},
+            cpp = { 'cppcheck', 'cpplint' --[[CPPLINT.cfg]] },
             markdown = { 'markdownlint' },
             sql = { 'sqlfluff' },
             cmake = { 'cmakelint' }
@@ -17,18 +33,13 @@ return {
     config = function(_, opts)
         local lint = require("lint")
 
-        lint.linters["selene"].args = vim.tbl_deep_extend('force', lint.linters["selene"].args,
-            { "--config", vim.fs.find('selene.toml', {
-                upward = true, stop = vim.uv.os_homedir(), path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
-            })[1] })
-
-        lint.linters["cpplint"].args = vim.tbl_deep_extend('force', lint.linters["cpplint"].args,
-            { "--filter=-legal/copyright,-whitespace", "--linelength=120" }
-        )
-
-        lint.linters["sqlfluff"].args = vim.tbl_deep_extend('force', lint.linters["cpplint"].args,
-            { "--dialect", "sqlite" }
-        )
+        local extra_args = {
+            ["selene"] = { "--config", find_file_root('selene.toml') },
+            ["cmakelint"] = { "--linelength=120" },
+            ["cpplint"] = { "--filter=-legal/copyright,-whitespace", "--linelength=120" },
+            ["sqlfluff"] = { "--dialect", "sqlite" }
+        }
+        extend_args(lint.linters, extra_args)
 
         lint.linters_by_ft = opts.linters_by_ft
 
