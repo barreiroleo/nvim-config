@@ -6,14 +6,14 @@ dapui.setup()
 local function clean_and_open()
     dapui.open()
     require("core.dap.keymaps").setup_keymaps()
-    require("gitsigns").toggle_signs(false)
+    -- require("gitsigns").toggle_signs(false)
     vim.diagnostic.hide(nil, 0)
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 end
 
 local function restore_and_close()
     vim.diagnostic.show()
-    require("gitsigns").toggle_signs(true)
+    -- require("gitsigns").toggle_signs(true)
     require("core.dap.keymaps").shutdown_keymaps()
     dapui.close()
 end

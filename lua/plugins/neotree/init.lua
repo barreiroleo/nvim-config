@@ -30,7 +30,7 @@ return {
         },
         cmd = 'Neotree',
         keys = {
-            { '<leader>e', ToggleFocus, desc = 'Explorer NeoTree (cwd)', },
+            -- { '<leader>e', ToggleFocus, desc = 'Explorer NeoTree (cwd)', },
         },
         opts = require 'plugins.neotree.opts',
         init = function()
