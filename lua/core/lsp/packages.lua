@@ -14,7 +14,7 @@ Pack.lsp = {
     "gopls",                                       -- Go
     "eslint", "emmet_ls", "html",                  -- HTML
     "jdtls",                                       -- Java
-    "tsserver",                                    -- Js / Ts
+    "ts_ls",                                       -- Js / Ts
     "jsonls",                                      -- Json
     "ltex", "texlab",                              -- Latex
     "lua_ls",                                      -- Lua

@@ -27,7 +27,7 @@ local set_keymap_split = function(buf_id)
     local rhs = function(direction)
         -- Make new window and set it as target
         local new_target_window
-        vim.api.nvim_win_call(MiniFiles.get_target_window() or 0, function()
+        vim.api.nvim_win_call(MiniFiles.get_explorer_state().target_window or 0, function()
             vim.cmd('belowright ' .. direction .. ' split')
             new_target_window = vim.api.nvim_get_current_win()
         end)
