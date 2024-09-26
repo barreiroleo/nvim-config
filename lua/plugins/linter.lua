@@ -23,7 +23,8 @@ return {
             dockerfile = { 'hadolint' },
             json = { 'jsonlint' },
             lua = { 'selene' },
-            cpp = { 'cppcheck', 'cpplint' --[[CPPLINT.cfg]] },
+            -- TODO: Update cppcheck. Too many false positives
+            cpp = { 'cpplint' --[[CPPLINT.cfg]], --[[ 'cppcheck', ]] },
             markdown = { 'markdownlint' },
             sql = { 'sqlfluff' },
             cmake = { 'cmakelint' }
