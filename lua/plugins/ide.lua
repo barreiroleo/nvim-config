@@ -74,7 +74,8 @@ return {
             { "<leader>to", function() require("neotest").output_panel.toggle() end, desc = "[Neotest] Output panel" }
         },
         dependencies = {
-            "alfaix/neotest-gtest",
+            -- "alfaix/neotest-gtest",
+            "barreiroleo/neotest-gtest",
             "nvim-neotest/neotest-plenary",
             -- "nvim-neotest/neotest-vim-test",
             -- "vim-test/vim-test",
