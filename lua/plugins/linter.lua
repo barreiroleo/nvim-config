@@ -37,7 +37,7 @@ return {
         local extra_args = {
             ["selene"] = { "--config", find_file_root('selene.toml') },
             ["cmakelint"] = { "--linelength=120" },
-            ["cpplint"] = { "--filter=-legal/copyright,-whitespace,-build/c++11,-build/include_subdir", "--linelength=120" },
+            ["cpplint"] = { "--filter=-legal/copyright,-whitespace,-build/c++11,-build/include_subdir,-runtime/references", "--linelength=120" },
             ["sqlfluff"] = { "--dialect", "sqlite" }
         }
         extend_args(lint.linters, extra_args)
