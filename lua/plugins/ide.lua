@@ -47,7 +47,7 @@ return {
         dependencies = {
             "kristijanhusak/vim-dadbod-ui",
             "kristijanhusak/vim-dadbod-completion",
-            "hrsh7th/nvim-cmp",
+            "iguanacucumber/magazine.nvim",
         },
         cmd = { "DB", "DBUI", "DBUIFindBuffer" },
         config = function ()

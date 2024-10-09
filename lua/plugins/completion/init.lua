@@ -1,6 +1,6 @@
 return {
     -- Engine
-    { 'hrsh7th/nvim-cmp',
+    { 'iguanacucumber/magazine.nvim',
         -- Sources
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
