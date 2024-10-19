@@ -70,6 +70,7 @@ return {
 
             -- vim.cmd.colorscheme('gruvbox-material')
             vim.cmd.highlight("LspInlayHint cterm=italic,underline guifg=#686868")
+            vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
         end
     },
 }
