@@ -37,5 +37,13 @@ local protocol_and_logging = {
 
 return {
     randomized = randomized,
-    flags = vim.list_extend({ "clangd" }, vim.iter({ compilation_flags, feature, miscellaneous, protocol_and_logging }):flatten():totable())
+    -- flags = vim.list_extend({ "clangd" }, vim.iter({ compilation_flags, feature, miscellaneous, protocol_and_logging }):flatten():totable())
+    flags = vim.list_extend({ "clangd" }, {
+        "--background-index",
+        "--clang-tidy",
+        "--header-insertion=never", --iwyu
+        "--completion-style=detailed",
+        "--function-arg-placeholders",
+        "--fallback-style=webkit",
+    })
 }

@@ -46,4 +46,10 @@ return {
         }
     },
     cmd = clangd_flags.flags,
+    capabilities = { offsetEncoding = { "utf-16" } },
+    init_options = {
+        usePlaceholders = true,
+        completeUnimported = true,
+        clangdFileStatus = true,
+    }
 }

@@ -37,6 +37,7 @@ Pack.null_sources = {
 
 Pack.lint_tools = {
     'cmakelint',
+    'cpplint',
     'shellcheck',
     'hadolint',
     'jsonlint',
