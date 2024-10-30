@@ -48,7 +48,8 @@ Pack.lint_tools = {
 }
 
 Pack.format_tools = {
-    "stylua"
+    'black',
+    'stylua'
 }
 -- stylua: ignore end
 

@@ -3,7 +3,7 @@
 -- vim.o: behaves like :let &{option-name}
 -- vim.go: behaves like :let &g:{option-name}
 -- vim.bo: behaves like :let &l:{option-name} for buffer-local options
--- vim.wo: behaves like :let &l:{option-name} for window-local optionslocal present, impatient = pcall(require, "impatient")
+-- vim.wo: behaves like :let &l:{option-name} for window-local options
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","

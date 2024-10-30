@@ -22,7 +22,7 @@ return {
         'rebelot/kanagawa.nvim',
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         config = function()
             require('kanagawa').setup {
                 compile = true,     -- enable compiling the colorscheme
@@ -61,16 +61,20 @@ return {
         enabled = true,
         config = function()
             vim.g.gruvbox_material_background = 'hard'
-            vim.g.gruvbox_material_foreground = 'material'
+            vim.g.gruvbox_material_foreground = 'mix'
             vim.g.gruvbox_material_better_performance = 1
             vim.g.gruvbox_material_enable_italic = true
             vim.g.gruvbox_material_enable_bold = true
-            vim.g.gruvbox_material_transparent_background = true
+            vim.g.gruvbox_material_transparent_background = false
             vim.o.termguicolors = true
 
-            -- vim.cmd.colorscheme('gruvbox-material')
+            vim.cmd.colorscheme('gruvbox-material')
             vim.cmd.highlight("LspInlayHint cterm=italic,underline guifg=#686868")
             vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
+            vim.cmd.highlight("Normal guibg=#0f0f0f")
+            vim.cmd.highlight("NormalNC guibg=#0f0f0f")
+            vim.cmd.highlight("NormalFloat guibg=#0f0f0f")
+            vim.cmd.highlight("FloatBorder guibg=#141414")
         end
     },
 }

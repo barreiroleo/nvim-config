@@ -101,3 +101,9 @@ vim.api.nvim_create_autocmd("BufNewFile", {
 vim.api.nvim_create_autocmd("CmdlineEnter", { group = augroup("NoSmartcaseInCmdline"), pattern = { ":" }, command = "set nosmartcase" })
 ---@format disable-next
 vim.api.nvim_create_autocmd("CmdlineLeave", { group = augroup("NoSmartcaseInCmdline"), pattern = { ":" }, command = "set smartcase" })
+
+-- Cursorline off in insert mode
+vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" },
+    { group = augroup("SmartCursorline"), pattern = { "*" }, command = "set cursorline" })
+vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" },
+    { group = augroup("NoSmartcaseInCmdline"), pattern = { "*" }, command = "set nocursorline" })

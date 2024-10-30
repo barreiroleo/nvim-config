@@ -9,7 +9,7 @@ return {
                 rust = { "rustfmt" },
                 json = { "jq" },
                 -- lua = { "stylua" },
-                python = { "black" },
+                python = { --[[ "black", ]] "yapf" },
             },
             formatters = {
                 jq = {append_args = {"--indent", "4"}}
