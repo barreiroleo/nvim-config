@@ -1,6 +1,6 @@
 local cmp         = require("cmp")
 local luasnip     = require("luasnip")
-local icons       = require('core.icons')
+local icons       = require('core.utils.icons')
 
 vim.opt.pumblend  = 10
 vim.opt.pumheight = 10

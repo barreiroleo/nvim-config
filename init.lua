@@ -1,9 +1,26 @@
--- vim.deprecate = function() end
+vim.g.mapleader = ","
 
--- Fix the behaviour of alacritty restoring the cursor style after Leave or Suspend vim
-local std_cursor = vim.o.guicursor
-vim.cmd([[au VimEnter,VimResume * set guicursor=]] .. std_cursor)
-vim.cmd [[au VimLeave,VimSuspend * set guicursor=a:ver90]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
+    vim.fn.system({ "git", "clone", "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+end
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
--- bootstrap lazy.nvim, LazyVim and your plugins
-require 'config'
+require("lazy").setup({
+    spec = { { import = "plugins" }, },
+    dev = {
+        path = "~/develop/plugins/",
+        patterns = { "barreiroleo" },
+        fallback = true,
+    },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip", "matchit", "matchparen", "tarPlugin", "tutor", "zipPlugin",
+                -- "netrwPlugin", Needed to download the language spells automatically
+                -- "tohtml", Needed to export lines with :tohtml
+            },
+        },
+    },
+})

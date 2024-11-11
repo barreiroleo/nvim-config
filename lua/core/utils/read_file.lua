@@ -1,6 +1,6 @@
 ---@param path string
 ---@return string|uv_fs_t
-local function readFileSync(path)
+local function read_file_sync(path)
     local fd = assert(vim.uv.fs_open(path, "r", 438))
     local stat = assert(vim.uv.fs_fstat(fd))
     local data = assert(vim.uv.fs_read(fd, stat.size, 0))
@@ -10,7 +10,7 @@ end
 
 ---@param data string|any
 ---@return string[]
-local function parseContent(data)
+local function parse_content(data)
     if type(data) ~= "string" then
         return {}
     end
@@ -27,10 +27,10 @@ end
 
 ---@param path string
 ---@return string[]
-local function GetContent(path)
-    local raw = readFileSync(path)
-    local data = parseContent(raw)
+local function read_file_content(path)
+    local raw = read_file_sync(path)
+    local data = parse_content(raw)
     return data
 end
 
-return GetContent
+return read_file_content

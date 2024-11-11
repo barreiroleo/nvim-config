@@ -1,7 +1,5 @@
-local M = {}
-
 -- Save and exec the current Lua or VimL file
-M.save_and_exec = function()
+local function save_and_exec ()
     local source_commands = {
         lua = 'luafi %',
         vim = 'source %',
@@ -29,4 +27,4 @@ M.save_and_exec = function()
     vim.cmd(command)
 end
 
-return M.save_and_exec
+return save_and_exec

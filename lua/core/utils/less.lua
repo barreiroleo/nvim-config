@@ -1,16 +1,6 @@
-function P(v)
-    vim.notify(vim.inspect(v) .. "\n", vim.log.levels.WARN)
-    return v
-end
-
-function R(...)
-    require("plenary.reload").reload_module(...)
-    return require(...)
-end
-
 -- Command less. Usefull to inspect vim outputs in teporary buffer
 -- Use: <cmd>less messages<cr>
-vim.cmd[[
+vim.cmd [[
     command! -nargs=+ -complete=command Less call Less(win_getid(), <q-mods>, <q-args>)
 
     function! Less(winid, mods, args) abort

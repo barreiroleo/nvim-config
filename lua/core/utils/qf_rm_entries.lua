@@ -1,5 +1,5 @@
 -- Remove items from quickfix list.
-local function del_qf_items()
+local function qf_rm_entries()
     local qflist = vim.fn.getqflist()
 
     local mode = vim.api.nvim_get_mode()['mode']
@@ -37,11 +37,4 @@ local function del_qf_items()
     vim.fn.cursor(start_idx, 1)
 end
 
-
-vim.api.nvim_create_autocmd("Filetype", {
-    pattern = { "qf" },
-    callback = function()
-        vim.keymap.set("n", "dd", del_qf_items, { buffer = true, desc = "QuickFix: Remove entry from" })
-        vim.keymap.set("x", "d", del_qf_items, { buffer = true, desc = "QuickFix: Remove entry from" })
-    end
-})
+return qf_rm_entries
