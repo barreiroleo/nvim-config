@@ -27,6 +27,7 @@ M.debug_keymaps = {
     { mode = "n",          lhs = "<leader>ds",  rhs = function() dapwidgets.centered_float(dapwidgets.scopes) end,            desc = "DAP: Scopes" },
 }
 
+---@type vim.api.keyset.keymap[]
 M.global_keymaps = {
     { mode = "n", lhs = "<leader>dC",   rhs = function() dap.set_breakpoint(vim.fn.input '[Condition] > ') end, desc = "DAP: Conditional breakpoint" },
     { mode = 'n', lhs = "<F9>",         rhs = dap.toggle_breakpoint,                                            desc = "DAP: Breakpoint toggle" },

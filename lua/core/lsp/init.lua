@@ -71,6 +71,7 @@ require("mason-tool-installer").setup({
 })
 
 require("mason-nvim-dap").setup({
+    automatic_installation = false,
     ensure_installed = servers_dap,
 })
 
@@ -114,27 +115,13 @@ vim.diagnostic.config {
 vim.cmd.highlight("ErrorMsg guibg=#250003 guifg=0")
 vim.cmd.highlight("WarningMsg guibg=#382b00 guifg=0")
 
--- Hover and signature popups rounded
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-vim.lsp.handlers["textDocument/signature_help"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("UserAutocmd_LspAttach", { clear = false }),
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        local bufnr = args.buf
-        vim.keymap.set('n', 'gd',    vim.lsp.buf.definition,      { buffer = bufnr, desc = "[LSP] Go to definition"})
-        vim.keymap.set('n', 'gD',    vim.lsp.buf.declaration,     { buffer = bufnr, desc = "[LSP] Go to declaration"})
-        vim.keymap.set('n', 'gt',    vim.lsp.buf.type_definition, { buffer = bufnr, desc = "[LSP] Go to type definition"})
-        vim.keymap.set('n', 'gi',    vim.lsp.buf.implementation,  { buffer = bufnr, desc = "[LSP] List symbol implementations"})
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,  { buffer = bufnr, desc = "[LSP] Symbol signature information"})
-        -- vim.keymap.set('n', 'K',     vim.lsp.buf.hover,           { buffer = bufnr, desc = "[LSP] Hover symbol information"})
-
-        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            vim.keymap.set("n", "<leader>th", function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-            end, { buffer = bufnr, desc = "[LSP] Toggle inlay hints" })
-        end
-    end,
-})
+-- Override floating windows border globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+---@diagnostic disable-next-line: duplicate-set-field
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+    opts = opts or {}
+    ---@diagnostic disable-next-line: assign-type-mismatch
+    opts.border = opts.border or "rounded"
+    return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
