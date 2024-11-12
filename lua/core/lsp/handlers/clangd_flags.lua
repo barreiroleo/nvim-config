@@ -45,5 +45,6 @@ return {
         "--completion-style=detailed",
         "--function-arg-placeholders",
         "--fallback-style=webkit",
+        '--offset-encoding=utf-16',
     })
 }

@@ -4,7 +4,6 @@ local Pack = {}
 -- :lua P(require("mason-lspconfig").get_available_servers())
 -- :put = execute('messages')
 
--- stylua: ignore start
 Pack.lsp = {
     "bashls",                                      -- Bash
     "clangd",                                      -- C / C++
@@ -25,8 +24,8 @@ Pack.lsp = {
 }
 
 Pack.dap = {
-    'coreclr',              -- netcoredbg
-    'cppdbg', 'codelldb',   -- Cpptool, codelldb
+    'coreclr',            -- netcoredbg
+    'cppdbg', 'codelldb', -- Cpptool, codelldb
 }
 
 Pack.null_sources = {
@@ -51,6 +50,5 @@ Pack.format_tools = {
     'black',
     'stylua'
 }
--- stylua: ignore end
 
 return Pack

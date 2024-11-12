@@ -2,11 +2,13 @@ local M = {}
 
 --- Diagnostic severities.
 M.diagnostics = {
-    ERROR = '',
-    WARN = '',
+    ERROR = '',
+    WARN = '',
+    INFO = '',
     HINT = '',
-    INFO = '',
 }
+
+M.code_action = ''
 
 --- For folding.
 M.arrows = {

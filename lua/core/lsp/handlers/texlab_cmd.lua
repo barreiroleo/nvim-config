@@ -1,7 +1,7 @@
 local M = {}
 
 function M.cmd_backsearch (file, line, col)
-    local drop_cmd = string.format(":lua require('%s').drop_tex('%s', %s, %s)<CR>", "core.lsp.utils.texlab_cmd", file, line, col or 0)
+    local drop_cmd = string.format(":lua require('%s').drop_tex('%s', %s, %s)<CR>", "core.lsp.handlers.texlab_cmd", file, line, col or 0)
     local cmd = string.format("\"nvim --server %s --remote-send \\%q\\\"", "/tmp/nvim.latex", drop_cmd) -- vim.v.servername
     return cmd
 end

@@ -11,6 +11,8 @@ local capabilities = vim.tbl_deep_extend("force", {},
     require("cmp_nvim_lsp").default_capabilities()
 )
 
+require("core.lsp.lsp_ui")
+
 -- Install servers and tools
 require("mason").setup()
 
@@ -79,49 +81,3 @@ require("null-ls").setup({
     debug = false,
     sources = null_sources,
 })
-
--- Diagnostic message display. Error lens
-vim.diagnostic.config {
-    virtual_text = {
-        spacing = 4,
-        severity = {
-            min = vim.diagnostic.severity.WARN,
-            max = vim.diagnostic.severity.ERROR
-        },
-        source = "if_many",
-        prefix = '■' -- Could be '●', '▎', 'x', '⯀'
-    },
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN] = '',
-            [vim.diagnostic.severity.HINT] = '',
-            [vim.diagnostic.severity.INFO] = '',
-        },
-        linehl = {
-            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-            [vim.diagnostic.severity.WARN] = 'WarningMsg',
-        },
-        numhl = {
-            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-            [vim.diagnostic.severity.WARN] = 'WarningMsg',
-        },
-    },
-    float = { source = "if_many", border = "rounded" },
-    underline = true,
-    update_in_insert = true,
-    severity_sort = true,
-}
-vim.cmd.highlight("ErrorMsg guibg=#250003 guifg=0")
-vim.cmd.highlight("WarningMsg guibg=#382b00 guifg=0")
-
-
--- Override floating windows border globally
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
----@diagnostic disable-next-line: duplicate-set-field
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-    opts = opts or {}
-    ---@diagnostic disable-next-line: assign-type-mismatch
-    opts.border = opts.border or "rounded"
-    return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end

@@ -1,4 +1,4 @@
-local cmd_backsearch = require("core.lsp.utils.texlab_cmd").cmd_backsearch
+local cmd_backsearch = require("core.lsp.handlers.texlab_cmd").cmd_backsearch
 
 local SearchCmds = {
     -- evincesyn = {
