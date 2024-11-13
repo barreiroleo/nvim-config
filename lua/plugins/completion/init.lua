@@ -29,25 +29,5 @@ return {
         end,
     },
 
-    {
-        'saghen/blink.cmp', lazy = false, enabled = false,
-        dependencies = 'rafamadriz/friendly-snippets',
-        build = 'cargo build --release',
-
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            trigger = { signature_help = { enabled = true } },
-            windows = {
-                autocomplete = {
-                    border = 'rounded',
-                    draw = 'reversed',
-                },
-                documentation = { border = 'rounded', auto_show = true, },
-                signature_help = { border = 'rounded' },
-            },
-            highlight = { use_nvim_cmp_as_default = true, },
-            nerd_font_variant = 'mono',
-        }
-    }
+    -- { import = "plugins.completion.blink" }
 }
