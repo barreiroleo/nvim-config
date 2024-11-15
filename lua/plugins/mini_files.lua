@@ -18,7 +18,7 @@ local function set_toggle_hidden_files_keymap(buf_id)
         local new_filter = show_dotfiles and filter_show or filter_hide
         MiniFiles.refresh({ content = { filter = new_filter } })
     end
-    vim.keymap.set('n', '.', toggle_dotfiles_action, { buffer = buf_id })
+    vim.keymap.set('n', '.', toggle_dotfiles_action, { buffer = buf_id, desc = "MiniFiles: Toggle hidden files" })
 end
 
 ---Set keymaps for open file in split windows
@@ -34,8 +34,8 @@ local set_keymap_split = function(buf_id)
         MiniFiles.set_target_window(new_target_window)
     end
     -- Adding `desc` will result into `show_help` entries
-    vim.keymap.set('n', "gs", function() rhs("horizontal") end, { buffer = buf_id, desc = "Split belowright horizontal" })
-    vim.keymap.set('n', "gv", function() rhs("vertical") end, { buffer = buf_id, desc = "Split belowright vertical" })
+    vim.keymap.set('n', "gs", function() rhs("horizontal") end, { buffer = buf_id, desc = "MiniFiles: Split belowright horizontal" })
+    vim.keymap.set('n', "gv", function() rhs("vertical") end, { buffer = buf_id, desc = "MiniFiles: Split belowright vertical" })
 end
 
 local function toggle_minifiles_window()
@@ -66,5 +66,5 @@ return {
             end,
         })
     end,
-    keys = { { '<leader>e', toggle_minifiles_window, desc = 'Explorer NeoTree (cwd)' } },
+    keys = { { '<leader>e', toggle_minifiles_window, desc = 'MiniFiles: Toggle explorer' } },
 }

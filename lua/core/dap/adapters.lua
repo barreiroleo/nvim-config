@@ -7,28 +7,20 @@ local gdb = require("core.dap.config.gdb")
 local netcoredbg = require('core.dap.config.netcoredbg')
 local nlua = require("core.dap.config.nlua")
 
-local adapters = {
-    bashdb.adapters,
-    codelldb.adapters,
-    cppdbg.adapters,
-    gdb.adapters,
-    netcoredbg.adapters,
-    nlua.adapters,
+dap.adapters = {
+    bashdb = bashdb.adapter,
+    codelldb = codelldb.adapter,
+    cppdbg = cppdbg.adapter,
+    gdb = gdb.adapter,
+    netcoredbg = netcoredbg.adapter,
+    nlua = nlua.adapter,
 }
 
-for _, config in pairs(adapters) do
-    dap.adapters = vim.tbl_extend("error", dap.adapters, config)
-end
-
-local c_cpp_rust = {}
-vim.list_extend(c_cpp_rust, codelldb.configurations)
-vim.list_extend(c_cpp_rust, cppdbg.configurations)
--- vim.list_extend(c_cpp_rust, gdb.configurations)
-
+local c_family = vim.iter({ codelldb.configurations, cppdbg.configurations }):flatten():totable()
 dap.configurations = {
-    c = c_cpp_rust,
-    cpp = c_cpp_rust,
-    rust = c_cpp_rust,
+    c = c_family,
+    cpp = c_family,
+    rust = c_family,
     lua = nlua.configurations,
     bash = bashdb.configurations,
     cs = netcoredbg.configurations,

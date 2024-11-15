@@ -1,12 +1,10 @@
 local M = {}
 
-M.adapters = {
-    ["gdb"] = {
-        id = 'gdb',
-        type = 'executable',
-        command = "gdb",
-        args = { "-i", "dap" }
-    },
+M.adapter = {
+    id = 'gdb',
+    type = 'executable',
+    command = "gdb",
+    args = { "-i", "dap" }
 }
 
 local common = {

@@ -1,11 +1,9 @@
 local M = {}
 
-M.adapters = {
-    ["cppdbg"] = {
-        id = 'cppdbg',
-        type = 'executable',
-        command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7",
-    },
+M.adapter = {
+    id = 'cppdbg',
+    type = 'executable',
+    command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7",
 }
 
 local common = {

@@ -12,7 +12,7 @@ local capabilities = vim.tbl_deep_extend("force", {},
 )
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-require("core.lsp.lsp_ui")
+require("core.lsp.ui")
 
 -- Install servers and tools
 require("mason").setup()
@@ -73,8 +73,9 @@ require("mason-tool-installer").setup({
     auto_update = true,
 })
 
+
 require("mason-nvim-dap").setup({
-    automatic_installation = false,
+    automatic_installation = true,
     ensure_installed = servers_dap,
 })
 

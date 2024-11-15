@@ -1,15 +1,13 @@
 local M = {}
 
-M.adapters = {
-    ["codelldb"] = {
-        type = 'server',
-        port = "${port}",
-        executable = {
-            command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
-            args = { "--port", "${port}" },
-            -- On windows you may have to uncomment this:
-            -- detached = false,
-        }
+M.adapter = {
+    type = 'server',
+    port = "${port}",
+    executable = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+        args = { "--port", "${port}" },
+        -- On windows you may have to uncomment this:
+        -- detached = false,
     }
 }
 

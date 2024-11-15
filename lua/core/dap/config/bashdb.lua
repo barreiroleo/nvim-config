@@ -1,11 +1,9 @@
 local M = {}
 
-M.adapters= {
-    ["bashdb"] = {
-        type = 'executable',
-        command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
-        name = 'bashdb',
-    }
+M.adapter = {
+    type = 'executable',
+    command = vim.fn.stdpath("data") .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
+    name = 'bashdb',
 }
 
 M.configurations = {
