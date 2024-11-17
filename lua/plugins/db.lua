@@ -1,0 +1,25 @@
+return {
+    -- {
+    --     "tpope/vim-dadbod",
+    --     enabled = false,
+    --     dependencies = {
+    --         "kristijanhusak/vim-dadbod-ui",
+    --         "kristijanhusak/vim-dadbod-completion",
+    --         "iguanacucumber/magazine.nvim",
+    --     },
+    --     cmd = { "DB", "DBUI", "DBUIFindBuffer" },
+    --     config = function()
+    --         vim.api.nvim_create_autocmd("FileType", {
+    --             pattern = { "sql", "mysql", "plsql" },
+    --             callback = function()
+    --                 require('cmp').setup.buffer({ sources = { { name = 'vim-dadbod-completion' } } })
+    --             end,
+    --         })
+    --         vim.g.dbs = {
+    --             ['dev-mysql'] = 'mysql://root:root@127.0.0.1',
+    --             ['dev-redis'] = 'redis://',
+    --             ['dev-sqlite'] = 'sqlite:db.sqlite3',
+    --         }
+    --     end
+    -- }
+}

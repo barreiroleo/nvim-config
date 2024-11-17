@@ -20,23 +20,23 @@ local function ToggleFocus()
 end
 
 return {
-    { 'nvim-neo-tree/neo-tree.nvim',
-        enabled = false,
-        branch = 'main',
-        lazy = true,
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'kyazdani42/nvim-web-devicons',
-            'MunifTanjim/nui.nvim',
-        },
-        cmd = 'Neotree',
-        keys = {
-            -- { '<leader>e', ToggleFocus, desc = 'Explorer NeoTree (cwd)', },
-        },
-        opts = require 'plugins.neotree.opts',
-        init = function()
-            vim.g.neo_tree_remove_legacy_commands = true
-        end,
-        deactivate = function() vim.cmd [[Neotree close]] end,
-    }
+    -- {
+    --     'nvim-neo-tree/neo-tree.nvim',
+    --     enabled = false,
+    --     branch = 'main',
+    --     dependencies = {
+    --         'nvim-lua/plenary.nvim',
+    --         'kyazdani42/nvim-web-devicons',
+    --         'MunifTanjim/nui.nvim',
+    --     },
+    --     cmd = 'Neotree',
+    --     keys = {
+    --         -- { '<leader>e', ToggleFocus, desc = 'Neotree: Toggle focus' },
+    --     },
+    --     opts = require 'plugins.neotree.opts',
+    --     init = function()
+    --         vim.g.neo_tree_remove_legacy_commands = true
+    --     end,
+    --     deactivate = function() vim.cmd [[Neotree close]] end,
+    -- }
 }

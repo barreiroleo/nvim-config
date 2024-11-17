@@ -1,7 +1,6 @@
 return {
     "stevearc/conform.nvim",
-    event = { "VeryLazy" },
-    cmd = { "ConformInfo" },
+    cmd = { "ConformInfo", "Format" },
     config = function()
         require("conform").setup({
             -- log_level = vim.log.levels.DEBUG,
@@ -12,7 +11,7 @@ return {
                 python = { --[[ "black", ]] "yapf" },
             },
             formatters = {
-                jq = {append_args = {"--indent", "4"}}
+                jq = { append_args = { "--indent", "4" } }
             }
         })
 
@@ -30,8 +29,10 @@ return {
             end
             require("conform").format({ async = true, lsp_fallback = true, range = range })
         end, { range = true })
-
-        vim.keymap.set({ "v" }, "gq", "<cmd>Format<CR>", { desc = "Conform: Range format" })
-        vim.keymap.set({ "n" }, "gqf", "<cmd>Format<CR>", { desc = "Conform: File format" })
     end,
+
+    keys = {
+        { "gq",  "<cmd>Format<CR>", mode = "n", desc = "Conform: Range format" },
+        { "gqf", "<cmd>Format<CR>", mode = "v", desc = "Conform: File format" }
+    }
 }

@@ -1,9 +1,11 @@
 return {
-    { "windwp/nvim-autopairs",
-        event = { "BufNewFile", "BufReadPre" },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
         opts = { check_ts = true }
     },
-    { "folke/todo-comments.nvim",
+    {
+        "folke/todo-comments.nvim",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = "nvim-lua/plenary.nvim",
         opts = {
@@ -17,13 +19,11 @@ return {
             },
         }
     },
-    { "zef/vim-cycle" },
-    { "numToStr/Comment.nvim",
-        event = { "BufNewFile", "BufReadPre" },
-        config = true,
-    },
-    { 'tpope/vim-repeat',event = { 'BufNewFile', 'BufReadPre' } },
-    { "tpope/vim-surround",
+    { "zef/vim-cycle",         event = { "BufNewFile", "BufReadPre" } },
+    { "numToStr/Comment.nvim", event = { "BufNewFile", "BufReadPre" }, config = true, },
+    { 'tpope/vim-repeat',      event = { 'BufNewFile', 'BufReadPre' } },
+    {
+        "tpope/vim-surround",
         event = { "BufNewFile", "BufReadPre" },
         config = function()
             vim.cmd [[

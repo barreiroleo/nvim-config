@@ -29,20 +29,20 @@ return {
         print("Loading clangd")
         vim.keymap.set({ "n", "i" }, "<A-o>", function()
             switch_source_header(0, "edit")
-        end, { desc = "[Clang] Switch source/header", buffer = bufnr })
+        end, { desc = "Clang: Switch source/header", buffer = bufnr })
     end,
     commands = {
         ClangdSwitchSourceHeader = {
             function() switch_source_header(0, "edit") end,
-            description = "Open source/header in current buffer",
+            description = "Clang: Open source/header in current buffer",
         },
         ClangdSwitchSourceHeaderSplit = {
             function() switch_source_header(0, "vsplit") end,
-            description = "Open source/header in a new vsplit",
+            description = "Clang: Open source/header in a new vsplit",
         },
         ClangdPrintFlags = {
             function() P({ clangd_flags.randomized, clangd_flags.flags }) end,
-            description = "Print the clangd flags"
+            description = "Clang: Print the clangd flags"
         }
     },
     cmd = clangd_flags.flags,

@@ -1,2 +1,2 @@
-vim.keymap.set('n', '<F3>', ':w | :TexlabBuild<CR>', { desc = 'Build tex file' })
-vim.keymap.set('n', '<F4>', ':TexlabForward<CR>',    { desc = 'Search line in pdf' })
+vim.keymap.set("n", "<F3>", ":w | :TexlabBuild<CR>", { desc = "Texlab: Build tex file" })
+vim.keymap.set("n", "<F4>", ":TexlabForward<CR>",    { desc = "Texlab: Search line in pdf" })

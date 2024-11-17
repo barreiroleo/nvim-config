@@ -66,5 +66,5 @@ return {
             end,
         })
     end,
-    keys = { { '<leader>e', toggle_minifiles_window, desc = 'MiniFiles: Toggle explorer' } },
+    keys = { { "<leader>e", toggle_minifiles_window, desc = "MiniFiles: Toggle explorer" } },
 }

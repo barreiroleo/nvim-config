@@ -27,17 +27,4 @@ M.debug_keymaps = {
     { mode = "n",          lhs = "<leader>ds",  rhs = function() dapwidgets.centered_float(dapwidgets.scopes) end,            desc = "DAP: Scopes" },
 }
 
----@type vim.api.keyset.keymap[]
-M.global_keymaps = {
-    { mode = "n", lhs = "<leader>dC",   rhs = function() dap.set_breakpoint(vim.fn.input '[Condition] > ') end, desc = "DAP: Conditional breakpoint" },
-    { mode = 'n', lhs = "<F9>",         rhs = dap.toggle_breakpoint,                                            desc = "DAP: Breakpoint toggle" },
-    { mode = 'n', lhs = "<F6>",         rhs = dap.goto_,                                                        desc = "DAP: Goto line" },
-    { mode = 'n', lhs = "<F5>",         rhs = dap.continue,                                                     desc = "DAP: Continue" },
-    { mode = 'n', lhs = "<leader><F5>", rhs = dap.run_last,                                                     desc = "DAP: Run last" },
-    { mode = 'n', lhs = "<F11>",        rhs = dap.step_into,                                                    desc = "DAP: Step Into" },
-    { mode = 'n', lhs = "<F10>",        rhs = dap.step_over,                                                    desc = "DAP: Step Over" },
-    { mode = 'n', lhs = "<F12>",        rhs = dap.step_out,                                                     desc = "DAP: Step Out" },
-
-}
-
 return M

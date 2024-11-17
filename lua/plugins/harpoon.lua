@@ -1,7 +1,9 @@
 return {
     "ThePrimeagen/harpoon",
+    event = { "BufNewFile", "BufReadPre" },
     branch = "harpoon2",
     dependencies = "nvim-lua/plenary.nvim",
+
     config = function()
         local harpoon = require("harpoon")
         harpoon:setup({ default = { save_on_toggle = true } })

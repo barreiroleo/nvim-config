@@ -1,5 +1,5 @@
 return {
-    { 'weirongxu/plantuml-previewer.vim', lazy = true,
+    { 'weirongxu/plantuml-previewer.vim',
         ft = { 'plantuml', 'puml', 'uml', 'md' },
         dependencies = {
             'tyru/open-browser.vim',

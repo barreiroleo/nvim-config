@@ -14,7 +14,7 @@ return {
                 "c", "cpp", "make", "cmake",
                 "lua", "luadoc", "vim", "vimdoc",
                 "rust", "java", "python", "bash",
-                "bibtex", "latex", "markdown", "mermaid",
+                "markdown",
                 "json", "jsonc", "toml", "yaml", "sql", "dockerfile",
             },
             ignore_install = { "javascript" },

@@ -6,11 +6,8 @@ local format_tools = require("core.lsp.packages").format_tools
 local lint_tools = require("core.lsp.packages").lint_tools
 local tools = vim.iter({ lint_tools, format_tools }):flatten():totable()
 
-local capabilities = vim.tbl_deep_extend("force", {},
-    vim.lsp.protocol.make_client_capabilities(),
-    require("cmp_nvim_lsp").default_capabilities()
-)
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 require("core.lsp.ui")
 
@@ -18,10 +15,8 @@ require("core.lsp.ui")
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-    -- Use lspconfig names
     ensure_installed = servers_lsp,
-    auto_update = true,
-
+    automatic_installation = false,
     handlers = {
         function(server_name)
             require("lspconfig")[server_name].setup {
@@ -75,7 +70,7 @@ require("mason-tool-installer").setup({
 
 
 require("mason-nvim-dap").setup({
-    automatic_installation = true,
+    automatic_installation = false,
     ensure_installed = servers_dap,
 })
 
