@@ -52,7 +52,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserAutocmd_CodeActionSign", { clear = false }),
     callback = function(lsp_args)
         local client = vim.lsp.get_client_by_id(lsp_args.data.client_id)
-        if client and (not client.server_capabilities.codeActionProvider or client.name == "null-ls") then return end
+        -- Check for invalid clients, null-ls, or not code action provider
+        if not client or client.name == "null-ls" or not client.server_capabilities.codeActionProvider then
+            return
+        end
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),
             callback = function(args) codeaction_indication(args.buf) end,
