@@ -13,10 +13,8 @@ return {
     },
     {
         "chentoast/marks.nvim",
-        cmd = {
-            "MarksListAll", "MarksListBuf", "MarksListGlobal", "MarksQFListAll",
-            "MarksQFListBuf", "MarksQFListGlobal", "MarksToggleSigns"
-        }
+        event = { "BufNewFile", "BufReadPre" },
+        opts = {}
     },
     {
         "tpope/vim-dispatch",

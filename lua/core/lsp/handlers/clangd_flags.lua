@@ -40,10 +40,15 @@ return {
     -- flags = vim.list_extend({ "clangd" }, vim.iter({ compilation_flags, feature, miscellaneous, protocol_and_logging }):flatten():totable())
     flags = vim.list_extend({ "clangd" }, {
         "--background-index",
+        "--background-index-priority=background",
         "--clang-tidy",
-        "--header-insertion=never", --iwyu
         "--completion-style=detailed",
         "--function-arg-placeholders",
+        "--header-insertion=never",
+        "--log=error",
+        "--malloc-trim",
+        "--pch-storage=memory",
+
         "--fallback-style=webkit",
         '--offset-encoding=utf-16',
     })

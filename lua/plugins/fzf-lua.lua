@@ -15,9 +15,14 @@ return {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+        local actions = require("fzf-lua.actions")
         require("fzf-lua").setup({
-            keymap = {
-                fzf = { ['ctrl-a'] = "select-all" }
+            -- fzf_opts = { ["--layout"] = "reverse-list" },
+            winopts = { preview = { layout = { "horizontal" } } },
+            grep = {
+                actions = {
+                    ["ctrl-q"] = { fn = actions.file_edit_or_qf, prefix = "select-all+" }
+                }
             }
         })
     end,
