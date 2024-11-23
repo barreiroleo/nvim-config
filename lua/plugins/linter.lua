@@ -6,50 +6,36 @@ local function find_file_root(filename)
     return vim.fs.find(filename, { upward = true, stop = stop, path = path })[1]
 end
 
----@param linters table
----@param extra_args {linter:string, args:string[]}[]
-local function extend_args(linters, extra_args)
-    vim.iter(extra_args):each(function(linter, args)
-        linters[linter].args = vim.tbl_deep_extend('force', linters[linter].args, args)
-    end)
-end
-
 return {
     "mfussenegger/nvim-lint",
     event = { "BufNewFile", "BufReadPre" },
-    opts = {
-        events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-        linters_by_ft = {
+    config = function()
+        local lint = require("lint")
+
+        lint.linters_by_ft = {
             sh = { 'shellcheck' },
             dockerfile = { 'hadolint' },
             json = { 'jsonlint' },
             lua = { 'selene' },
             -- TODO: Update cppcheck. Too many false positives
             cpp = { 'cpplint' --[[CPPLINT.cfg]], --[[ 'cppcheck', ]] },
-            markdown = { 'markdownlint' },
             sql = { 'sqlfluff' },
             cmake = { 'cmakelint' }
-        },
-    },
+        }
 
-    config = function(_, opts)
-        local lint = require("lint")
-
+        -- Extend default args
         local extra_args = {
             ["selene"] = { "--config", find_file_root('selene.toml') },
             ["cmakelint"] = { "--linelength=120" },
             ["cpplint"] = { "--filter=-legal/copyright,-whitespace,-build/c++11,-build/include_subdir,-runtime/references", "--linelength=120" },
             ["sqlfluff"] = { "--dialect", "sqlite" }
         }
-        extend_args(lint.linters, extra_args)
+        vim.iter(extra_args):each(function(linter, args)
+            lint.linters[linter].args = vim.tbl_deep_extend('force', lint.linters[linter].args, args)
+        end)
 
-        lint.linters_by_ft = opts.linters_by_ft
-
-        vim.api.nvim_create_autocmd(opts.events, {
-            callback = function()
-                require("lint").try_lint()
-                require("lint").try_lint("compiler")
-            end,
+        vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+            callback = function() lint.try_lint() end,
         })
     end,
 }

@@ -31,8 +31,7 @@ return {
     },
 
     {
-        "barreiroleo/refactoring.nvim",
-        branch = "fix_ts_nightly",
+        "ThePrimeagen/refactoring.nvim",
         event = { "BufNewFile", "BufReadPre" },
         keys = {
             { "<leader>rr", function() require("refactoring").select_refactor({}) end, mode = { "n", "x" }, desc = "Refactoring: Select refactor" },

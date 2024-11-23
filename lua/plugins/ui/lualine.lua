@@ -1,25 +1,33 @@
+local lint_component = {
+    function()
+        local linters = require("lint").get_running()
+        if #linters == 0 then return "" end
+        return "[" .. table.concat(linters, ", ") .. "]"
+    end,
+    -- icon = "󱉶 "
+}
+
+local lsp_component = {
+    function()
+        local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
+        -- Map server names from clients and filter null-ls
+        local client_names = vim.iter(attached_clients)
+            :map(function(client)
+                local name = client.name:gsub("language.server", "ls")
+                return name
+            end)
+            :filter(function(name) return name ~= "null-ls" end):totable()
+
+        if #client_names == 0 then return "[No active lsp]" end
+        return "[" .. table.concat(client_names, ",") .. "]"
+    end,
+    -- icon = ' ',
+}
+
 return {
     "nvim-lualine/lualine.nvim",
     event = { "BufNewFile", "BufReadPre", "InsertEnter" },
     config = function()
-        local lsp_component = {
-            function()
-                local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
-                if #attached_clients == 0 then
-                    return "No Active Lsp"
-                end
-                local it = vim.iter(attached_clients)
-                it:map(function(client)
-                    local name = client.name:gsub("language.server", "ls")
-                    return name
-                end)
-                local names = it:filter(function(name) return name ~= "null-ls" end):totable()
-                if #names == 0 then names = { "No LSP" } end
-                return "[" .. table.concat(names, ",") .. "]"
-            end,
-            -- icon = ' ',
-        }
-
         local def_opts = require("lualine").get_config()
         def_opts.options = {
             component_separators = '|',
@@ -28,7 +36,7 @@ return {
             -- always_divide_middle = false,
             -- globalstatus = false,
         }
-        def_opts.sections.lualine_x = lsp_component
+        def_opts.sections.lualine_x = { lint_component, lsp_component }
 
         require("lualine").setup(def_opts)
     end,
