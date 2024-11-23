@@ -1,21 +1,22 @@
 return {
     {
         "nvim-lua/plenary.nvim",
-        keys = { { "<leader><leader>t", "<cmd>w<cr> | <Plug>PlenaryTestFile", desc = "Plenary: Test current file" } }
+        keys = {
+            { "<leader><leader>t", "<cmd>w<cr> | <Plug>PlenaryTestFile", desc = "Plenary: Test current file" }
+        }
     },
+
     {
         'mbbill/undotree',
         cmd = "UndotreeShow"
     },
-    {
-        "lambdalisue/suda.vim",
-        cmd = { "SudaWrite", "SudaRead" }
-    },
+
     {
         "chentoast/marks.nvim",
         event = { "BufNewFile", "BufReadPre" },
         opts = {}
     },
+
     {
         "tpope/vim-dispatch",
         cmd = { "Dispatch", "Make" }
@@ -23,7 +24,6 @@ return {
 
     {
         "danymat/neogen",
-        event = { "BufNewFile", "BufReadPre" },
         keys = {
             { "<leader>dg", function() require('neogen').generate() end, mode = { "n", "v" }, desc = "Neogen: Generate docs" }
         },
@@ -32,7 +32,6 @@ return {
 
     {
         "ThePrimeagen/refactoring.nvim",
-        event = { "BufNewFile", "BufReadPre" },
         keys = {
             { "<leader>rr", function() require("refactoring").select_refactor({}) end, mode = { "n", "x" }, desc = "Refactoring: Select refactor" },
         },

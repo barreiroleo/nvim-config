@@ -1,11 +1,7 @@
 local get_target_path = function()
     local path = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
     vim.ui.input({ prompt = "Search in folder: ", default = path }, function(input)
-        if input == "" then
-            ---@diagnostic disable-next-line: undefined-field
-            input = vim.uv.cwd()
-            vim.notify("Invalid path. Using CWD: " .. input, vim.log.levels.WARN)
-        end
+        if input == "" then input = "." end
         path = input
     end)
     return path
@@ -14,10 +10,10 @@ end
 return {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+
     config = function()
         local actions = require("fzf-lua.actions")
         require("fzf-lua").setup({
-            -- fzf_opts = { ["--layout"] = "reverse-list" },
             winopts = { preview = { layout = { "horizontal" } } },
             grep = {
                 actions = {
@@ -26,6 +22,7 @@ return {
             }
         })
     end,
+
     keys = {
         { "<leader>ff",  function() require('fzf-lua').files() end,          desc = "Fzf: Find by file name" },
         { "<leader>fg",  function() require('fzf-lua').live_grep_glob() end, desc = "Fzf: Find by grep. Usage: SearchThing--*.ft" },

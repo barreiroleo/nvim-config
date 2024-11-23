@@ -1,12 +1,16 @@
 return {
     "neovim/nvim-lspconfig",
+    event = { "BufNewFile", "BufReadPre" },
     dependencies = {
         { "williamboman/mason.nvim" },
         { "williamboman/mason-lspconfig.nvim" },
-        { "j-hui/fidget.nvim", opts = { } },
-        { "folke/lazydev.nvim", ft = "lua", config = true },
+        {
+            "j-hui/fidget.nvim", opts = {}
+        },
+        {
+            "folke/lazydev.nvim", ft = "lua", opts = {}
+        },
     },
-    event = { "BufNewFile", "BufReadPre" },
     config = function() require("core.lsp") end,
     cmd = { "Mason", "MasonInstall" },
 }

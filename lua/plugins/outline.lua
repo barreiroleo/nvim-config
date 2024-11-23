@@ -1,6 +1,5 @@
 local function OpenOutline()
     local outline = require("outline")
-
     if not outline.is_open() then
         outline.open()
     else

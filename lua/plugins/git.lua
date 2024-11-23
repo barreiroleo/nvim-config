@@ -2,7 +2,10 @@ return {
     {
         "tpope/vim-fugitive",
         dependencies = {
-            "sindrets/diffview.nvim",
+            {
+                "sindrets/diffview.nvim",
+                cmd = { "DiffviewFileHistory", "DiffviewOpen" }
+            },
         },
         cmd = { "Git" }
     },

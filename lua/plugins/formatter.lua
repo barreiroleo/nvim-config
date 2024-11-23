@@ -3,11 +3,9 @@ return {
     cmd = { "ConformInfo", "Format" },
     config = function()
         require("conform").setup({
-            -- log_level = vim.log.levels.DEBUG,
             formatters_by_ft = {
                 rust = { "rustfmt" },
                 json = { "jq" },
-                -- lua = { "stylua" },
                 python = { --[[ "black", ]] "yapf" },
             },
             formatters = {
@@ -32,7 +30,7 @@ return {
     end,
 
     keys = {
-        { "gq",  "<cmd>Format<CR>", mode = "n", desc = "Conform: Range format" },
-        { "gqf", "<cmd>Format<CR>", mode = "v", desc = "Conform: File format" }
+        { "gq",  "<cmd>Format<CR>", mode = "v", desc = "Conform: Range format" },
+        { "gqf", "<cmd>Format<CR>", mode = "n", desc = "Conform: File format" }
     }
 }

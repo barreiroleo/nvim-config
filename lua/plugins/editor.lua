@@ -1,9 +1,25 @@
 return {
     {
+        'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
+        event = { 'BufNewFile', 'BufReadPre' },
+        opts = {
+            indent = { char = "┆" },
+        },
+    },
+
+    {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         opts = { check_ts = true }
     },
+
+    {
+        'folke/trouble.nvim',
+        cmd = "Trouble",
+        opts = {},
+    },
+
     {
         "folke/todo-comments.nvim",
         event = { "BufNewFile", "BufReadPre" },
@@ -19,6 +35,14 @@ return {
             },
         }
     },
+
+    {
+        'norcalli/nvim-colorizer.lua',
+        event = { 'BufNewFile', 'BufReadPre' },
+        opts = { 'md', 'tex', 'json', 'css', 'javascript', 'html', 'python', 'lua' },
+        cmd = { "ColorizerAttachToBuffer" }
+    },
+
     { "zef/vim-cycle",         event = { "BufNewFile", "BufReadPre" } },
     { "numToStr/Comment.nvim", event = { "BufNewFile", "BufReadPre" }, config = true, },
     { 'tpope/vim-repeat',      event = { 'BufNewFile', 'BufReadPre' } },

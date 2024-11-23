@@ -119,32 +119,32 @@ cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
     },
 })
 
-cmp.setup.cmdline(':', {
-    -- view = { entries = "wildmenu", separator = "|" },
-    mapping = cmp.mapping.preset.cmdline({
-        ['<Tab>'] = {
-            c = function(_)
-                if cmp.visible() then
-                    cmp.confirm({ select = true })
-                else
-                    cmp.complete()
-                    if #cmp.get_entries() == 1 then
-                        cmp.confirm({ select = true })
-                    end
-                end
-            end,
-        }
-    }),
-    sources = {
-        { name = 'cmdline' },
-        { name = 'path' }
-    },
-    formatting = { fields = { 'abbr' }, }
-})
-
-cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'buffer' }
-    }
-})
+-- cmp.setup.cmdline(':', {
+--     -- view = { entries = "wildmenu", separator = "|" },
+--     mapping = cmp.mapping.preset.cmdline({
+--         ['<Tab>'] = {
+--             c = function(_)
+--                 if cmp.visible() then
+--                     cmp.confirm({ select = true })
+--                 else
+--                     cmp.complete()
+--                     if #cmp.get_entries() == 1 then
+--                         cmp.confirm({ select = true })
+--                     end
+--                 end
+--             end,
+--         }
+--     }),
+--     sources = {
+--         { name = 'cmdline' },
+--         { name = 'path' }
+--     },
+--     formatting = { fields = { 'abbr' }, }
+-- })
+--
+-- cmp.setup.cmdline({ '/', '?' }, {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = {
+--         { name = 'buffer' }
+--     }
+-- })

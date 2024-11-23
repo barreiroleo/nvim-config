@@ -3,7 +3,7 @@ return {
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
-        "jbyuki/one-small-step-for-vimkind",
+        { "jbyuki/one-small-step-for-vimkind", ft = "lua" },
         {
             "theHamsta/nvim-dap-virtual-text",
             opts = {
