@@ -13,12 +13,12 @@ return {
         opts = { 'md', 'tex', 'json', 'css', 'javascript', 'html', 'python', 'lua' },
         cmd = { "ColorizerAttachToBuffer" }
     },
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        main = 'ibl',
-        event = { 'BufNewFile', 'BufReadPre' },
-        opts = {
-            indent = { char = "┆" },
-        },
-    },
+    -- {
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     main = 'ibl',
+    --     event = { 'BufNewFile', 'BufReadPre' },
+    --     opts = {
+    --         indent = { char = "┆" },
+    --     },
+    -- },
 }

@@ -1,22 +1,16 @@
-local servers_lsp = require("core.lsp.packages").lsp
-local servers_dap = require("core.lsp.packages").dap
-local null_sources = require("core.lsp.packages").null_sources
-
-local format_tools = require("core.lsp.packages").format_tools
-local lint_tools = require("core.lsp.packages").lint_tools
-local tools = vim.iter({ lint_tools, format_tools }):flatten():totable()
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 require("core.lsp.ui")
-
--- Install servers and tools
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-    ensure_installed = servers_lsp,
-    automatic_installation = false,
+    ensure_installed = {
+        "clangd",
+        "lua_ls",
+        "basedpyright",
+    },
+
     handlers = {
         function(server_name)
             require("lspconfig")[server_name].setup {
@@ -58,23 +52,6 @@ require("mason-lspconfig").setup({
         end,
 
         -- Disable Rust from lsp-config cuz Rustacean
-        ["rust_analyzer"] = function(server_name)
-        end
+        ["rust_analyzer"] = function(_) end
     }
-})
-
-require("mason-tool-installer").setup({
-    ensure_installed = tools,
-    auto_update = true,
-})
-
-
-require("mason-nvim-dap").setup({
-    automatic_installation = false,
-    ensure_installed = servers_dap,
-})
-
-require("null-ls").setup({
-    debug = false,
-    sources = null_sources,
 })

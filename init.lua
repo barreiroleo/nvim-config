@@ -9,6 +9,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
     spec = { { import = "plugins" }, },
+    change_detection = { notify = false },
     dev = {
         path = "~/develop/plugins/",
         patterns = { "barreiroleo" },
