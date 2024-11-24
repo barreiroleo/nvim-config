@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         key('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf, desc = "LSP: Go to definition" })
         key('n', 'gD', vim.lsp.buf.declaration, { buffer = args.buf, desc = "LSP: Go to declaration" })
         key('n', 'gt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = "LSP: Go to type definition" })
-        key('n', 'gi', vim.lsp.buf.implementation, { buffer = args.buf, desc = "LSP: List symbol implementations" })
+        key('n', 'gh', vim.lsp.buf.typehierarchy, { buffer = args.buf, desc = "LSP: Go to type hierarchy" })
         key('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = args.buf, desc = "LSP: Symbol signature information" })
         key('n', 'K', vim.lsp.buf.hover, { buffer = args.buf, desc = "LSP: Hover symbol information" })
 

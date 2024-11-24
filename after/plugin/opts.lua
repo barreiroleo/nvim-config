@@ -43,3 +43,8 @@ vim.g.markdown_folding = 1           -- Enable the markdown plugin
 vim.g.markdown_recommended_style = 0 -- expandtab will be set by default
 -- Fix TeX recognized as latex instead of plaintex
 vim.g.tex_flavor = "latex"
+-- Disable health checks for these providers.
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0

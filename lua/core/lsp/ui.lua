@@ -36,10 +36,10 @@ vim.cmd.highlight("WarningMsg guibg=#382b00 guifg=0")
 
 -- Code action hint
 vim.fn.sign_define("lsp-ca", { text = "", texthl = "LineNr", numhl = "LineNr" }) --  
-local function codeaction_indication(bufnr)
-    local params = vim.lsp.util.make_range_params()
-    params.context = { diagnostics = vim.diagnostic.get(bufnr) }
-    vim.lsp.buf_request(bufnr, "textDocument/codeAction", params, function(err, result, context, config)
+local function codeaction_indication(bufnr, offset_encoding)
+    local params = vim.lsp.util.make_range_params(nil, offset_encoding)
+    params["context"] = { diagnostics = vim.diagnostic.get(bufnr) }
+    vim.lsp.buf_request(bufnr, "textDocument/codeAction", params, function(err, result, context)
         if not result or type(result) ~= "table" or vim.tbl_isempty(result) then
             return vim.fn.sign_unplace("lsp-ca")
         else
@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),
-            callback = function(args) codeaction_indication(args.buf) end,
+            callback = function(args) codeaction_indication(args.buf, client.offset_encoding) end,
         })
         vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
             group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),

@@ -41,6 +41,15 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Set commit length
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("SetSpell"),
+    pattern = { "gitcommit" },
+    callback = function()
+        vim.opt_local.colorcolumn = {50,72}
+    end,
+})
+
 -- Disable smartcase for command line
 vim.api.nvim_create_autocmd("CmdlineEnter",
     { group = augroup("NoSmartcaseInCmdline"), pattern = { ":" }, command = "set nosmartcase" })
