@@ -9,7 +9,10 @@ end
 
 return {
     "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        "nvim-treesitter/nvim-treesitter"
+    },
 
     config = function()
         local actions = require("fzf-lua.actions")

@@ -71,12 +71,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserAutocmd_LspAttach", { clear = false }),
     callback = function(args)
         local key = vim.keymap.set
-        key('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf, desc = "LSP: Go to definition" })
         key('n', 'gD', vim.lsp.buf.declaration, { buffer = args.buf, desc = "LSP: Go to declaration" })
+        key('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf, desc = "LSP: Go to definition" })
+        key('n', 'K', vim.lsp.buf.hover, { buffer = args.buf, desc = "LSP: Hover symbol information" })
+        key('n', 'gic', vim.lsp.buf.incoming_calls, { buffer = args.buf, desc = "LSP: Incomming calls" })
+        key('n', 'goc', vim.lsp.buf.outgoing_calls, { buffer = args.buf, desc = "LSP: Outcomming calls" })
         key('n', 'gt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = "LSP: Go to type definition" })
         key('n', 'gh', vim.lsp.buf.typehierarchy, { buffer = args.buf, desc = "LSP: Go to type hierarchy" })
-        key('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = args.buf, desc = "LSP: Symbol signature information" })
-        key('n', 'K', vim.lsp.buf.hover, { buffer = args.buf, desc = "LSP: Hover symbol information" })
 
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then

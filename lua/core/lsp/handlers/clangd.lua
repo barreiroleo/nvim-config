@@ -1,55 +1,40 @@
-local clangd_flags = require("core.lsp.handlers.clangd_flags")
+-- https://github.com/llvm/llvm-project/blob/main/clang-tools-extra/clangd/tool/ClangdMain.cpp
+-- https://github.com/llvm/llvm-project/blob/main/clang-tools-extra/clangd/CodeComplete.h
 
----@param bufnr integer
----@param splitcmd string
-local function switch_source_header(bufnr, splitcmd)
-    bufnr = require 'lspconfig'.util.validate_bufnr(bufnr)
-    local clangd_client = require 'lspconfig'.util.get_active_client_by_name(bufnr, 'clangd')
-    local params = { uri = vim.uri_from_bufnr(bufnr) }
-    if clangd_client then
-        clangd_client.request("textDocument/switchSourceHeader", params, function(err, result)
-            if err then
-                error(tostring(err))
-            end
-            if not result then
-                print("Corresponding file can’t be determined")
-                return
-            end
-            vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
-        end, bufnr)
-    else
-        print 'textDocument/switchSourceHeader is not supported by the clangd server active on the current buffer'
-    end
-end
-
--- NOTE: Clangd help: ~/.local/share/nvim/mason/packages/clangd/clangd_16.0.2/bin/clangd --help-hidden
+-- TEST:
+-- local compilation_flags = {
+--     "--compile-commands-dir='build'",
+--     '--compile_args_from=' .. { "lsp", "filesystem" }, -- TEST: Default filesystem
+--
+--     '--j=8',                                           -- TEST: Unk def   - Number of async workers used by clangd. Background index also uses this many workers.
+--     '--pch-storage=' .. { "disk", "memory" },          -- TEST: Def disk  - Storing PCHs in memory increases memory usages, but may improve performance
+--     '--use-dirty-headers=true',                        -- Use files open in the editor when parsing headers instead of reading from the disk
+-- }
 
 return {
     on_attach = function(_client, bufnr)
-        print("Loading clangd")
-        vim.keymap.set({ "n", "i" }, "<A-o>", function()
-            switch_source_header(0, "edit")
-        end, { desc = "Clang: Switch source/header", buffer = bufnr })
+        vim.keymap.set({ "n", "i" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>",
+            { desc = "Clang: Switch source/header", buffer = bufnr })
     end,
-    commands = {
-        ClangdSwitchSourceHeader = {
-            function() switch_source_header(0, "edit") end,
-            description = "Clang: Open source/header in current buffer",
-        },
-        ClangdSwitchSourceHeaderSplit = {
-            function() switch_source_header(0, "vsplit") end,
-            description = "Clang: Open source/header in a new vsplit",
-        },
-        ClangdPrintFlags = {
-            function() P({ clangd_flags.randomized, clangd_flags.flags }) end,
-            description = "Clang: Print the clangd flags"
-        }
-    },
-    cmd = clangd_flags.flags,
-    capabilities = { offsetEncoding = { "utf-16" } },
+
     init_options = {
         usePlaceholders = true,
         completeUnimported = true,
         clangdFileStatus = true,
-    }
+    },
+
+    cmd = vim.list_extend({ "clangd" }, {
+        "--background-index",
+        "--background-index-priority=background",
+        "--clang-tidy",
+        "--completion-style=detailed",
+        "--function-arg-placeholders",
+        "--header-insertion=never",
+        "--log=error",
+        "--malloc-trim",
+        "--pch-storage=memory",
+
+        "--fallback-style=webkit",
+        '--offset-encoding=utf-16',
+    }),
 }
