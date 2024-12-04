@@ -1,6 +1,7 @@
 -- Shorthands
-vim.keymap.set({ "n", "x", "v" }, "<leader><leader>x", require("core.utils.save_and_exec"),
+vim.keymap.set("n", "<leader><leader>x", require("core.utils.save_and_exec"),
     { desc = "Utils: Save and execute the current file" })
+vim.keymap.set("v", "<leader><leader>x", ":lua<CR>", {desc = "Utils: Run the current lua visual selection"})
 vim.keymap.set("n", "<leader>m", "<cmd>messages<cr>", { desc = "Utils: Open vim messages" })
 
 -- Move cursor support for wrapped lines

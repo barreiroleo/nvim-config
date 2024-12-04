@@ -30,8 +30,8 @@ vim.diagnostic.config {
     update_in_insert = true,
     severity_sort = true,
 }
-vim.cmd.highlight("ErrorMsg guibg=#250003 guifg=0")
-vim.cmd.highlight("WarningMsg guibg=#382b00 guifg=0")
+vim.cmd.highlight("ErrorMsg guibg=#250000 guifg=0")
+vim.cmd.highlight("WarningMsg guibg=#252500 guifg=0")
 
 
 -- Code action hint
@@ -48,24 +48,27 @@ local function codeaction_indication(bufnr, offset_encoding)
     end)
 end
 
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("UserAutocmd_CodeActionSign", { clear = false }),
-    callback = function(lsp_args)
-        local client = vim.lsp.get_client_by_id(lsp_args.data.client_id)
-        -- Check for invalid clients, null-ls, or not code action provider
-        if not client or client.name == "null-ls" or not client.server_capabilities.codeActionProvider then
-            return
-        end
-        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-            group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),
-            callback = function(args) codeaction_indication(args.buf, client.offset_encoding) end,
-        })
-        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-            group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),
-            callback = function() vim.fn.sign_unplace("lsp-ca") end,
-        })
-    end
-})
+-- FIX: Disabling because bad handling. Suppose buffer 1 and 2. Buf 1 attaches to a non-ca-provider
+-- and then buf 2 attaches to a code-action provider. When switch back to buf 1, CursorHold autocmd
+-- fail. Clangd and jq, for instance.
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--     group = vim.api.nvim_create_augroup("UserAutocmd_CodeActionSign", { clear = false }),
+--     callback = function(lsp_args)
+--         local client = vim.lsp.get_client_by_id(lsp_args.data.client_id)
+--         -- Check for invalid clients, null-ls, or not code action provider
+--         if not client or client.name == "null-ls" or not client.server_capabilities.codeActionProvider then
+--             return
+--         end
+--         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+--             group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),
+--             callback = function(args) codeaction_indication(args.buf, client.offset_encoding) end,
+--         })
+--         vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+--             group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),
+--             callback = function() vim.fn.sign_unplace("lsp-ca") end,
+--         })
+--     end
+-- })
 
 
 -- Override floating windows border globally

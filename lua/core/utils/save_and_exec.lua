@@ -4,7 +4,8 @@ local function save_and_exec ()
         lua = 'luafi %',
         vim = 'source %',
         python = '!python %',
-        cpp = 'Make run',
+        cpp = '!clang++ %:p --std=c++23 -o %:p:r',
+        c = '!clang %:p -o %:p:r',
         sh = "!bash %"
     }
 
@@ -19,7 +20,7 @@ local function save_and_exec ()
     vim.notify(string.format('File %s Sourced', current_file_name), vim.log.levels.INFO, { title = 'Core utils' })
 
     -- If has nightly with Lua module loader
-    if vim.loader then
+    if ft == "lua" and vim.loader then
         vim.loader.reset(vim.api.nvim_buf_get_name(0))
     end
     vim.cmd 'silent w'
