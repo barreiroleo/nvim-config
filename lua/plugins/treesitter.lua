@@ -23,7 +23,7 @@ return {
             highlight = {
                 enable = true,
                 disable = function(lang, bufnr)
-                    local max_filesize = 100 * 1024 -- 100 KB
+                    local max_filesize = 600 * 1024 -- 600 KB
                     local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
                     if ok and stats and stats.size > max_filesize then
                         vim.notify("TS highlight disabled: max size", vim.log.levels.WARN)
