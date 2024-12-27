@@ -1,9 +1,10 @@
 return {
     -- Just testing blink from time to time
-    -- { import = "plugins.completion.blink" }
+    -- { import = "plugins.completion.blink" },
 
     {
         'iguanacucumber/magazine.nvim',
+        enabled = true,
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-buffer' },

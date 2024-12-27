@@ -1,46 +1,54 @@
 return {
     {
         'saghen/blink.cmp',
-        lazy = false,
-        enabled = true,
+        event = "InsertEnter",
         dependencies = 'rafamadriz/friendly-snippets',
-        build = 'cargo build --release',
+        -- use a release tag to download pre-built binaries
+        version = '*',
+
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
         opts = {
             keymap = { preset = 'super-tab' },
-            accept = {
-                expand_snippet = vim.snippet.expand,
-                auto_brackets = { enabled = true }
+            appearance = {
+                use_nvim_cmp_as_default = true,
+                nerd_font_variant = 'mono'
             },
-            signature_help = { enabled = true },
-            windows = {
-                autocomplete = {
-                    border = 'rounded',
-                    winbled = 10,
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+            },
+
+            completion = {
+                menu = {
+                    border = "rounded",
                     draw = {
-                        -- for a setup similar to nvim-cmp: https://github.com/Saghen/blink.cmp/pull/245#issuecomment-2463659508
-                        columns = { { "label", "label_description", gap = 2 }, { "kind_icon", "kind", gap = 2 }, { 'source' } },
-                        components = {
-                            source = {
-                                text = function(ctx)
-                                    local MAX_MENU_WIDTH = 04
-                                    local source_name    = ctx.item.source_name or ""
-                                    if vim.api.nvim_strwidth(source_name) > MAX_MENU_WIDTH then
-                                        source_name = vim.fn.strcharpart(source_name, 0, MAX_MENU_WIDTH) ..
-                                            require('core.utils.icons').misc.ellipsis
-                                    end
-                                    return string.format("[%s]", source_name)
-                                end
-                            }
+                        -- std::unique_ptr<class Tp, class Dp>      󱡠  Class    [LSP]
+                        columns = {
+                            { 'label',       'label_description', gap = 1 },
+                            { 'kind_icon',   "kind",              gap = 1 },
+                            { 'source_name', gap = 1 },
                         },
+                        components = {
+                            source_name = {
+                                text = function(ctx)
+                                    if vim.api.nvim_strwidth(ctx.source_name) > 3 then
+                                        return string.format("[%s]", vim.fn.strcharpart(ctx.source_name, 0, 3))
+                                    end
+                                    return string.format("[%s]", ctx.source_name)
+                                end,
+                                highlight = 'BlinkCmpKind'
+                            }
+                        }
                     }
                 },
-                documentation = { border = 'rounded', auto_show = true, },
-                signature_help = { border = 'rounded', scrollbar = true },
-                ghots_text = { enabled = true }
+                documentation = { window = { border = "rounded" }, auto_show = true, auto_show_delay_ms = 100 },
+                ghost_text = { enabled = true },
             },
-            highlight = { se_nvim_cmp_as_default = false, },
-        }
+            signature = { window = { border = "rounded" }, enabled = true }
+        },
+        opts_extend = { "sources.default" },
     },
+
     {
         'neovim/nvim-lspconfig',
         dependencies = { 'saghen/blink.cmp' },
