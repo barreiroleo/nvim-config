@@ -56,8 +56,8 @@ return {
         -- def_opts.inactive_winbar.lualine_a = {'filename'}
         def_opts.sections.lualine_b = { {'branch', fmt = trunc(80, 10, nil, true)}, 'diagnostics' }
         def_opts.sections.lualine_x = { lint_component, lsp_component  }
-        vim.cmd.highlight("lualine_c_normal guifg=#c8c093 guibg=#0d0c0c") -- Statusline
 
         require("lualine").setup(def_opts)
+        vim.cmd("highlight! default link lualine_c_normal StatusLine")
     end,
 }

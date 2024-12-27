@@ -16,13 +16,19 @@ vim.opt.textwidth = 100    -- Broke lines after N when insert
 vim.opt.spelllang = { "en", "es" }
 
 -- Behaviour
-vim.opt.clipboard = "unnamedplus"   -- Sync with system clipboard
-vim.opt.ignorecase = true           -- Search ignore case
+vim.opt.clipboard = "unnamedplus"
+vim.opt.ignorecase = true
 vim.opt.confirm = true              -- Confirm to save changes before exiting modified buffer
-vim.opt.mouse = "a"                 -- Enable mouse mode
-vim.opt.nrformats = "alpha,hex,bin" -- Increment/decrements <C-x>: 0b01 0x1 a1
+vim.opt.mouse = "a"
+vim.opt.nrformats = "alpha,hex,bin" -- Increment/decrements: 0b01 0x1 a1
 vim.opt.updatetime = 200            -- Save swap file and trigger CursorHold
 vim.opt.undofile = true
+
+-- CMD completion
+-- longest -> First wild char tap (Tab press). Insert longest common occurrence.
+-- :full ->   Second tap. Open and populate the wild menu with full completions.
+-- ,full ->   Third tap. Select next/prev completions.
+vim.opt.wildmode = "longest:full,full"
 
 -- Visual
 vim.opt.colorcolumn = "100"

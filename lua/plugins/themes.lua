@@ -24,13 +24,14 @@ return {
         config = function()
             require('kanagawa').setup {
                 compile = true,     -- enable compiling the colorscheme
-                transparent = true, -- do not set background color
+                transparent = false, -- do not set background color
                 background = {
                     dark = 'dragon',
                 },
                 overrides = function(colors)
                     local theme = colors.theme
                     return {
+                        Normal = { bg = "#0C0A0A"},
                         NormalFloat = { bg = "none" },
                         FloatBorder = { bg = "none" },
                         FloatTitle = { bg = "none" },

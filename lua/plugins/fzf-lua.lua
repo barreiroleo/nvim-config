@@ -13,6 +13,7 @@ return {
         "nvim-tree/nvim-web-devicons",
         "nvim-treesitter/nvim-treesitter"
     },
+    cmd = "FzfLua",
 
     config = function()
         local actions = require("fzf-lua.actions")
