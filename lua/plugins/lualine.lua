@@ -58,6 +58,5 @@ return {
         def_opts.sections.lualine_x = { lint_component, lsp_component  }
 
         require("lualine").setup(def_opts)
-        vim.cmd("highlight! default link lualine_c_normal StatusLine")
     end,
 }

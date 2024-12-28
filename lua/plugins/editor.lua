@@ -1,22 +1,5 @@
 return {
     {
-        'lukas-reineke/indent-blankline.nvim',
-        main = 'ibl',
-        event = { 'BufNewFile', 'BufReadPre' },
-        opts = {
-            indent = { char = "┆" },
-        },
-    },
-
-    {
-        'RRethy/vim-illuminate',
-        event = { 'BufNewFile', 'BufReadPre' },
-        config = function ()
-            require("illuminate").configure({ large_file_cutoff = 100000 })
-        end
-    },
-
-    {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         opts = { check_ts = true }

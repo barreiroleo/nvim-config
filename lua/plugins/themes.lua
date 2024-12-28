@@ -23,7 +23,7 @@ return {
         priority = 1000,
         config = function()
             require('kanagawa').setup {
-                compile = true,     -- enable compiling the colorscheme
+                compile = true,      -- enable compiling the colorscheme
                 transparent = false, -- do not set background color
                 background = {
                     dark = 'dragon',
@@ -31,7 +31,7 @@ return {
                 overrides = function(colors)
                     local theme = colors.theme
                     return {
-                        Normal = { bg = "#0C0A0A"},
+                        Normal = { bg = "#181515" },
                         NormalFloat = { bg = "none" },
                         FloatBorder = { bg = "none" },
                         FloatTitle = { bg = "none" },
@@ -49,7 +49,11 @@ return {
                 end,
             }
             vim.cmd.colorscheme("kanagawa")
-            vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
+
+            vim.cmd("highlight! default link Pmenu Normal")
+            vim.cmd("highlight! default link WinSeparator SignColumn")
+            vim.cmd("highlight! TreesitterContextBottom gui=underline guisp=Grey")
+            vim.cmd("highlight! default link lualine_c_normal StatusLine")
         end,
     },
 

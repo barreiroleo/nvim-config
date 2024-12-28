@@ -2,7 +2,8 @@
 vim.keymap.set("n", "<leader><leader>x", require("core.utils.save_and_exec"),
     { desc = "Utils: Save and execute the current file" })
 vim.keymap.set("v", "<leader><leader>x", ":lua<CR>", {desc = "Utils: Run the current lua visual selection"})
-vim.keymap.set("n", "<leader>m", "<cmd>messages<cr>", { desc = "Utils: Open vim messages" })
+-- vim.keymap.set("n", "<leader>m", "<cmd>messages<cr>", { desc = "Utils: Open vim messages" })
+vim.keymap.set("n", "<leader>m", Snacks.notifier.show_history, { desc = "Snacks: Open messages history" })
 
 -- Move cursor support for wrapped lines
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Editor: Cursor move up", expr = true })

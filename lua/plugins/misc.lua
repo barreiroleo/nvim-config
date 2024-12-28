@@ -18,11 +18,6 @@ return {
     },
 
     {
-        "tpope/vim-dispatch",
-        cmd = { "Dispatch", "Make" }
-    },
-
-    {
         "danymat/neogen",
         keys = {
             { "<leader>dg", function() require('neogen').generate() end, mode = { "n", "v" }, desc = "Neogen: Generate docs" }
