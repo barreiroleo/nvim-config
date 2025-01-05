@@ -30,8 +30,11 @@ vim.diagnostic.config {
     update_in_insert = true,
     severity_sort = true,
 }
-vim.cmd.highlight("ErrorMsg guibg=#250000 guifg=0")
-vim.cmd.highlight("WarningMsg guibg=#252500 guifg=0")
+
+if vim.o.background == "dark" then
+    vim.cmd.highlight("ErrorMsg guibg=#250000 guifg=0")
+    vim.cmd.highlight("WarningMsg guibg=#252500 guifg=0")
+end
 
 
 -- Code action hint

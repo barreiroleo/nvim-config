@@ -23,7 +23,7 @@ return {
         priority = 1000,
         config = function()
             require('kanagawa').setup {
-                compile = true,      -- enable compiling the colorscheme
+                compile = false,      -- enable compiling the colorscheme
                 transparent = false, -- do not set background color
                 background = {
                     dark = 'dragon',
