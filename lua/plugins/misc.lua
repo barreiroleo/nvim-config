@@ -12,12 +12,6 @@ return {
     },
 
     {
-        "chentoast/marks.nvim",
-        event = { "BufNewFile", "BufReadPre" },
-        opts = {}
-    },
-
-    {
         "danymat/neogen",
         keys = {
             { "<leader>dg", function() require('neogen').generate() end, mode = { "n", "v" }, desc = "Neogen: Generate docs" }

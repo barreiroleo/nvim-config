@@ -90,12 +90,14 @@ cmp.setup {
                 path     = "Path",
                 nvim_lua = "Vim",
             })
-            local MAX_KIND_WIDTH, MAX_ABBR_WIDTH, MAX_MENU_WIDTH = 05, 25, 30
+            local MAX_KIND_WIDTH, MAX_ABBR_WIDTH, MAX_MENU_WIDTH = 05, 40, 10
 
             -- Add the icon.
             vim_item.kind = (icons.symbol_kinds[vim_item.kind] or icons.symbol_kinds.Text) .. ' ' .. vim_item.kind
-            -- Add the source to description
-            vim_item.menu = string.format("[%s] %s", source[entry.source.name] or "", vim_item.menu or "")
+            -- Add the desription to the item.abbr
+            vim_item.abbr = string.format("%s %s", vim_item.abbr or "", vim_item.menu or "")
+            -- And make the source the new item.menu
+            vim_item.menu = string.format("[%s]", source[entry.source.name] or "")
 
             -- Truncate the kind, label, description.
             if vim.api.nvim_strwidth(vim_item.kind) > MAX_KIND_WIDTH then

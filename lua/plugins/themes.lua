@@ -31,10 +31,11 @@ return {
                 overrides = function(colors)
                     local theme = colors.theme
                     return {
-                        Normal = { bg = "#181515" },
                         NormalFloat = { bg = "none" },
                         FloatBorder = { bg = "none" },
                         FloatTitle = { bg = "none" },
+
+                        CursorLine = { bg = theme.ui.bg_m3 },
 
                         -- Save an hlgroup with dark background and dimmed foreground
                         -- so that you can use it where your still want darker windows.

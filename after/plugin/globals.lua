@@ -1,3 +1,11 @@
+_G.DD = function(...)
+    Snacks.debug.inspect(...)
+end
+_G.BT = function()
+    Snacks.debug.backtrace()
+end
+vim.print = _G.DD
+
 function P(v)
     vim.notify(vim.inspect(v) .. "\n", vim.log.levels.WARN)
     return v

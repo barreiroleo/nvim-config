@@ -1,6 +1,10 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+local ok, mod = pcall(require, "blink.cmp")
+if ok then capabilities = mod.get_lsp_capabilities(capabilities) end
+
+local ok, mod = pcall(require, "cmp_nvim_lsp")
+if ok then capabilities = mod.default_capabilities(capabilities) end
 
 require("core.lsp.ui")
 require("mason").setup()
