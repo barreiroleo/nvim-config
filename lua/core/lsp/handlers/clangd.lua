@@ -1,13 +1,11 @@
 -- https://github.com/llvm/llvm-project/blob/main/clang-tools-extra/clangd/tool/ClangdMain.cpp
 -- https://github.com/llvm/llvm-project/blob/main/clang-tools-extra/clangd/CodeComplete.h
+--
+-- Clang-tidy: Clangd only supports "pure" matchers, not those based on clang static analyzer
+-- https://github.com/clangd/clangd/issues/905
 
 -- TEST:
 -- local compilation_flags = {
---     "--compile-commands-dir='build'",
---     '--compile_args_from=' .. { "lsp", "filesystem" }, -- TEST: Default filesystem
---
---     '--j=8',                                           -- TEST: Unk def   - Number of async workers used by clangd. Background index also uses this many workers.
---     '--pch-storage=' .. { "disk", "memory" },          -- TEST: Def disk  - Storing PCHs in memory increases memory usages, but may improve performance
 --     '--use-dirty-headers=true',                        -- Use files open in the editor when parsing headers instead of reading from the disk
 -- }
 
@@ -21,12 +19,15 @@ return {
         usePlaceholders = true,
         completeUnimported = true,
         clangdFileStatus = true,
+        -- Controls the flags used when no compile command is found. Like compile_flags.txt
+        fallbackFlags = { '-std=c++23', "-stdlib=libc++" }
     },
 
-    cmd = vim.list_extend({ "clangd" }, {
+    cmd = { "clangd",
+        "-j=8",
         "--background-index",
         "--background-index-priority=background",
-        "--clang-tidy",
+        "--clang-tidy", -- Run through nvim-lint. See comment on top.
         "--completion-style=detailed",
         "--function-arg-placeholders",
         "--header-insertion=never",
@@ -36,5 +37,5 @@ return {
 
         "--fallback-style=webkit",
         '--offset-encoding=utf-16',
-    }),
+    },
 }

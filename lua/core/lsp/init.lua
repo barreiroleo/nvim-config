@@ -35,7 +35,8 @@ require("mason-lspconfig").setup({
                 capabilities = capabilities,
                 on_attach = require("core.lsp.handlers.clangd").on_attach,
                 commands = require("core.lsp.handlers.clangd").commands,
-                cmd = require("core.lsp.handlers.clangd").cmd
+                cmd = require("core.lsp.handlers.clangd").cmd,
+                init_options = require("core.lsp.handlers.clangd").init_options,
             }
         end,
 

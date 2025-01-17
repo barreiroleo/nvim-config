@@ -25,7 +25,7 @@ vim.diagnostic.config {
             [vim.diagnostic.severity.WARN] = 'WarningMsg',
         },
     },
-    float = { source = "if_many", border = "rounded" },
+    float = { source = true, border = "rounded" },
     underline = true,
     update_in_insert = true,
     severity_sort = true,
