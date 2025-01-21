@@ -1,5 +1,17 @@
 vim.g.mapleader = ","
 
+-- Start as `PROF=1 vim`
+if vim.env.PROF then
+    local snackspath = vim.fn.stdpath("data") .. "/lazy/snacks.nvim"
+    vim.opt.rtp:append(snackspath)
+    ---@diagnostic disable-next-line: missing-fields
+    require("snacks.profiler").startup({
+        startup = {
+            event = "VimEnter", -- stop profiler on this event
+        },
+    })
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({ "git", "clone", "--filter=blob:none",
@@ -18,9 +30,8 @@ require("lazy").setup({
     performance = {
         rtp = {
             disabled_plugins = {
-                "gzip", "matchit", "matchparen", "tarPlugin", "tutor", "zipPlugin",
+                "gzip", "matchit", "matchparen", "tarPlugin", "tutor", "zipPlugin", "tohtml",
                 -- "netrwPlugin", Needed to download the language spells automatically
-                -- "tohtml", Needed to export lines with :tohtml
             },
         },
     },

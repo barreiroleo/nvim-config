@@ -7,7 +7,6 @@ local ok, mod = pcall(require, "cmp_nvim_lsp")
 if ok then capabilities = mod.default_capabilities(capabilities) end
 
 require("core.lsp.ui")
-require("mason").setup()
 
 require("mason-lspconfig").setup({
     ensure_installed = {

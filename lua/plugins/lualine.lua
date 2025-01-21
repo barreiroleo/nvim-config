@@ -54,7 +54,7 @@ return {
         }
         -- def_opts.winbar.lualine_a = {'filename'}
         -- def_opts.inactive_winbar.lualine_a = {'filename'}
-        def_opts.sections.lualine_b = { {'branch', fmt = trunc(80, 10, nil, true)}, 'diagnostics' }
+        def_opts.sections.lualine_b = { {'branch', fmt = trunc(80, 0, nil, true)}, 'diagnostics' }
         def_opts.sections.lualine_x = { lint_component, lsp_component  }
 
         require("lualine").setup(def_opts)

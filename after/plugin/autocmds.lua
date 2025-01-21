@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("FileType", {
     group = augroup("CloseWith<q>"),
     pattern = {
         -- Core: <cmd>help, <cmd>Man, <cmd>messages, Quickfix, <cmd>InspectTree
-        "help", "man", "notify", "qf", "lspinfo", "query",
+        "help", "man", "notify", "qf", "lspinfo", "query", "fugitive", "DiffviewFileHistory"
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

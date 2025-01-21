@@ -1,13 +1,15 @@
 -- Diagnostic message display. Error lens
 vim.diagnostic.config {
+    virtual_lines = { current_line = true },
     virtual_text = {
         spacing = 4,
         severity = {
             min = vim.diagnostic.severity.WARN,
             max = vim.diagnostic.severity.ERROR
         },
-        source = "if_many",
-        prefix = '■' -- Could be '●', '▎', 'x', '⯀'
+        source = false,
+        prefix = '■', -- Could be '●', '▎', 'x', '⯀'
+        virt_text_pos = "eol_right_align",
     },
     signs = {
         text = {
@@ -31,48 +33,11 @@ vim.diagnostic.config {
     severity_sort = true,
 }
 
+-- Cursor line background on dark themes
 if vim.o.background == "dark" then
     vim.cmd.highlight("ErrorMsg guibg=#250000 guifg=0")
     vim.cmd.highlight("WarningMsg guibg=#252500 guifg=0")
 end
-
-
--- Code action hint
-vim.fn.sign_define("lsp-ca", { text = "", texthl = "LineNr", numhl = "LineNr" }) --  
-local function codeaction_indication(bufnr, offset_encoding)
-    local params = vim.lsp.util.make_range_params(nil, offset_encoding)
-    params["context"] = { diagnostics = vim.diagnostic.get(bufnr) }
-    vim.lsp.buf_request(bufnr, "textDocument/codeAction", params, function(err, result, context)
-        if not result or type(result) ~= "table" or vim.tbl_isempty(result) then
-            return vim.fn.sign_unplace("lsp-ca")
-        else
-            return vim.fn.sign_place(0, "lsp-ca", "lsp-ca", bufnr, { lnum = context.params.range.start.line + 1 })
-        end
-    end)
-end
-
--- FIX: Disabling because bad handling. Suppose buffer 1 and 2. Buf 1 attaches to a non-ca-provider
--- and then buf 2 attaches to a code-action provider. When switch back to buf 1, CursorHold autocmd
--- fail. Clangd and jq, for instance.
--- vim.api.nvim_create_autocmd("LspAttach", {
---     group = vim.api.nvim_create_augroup("UserAutocmd_CodeActionSign", { clear = false }),
---     callback = function(lsp_args)
---         local client = vim.lsp.get_client_by_id(lsp_args.data.client_id)
---         -- Check for invalid clients, null-ls, or not code action provider
---         if not client or client.name == "null-ls" or not client.server_capabilities.codeActionProvider then
---             return
---         end
---         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
---             group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),
---             callback = function(args) codeaction_indication(args.buf, client.offset_encoding) end,
---         })
---         vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
---             group = vim.api.nvim_create_augroup("code_action_sign", { clear = false }),
---             callback = function() vim.fn.sign_unplace("lsp-ca") end,
---         })
---     end
--- })
-
 
 -- Override floating windows border globally
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview

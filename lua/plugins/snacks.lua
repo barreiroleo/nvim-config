@@ -62,9 +62,9 @@ return {
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
             callback = function()
-                _G.DD = function(...) Snacks.debug.inspect(...) end
+                _G.P = function(...) Snacks.debug.inspect(...) end
                 _G.BT = function() Snacks.debug.backtrace() end
-                vim.print = _G.DD
+                vim.print = _G.P
             end
         })
 
@@ -97,27 +97,28 @@ return {
     },
 
     keys = {
-        { "<leader><leader>s", function() Snacks.scratch() end,             desc = "Toggle Scratch Buffer" },
-        { "<leader><leader>S", function() Snacks.scratch.select() end,      desc = "Select Scratch Buffer" },
+        { "<leader><leader>s", function() Snacks.scratch() end,             desc = "Snacks(scratch): Toggle Scratch Buffer" },
+        { "<leader><leader>S", function() Snacks.scratch.select() end,      desc = "Snacks(scratch): Select Scratch Buffer" },
+        { "<leader>E",         function() Snacks.picker.explorer() end,     desc = "Snacks(picker): Toggle explorer" },
 
-        { "<leader>ff",        function() Snacks.picker.files() end,        desc = "Fzf: Find by file name" },
-        { "<leader>fg",        function() Snacks.picker.grep() end,         desc = "Fzf: Find by grep. Usage: SearchThing--*.ft" },
-        { "<leader>fb",        function() Snacks.picker.buffers() end,      desc = "Fzf: Find buffer" },
-        { "<leader>fh",        function() Snacks.picker.help() end,         desc = "Fzf: Find help tag (vimdoc)" },
-        { "<leader>/",         function() Snacks.picker.grep_buffers() end, desc = "Fzf: Find in current buffer by grep" },
-        { "<leader>fm",        function() Snacks.picker.man() end,          desc = "Fzf: Find in manpages" },
-        { "<leader>fvk",       function() Snacks.picker.keymaps() end,      desc = "Fzf: Find keymap" },
+        { "<leader>ff",        function() Snacks.picker.files() end,        desc = "Snacks(picker): Find by file name" },
+        { "<leader>fg",        function() Snacks.picker.grep() end,         desc = "Snacks(picker): Find by grep. Usage: SearchThing--*.ft" },
+        { "<leader>fb",        function() Snacks.picker.buffers() end,      desc = "Snacks(picker): Find buffer" },
+        { "<leader>fh",        function() Snacks.picker.help() end,         desc = "Snacks(picker): Find help tag (vimdoc)" },
+        { "<leader>/",         function() Snacks.picker.grep_buffers() end, desc = "Snacks(picker): Find in current buffer by grep" },
+        { "<leader>fm",        function() Snacks.picker.man() end,          desc = "Snacks(picker): Find in manpages" },
+        { "<leader>fvk",       function() Snacks.picker.keymaps() end,      desc = "Snacks(picker): Find keymap" },
         {
             "<leader>cfg",
             ---@diagnostic disable-next-line: missing-fields
             function() Snacks.picker.grep({ cwd = get_target_path() }) end,
-            desc = "Fzf: Current folder, find grep"
+            desc = "Picker: Current folder, find grep"
         },
         {
             "<leader>cff",
             ---@diagnostic disable-next-line: missing-fields
             function() Snacks.picker.files({ cwd = get_target_path() }) end,
-            desc = "Fzf: Current folder, find files"
+            desc = "Picker: Current folder, find files"
         },
     }
 }
