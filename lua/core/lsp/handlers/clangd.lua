@@ -13,6 +13,7 @@ return {
     on_attach = function(_client, bufnr)
         vim.keymap.set({ "n", "i" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>",
             { desc = "Clang: Switch source/header", buffer = bufnr })
+        vim.treesitter.stop(bufnr)
     end,
 
     init_options = {
@@ -23,8 +24,8 @@ return {
         fallbackFlags = { '-std=c++23', "-stdlib=libc++" }
     },
 
-    cmd = { "clangd",
-        "-j=8",
+    cmd = { "/usr/bin/clangd",
+        "-j=10",
         "--background-index",
         "--background-index-priority=background",
         "--clang-tidy", -- Run through nvim-lint. See comment on top.

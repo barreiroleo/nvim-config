@@ -91,9 +91,12 @@ return {
             animate = { enabled = false },
         },
         notifier = { enabled = true },
+        picker = {
+            enabled = true,
+            sources = { explorer = { layout = { layout = { position = "right" } } } }
+        },
         statuscolumn = { enabled = true },
         words = { enabled = true },
-        picker = { enabled = true }
     },
 
     keys = {
