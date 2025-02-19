@@ -33,12 +33,6 @@ vim.diagnostic.config {
     severity_sort = true,
 }
 
--- Cursor line background on dark themes
-if vim.o.background == "dark" then
-    vim.cmd.highlight("ErrorMsg guibg=#250000 guifg=0")
-    vim.cmd.highlight("WarningMsg guibg=#252500 guifg=0")
-end
-
 -- Override floating windows border globally
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 ---@diagnostic disable-next-line: duplicate-set-field

@@ -10,10 +10,11 @@
 -- }
 
 return {
-    on_attach = function(_client, bufnr)
+    ---@param _ vim.lsp.Client: client
+    ---@param bufnr integer: buffer number
+    on_attach = function(_, bufnr)
         vim.keymap.set({ "n", "i" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>",
             { desc = "Clang: Switch source/header", buffer = bufnr })
-        vim.treesitter.stop(bufnr)
     end,
 
     init_options = {
