@@ -5,7 +5,7 @@ return {
         priority = 1000,
         enabled = true,
         opts = {
-            compile = false,
+            compile = true,
             background = { dark = "dragon" },
             transparent = false,
             dimInactive = true,
@@ -20,8 +20,8 @@ return {
                 }
             end,
         },
-        init = function()
-            vim.cmd.colorscheme("kanagawa")
+        config = function()
+            vim.cmd.colorscheme("kanagawa-dragon")
         end,
     },
 
@@ -49,7 +49,7 @@ return {
     --             }
     --         end,
     --     },
-    --     init = function()
+    --     config = function()
     --         vim.cmd.colorscheme("kanagawa-paper")
     --     end
     -- },
@@ -60,7 +60,7 @@ return {
     --     priority = 1000,
     --     enabled = true,
     --     opts = {},
-    --     init = function()
+    --     config = function()
     --         vim.o.termguicolors = true
     --         vim.g.gruvbox_material_background = "hard"
     --         vim.g.gruvbox_material_foreground = "material"
@@ -84,7 +84,7 @@ return {
     --     priority = 1000,
     --     enabled = true,
     --     opts = {},
-    --     init = function()
+    --     config = function()
     --         vim.o.termguicolors = true
     --         vim.g.everforest_background = "hard"
     --         vim.g.everforest_ui_contrast = "high"
@@ -107,7 +107,7 @@ return {
     --     priority = 1000,
     --     enabled = true,
     --     opts = {},
-    --     init = function()
+    --     config = function()
     --         vim.cmd.colorscheme("jellybeans")
     --     end,
     -- },
@@ -118,7 +118,7 @@ return {
     --     priority = 1000,
     --     enabled = true,
     --     opts = {},
-    --     init = function()
+    --     config = function()
     --         vim.cmd.colorscheme("vscode")
     --     end
     -- },
