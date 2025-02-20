@@ -18,6 +18,7 @@ vim.opt.spelllang = { "en", "es" }
 -- Behaviour
 vim.opt.clipboard = "unnamedplus"
 vim.opt.ignorecase = true
+vim.opt.inccommand = "split"        -- Shows all effects of subtitutions in a preview window
 vim.opt.confirm = true              -- Confirm to save changes before exiting modified buffer
 vim.opt.mouse = "a"
 vim.opt.nrformats = "alpha,hex,bin" -- Increment/decrements: 0b01 0x1 a1

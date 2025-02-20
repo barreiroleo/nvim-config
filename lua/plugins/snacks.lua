@@ -97,20 +97,23 @@ return {
         },
         statuscolumn = { enabled = true },
         words = { enabled = true },
+        terminal = { enabled = true },
     },
 
     keys = {
-        { "<leader><leader>s", function() Snacks.scratch() end,             desc = "Snacks(scratch): Toggle Scratch Buffer" },
-        { "<leader><leader>S", function() Snacks.scratch.select() end,      desc = "Snacks(scratch): Select Scratch Buffer" },
-        { "<leader>E",         function() Snacks.picker.explorer() end,     desc = "Snacks(picker): Toggle explorer" },
+        { "<leader><leader>s", function() Snacks.scratch() end,               desc = "Snacks(scratch): Toggle Scratch Buffer" },
+        { "<leader><leader>S", function() Snacks.scratch.select() end,        desc = "Snacks(scratch): Select Scratch Buffer" },
+        { "<leader><leader>t", function() Snacks.terminal.toggle() end,       desc = "Snacks(terminal): Toggle terminal" },
+        { "<leader>m",         function() Snacks.notifier.show_history() end, desc = "Snacks(notifier): Open messages history" },
 
-        { "<leader>ff",        function() Snacks.picker.files() end,        desc = "Snacks(picker): Find by file name" },
-        { "<leader>fg",        function() Snacks.picker.grep() end,         desc = "Snacks(picker): Find by grep. Usage: SearchThing--*.ft" },
-        { "<leader>fb",        function() Snacks.picker.buffers() end,      desc = "Snacks(picker): Find buffer" },
-        { "<leader>fh",        function() Snacks.picker.help() end,         desc = "Snacks(picker): Find help tag (vimdoc)" },
-        { "<leader>/",         function() Snacks.picker.grep_buffers() end, desc = "Snacks(picker): Find in current buffer by grep" },
-        { "<leader>fm",        function() Snacks.picker.man() end,          desc = "Snacks(picker): Find in manpages" },
-        { "<leader>fvk",       function() Snacks.picker.keymaps() end,      desc = "Snacks(picker): Find keymap" },
+        { "<leader>E",         function() Snacks.picker.explorer() end,       desc = "Snacks(picker): Toggle explorer" },
+        { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find by file name" },
+        { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find by grep. Usage: SearchThing--*.ft" },
+        { "<leader>fb",        function() Snacks.picker.buffers() end,        desc = "Snacks(picker): Find buffer" },
+        { "<leader>fh",        function() Snacks.picker.help() end,           desc = "Snacks(picker): Find help tag (vimdoc)" },
+        { "<leader>/",         function() Snacks.picker.grep_buffers() end,   desc = "Snacks(picker): Find in current buffer by grep" },
+        { "<leader>fm",        function() Snacks.picker.man() end,            desc = "Snacks(picker): Find in manpages" },
+        { "<leader>fvk",       function() Snacks.picker.keymaps() end,        desc = "Snacks(picker): Find keymap" },
         {
             "<leader>cfg",
             ---@diagnostic disable-next-line: missing-fields

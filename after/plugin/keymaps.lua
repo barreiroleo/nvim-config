@@ -1,9 +1,7 @@
 -- Shorthands
 vim.keymap.set("n", "<leader><leader>x", require("core.utils.save_and_exec"),
     { desc = "Utils: Save and execute the current file" })
-vim.keymap.set("v", "<leader><leader>x", ":lua<CR>", {desc = "Utils: Run the current lua visual selection"})
--- vim.keymap.set("n", "<leader>m", "<cmd>messages<cr>", { desc = "Utils: Open vim messages" })
-vim.keymap.set("n", "<leader>m", Snacks.notifier.show_history, { desc = "Snacks: Open messages history" })
+vim.keymap.set("v", "<leader><leader>x", ":lua<CR>", { desc = "Utils: Run the current lua visual selection" })
 
 -- Move cursor support for wrapped lines
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Editor: Cursor move up", expr = true })
@@ -18,8 +16,8 @@ vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Editor: Swap line dow
 vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Editor: Swap line up" })
 
 -- Can indent without exit from visual mode
-vim.keymap.set("v", "<", "<gv", {desc = "Editor: Indent to left"})
-vim.keymap.set("v", ">", ">gv", {desc = "Editor: Indent to right"})
+vim.keymap.set("v", "<", "<gv", { desc = "Editor: Indent to left" })
+vim.keymap.set("v", ">", ">gv", { desc = "Editor: Indent to right" })
 
 -- Breaks the undofile blocks
 vim.keymap.set("i", ",", ",<c-g>u")
@@ -38,19 +36,10 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Term: Enter normal mo
 
 -- Sanner ctrl-L: https://github.com/mhinz/vim-galore#saner-ctrl-l
 -- Clear search, diff update and redraw. Taken from runtime/lua/_editor.lua
-vim.keymap.set("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-    { desc = "Utils: Redraw" })
+vim.keymap.set("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Utils: Redraw" })
 
 -- Buffers
 vim.keymap.set("n", "<leader>bd", "<cmd>bp | bd #<cr>", { desc = "Buffer: Buffer delete" })
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Buffer: Prev buffer" })
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Buffer: Next buffer" })
-
--- Tabs
-vim.keymap.set("n", "<leader><leader><tab>", "<cmd>tabnew<cr>", { desc = "Tabs: New Tab" })
-vim.keymap.set("n", "<leader><tab>w", "<cmd>tabprevious<cr>", { desc = "Tabs: Previous Tab" })
-vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Tabs: Close Tab" })
-vim.keymap.set("n", "<leader><tab>q", "<cmd>tabnext<cr>", { desc = "Tabs: Next Tab" })
 
 -- Resize window using <ctrl> arrow keys
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -1<cr>", { desc = "Window: Decrease window width" })

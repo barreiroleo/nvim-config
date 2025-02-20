@@ -1,10 +1,5 @@
 return {
-    {
-        "nvim-lua/plenary.nvim",
-        keys = {
-            { "<leader><leader>t", "<cmd>w<cr> | <Plug>PlenaryTestFile", desc = "Plenary: Test current file" }
-        }
-    },
+    { "nvim-lua/plenary.nvim", },
 
     {
         'mbbill/undotree',
