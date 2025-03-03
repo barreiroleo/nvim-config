@@ -11,7 +11,7 @@ return {
             require("neotest-gtest").setup({
                 -- TODO: I don't like this global approach. Need to read about neotest projects settings
                 filter_dir = function(name, _rel_path, _root)
-                    if name == "include" or name == "build" or name == "lib" then
+                    if name == "include" or name == "build" then
                         return false
                     end
                     return true

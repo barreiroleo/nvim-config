@@ -107,11 +107,12 @@ return {
         { "<leader>m",         function() Snacks.notifier.show_history() end, desc = "Snacks(notifier): Open messages history" },
 
         { "<leader>E",         function() Snacks.picker.explorer() end,       desc = "Snacks(picker): Toggle explorer" },
-        { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find by file name" },
-        { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find by grep. Usage: SearchThing--*.ft" },
+        { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },
+        { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find content. Usage: SearchThing--*.ft" },
         { "<leader>fb",        function() Snacks.picker.buffers() end,        desc = "Snacks(picker): Find buffer" },
         { "<leader>fh",        function() Snacks.picker.help() end,           desc = "Snacks(picker): Find help tag (vimdoc)" },
-        { "<leader>/",         function() Snacks.picker.grep_buffers() end,   desc = "Snacks(picker): Find in current buffer by grep" },
+        { "<leader>f/",        function() Snacks.picker.grep_buffers() end,   desc = "Snacks(picker): Find in open buffers" },
+        { "<leader>/",         function() Snacks.picker.lines() end,          desc = "Snacks(picker): Find in current buffer" },
         { "<leader>fm",        function() Snacks.picker.man() end,            desc = "Snacks(picker): Find in manpages" },
         { "<leader>fvk",       function() Snacks.picker.keymaps() end,        desc = "Snacks(picker): Find keymap" },
         {
