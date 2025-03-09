@@ -2,7 +2,17 @@ return {
     { import = "plugins.langs.ltex_extra" },
     -- { import = "plugins.langs.markdown" },
     -- { import = "plugins.langs.plantuml" },
-    { import = "plugins.langs.rust" },
+
+    {
+        'mrcjkb/rustaceanvim',
+        ft = { "rust" },
+        -- version = '^4',
+        config = function()
+            vim.g.rustaceanvim = {
+                tools = { code_actions = { ui_select_fallback = true } }
+            }
+        end
+    },
 
     {
         "OXY2DEV/markview.nvim",

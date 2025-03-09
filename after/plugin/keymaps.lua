@@ -38,7 +38,9 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Term: Enter normal mo
 -- Clear search, diff update and redraw. Taken from runtime/lua/_editor.lua
 vim.keymap.set("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Utils: Redraw" })
 
--- Buffers
+-- Buffers and tabs
+vim.keymap.set("n", "]t", "<cmd>tabnext<cr>", { desc = "Tab: Next tab" })
+vim.keymap.set("n", "[t", "<cmd>tabprevious<cr>", { desc = "Tab: Previous tab" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bp | bd #<cr>", { desc = "Buffer: Buffer delete" })
 
 -- Resize window using <ctrl> arrow keys
