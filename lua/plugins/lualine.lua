@@ -25,38 +25,19 @@ local lint_component = {
     icon = "󱉶 "
 }
 
-local lsp_component = {
-    function()
-        local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
-        -- Map server names from clients and filter null-ls
-        local client_names = vim.iter(attached_clients)
-            :map(function(client)
-                local name = client.name:gsub("language.server", "ls")
-                return name
-            end)
-            :filter(function(name) return name ~= "null-ls" end):totable()
-
-        if #client_names == 0 then return "[No Lsp]" end
-        return "[" .. table.concat(client_names, ",") .. "]"
-    end,
-    fmt = trunc(80, 10, nil, true),
-    icon = ' ',
-}
-
 return {
     "nvim-lualine/lualine.nvim",
     event = { "BufNewFile", "BufReadPre", "InsertEnter" },
-    config = function()
-        local def_opts = require("lualine").get_config()
-        def_opts.options = {
+    opts = function()
+        local opts = require("lualine").get_config()
+        opts.options = {
             component_separators = '|',
             section_separators = { left = '', right = '' },
         }
-        -- def_opts.winbar.lualine_a = {'filename'}
-        -- def_opts.inactive_winbar.lualine_a = {'filename'}
-        def_opts.sections.lualine_b = { {'branch', fmt = trunc(80, 0, nil, true)}, 'diagnostics' }
-        def_opts.sections.lualine_x = { lint_component, lsp_component  }
-
-        require("lualine").setup(def_opts)
+        -- opts.winbar.lualine_a = {'filename'}
+        -- opts.inactive_winbar.lualine_a = {'filename'}
+        opts.sections.lualine_b = { {'branch', fmt = trunc(80, 0, nil, true)}, 'diagnostics' }
+        opts.sections.lualine_x = { lint_component, 'lsp_status'  }
+        return opts
     end,
 }
