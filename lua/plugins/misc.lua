@@ -6,12 +6,23 @@ return {
         cmd = "UndotreeShow"
     },
 
+    -- {
+    --     "danymat/neogen",
+    --     keys = {
+    --         { "<leader>dg", function() require('neogen').generate() end, mode = { "n", "v" }, desc = "Neogen: Generate docs" }
+    --     },
+    --     opts = { snippet_engine = "luasnip" }
+    -- },
     {
-        "danymat/neogen",
+        "kkoomen/vim-doge",
+        event = { 'BufNewFile', 'BufReadPre' },
+        build = "<cmd>call doge#install()",
+        config = function ()
+            vim.g.doge_doc_standard_cpp = "doxygen_cpp_comment_slash"
+        end,
         keys = {
-            { "<leader>dg", function() require('neogen').generate() end, mode = { "n", "v" }, desc = "Neogen: Generate docs" }
+            { "<leader>dg", "<cmd>DogeGenerate<cr>", mode = { "n", "v" }, desc = "VimDoge: Generate docs" }
         },
-        opts = { snippet_engine = "luasnip" }
     },
 
     {
