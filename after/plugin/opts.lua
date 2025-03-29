@@ -44,6 +44,7 @@ vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 4
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.winborder = "rounded"
 
 -- Fix markdown indentation settings
 vim.g.markdown_folding = 1           -- Enable the markdown plugin

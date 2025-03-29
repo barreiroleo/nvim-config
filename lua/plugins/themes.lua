@@ -40,30 +40,30 @@ return {
         priority = 1000,
         enabled = true,
         opts = {
-            compile = true,
+            compile = false,
             background = { dark = "dragon" },
             transparent = false,
             dimInactive = true,
             overrides = function(colors)
                 -- Supported keywords are the same for :h nvim_set_hl {val} parameter.
                 return {
-                    ["CursorLine"] = { bg = colors.theme.ui.bg_m3 },
-                    ["Pmenu"] = { link = "Normal" },
-                    ["WinSeparator"] = { link = "SignColumn" },
-                    ["TreesitterContextBottom"] = { underline = true },
-                    ["lualine_c_normal"] = { link = "StatusLine" },
-                    -- NOTE: Related issue: https://github.com/rebelot/kanagawa.nvim/issues/253
-                    -- Override did't take any effect, even with :KanagawaCompile. Had to manually override
-                    -- ["@lsp.type.comment.cpp"] = { link = "Comment" },
+                    CursorLine              = { bg = colors.theme.ui.bg_m3 },
+                    TreesitterContextBottom = { underline = true },
+                    -- Dark completion:
+                    -- https://github.com/rebelot/kanagawa.nvim#dark-completion-popup-menu
+                    Pmenu                   = { link = "Normal" },
+                    PmenuSel                = { link = "CursorLine" },
+                    -- TODO: Send a PR. There's a typo in BlinkCmpLabelDetail.
+                    -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/highlights/plugins.lua#L196
+                    BlinkCmpMenuBorder      = { link = "Pmenu" },
+                    BlinkCmpLabelDetail     = { fg = colors.theme.syn.comment },
                 }
             end,
         },
-        config = function()
-            customizer_hl_functors["kanagawa-dragon"] = function()
-                vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", { default = true, link = "Comment" })
-            end
+        config = function(_, opts)
+            require("kanagawa").setup(opts)
             if COLORSCHEME ~= "kanagawa-dragon" and COLORSCHEME ~= "kanagawa-wave" then return end
-            vim.cmd.colorscheme("kanagawa-dragon")
+            vim.cmd.colorscheme(COLORSCHEME)
         end,
     },
 
