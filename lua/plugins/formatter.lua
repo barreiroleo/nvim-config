@@ -7,6 +7,7 @@ return {
                 rust = { "rustfmt" },
                 json = { "jq" },
                 python = { --[[ "black", ]] "yapf" },
+                sh = { "smfmt " }
             },
             formatters = {
                 jq = { append_args = { "--indent", "4" } }

@@ -1,3 +1,35 @@
+-- deepseek-r1:14b: Knows C++23. Fast processing but responses takes long because the verbosity.
+-- deepseek-coder-v2:16b. Knows until C++20. Fast. Horrible at inline requests and C++ in general.
+-- codegemma:7b-instruct. Knows C++23. Fast. Horrible with codecompanion in general.
+
+-- Knows C++23.
+local phi4 = function()
+    return require("codecompanion.adapters").extend("ollama", {
+        name = "phi4",
+        schema = {
+            model = {
+                default = "phi4:14b"
+            },
+        },
+    })
+end
+
+-- Knows C++. Doesn't work with inline requests.
+-- Result is present in logs but not well formated. Raise a ticket.
+local gemma3 = function()
+    return require("codecompanion.adapters").extend("ollama", {
+        name = "gemma3",
+        schema = {
+            model = {
+                default = "gemma3:12b",
+            },
+            temperature = { default = 1.0 },
+            top_k = { default = 64 },
+            top_p = { default = 0.95 },
+        },
+    })
+end
+
 return {
     "olimorris/codecompanion.nvim",
     event = { 'BufNewFile', 'BufReadPre' },
@@ -10,28 +42,19 @@ return {
     },
     opts = {
         strategies = {
-            chat = { adapter = "ollama", },
-            inline = { adapter = "ollama", },
+            agent = { adapter = "phi4", },
+            chat = { adapter = "gemma3", },
+            inline = { adapter = "phi4", },
         },
         adapters = {
-            ollama = function()
-                return require("codecompanion.adapters").extend("ollama", {
-                    env = {
-                        url = "http://localhost:11434",
-                        -- api_key = "OLLAMA_API_KEY",
-                    },
-                    schema = {
-                        model = {
-                            -- default = "CodeOllamaLlama3.1-8B",
-                            default = "llama3.1:latest",
-                            -- default = "codellama:13b",
-                        },
-                        temperature = {
-                            default = 0.1
-                        },
-                    }
-                })
-            end,
+            phi4 = phi4,
+            gemma3 = gemma3,
         },
-    }
+        -- opts = {
+        --     log_level = "DEBUG"
+        -- }
+    },
+    init = function()
+        require("plugins.snacks_notifiers.codecompanion").setup()
+    end
 }

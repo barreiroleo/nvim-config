@@ -40,7 +40,7 @@ return {
         priority = 1000,
         enabled = true,
         opts = {
-            compile = false,
+            compile = true,
             background = { dark = "dragon" },
             transparent = false,
             dimInactive = true,
@@ -52,7 +52,7 @@ return {
                     -- Dark completion:
                     -- https://github.com/rebelot/kanagawa.nvim#dark-completion-popup-menu
                     Pmenu                   = { link = "Normal" },
-                    PmenuSel                = { link = "CursorLine" },
+                    -- PmenuSel                = { link = "CursorLine" },
                     -- TODO: Send a PR. There's a typo in BlinkCmpLabelDetail.
                     -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/highlights/plugins.lua#L196
                     BlinkCmpMenuBorder      = { link = "Pmenu" },
