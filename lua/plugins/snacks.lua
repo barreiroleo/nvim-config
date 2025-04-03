@@ -48,7 +48,14 @@ return {
         notifier = { enabled = true },
         picker = {
             enabled = true,
-            sources = { explorer = { layout = { layout = { position = "right" } } } }
+            sources = {
+                explorer = {
+                    layout = {
+                        layout = { position = "right" },
+                        preview = { main = true, enabled = false }
+                    }
+                }
+            }
         },
         statuscolumn = { enabled = true },
         words = { enabled = true },
@@ -61,7 +68,7 @@ return {
         { "<leader><leader>t", function() Snacks.terminal.toggle() end,       desc = "Snacks(terminal): Toggle terminal" },
         { "<leader>m",         function() Snacks.notifier.show_history() end, desc = "Snacks(notifier): Open messages history" },
 
-        { "<leader>E",         function() Snacks.picker.explorer() end,       desc = "Snacks(picker): Toggle explorer" },
+        { "<leader>e",         function() Snacks.picker.explorer() end,       desc = "Snacks(picker): Toggle explorer" },
         { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },
         { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find content. Usage: SearchThing--*.ft" },
         { "<leader>fb",        function() Snacks.picker.buffers() end,        desc = "Snacks(picker): Find buffer" },

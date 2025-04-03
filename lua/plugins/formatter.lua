@@ -7,10 +7,20 @@ return {
                 rust = { "rustfmt" },
                 json = { "jq" },
                 python = { --[[ "black", ]] "yapf" },
-                sh = { "smfmt " }
+                sh = { "smfmt " },
+                cmake = { "cmake_format" },
             },
             formatters = {
-                jq = { append_args = { "--indent", "4" } }
+                jq = { append_args = { "--indent", "4" } },
+                -- cmake_format: MasonInstall cmakelang
+                cmake_format = {
+                    append_args = {
+                        "--first-comment-is-literal",
+                        "--line-width", "120",
+                        "--tab-size", "4",
+                        "--bullet-char", "-",
+                    }
+                }
             }
         })
 
