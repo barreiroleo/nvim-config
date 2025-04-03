@@ -8,10 +8,10 @@ return {
 
     -- {
     --     "danymat/neogen",
+    --     opts = { snippet_engine = "nvim" },
     --     keys = {
     --         { "<leader>dg", function() require('neogen').generate() end, mode = { "n", "v" }, desc = "Neogen: Generate docs" }
     --     },
-    --     opts = { snippet_engine = "luasnip" }
     -- },
     {
         "kkoomen/vim-doge",

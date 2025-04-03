@@ -6,7 +6,7 @@ return {
             "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
         },
-        init = function()
+        config = function()
             -- Setup adapters
             require("core.dap.adapters")
             -- Setup dap config by VsCode launch.json file

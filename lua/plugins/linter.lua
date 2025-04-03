@@ -17,7 +17,6 @@ return {
             json = { 'jsonlint' },
             lua = { 'selene' },
             sql = { 'sqlfluff' },
-            cmake = { 'cmakelint' }
         }
 
         -- Extend default args

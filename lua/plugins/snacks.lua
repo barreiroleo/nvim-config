@@ -48,7 +48,14 @@ return {
         notifier = { enabled = true },
         picker = {
             enabled = true,
-            sources = { explorer = { layout = { layout = { position = "right" } } } }
+            sources = {
+                explorer = {
+                    layout = {
+                        layout = { position = "right" },
+                        preview = { main = true, enabled = false }
+                    }
+                }
+            }
         },
         statuscolumn = { enabled = true },
         words = { enabled = true },
