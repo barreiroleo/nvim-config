@@ -1,10 +1,11 @@
 ---@type Theme
-local COLORSCHEME = "kanagawa-dragon" -- gruvbox-material
+local COLORSCHEME = "kanagawa-wave"
 
 ---@alias Theme
----| '"kanagawa-dragon"'    # Kanagawa dark colorscheme
----| '"kanagawa-wave"'      # Kanagawa light colorscheme
----| '"gruvbox-material"'   # Gruvbox material colorscheme
+---| "kanagawa-dragon"   # Kanagawa dark colorscheme
+---| "kanagawa-wave"     # Kanagawa light colorscheme
+---| "gruvbox-material"  # Gruvbox material colorscheme
+---| "jellybeans"        # Jellybeans colorscheme
 
 ---Repository to store functors to customizer highlights according the colorscheme
 ---@type table<Theme, function?>
@@ -108,17 +109,18 @@ return {
         end
     },
 
-    -- NOTE: Doesn't play well with classic setup yet.
-    -- Potentially usable in future or wait for an alternative
-    -- {
-    --     "wtfox/jellybeans.nvim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     enabled = true,
-    --     opts = {},
-    --     config = function()
-    --         if COLORSCHEME ~= "jellybeans" then return end
-    --         vim.cmd.colorscheme("jellybeans")
-    --     end,
-    -- },
+    {
+        "wtfox/jellybeans.nvim",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        opts = {
+            style = "dark",
+        },
+        config = function(_, opts)
+            if COLORSCHEME ~= "jellybeans" then return end
+            require("jellybeans").setup(opts)
+            vim.cmd.colorscheme("jellybeans-muted")
+        end,
+    },
 }

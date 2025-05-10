@@ -4,19 +4,30 @@
 -- Clang-tidy: Clangd only supports "pure" matchers, not those based on clang static analyzer
 -- https://github.com/clangd/clangd/issues/905
 
--- TEST:
 -- local compilation_flags = {
---     '--use-dirty-headers=true',                        -- Use files open in the editor when parsing headers instead of reading from the disk
+--     -- Use files open in the editor when parsing headers instead of reading from the disk
+--     '--use-dirty-headers=true',
 -- }
 
-return {
-    ---@param _ vim.lsp.Client: client
-    ---@param bufnr integer: buffer number
-    on_attach = function(_, bufnr)
-        vim.keymap.set({ "n", "i" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>",
-            { desc = "Clang: Switch source/header", buffer = bufnr })
-    end,
+-- NOTE: Legacy lsp-config
+-- on_attach = function(_client, bufnr)
+--     local commands = require("lspconfig.configs.clangd").commands
+--     vim.keymap.set({ "n", "i" }, "<A-o>", commands.ClangdSwitchSourceHeader[1],
+--         { desc = "Clang: Switch source/header", buffer = bufnr })
+--     vim.keymap.set({ "n", "i" }, "<leader>k", commands.ClangdShowSymbolInfo[1],
+--         { desc = "Clang: Show symbol info", buffer = bufnr })
+-- end,
 
+require("core.lsp.on_attach_fn").on_attach_client_name("clangd",
+    function(autocmd_args, on_attach_args)
+        vim.keymap.set({ "n", "i" }, "<A-o>", "<cmd>LspClangdSwitchSourceHeader<cr>",
+            { desc = "Clang: Switch source/header", buffer = autocmd_args.buf })
+        vim.keymap.set({ "n", "i" }, "<leader>k", "<cmd>LspClangdShowSymbolInfo<cr>",
+            { desc = "Clang: Show symbol info", buffer = autocmd_args.buf })
+    end
+)
+
+return {
     init_options = {
         usePlaceholders = true,
         completeUnimported = true,

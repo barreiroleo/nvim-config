@@ -1,4 +1,4 @@
-local cmd_backsearch = require("core.lsp.handlers.texlab_cmd").cmd_backsearch
+local cmd_backsearch = require("core.lsp.texlab_util").cmd_backsearch
 
 local SearchCmds = {
     -- evincesyn = {
@@ -35,10 +35,13 @@ local BuildCmds = {
     }
 }
 
-return {
-    on_attach = function(_client, _bufnr)
+require("core.lsp.on_attach_fn").on_attach_client_name("texlab",
+    function(autocmd_args, on_attach_args)
         vim.fn.serverstart("/tmp/nvim.latex")
-    end,
+    end
+)
+
+return {
     filetypes = { 'bib', 'plaintex', 'tex' },
     settings = {
         texlab = {
