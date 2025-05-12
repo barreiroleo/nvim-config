@@ -109,18 +109,18 @@ return {
         end
     },
 
-    {
-        "wtfox/jellybeans.nvim",
-        lazy = false,
-        priority = 1000,
-        enabled = true,
-        opts = {
-            style = "dark",
-        },
-        config = function(_, opts)
-            if COLORSCHEME ~= "jellybeans" then return end
-            require("jellybeans").setup(opts)
-            vim.cmd.colorscheme("jellybeans-muted")
-        end,
-    },
+    -- {
+    --     "wtfox/jellybeans.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     enabled = true,
+    --     opts = {
+    --         background = { dark = "jellybeans_mono" },
+    --     },
+    --     config = function(_, opts)
+    --         require("jellybeans").setup(opts)
+    --         if COLORSCHEME ~= "jellybeans" then return end
+    --         vim.cmd.colorscheme("jellybeans-mono")
+    --     end,
+    -- },
 }

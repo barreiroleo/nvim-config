@@ -1,8 +1,21 @@
--- deepseek-r1:14b: Knows C++23. Fast processing but responses takes long because the verbosity.
--- deepseek-coder-v2:16b. Knows until C++20. Fast. Horrible at inline requests and C++ in general.
--- codegemma:7b-instruct. Knows C++23. Fast. Horrible with codecompanion in general.
+--[[
 
--- Knows C++23.
+| Model Name            | Cutoff    | C++23 | Speed          | Other Notes                                            | CodeCompanion bugs          |
+|-----------------------|-----------|-------|----------------| -------------------------------------------------------|-----------------------------|
+| deepseek-r1:14b       | ?         | Yes   | Fast preocess  | Reasoning verbosity makes responses too long and slow. |                             |
+| deepseek-coder-v2     | ?         | C++20 | Fast           | Horrible in general adn at C++.                        | Horrible at inline          |
+| codegemma:7b-instruct | ?         | Yes   | Fast           |                                                        | Horrible in general         |
+| mistral-small:22b     | 2023 Oct. | Yes   | Slow / precise | Tends to cite bibliography.                            |                             |
+| mistral-nemo:12b      | 2021?     | Draft | Fast           | Tends to hallucinate. Still better than mistral:7b     |                             |
+| codestral:22b         | 2021      | No    | Slow           |                                                        |                             |
+| => qwen3:8b           | 2024 Oct. | Yes   | Fast / precise | Tends to verbosity.                                    |                             |
+| exaone-deep:7.8b      | 2024 Abr. | Yes   | Fast / precise | Tends to concise. I prefeer qwen3.                     |                             |
+| gemma3:12b            | 2024 Mar. | Yes   | Slow (super)   | Good as code reviewer/summaries. Similar to phi4.      | Format output breaks inline |
+| => phi4:14b           | 2023 Oct. | Yes   | Fast / quality |                                                        |                             |
+| cogito:14b            | 2023 Apr. | Yes   | Fast / quality | Feels good. Need to compare whit phi4                  |                             |
+
+--]]
+
 local phi4 = function()
     return require("codecompanion.adapters").extend("ollama", {
         name = "phi4",
@@ -14,8 +27,6 @@ local phi4 = function()
     })
 end
 
--- Knows C++. Doesn't work with inline requests.
--- Result is present in logs but not well formated. Raise a ticket.
 local gemma3 = function()
     return require("codecompanion.adapters").extend("ollama", {
         name = "gemma3",
@@ -26,6 +37,17 @@ local gemma3 = function()
             temperature = { default = 1.0 },
             top_k = { default = 64 },
             top_p = { default = 0.95 },
+        },
+    })
+end
+
+local qwen3 = function()
+    return require("codecompanion.adapters").extend("ollama", {
+        name = "qwen3",
+        schema = {
+            model = {
+                default = "qwen3:8b"
+            },
         },
     })
 end
@@ -59,12 +81,14 @@ return {
     opts = {
         strategies = {
             agent = { adapter = "phi4", },
-            chat = { adapter = "gemma3", },
+            -- chat = { adapter = "gemma3", },
+            chat = { adapter = "qwen3", },
             inline = { adapter = "phi4", },
         },
         adapters = {
             phi4 = phi4,
             gemma3 = gemma3,
+            qwen3 = qwen3,
         },
 
         prompt_library = {
