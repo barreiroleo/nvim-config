@@ -6,12 +6,6 @@ return {
     },
 
     {
-        'folke/trouble.nvim',
-        cmd = "Trouble",
-        opts = {},
-    },
-
-    {
         "folke/todo-comments.nvim",
         event = { "BufNewFile", "BufReadPre" },
         dependencies = "nvim-lua/plenary.nvim",

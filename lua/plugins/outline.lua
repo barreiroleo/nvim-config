@@ -1,19 +1,41 @@
-local function OpenOutline()
-    local outline = require("outline")
-    if not outline.is_open() then
-        outline.open()
-    else
-        outline.focus_toggle()
-    end
-end
-
 return {
-    'hedyhli/outline.nvim',
-    cmd = 'Outline',
-    keys = {
-        { '<leader>cs', OpenOutline, desc = 'Outline: Symbols LSP navigation' }
+    {
+        'folke/trouble.nvim',
+        cmd = "Trouble",
+        opts = {},
     },
-    opts = {
-        preview_window = { live = true },
-    }
+
+    {
+        'hedyhli/outline.nvim',
+        cmd = 'Outline',
+        keys = {
+            { '<leader>cs', function() require("outline").toggle() end, desc = 'Outline: Symbols LSP navigation' }
+        },
+        opts = {
+            preview_window = { live = true },
+        }
+    },
+
+    {
+        'ldelossa/litee.nvim',
+        opts = {
+            notify = { enabled = false },
+            panel = {
+                orientation = "bottom",
+                panel_size = 10,
+            },
+        },
+        config = function(_, opts) require('litee.lib').setup(opts) end
+    },
+
+    {
+        'ldelossa/litee-calltree.nvim',
+        dependencies = 'ldelossa/litee.nvim',
+        event = "LspAttach",
+        opts = {
+            on_open = "panel",
+            map_resize_keys = false,
+        },
+        config = function(_, opts) require('litee.calltree').setup(opts) end,
+    },
 }
