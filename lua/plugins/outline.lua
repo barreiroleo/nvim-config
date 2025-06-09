@@ -17,25 +17,15 @@ return {
     },
 
     {
-        'ldelossa/litee.nvim',
-        opts = {
-            notify = { enabled = false },
-            panel = {
-                orientation = "bottom",
-                panel_size = 10,
-            },
-        },
-        config = function(_, opts) require('litee.lib').setup(opts) end
+        "barreiroleo/hierarchy.nvim",
+        cmd = "FunctionReferences",
+        opts = {}
     },
 
     {
-        'ldelossa/litee-calltree.nvim',
-        dependencies = 'ldelossa/litee.nvim',
-        event = "LspAttach",
-        opts = {
-            on_open = "panel",
-            map_resize_keys = false,
-        },
-        config = function(_, opts) require('litee.calltree').setup(opts) end,
+        "barreiroleo/callgraph.nvim",
+        lazy = true,
+        dev = true,
+        opts = {}
     },
 }

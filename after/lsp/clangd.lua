@@ -36,7 +36,9 @@ return {
         fallbackFlags = { '-std=c++23', "-stdlib=libc++" }
     },
 
-    cmd = { "/usr/bin/clangd",
+    cmd = {
+        vim.fn.stdpath("data") .. "/mason/bin/clangd",
+        -- "/usr/bin/clangd",
         "-j=10",
         "--background-index",
         "--background-index-priority=background",

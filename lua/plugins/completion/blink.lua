@@ -21,32 +21,53 @@ local custom_menu = {
 }
 
 return {
-    'saghen/blink.cmp',
-    event = "InsertEnter",
-    dependencies = 'rafamadriz/friendly-snippets',
-    version = '1.*', -- Release tag to download pre-built binaries
+    {
+        "fang2hou/blink-copilot",
+        lazy = true,
+        opts = {
+            max_completions = 1,
+            max_attempts = 2,
+        }
+    },
 
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-        cmdline = { enabled = false },
-        keymap = { preset = 'super-tab', },
-
-        completion = {
-            menu = custom_menu,
-            documentation = { auto_show = true, auto_show_delay_ms = 500 },
-            ghost_text = { enabled = true },
+    {
+        'saghen/blink.cmp',
+        event = "InsertEnter",
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+            "fang2hou/blink-copilot"
         },
+        version = '1.*', -- Release tag to download pre-built binaries
 
-        signature = { enabled = true },
-        -- snippets = { preset = "luasnip" },
-        sources = {
-            default = { "lazydev", "lsp", "path", "snippets", "buffer", "omni" },
-            providers = {
-                lazydev = {
-                    name = "Lazy",
-                    module = "lazydev.integrations.blink",
-                    score_offset = 100,
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            cmdline = { enabled = false },
+            keymap = { preset = 'super-tab', },
+            fuzzy = { implementation = "lua" },
+
+            completion = {
+                menu = custom_menu,
+                documentation = { auto_show = true, auto_show_delay_ms = 500 },
+                ghost_text = { enabled = true },
+            },
+
+            signature = { enabled = true },
+            -- snippets = { preset = "luasnip" },
+            sources = {
+                default = { "lazydev", "lsp", "path", "snippets", "buffer", "omni", "copilot" },
+                providers = {
+                    lazydev = {
+                        name = "Lazy",
+                        module = "lazydev.integrations.blink",
+                        score_offset = 100,
+                    },
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-copilot",
+                        score_offset = -1,
+                        async = true,
+                    },
                 },
             },
         },

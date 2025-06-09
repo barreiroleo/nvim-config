@@ -1,5 +1,5 @@
 ---@type Theme
-local COLORSCHEME = "kanagawa-wave"
+local COLORSCHEME = "kanagawa-dragon"
 
 ---@alias Theme
 ---| "kanagawa-dragon"   # Kanagawa dark colorscheme
@@ -68,34 +68,34 @@ return {
         end,
     },
 
-    {
-        "sainnhe/gruvbox-material",
-        lazy = false,
-        priority = 1000,
-        enabled = true,
-        opts = {},
-        config = function()
-            vim.o.termguicolors = true
-            vim.g.gruvbox_material_background = "hard"
-            vim.g.gruvbox_material_foreground = "material"
-            vim.g.gruvbox_material_better_performance = 1
-            vim.g.gruvbox_material_enable_bold = true
-            vim.g.gruvbox_material_enable_italic = true
-            vim.g.gruvbox_material_transparent_background = false
-
-            customizer_hl_functors["gruvbox-material"] = function()
-                vim.cmd.highlight("LspInlayHint cterm=italic,underline guifg=#686868")
-                vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
-                vim.cmd.highlight("Normal guifg=#c5c9c5 guibg=#181616")
-                vim.cmd.highlight("NormalNC guifg=#c8c093 guibg=#12120f")
-                vim.cmd.highlight("NormalFloat guifg=#c8c093 guibg=#0d0c0c")
-                vim.cmd.highlight("FloatBorder guifg=#54546d guibg=#0d0c0c")
-            end
-
-            if COLORSCHEME ~= "gruvbox-material" then return end
-            vim.cmd.colorscheme("gruvbox-material")
-        end
-    },
+    -- {
+    --     "sainnhe/gruvbox-material",
+    --     lazy = false,
+    --     priority = 1000,
+    --     enabled = true,
+    --     opts = {},
+    --     config = function()
+    --         vim.o.termguicolors = true
+    --         vim.g.gruvbox_material_background = "hard"
+    --         vim.g.gruvbox_material_foreground = "material"
+    --         vim.g.gruvbox_material_better_performance = 1
+    --         vim.g.gruvbox_material_enable_bold = true
+    --         vim.g.gruvbox_material_enable_italic = true
+    --         vim.g.gruvbox_material_transparent_background = false
+    --
+    --         customizer_hl_functors["gruvbox-material"] = function()
+    --             vim.cmd.highlight("LspInlayHint cterm=italic,underline guifg=#686868")
+    --             vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
+    --             vim.cmd.highlight("Normal guifg=#c5c9c5 guibg=#181616")
+    --             vim.cmd.highlight("NormalNC guifg=#c8c093 guibg=#12120f")
+    --             vim.cmd.highlight("NormalFloat guifg=#c8c093 guibg=#0d0c0c")
+    --             vim.cmd.highlight("FloatBorder guifg=#54546d guibg=#0d0c0c")
+    --         end
+    --
+    --         if COLORSCHEME ~= "gruvbox-material" then return end
+    --         vim.cmd.colorscheme("gruvbox-material")
+    --     end
+    -- },
 
     {
         "Mofiqul/vscode.nvim",
