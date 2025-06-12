@@ -37,8 +37,8 @@ return {
     },
 
     cmd = {
-        vim.fn.stdpath("data") .. "/mason/bin/clangd",
-        -- "/usr/bin/clangd",
+        -- vim.fn.stdpath("data") .. "/mason/bin/clangd",
+        "/usr/bin/clangd",
         "-j=10",
         "--background-index",
         "--background-index-priority=background",
