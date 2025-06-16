@@ -1,6 +1,6 @@
 -- Diagnostic message display. Error lens
 vim.diagnostic.config {
-    virtual_lines = { current_line = true },
+    -- virtual_lines = { current_line = true },
     virtual_text = {
         spacing = 4,
         severity = {

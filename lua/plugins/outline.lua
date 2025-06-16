@@ -24,11 +24,12 @@ return {
 
     {
         "barreiroleo/callgraph.nvim",
+        ---@type callgraph.Opts
         opts = {
             run = {
                 direction = "out",
                 depth_limit_in = 10,
-                depth_limit_out = 3,
+                depth_limit_out = 5,
                 filter_location = { "/usr/include/c", "/usr/include/c++" },
                 -- filter_location = function(uri)
                 --     for _, filter in ipairs({ "/usr/include/c", "/usr/include/c++" }) do
@@ -45,9 +46,14 @@ return {
                 file_path = vim.fs.normalize("/tmp/callgraph.dot"),
                 graph_name = "CallGraph",
                 direction = "LR", -- TB, LR, BT, RL
+            },
+            _dev = {
+                dump_tree = false,
+                dump_locations = false,
             }
         },
         keys = {
+            { '<leader>ca', function() require("callgraph").add_location() end,             desc = 'Callgraph: add location to analyze' },
             { '<leader>ci', function() require("callgraph").run({ direction = "in" }) end,  desc = 'Callgraph: incoming calls' },
             { '<leader>co', function() require("callgraph").run({ direction = "out" }) end, desc = 'Callgraph: outgoing calls' },
             { '<leader>cm', function() require("callgraph").run({ direction = "mix" }) end, desc = 'Callgraph: incoming/outgoing calls' },

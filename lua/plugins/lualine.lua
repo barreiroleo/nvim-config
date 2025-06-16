@@ -37,7 +37,7 @@ return {
         -- opts.winbar.lualine_a = {'filename'}
         -- opts.inactive_winbar.lualine_a = {'filename'}
         opts.sections.lualine_b = { {'branch', fmt = trunc(80, 0, nil, true)}, 'diagnostics' }
-        opts.sections.lualine_x = { lint_component, 'lsp_status'  }
+        opts.sections.lualine_x = { Snacks.profiler.status(), lint_component, 'lsp_status' }
         return opts
     end,
 }

@@ -4,8 +4,11 @@ return {
     build = ':TSUpdate',
     main = "nvim-treesitter.configs", -- Sets main module to use for opts
     dependencies = {
-        'nvim-treesitter/nvim-treesitter-context',
-        opts = { multiline_threshold = 1, } -- Avoid showing '{' only lines
+        { "nvim-treesitter/nvim-treesitter-textobjects" },
+        {
+            'nvim-treesitter/nvim-treesitter-context',
+            opts = { multiline_threshold = 1, } -- Avoid showing '{' only lines
+        }
     },
     opts = {
         ensure_installed = {
@@ -31,5 +34,25 @@ return {
             additional_vim_regex_highlighting = { 'latex' },
         },
         indent = { enable = true }, -- Indentation based on treesitter for the = operator.
+        textobjects = {
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@class.outer",
+                    ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                    ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
+                },
+            },
+            move = {
+                enable = true,
+                goto_next_start = { ["]f"] = "@function.outer" },     -- ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+                goto_next_end = { ["]F"] = "@function.outer" },       -- ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+                goto_previous_start = { ["[f"] = "@function.outer" }, -- ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+                goto_previous_end = { ["[F"] = "@function.outer" },   -- ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+            },
+        },
     }
 }
