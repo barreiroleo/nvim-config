@@ -53,4 +53,23 @@ return {
             },
         },
     },
+
+    -- TODO(lbarreiro): Fork it or wait until is unified with the lsp bundled by copilot.lua
+    -- {
+    --     "copilotlsp-nvim/copilot-lsp",
+    --     opts = {},
+    --     init = function()
+    --         vim.g.copilot_nes_debounce = 500
+    --         vim.lsp.enable("copilot_ls")
+    --
+    --         vim.keymap.set("n", "<leader><tab>", function()
+    --             local nes = require("copilot-lsp.nes")
+    --             local _ = nes.walk_cursor_start_edit() or (nes.apply_pending_nes() and nes.walk_cursor_end_edit())
+    --         end, { desc = "Copilot: Apply NES suggestion" })
+    --
+    --         vim.keymap.set("n", "<leader><esc>", function()
+    --             require("copilot-lsp.nes").clear()
+    --         end, { desc = "Copilot: Clear NES suggestion" })
+    --     end,
+    -- },
 }

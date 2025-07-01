@@ -80,10 +80,10 @@ return {
     },
     opts = {
         strategies = {
-            agent = { adapter = "phi4", },
-            -- chat = { adapter = "gemma3", },
-            chat = { adapter = "qwen3", },
-            inline = { adapter = "phi4", },
+            -- For local use: agent=phi4, chat=gemma3/qwen3, inline=phi4
+            agent = { adapter = "copilot", },
+            chat = { adapter = "copilot", },
+            inline = { adapter = "copilot", },
         },
         adapters = {
             phi4 = phi4,

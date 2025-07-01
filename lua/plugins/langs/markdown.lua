@@ -24,5 +24,10 @@ return {
         cmd = "LivePreview",
         ft = "markdown",
         opts = {},
-   }
+    },
+
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+    },
 }

@@ -18,12 +18,35 @@
 --         { desc = "Clang: Show symbol info", buffer = bufnr })
 -- end,
 
+--- https://clangd.llvm.org/extensions.html#file-status
+local function force_diagnostics(bufnr)
+    -- Clangd diagnostics sometimes get behind. This sends a textDocument/didChange notify with an extra arg.
+    local method_name = "textDocument/didChange"
+    local client = vim.lsp.get_clients({ bufnr = bufnr, name = "clangd" })[1]
+    if not client then
+        vim.notify("No clangd client found for buffer " .. bufnr, vim.log.levels.WARN)
+        return
+    end
+
+    local params = vim.lsp.util.make_text_document_params(bufnr)
+    params["wantDiagnostics"] = true
+
+    local ok = client:notify(method_name, params)
+    if not ok then
+        vim.notify("Failed to send " .. method_name .. " notification to clangd", vim.log.levels.ERROR)
+    end
+end
+
 require("core.lsp.on_attach_fn").on_attach_client_name("clangd",
     function(autocmd_args, on_attach_args)
         vim.keymap.set({ "n", "i" }, "<A-o>", "<cmd>LspClangdSwitchSourceHeader<cr>",
             { desc = "Clang: Switch source/header", buffer = autocmd_args.buf })
         vim.keymap.set({ "n", "i" }, "<leader>k", "<cmd>LspClangdShowSymbolInfo<cr>",
             { desc = "Clang: Show symbol info", buffer = autocmd_args.buf })
+
+        vim.api.nvim_buf_create_user_command(autocmd_args.buf, "LspClangdForceDiagnostics", function()
+            force_diagnostics(autocmd_args.buf)
+        end, { desc = "Force diagnostics generation for clangd" })
     end
 )
 

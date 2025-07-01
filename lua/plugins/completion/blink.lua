@@ -20,13 +20,32 @@ local custom_menu = {
     }
 }
 
+local copilot_tab_nes = {
+    function(cmp)
+        if vim.b[vim.api.nvim_get_current_buf()].nes_state then
+            cmp.hide()
+            return (
+                require("copilot-lsp.nes").apply_pending_nes()
+                and require("copilot-lsp.nes").walk_cursor_end_edit()
+            )
+        end
+        if cmp.snippet_active() then
+            return cmp.accept()
+        else
+            return cmp.select_and_accept()
+        end
+    end,
+    "snippet_forward",
+    "fallback",
+}
+
 return {
     {
         "fang2hou/blink-copilot",
         lazy = true,
         opts = {
-            max_completions = 1,
-            max_attempts = 2,
+            max_completions = 3,
+            max_attempts = 4,
         }
     },
 
@@ -37,13 +56,16 @@ return {
             'rafamadriz/friendly-snippets',
             "fang2hou/blink-copilot"
         },
-        version = '1.*', -- Release tag to download pre-built binaries
+        -- version = '1.*', -- Release tag to download pre-built binaries
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
             cmdline = { enabled = false },
-            keymap = { preset = 'super-tab', },
+            keymap = {
+                preset = 'super-tab',
+                -- ["<Tab>"] = copilot_tab_nes,
+            },
             fuzzy = { implementation = "lua" },
 
             completion = {
