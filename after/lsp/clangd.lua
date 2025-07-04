@@ -38,15 +38,18 @@ local function force_diagnostics(bufnr)
 end
 
 require("core.lsp.on_attach_fn").on_attach_client_name("clangd",
-    function(autocmd_args, on_attach_args)
+    function(client, lsp_attach_args, callback_args)
         vim.keymap.set({ "n", "i" }, "<A-o>", "<cmd>LspClangdSwitchSourceHeader<cr>",
-            { desc = "Clang: Switch source/header", buffer = autocmd_args.buf })
+            { desc = "Clang: Switch source/header", buffer = lsp_attach_args.buf })
         vim.keymap.set({ "n", "i" }, "<leader>k", "<cmd>LspClangdShowSymbolInfo<cr>",
-            { desc = "Clang: Show symbol info", buffer = autocmd_args.buf })
+            { desc = "Clang: Show symbol info", buffer = lsp_attach_args.buf })
 
-        vim.api.nvim_buf_create_user_command(autocmd_args.buf, "LspClangdForceDiagnostics", function()
-            force_diagnostics(autocmd_args.buf)
+        vim.api.nvim_buf_create_user_command(lsp_attach_args.buf, "LspClangdForceDiagnostics", function()
+            force_diagnostics(lsp_attach_args.buf)
         end, { desc = "Force diagnostics generation for clangd" })
+
+        -- Disable semantic tokens for clangd
+        -- client.server_capabilities.semanticTokensProvider = nil
     end
 )
 
