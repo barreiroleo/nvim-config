@@ -39,6 +39,9 @@ return {
     end,
 
     opts = {
+        styles = {
+            zen = { width = 150 }
+        },
         bigfile = { enabled = true },
         indent = {
             enabled = true,
@@ -60,6 +63,10 @@ return {
         statuscolumn = { enabled = true },
         words = { enabled = true },
         terminal = { enabled = true },
+        zen = {
+            enabled = true,
+            win = { style = "zen" }
+        }
     },
 
     keys = {
@@ -67,6 +74,7 @@ return {
         { "<leader><leader>S", function() Snacks.scratch.select() end,        desc = "Snacks(scratch): Select Scratch Buffer" },
         { "<leader><leader>t", function() Snacks.terminal.toggle() end,       desc = "Snacks(terminal): Toggle terminal" },
         { "<leader>m",         function() Snacks.notifier.show_history() end, desc = "Snacks(notifier): Open messages history" },
+        { "<leader>z",         function() Snacks.zen.zen() end,               desc = "Snacks(zen): Toogle Zen mode" },
 
         { "<leader>E",         function() Snacks.picker.explorer() end,       desc = "Snacks(picker): Toggle explorer" },
         { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },

@@ -1,11 +1,16 @@
 ---@type Theme
-local COLORSCHEME = "kanagawa-dragon"
+local COLORSCHEME = "vscode"
 
 ---@alias Theme
----| "kanagawa-dragon"   # Kanagawa dark colorscheme
----| "kanagawa-wave"     # Kanagawa light colorscheme
----| "gruvbox-material"  # Gruvbox material colorscheme
----| "jellybeans"        # Jellybeans colorscheme
+---| "kanagawa-dragon"
+---| "kanagawa-wave"
+---| "vscode"
+---| "kanagawa-paper"
+---| "gruvbox-material"
+---| "jellybeans-muted"
+---| "onedark"
+---| "tokyonight-night"
+---| "catpuccin-mocha"
 
 ---Repository to store functors to customizer highlights according the colorscheme
 ---@type table<Theme, function?>
@@ -68,13 +73,41 @@ return {
         end,
     },
 
+    {
+        "Mofiqul/vscode.nvim",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        opts = {},
+        config = function(_, opts)
+            require("vscode").setup(opts)
+            if COLORSCHEME ~= "vscode" then return end
+            vim.cmd.colorscheme(COLORSCHEME)
+        end
+    },
+
+    -- {
+    --     "thesimonho/kanagawa-paper.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     enabled = true,
+    --     opts = {
+    --         cache = true,
+    --     },
+    --     config = function(_, opts)
+    --         require("kanagawa-paper").setup(opts)
+    --         if COLORSCHEME ~= "kanagawa-paper" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end,
+    -- },
+
     -- {
     --     "sainnhe/gruvbox-material",
     --     lazy = false,
     --     priority = 1000,
     --     enabled = true,
     --     opts = {},
-    --     config = function()
+    --     config = function(_, opts)
     --         vim.o.termguicolors = true
     --         vim.g.gruvbox_material_background = "hard"
     --         vim.g.gruvbox_material_foreground = "material"
@@ -93,34 +126,60 @@ return {
     --         end
     --
     --         if COLORSCHEME ~= "gruvbox-material" then return end
-    --         vim.cmd.colorscheme("gruvbox-material")
+    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end
     -- },
-
-    {
-        "Mofiqul/vscode.nvim",
-        lazy = false,
-        priority = 1000,
-        enabled = true,
-        opts = {},
-        config = function()
-            if COLORSCHEME ~= "vscode" then return end
-            vim.cmd.colorscheme("vscode")
-        end
-    },
 
     -- {
     --     "wtfox/jellybeans.nvim",
     --     lazy = false,
     --     priority = 1000,
     --     enabled = true,
-    --     opts = {
-    --         background = { dark = "jellybeans_mono" },
-    --     },
+    --     opts = {},
     --     config = function(_, opts)
     --         require("jellybeans").setup(opts)
-    --         if COLORSCHEME ~= "jellybeans" then return end
-    --         vim.cmd.colorscheme("jellybeans-mono")
+    --         if COLORSCHEME ~= "jellybeans-muted" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end,
+    -- },
+
+    -- {
+    --     "olimorris/onedarkpro.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     enabled = true,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require("onedarkpro").setup(opts)
+    --         if COLORSCHEME ~= "onedark" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end,
+    -- },
+
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     enabled = true,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require("tokyonight").setup(opts)
+    --         if COLORSCHEME ~= "tokyonight-night" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end,
+    -- },
+
+    -- {
+    --     "catppuccin/nvim",
+    --     name = "catppuccin",
+    --     lazy = false,
+    --     priority = 1000,
+    --     enabled = true,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require("catppuccin").setup(opts)
+    --         if COLORSCHEME ~= "catpuccin-mocha" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end,
     -- },
 }
