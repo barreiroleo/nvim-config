@@ -176,7 +176,8 @@ return {
     --     priority = 1000,
     --     enabled = true,
     --     opts = {},
-    --     config = function(_, opts)
+    --     config = function(_, _opts)
+    --         local opts = require("plugins.opts.themes-catpuccin-gruvbox-hl")
     --         require("catppuccin").setup(opts)
     --         if COLORSCHEME ~= "catpuccin-mocha" then return end
     --         vim.cmd.colorscheme(COLORSCHEME)

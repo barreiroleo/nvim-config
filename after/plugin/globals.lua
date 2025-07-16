@@ -17,6 +17,7 @@ function RR(...)
     return require(...)
 end
 
+require("core.utils.diff_inline").setup()
 require("core.utils.highlight_repeats")
 require("core.utils.search_selection")
 require("core.utils.less")
