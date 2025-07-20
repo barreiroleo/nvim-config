@@ -9,6 +9,8 @@ return {
                 python = { --[[ "black", ]] "yapf" },
                 sh = { "shfmt" },
                 cmake = { "cmake_format" },
+                markdown = { "prettier" },
+                yaml = { "prettier" }
             },
             formatters = {
                 jq = { append_args = { "--indent", "4" } },
