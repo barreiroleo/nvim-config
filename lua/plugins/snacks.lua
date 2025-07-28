@@ -76,7 +76,7 @@ return {
         { "<leader>m",         function() Snacks.notifier.show_history() end, desc = "Snacks(notifier): Open messages history" },
         { "<leader>z",         function() Snacks.zen.zen() end,               desc = "Snacks(zen): Toogle Zen mode" },
 
-        { "<leader>E",         function() Snacks.picker.explorer() end,       desc = "Snacks(picker): Toggle explorer" },
+        { "<leader>e",         function() Snacks.picker.explorer() end,       desc = "Snacks(picker): Toggle explorer" },
         { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },
         { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find content. Usage: SearchThing--*.ft" },
         { "<leader>fb",        function() Snacks.picker.buffers() end,        desc = "Snacks(picker): Find buffer" },

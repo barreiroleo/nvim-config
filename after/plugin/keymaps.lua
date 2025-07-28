@@ -30,6 +30,11 @@ vim.keymap.set({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, d
 vim.keymap.set({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Search: Nrev search result" })
 vim.keymap.set({ "n", "x" }, "fw", "*N <bar>:set hls<cr>", { desc = "Search: Search word under cursor" })
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Search: Escape and clear hlsearch" })
+-- Sets the word under the cursor as the search pattern, and highlights all matches
+vim.keymap.set('n', '*', function()
+    vim.fn.setreg('/', '\\<' .. vim.fn.expand('<cword>') .. '\\>')
+    vim.opt.hlsearch = true
+end, { silent = true, desc = "Search: Highlight word under cursor" })
 
 -- Terminal escape
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Term: Enter normal mode" })
