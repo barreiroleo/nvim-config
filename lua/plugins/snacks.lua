@@ -76,7 +76,6 @@ return {
         { "<leader>m",         function() Snacks.notifier.show_history() end, desc = "Snacks(notifier): Open messages history" },
         { "<leader>z",         function() Snacks.zen.zen() end,               desc = "Snacks(zen): Toogle Zen mode" },
 
-        { "<leader>e",         function() Snacks.picker.explorer() end,       desc = "Snacks(picker): Toggle explorer" },
         { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },
         { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find content. Usage: SearchThing--*.ft" },
         { "<leader>fb",        function() Snacks.picker.buffers() end,        desc = "Snacks(picker): Find buffer" },
@@ -85,6 +84,23 @@ return {
         { "<leader>/",         function() Snacks.picker.lines() end,          desc = "Snacks(picker): Find in current buffer" },
         { "<leader>fm",        function() Snacks.picker.man() end,            desc = "Snacks(picker): Find in manpages" },
         { "<leader>fvk",       function() Snacks.picker.keymaps() end,        desc = "Snacks(picker): Find keymap" },
+
+        {
+            "<leader>e",
+            function()
+                local explorer_picker = Snacks.picker.get({ source = "explorer" })[1]
+                if not explorer_picker then
+                    Snacks.picker.explorer()
+                    return
+                elseif explorer_picker:is_focused() then
+                    explorer_picker:close()
+                else
+                    explorer_picker:focus()
+                end
+            end,
+            desc = "Snacks(picker): Toggle explorer"
+        },
+
         {
             "<leader>cfg",
             ---@diagnostic disable-next-line: missing-fields
