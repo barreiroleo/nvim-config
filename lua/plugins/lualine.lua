@@ -25,19 +25,31 @@ local lint_component = {
     icon = "󱉶 "
 }
 
+local lsp_component = {
+    require("core.utils.lsp_progress").get_statusline_data,
+    fmt = trunc(80, 10, nil, true),
+    -- icon = "" "✓"
+}
+
 return {
     "nvim-lualine/lualine.nvim",
     event = { "BufNewFile", "BufReadPre", "InsertEnter" },
     opts = function()
         local opts = require("lualine").get_config()
         opts.options = {
-            component_separators = '|',
-            section_separators = { left = '', right = '' },
+            component_separators = '',
+            section_separators = { left = '', right = '' },
         }
         -- opts.winbar.lualine_a = {'filename'}
         -- opts.inactive_winbar.lualine_a = {'filename'}
-        opts.sections.lualine_b = { {'branch', fmt = trunc(80, 0, nil, true)}, 'diagnostics' }
-        opts.sections.lualine_x = { Snacks.profiler.status(), lint_component, 'lsp_status' }
+        --
+        opts.sections.lualine_a = { { 'mode', --[[ separator = { left = '' }, right_padding = 2 ]] } }
+        opts.sections.lualine_b = { { 'branch', fmt = trunc(80, 0, nil, true) }, 'diagnostics' }
+
+        opts.sections.lualine_c = { 'filename', '%=', --[[ Centered components goes here ]] }
+
+        opts.sections.lualine_x = { Snacks.profiler.status(), lint_component, lsp_component --[[ 'lsp_status' ]] }
+        opts.sections.lualine_z = { { 'location', --[[ separator = { right = '' }, left_padding = 2 ]] } }
         return opts
     end,
 }

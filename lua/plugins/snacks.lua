@@ -34,7 +34,16 @@ return {
 
         ---LSP Progress, replacing fidget
         vim.api.nvim_create_autocmd("LspProgress", {
-            callback = require("plugins.snacks_notifiers.lsp_progress"),
+            callback = function(event_data)
+                local data = require("core.utils.lsp_progress").get_notify_data(event_data)
+                if not data then return end
+
+                vim.notify(data.message, vim.log.levels.INFO, {
+                    id = "lsp_progress",
+                    title = data.title,
+                    opts = function(notif) notif.icon = data.spinner end,
+                })
+            end,
         })
     end,
 
