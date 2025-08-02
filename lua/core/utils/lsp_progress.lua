@@ -28,9 +28,7 @@ local function update_progress_cache(client, value)
     local percentage = value.kind == "end" and 100 or value.percentage or 0
 
     if cached and cached.percentage == 100 then
-        vim.defer_fn(function()
-            lsp_progress_map[client.id] = nil
-        end, 1000)
+        lsp_progress_map[client.id] = nil
     end
 
     if cached and cached.percentage == percentage then
@@ -53,7 +51,7 @@ end
 ---
 local M = { _loaded = false }
 
----@param event_data {data: LspProgress.AutocmdEventData}   
+---@param event_data {data: LspProgress.AutocmdEventData}
 ---@return LspProgress.Params.Value?
 function M.get_notify_data(event_data)
     M.setup()
@@ -108,7 +106,9 @@ function M.setup()
             local client = vim.lsp.get_client_by_id(client_id)
             if not client then return end
 
-            update_progress_cache(client, event_data.data.params.value --[[@as LspProgress.Params.Value]])
+            vim.schedule(function()
+                update_progress_cache(client, event_data.data.params.value --[[@as LspProgress.Params.Value]])
+            end)
         end,
     })
 
