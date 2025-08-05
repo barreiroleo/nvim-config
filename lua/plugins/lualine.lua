@@ -34,22 +34,29 @@ local lsp_component = {
 return {
     "nvim-lualine/lualine.nvim",
     event = { "BufNewFile", "BufReadPre", "InsertEnter" },
-    opts = function()
-        local opts = require("lualine").get_config()
-        opts.options = {
+    opts = {
+        options = {
             component_separators = '',
             section_separators = { left = '', right = '' },
+        },
+        inactive_sections = {
+            lualine_c = { { 'filename', path = 1 } }
+        },
+        sections = {
+            lualine_a = { { 'mode', --[[ separator = { left = '' }, right_padding = 2 ]] } },
+            lualine_b = { { 'branch', fmt = trunc(80, 0, nil, true) }, 'diagnostics' },
+            lualine_c = { { 'filename', path = 1 }, '%=', --[[ Centered components goes here ]] },
+            lualine_x = { lint_component, lsp_component --[[ 'lsp_status' ]] },
+            lualine_z = { { 'location', --[[ separator = { right = '' }, left_padding = 2 ]] } },
+        },
+        tabline = {
+            lualine_b = { 'buffers' },
+            lualine_z = { 'tabs' }
         }
-        -- opts.winbar.lualine_a = {'filename'}
-        -- opts.inactive_winbar.lualine_a = {'filename'}
-        --
-        opts.sections.lualine_a = { { 'mode', --[[ separator = { left = '' }, right_padding = 2 ]] } }
-        opts.sections.lualine_b = { { 'branch', fmt = trunc(80, 0, nil, true) }, 'diagnostics' }
-
-        opts.sections.lualine_c = { 'filename', '%=', --[[ Centered components goes here ]] }
-
-        opts.sections.lualine_x = { Snacks.profiler.status(), lint_component, lsp_component --[[ 'lsp_status' ]] }
-        opts.sections.lualine_z = { { 'location', --[[ separator = { right = '' }, left_padding = 2 ]] } }
-        return opts
-    end,
+    },
+    -- config = function(_, opts)
+    --     require("lualine").setup(
+    --         vim.tbl_deep_extend("force", require("lualine").get_config(), opts)
+    --     )
+    -- end,
 }
