@@ -1,4 +1,5 @@
 vim.g.mapleader = ","
+vim.g.maplocalleader = ";"
 
 -- Start as `PROF=1 vim`
 if vim.env.PROF then

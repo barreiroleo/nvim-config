@@ -53,8 +53,9 @@ return {
         'saghen/blink.cmp',
         event = "InsertEnter",
         dependencies = {
+            "fang2hou/blink-copilot",
+            "kristijanhusak/vim-dadbod-completion",
             'rafamadriz/friendly-snippets',
-            "fang2hou/blink-copilot"
         },
         -- version = '1.*', -- Release tag to download pre-built binaries
 
@@ -64,6 +65,7 @@ return {
             cmdline = { enabled = false },
             keymap = {
                 preset = 'super-tab',
+                ['<C-e>'] = { 'hide', 'hide_signature' },
                 -- ["<Tab>"] = copilot_tab_nes,
             },
             fuzzy = { implementation = "lua" },
@@ -77,7 +79,11 @@ return {
             signature = { enabled = true },
             -- snippets = { preset = "luasnip" },
             sources = {
-                default = { "lazydev", "lsp", "path", "snippets", "buffer", "omni", "copilot" },
+                default = { "lsp", "path", "snippets", "buffer", --[[ "omni", ]] "copilot" },
+                per_filetype = {
+                    lua = { inherit_defaults = true, 'lazydev' },
+                    sql = { inherit_defaults = true, 'dadbod' },
+                },
                 providers = {
                     lazydev = {
                         name = "Lazy",
@@ -89,6 +95,11 @@ return {
                         module = "blink-copilot",
                         score_offset = -1,
                         async = true,
+                    },
+                    dadbod = {
+                        name = "Dadbod",
+                        module = "vim_dadbod_completion.blink",
+                        score_offset = 100
                     },
                 },
             },
