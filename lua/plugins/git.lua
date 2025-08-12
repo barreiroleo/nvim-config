@@ -32,6 +32,11 @@ return {
             { "[c", function() MiniDiff.goto_hunk("prev") end, { desc = "MiniDiff: Next hunk" } },
         }
 
+    },
+
+    {
+        "barreiroleo/diff-tools.nvim",
+        opts = {}
     }
 
     -- {

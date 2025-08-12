@@ -28,9 +28,8 @@ vim.keymap.set("i", ";", ";<c-g>u")
 -- Sanner N-n search: https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Search: Next search result" })
 vim.keymap.set({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Search: Nrev search result" })
-vim.keymap.set({ "n", "x" }, "fw", "*N <bar>:set hls<cr>", { desc = "Search: Search word under cursor" })
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Search: Escape and clear hlsearch" })
--- Sets the word under the cursor as the search pattern, and highlights all matches
+-- Sets the word under the cursor as the search pattern, highlights all matches, but don't move the cursor
 vim.keymap.set('n', '*', function()
     vim.fn.setreg('/', '\\<' .. vim.fn.expand('<cword>') .. '\\>')
     vim.opt.hlsearch = true
