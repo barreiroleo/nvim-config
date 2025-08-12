@@ -1,15 +1,15 @@
 ---@type Theme
-local COLORSCHEME = "vague"
+local COLORSCHEME = "kanagawa-dragon"
 
 ---@alias Theme
----| "--catpuccin-mocha"
----| "--jellybeans-muted"
----| "--kanagawa-paper"
----| "--onedark"
----| "--tokyonight-night"
+---| "catpuccin-mocha"
 ---| "gruvbox-material"
+---| "jellybeans-muted"
 ---| "kanagawa-dragon"
+---| "kanagawa-paper"
 ---| "kanagawa-wave"
+---| "onedark"
+---| "tokyonight-night"
 ---| "vague"
 ---| "vscode"
 
