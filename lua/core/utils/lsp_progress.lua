@@ -38,7 +38,7 @@ local function update_progress_cache(client, value)
     lsp_progress_map[client.id] = {
         client_id = client.id,
         title = client.name,
-        message = string.format("[%3d%%] %s%s", percentage, value.title, value.message),
+        message = string.format("[%3d%%] %s %s", percentage, value.title, value.message or ""),
         kind = value.kind,
         percentage = percentage,
         spinner = (percentage == 100) and "✓" or
