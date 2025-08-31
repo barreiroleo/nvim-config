@@ -1,18 +1,7 @@
 return {
     {
         "tpope/vim-fugitive",
-        dependencies = "sindrets/diffview.nvim",
         cmd = { "Git" }
-    },
-
-    {
-        "sindrets/diffview.nvim",
-        cmd = { "DiffviewFileHistory", "DiffviewOpen" },
-        opts = {
-            default_args = {
-                DiffviewOpen = { "--imply-local" },
-            }
-        }
     },
 
     {
@@ -27,17 +16,22 @@ return {
                 goto_next = ']c',
             },
         },
-        keys = {
-            { "[c", function() MiniDiff.goto_hunk("prev") end, { desc = "MiniDiff: Prev hunk" } },
-            { "[c", function() MiniDiff.goto_hunk("prev") end, { desc = "MiniDiff: Next hunk" } },
-        }
-
     },
 
     {
         "barreiroleo/diff-tools.nvim",
         opts = {}
     }
+
+    -- {
+    --     "sindrets/diffview.nvim",
+    --     cmd = { "DiffviewFileHistory", "DiffviewOpen" },
+    --     opts = {
+    --         default_args = {
+    --             DiffviewOpen = { "--imply-local" },
+    --         }
+    --     }
+    -- },
 
     -- {
     --     "lewis6991/gitsigns.nvim",
