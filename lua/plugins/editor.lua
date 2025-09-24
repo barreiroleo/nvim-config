@@ -54,19 +54,37 @@ return {
         'MagicDuck/grug-far.nvim',
         opts = {},
         keys = {
-            vim.keymap.set({ 'n', 'x' }, '<leader>si', function()
-                require('grug-far').open({ visualSelectionUsage = 'operate-within-range' })
-            end, { desc = 'grug-far: Search within range' }),
+            vim.keymap.set('x', '<leader>si',
+                function() require('grug-far').with_visual_selection({ prefills = { paths = vim.fn.expand("%") } }) end,
+                { desc = 'grug-far: Search selection in current file' }),
 
-            vim.keymap.set({ 'n', 'x' }, '<leader>ss', function()
-                local search = vim.fn.getreg('/')
-                -- surround with \b if "word" search (such as when pressing `*`)
-                if search and vim.startswith(search, '\\<') and vim.endswith(search, '\\>') then
-                    search = '\\b' .. search:sub(3, -3) .. '\\b'
-                end
-                require('grug-far').open({ prefills = { search = search, }, })
-            end, { desc = 'grug-far: Search using @/ register value or visual selection' })
+            vim.keymap.set('n', '<leader>si',
+                function() require('grug-far').open({ prefills = { paths = vim.fn.expand("%") } }) end,
+                { desc = 'grug-far: Search in current file' }),
 
+
+            vim.keymap.set('n', '<leader>ss',
+                function()
+                    local bufname = vim.fn.expand("%")
+
+                    require('grug-far').open({
+                        prefills = {
+                            paths = bufname,
+                            search = "foo::(bar)( |>|,|&|\\*|\\{|\\(|::)",
+                            replacement = "fizz::$1$2"
+                        }
+                    })
+
+                    -- Uncomment to search/replace more than one pattern at the same time
+                    -- require('grug-far').open({
+                    --     prefills = {
+                    --         paths = bufname,
+                    --         search = "foo::(fizz)( |>|,|&|\\*|\\{|\\(|::)",
+                    --         replacement = "buzz::$1$2"
+                    --     }
+                    -- })
+                end,
+                { desc = 'grug-far: Search in current file' }),
         }
     }
 }

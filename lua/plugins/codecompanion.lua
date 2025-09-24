@@ -81,14 +81,16 @@ return {
     opts = {
         strategies = {
             -- For local use: agent=phi4, chat=gemma3/qwen3, inline=phi4
-            agent = { adapter = "copilot", },
-            chat = { adapter = "copilot", },
-            inline = { adapter = "copilot", },
+            agent = { adapter = { name = "copilot", model = "claude-sonnet-4" } },
+            chat = { adapter = { name = "copilot", model = "claude-sonnet-4" } },
+            inline = { adapter = { name = "copilot", model = "claude-sonnet-4" } },
         },
         adapters = {
-            phi4 = phi4,
-            gemma3 = gemma3,
-            qwen3 = qwen3,
+            http = {
+                phi4 = phi4,
+                gemma3 = gemma3,
+                qwen3 = qwen3,
+            }
         },
 
         prompt_library = {
