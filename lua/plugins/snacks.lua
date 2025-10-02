@@ -66,7 +66,7 @@ return {
             sources = {
                 explorer = {
                     layout = {
-                        layout = { position = "right" },
+                        layout = { position = "left" },
                         preview = { main = true, enabled = false }
                     }
                 }

@@ -63,6 +63,7 @@ return {
 
     {
         "barreiroleo/callgraph.nvim",
+        cmd = "Callgraph",
         ---@type callgraph.Opts
         opts = {
             run = {
@@ -92,10 +93,10 @@ return {
             }
         },
         keys = {
-            { '<leader>ca', function() require("callgraph").add_location() end,             desc = 'Callgraph: add location to analyze' },
-            { '<leader>ci', function() require("callgraph").run({ direction = "in" }) end,  desc = 'Callgraph: incoming calls' },
-            { '<leader>co', function() require("callgraph").run({ direction = "out" }) end, desc = 'Callgraph: outgoing calls' },
-            { '<leader>cm', function() require("callgraph").run({ direction = "mix" }) end, desc = 'Callgraph: incoming/outgoing calls' },
+            -- { '<leader>ca', function() require("callgraph").add_location() end,             desc = 'Callgraph: add location to analyze' },
+            -- { '<leader>ci', function() require("callgraph").run({ direction = "in" }) end,  desc = 'Callgraph: incoming calls' },
+            -- { '<leader>co', function() require("callgraph").run({ direction = "out" }) end, desc = 'Callgraph: outgoing calls' },
+            -- { '<leader>cm', function() require("callgraph").run({ direction = "mix" }) end, desc = 'Callgraph: incoming/outgoing calls' },
         },
     },
 }
