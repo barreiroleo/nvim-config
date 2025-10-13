@@ -1,3 +1,5 @@
+local lsp_start_time_by_client = {}
+
 local function get_target_path()
     local path = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
     vim.ui.input({ prompt = "Search in folder: ", default = path }, function(input)
@@ -38,8 +40,15 @@ return {
                 local data = require("core.utils.lsp_progress").get_last_msg_for_client(event_data)
                 if not data then return end
 
+                local client_id = event_data.data.client_id
+                local now = vim.uv.hrtime()
+
+                -- Skip notification if last one was sent less than 5000ms ago
+                lsp_start_time_by_client[client_id] = lsp_start_time_by_client[client_id] or now
+                if (now - lsp_start_time_by_client[client_id]) > 5e9 then return end
+
                 vim.notify(data.message, vim.log.levels.INFO, {
-                    id = "lsp_progress",
+                    id = "lsp_progress" .. client_id,
                     title = data.title,
                     opts = function(notif) notif.icon = data.spinner end,
                 })
