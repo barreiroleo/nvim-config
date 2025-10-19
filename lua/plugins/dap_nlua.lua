@@ -1,5 +1,6 @@
 return {
     "jbyuki/one-small-step-for-vimkind",
+    enabled = false,
     ft = "lua",
     init = function()
         vim.api.nvim_create_user_command("VimkindLuaServerStart",

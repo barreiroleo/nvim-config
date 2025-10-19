@@ -70,6 +70,7 @@ Use "N/A" when a certain tag doesn't apply. Do not hallucinate.
 
 return {
     "olimorris/codecompanion.nvim",
+    enabled = false,
     event = { 'BufNewFile', 'BufReadPre' },
     cmd = {
         "CodeCompanion", "CodeCompanionActions", "CodeCompanionChat", "CodeCompanionCmd",

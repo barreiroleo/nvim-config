@@ -3,6 +3,8 @@
 -- vim.bo: behaves like :let &l:{option-name} for buffer-local options
 -- vim.wo: behaves like :let &l:{option-name} for window-local options
 vim.cmd.packadd("cfilter")
+vim.cmd.packadd("nvim.undotree")
+vim.cmd.packadd("nvim.difftool")
 vim.opt.exrc = true -- Auto exec {.nvim.lua, .nvimrc, .exrc}
 
 -- Editing

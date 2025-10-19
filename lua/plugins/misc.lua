@@ -1,10 +1,10 @@
 return {
     { "nvim-lua/plenary.nvim", },
 
-    {
-        'mbbill/undotree',
-        cmd = "UndotreeShow"
-    },
+    -- {
+    --     'mbbill/undotree',
+    --     cmd = "UndotreeShow"
+    -- },
 
     -- {
     --     "danymat/neogen",

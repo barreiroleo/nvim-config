@@ -5,20 +5,6 @@ return {
     },
 
     {
-        "echasnovski/mini.diff",
-        version = false,
-        opts = {
-            view = {
-                style = 'sign',
-            },
-            mappings = {
-                goto_prev = '[c',
-                goto_next = ']c',
-            },
-        },
-    },
-
-    {
         "barreiroleo/diff-tools.nvim",
         opts = {}
     }

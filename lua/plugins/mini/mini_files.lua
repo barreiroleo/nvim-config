@@ -34,38 +34,38 @@ local set_keymap_split = function(buf_id)
         MiniFiles.set_target_window(new_target_window)
     end
     -- Adding `desc` will result into `show_help` entries
-    vim.keymap.set('n', "gs", function() rhs("horizontal") end, { buffer = buf_id, desc = "MiniFiles: Split belowright horizontal" })
-    vim.keymap.set('n', "gv", function() rhs("vertical") end, { buffer = buf_id, desc = "MiniFiles: Split belowright vertical" })
+    vim.keymap.set('n', "gs", function() rhs("horizontal") end,
+        { buffer = buf_id, desc = "MiniFiles: Split belowright horizontal" })
+    vim.keymap.set('n', "gv", function() rhs("vertical") end,
+        { buffer = buf_id, desc = "MiniFiles: Split belowright vertical" })
 end
 
 local function toggle_minifiles_window()
     if not MiniFiles.close() then MiniFiles.open(vim.api.nvim_buf_get_name(0)) end
 end
 
-return {
-    'echasnovski/mini.files',
-    version = false,
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-        require("mini.files").setup()
+local M = {}
 
-        vim.api.nvim_create_autocmd('User', {
-            pattern = 'MiniFilesWindowOpen',
-            callback = function(args)
-                local win_id = args.data.win_id
-                set_blend(win_id)
-            end,
-        })
+function M.setup()
+    require("mini.files").setup()
 
-        vim.api.nvim_create_autocmd('User', {
-            pattern = 'MiniFilesBufferCreate',
-            callback = function(args)
-                local buf_id = args.data.buf_id
-                set_toggle_hidden_files_keymap(buf_id)
-                set_keymap_split(buf_id)
-                set_keymap_split(buf_id)
-            end,
-        })
-    end,
-    keys = { { "<leader>E", toggle_minifiles_window, desc = "MiniFiles: Toggle explorer" } },
-}
+    vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesWindowOpen',
+        callback = function(args)
+            local win_id = args.data.win_id
+            set_blend(win_id)
+        end,
+    })
+
+    vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesBufferCreate',
+        callback = function(args)
+            local buf_id = args.data.buf_id
+            set_toggle_hidden_files_keymap(buf_id)
+            set_keymap_split(buf_id)
+            set_keymap_split(buf_id)
+        end,
+    })
+end
+
+return M
