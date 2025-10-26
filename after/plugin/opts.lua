@@ -17,10 +17,17 @@ vim.opt.wrap = false       -- Disable line wrap
 vim.opt.textwidth = 100    -- Broke lines after N when insert
 vim.opt.spelllang = { "en", "es" }
 
+-- Searching
+vim.opt.incsearch = true
+vim.opt.hlsearch = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.inccommand = "split" -- Shows all effects of subtitutions in a preview window
+vim.o.grepprg = "rg --vimgrep"
+vim.o.grepformat = "%f:%l:%c:%m"
+
 -- Behaviour
 vim.opt.clipboard = "unnamedplus"
-vim.opt.ignorecase = true
-vim.opt.inccommand = "split"        -- Shows all effects of subtitutions in a preview window
 vim.opt.confirm = true              -- Confirm to save changes before exiting modified buffer
 vim.opt.mouse = "a"
 vim.opt.nrformats = "alpha,hex,bin" -- Increment/decrements: 0b01 0x1 a1
