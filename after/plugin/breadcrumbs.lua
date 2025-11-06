@@ -1,36 +1,40 @@
 -- Credits to: https://github.com/juniorsundar/nvim/blob/main/lua/config/lsp/breadcrumbs.lua
 
+vim.lsp.breadcrumbs = {
+    enabled = true,
+}
 local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
+
 local folder_icon = "%#Conditional#" .. "󰉋" .. "%#Normal#"
 local file_icon = "󰈙"
 
 local kind_icons = {
-    "%#File#" .. "󰈙" .. "%#Normal#", -- file
-    "%#Module#" .. "" .. "%#Normal#", -- module
-    "%#Structure#" .. "" .. "%#Normal#", -- namespace
-    "", -- package
-    "%#Class#" .. "󰠱" .. "%#Normal#", -- class
-    "%#Method#" .. "󰆧" .. "%#Normal#", -- method
-    "%#Property#" .. "󰜢" .. "%#Normal#", -- property
-    "%#Field#" .. "󰇽" .. "%#Normal#", -- field
-    "%#Function#" .. "" .. "%#Normal#", -- constructor
-    "%#Enum#" .. "" .. "%#Normal#", -- enum
-    "%#Type#" .. "" .. "%#Normal#", -- interface
-    "%#Function#" .. "󰊕" .. "%#Normal#", -- function
-    "%#None#" .. "󰂡" .. "%#Normal#", -- variable
-    "%#Constant#" .. "󰏿" .. "%#Normal#", -- constant
-    "%#String#" .. "" .. "%#Normal#", -- string
-    "%#Number#" .. "" .. "%#Normal#", -- number
-    "%#Boolean#" .. "" .. "%#Normal#", -- boolean
-    "%#Array#" .. "" .. "%#Normal#", -- array
-    "%#Class#" .. "" .. "%#Normal#", -- object
-    "%#Keyword#" .. "󰌋" .. "%#Normal#", -- key
-    "󰟢", -- null
-    "", -- enum-member
-    "%#Struct#" .. "" .. "%#Normal#", -- struct
-    "", -- event
-    "", -- operator
-    "󰅲", -- type-parameter
+    [1] = "%#File#" .. "󰈙" .. "%#Normal#", -- file
+    [2] = "%#Module#" .. "󰠱" .. "%#Normal#", -- module
+    [3] = "%#Structure#" .. "" .. "%#Normal#", -- namespace
+    [19] = "%#Keyword#" .. "󰌋" .. "%#Normal#", -- key
+    [5] = "%#Class#" .. "" .. "%#Normal#", -- class
+    [6] = "%#Method#" .. "󰆧" .. "%#Normal#", -- method
+    [7] = "%#Property#" .. "" .. "%#Normal#", -- property
+    [8] = "%#Field#" .. "" .. "%#Normal#", -- field
+    [9] = "%#Function#" .. "" .. "%#Normal#", -- constructor
+    [10] = "%#Enum#" .. "" .. "%#Normal#", -- enum
+    [11] = "%#Type#" .. "" .. "%#Normal#", -- interface
+    [12] = "%#Function#" .. "󰊕" .. "%#Normal#", -- function
+    [13] = "%#None#" .. "󰂡" .. "%#Normal#", -- variable
+    [14] = "%#Constant#" .. "󰏿" .. "%#Normal#", -- constant
+    [15] = "%#String#" .. "" .. "%#Normal#", -- string
+    [16] = "%#Number#" .. "" .. "%#Normal#", -- number
+    [17] = "%#Boolean#" .. "" .. "%#Normal#", -- boolean
+    [18] = "%#Array#" .. "" .. "%#Normal#", -- array
+    [20] = "%#Class#" .. "" .. "%#Normal#", -- object
+    [4] = "", -- package
+    [21] = "󰟢", -- null
+    [22] = "", -- enum-member
+    [23] = "%#Struct#" .. "" .. "%#Normal#", -- struct
+    [24] = "", -- event
+    [25] = "", -- operator
+    [26] = "󰅲", -- type-parameter
 }
 
 local function range_contains_pos(range, line, char)
@@ -101,6 +105,10 @@ local function lsp_callback(err, symbols, ctx, config)
         relative_path = vim.fs.relpath(root_dir, file_path)
     end
 
+    if not relative_path then
+        relative_path = file_path
+    end
+
     local breadcrumbs = {}
 
     local path_components = vim.split(relative_path, "[/\\]", { trimempty = true })
@@ -108,16 +116,12 @@ local function lsp_callback(err, symbols, ctx, config)
 
     for i, component in ipairs(path_components) do
         if i == num_components then
-            local icon
-            local icon_hl
+            local icon, icon_hl = file_icon, ""
 
             if devicons_ok then
                 icon, icon_hl = devicons.get_icon(component)
-                table.insert(breadcrumbs,
-                    "%#" .. icon_hl .. "#" .. (icon or file_icon) .. "%#Normal#" .. " " .. component)
-            else
-                table.insert(breadcrumbs, "%#" .. "?" .. "#" .. (icon or file_icon) .. "%#Normal#" .. " " .. component)
             end
+            table.insert(breadcrumbs, "%#" .. icon_hl .. "#" .. icon .. "%#Normal#" .. " " .. component)
         else
             table.insert(breadcrumbs, folder_icon .. " " .. component)
         end
@@ -134,20 +138,22 @@ local function lsp_callback(err, symbols, ctx, config)
 end
 
 local function breadcrumbs_set()
+    if not vim.lsp.breadcrumbs.enabled then
+        return
+    end
     local bufnr = vim.api.nvim_get_current_buf()
     local winnr = vim.api.nvim_get_current_buf()
-    ---@type string
+
+    local clients = vim.lsp.get_clients({ bufnr = bufnr, method = "textDocument/documentSymbol" })
+    if #clients == 0 then
+        return
+    end
+
     local uri = vim.lsp.util.make_text_document_params(bufnr)["uri"]
     if not uri then
         vim.print("Error: Could not get URI for buffer. Is it saved?")
         return
     end
-
-    local params = {
-        textDocument = {
-            uri = uri
-        }
-    }
 
     local buf_src = uri:sub(1, uri:find(":") - 1)
     if buf_src ~= "file" then
@@ -155,26 +161,46 @@ local function breadcrumbs_set()
         return
     end
 
-    vim.lsp.buf_request(
-        bufnr,
-        'textDocument/documentSymbol',
-        params,
-        lsp_callback
-    )
+    local params = { textDocument = { uri = uri, }, }
+    vim.schedule(function()
+        vim.lsp.buf_request(bufnr, "textDocument/documentSymbol", params, lsp_callback)
+    end)
 end
 
 local breadcrumbs_augroup = vim.api.nvim_create_augroup("Breadcrumbs", { clear = true })
 
-vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
     group = breadcrumbs_augroup,
     callback = breadcrumbs_set,
     desc = "Set breadcrumbs.",
 })
 
-vim.api.nvim_create_autocmd({ "WinLeave" }, {
-    group = breadcrumbs_augroup,
-    callback = function()
+-- vim.api.nvim_create_autocmd({ "WinLeave" }, {
+--     group = breadcrumbs_augroup,
+--     callback = function()
+--         vim.o.winbar = ""
+--     end,
+--     desc = "Clear breadcrumbs when leaving window.",
+-- })
+
+local function toggle_breadcrumbs()
+    if vim.lsp.breadcrumbs == nil then
+        vim.notify("`vim.lsp.breadcrumbs` doesn't exists!", vim.log.levels.WARN, { title = "LSP" })
+        return
+    end
+    if vim.lsp.breadcrumbs.enabled == nil then
+        vim.notify("`vim.lsp.breadcrumbs.enabled` doesn't exists!", vim.log.levels.WARN, { title = "LSP" })
+        return
+    end
+    vim.lsp.breadcrumbs.enabled = not vim.lsp.breadcrumbs.enabled
+    if vim.lsp.breadcrumbs.enabled then
+        vim.notify("Auto Hover enabled", vim.log.levels.INFO, { title = "LSP" })
+    else
+        vim.notify("Auto Hover disabled", vim.log.levels.INFO, { title = "LSP" })
         vim.o.winbar = ""
-    end,
-    desc = "Clear breadcrumbs when leaving window.",
-})
+    end
+end
+
+vim.keymap.set("n", "<leader><leader>TB", toggle_breadcrumbs,
+    { desc = "Toggle LSP breadcrumbs", noremap = false, silent = true }
+)

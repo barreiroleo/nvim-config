@@ -37,7 +37,7 @@ local BuildCmds = {
 
 require("core.lsp.on_attach_fn").on_attach_client_name("texlab",
     function(client, lsp_attach_args, callback_args)
-        vim.fn.serverstart("/tmp/nvim.latex")
+        -- vim.fn.serverstart("/tmp/nvim.latex")
     end
 )
 

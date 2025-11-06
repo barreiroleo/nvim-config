@@ -3,7 +3,7 @@
 ---@type table
 vim.lsp.autohover = {
     enabled = false,
-    delay = 2000,
+    delay = 500,
     layout = "float",
     opts = {
         border = "rounded",
