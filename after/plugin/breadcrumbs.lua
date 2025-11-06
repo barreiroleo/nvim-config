@@ -62,7 +62,7 @@ local function find_symbol_path(symbol_list, line, char, path)
     end
 
     for _, symbol in ipairs(symbol_list) do
-        if range_contains_pos(symbol.range, line, char) then
+        if symbol.range and range_contains_pos(symbol.range, line, char) then
             local icon = kind_icons[symbol.kind] or ""
             table.insert(path, icon .. " " .. symbol.name)
             find_symbol_path(symbol.children, line, char, path)
@@ -162,9 +162,7 @@ local function breadcrumbs_set()
     end
 
     local params = { textDocument = { uri = uri, }, }
-    vim.schedule(function()
-        vim.lsp.buf_request(bufnr, "textDocument/documentSymbol", params, lsp_callback)
-    end)
+    vim.lsp.buf_request(bufnr, "textDocument/documentSymbol", params, lsp_callback)
 end
 
 local breadcrumbs_augroup = vim.api.nvim_create_augroup("Breadcrumbs", { clear = true })

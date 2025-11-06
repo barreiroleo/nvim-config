@@ -53,16 +53,6 @@ vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +1<cr>", { desc = "Window
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +1<cr>", { desc = "Window: Increase window height" })
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -1<cr>", { desc = "Window: Decrease window height" })
 
--- Quickfix
-vim.api.nvim_create_autocmd("Filetype", {
-    pattern = { "qf" },
-    callback = function()
-        local qf_rm_entries = require("core.utils.qf_rm_entries")
-        vim.keymap.set("n", "dd", qf_rm_entries, { buffer = true, desc = "QuickFix: Remove entry from" })
-        vim.keymap.set("x", "d", qf_rm_entries, { buffer = true, desc = "QuickFix: Remove entry from" })
-    end
-})
-
 -- LSP
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserAutocmd_LspAttach", { clear = false }),

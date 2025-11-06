@@ -44,6 +44,12 @@ return {
         },
     },
 
+    {
+        'stevearc/quicker.nvim',
+        ft = "qf",
+        opts = {},
+    },
+
     -- {
     --     'hedyhli/outline.nvim',
     --     cmd = 'Outline',
