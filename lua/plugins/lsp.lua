@@ -15,7 +15,11 @@ return {
 
             require("core.lsp.ui")
 
-            require('mason').setup()
+            require('mason').setup({
+                -- registries = {
+                --     "file:~/develop/mason-registry/"
+                -- }
+            })
 
             require("mason-lspconfig").setup({
                 ensure_installed = {

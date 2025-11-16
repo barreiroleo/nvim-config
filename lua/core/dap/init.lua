@@ -14,6 +14,7 @@ return {
     on_stop = function()
         vim.diagnostic.show()
         keymap_manager.shutdown()
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { desc = "DAP: Hover variables" })
         dapui.close()
     end
 }

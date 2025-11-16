@@ -10,7 +10,8 @@ return {
                 sh = { "shfmt" },
                 cmake = { "cmake_format" },
                 markdown = { "prettier" },
-                yaml = { "prettier" }
+                yaml = { "prettier" },
+                html = { "prettier" },
             },
             formatters = {
                 jq = { append_args = { "--indent", "4" } },
