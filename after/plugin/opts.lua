@@ -23,8 +23,10 @@ vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.inccommand = "split" -- Shows all effects of subtitutions in a preview window
-vim.o.grepprg = "rg --vimgrep"
-vim.o.grepformat = "%f:%l:%c:%m"
+if vim.fn.executable("rg") then
+    vim.o.grepprg = "rg --vimgrep --smart-case"
+    vim.o.grepformat = "%f:%l:%c:%m"
+end
 
 -- Behaviour
 vim.opt.clipboard = "unnamedplus"
@@ -41,7 +43,7 @@ vim.opt.undofile = true
 vim.opt.wildmode = "longest:full,full"
 
 -- Visual
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "+1"
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.relativenumber = true

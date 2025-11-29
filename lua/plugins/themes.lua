@@ -1,17 +1,23 @@
 ---@type Theme
-local COLORSCHEME = "kanagawa-dragon"
+local COLORSCHEME = "kanagawa-paper"
 
 ---@alias Theme
 ---| "catpuccin-mocha"
+---| "default"
 ---| "gruvbox-material"
 ---| "jellybeans-muted"
 ---| "kanagawa-dragon"
 ---| "kanagawa-paper"
 ---| "kanagawa-wave"
+---| "miasma"
+---| "nightfox"
+---| "nord"
+---| "nordic"
 ---| "onedark"
 ---| "tokyonight-night"
 ---| "vague"
 ---| "vscode"
+---| "rose-pine"
 
 ---Repository to store functors to customizer highlights according the colorscheme
 ---@type table<Theme, function?>
@@ -45,7 +51,6 @@ return {
         "sainnhe/gruvbox-material",
         lazy = false,
         priority = 1000,
-        enabled = true,
         opts = {},
         config = function(_, opts)
             vim.o.termguicolors = true
@@ -74,7 +79,6 @@ return {
         "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
-        enabled = true,
         opts = {
             compile = true,
             background = { dark = "dragon" },
@@ -115,11 +119,22 @@ return {
         end
     },
 
+    -- {
+    --     "rose-pine/neovim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require("rose-pine").setup(opts)
+    --         if COLORSCHEME ~= "rose-pine" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end
+    -- },
+
     {
         "Mofiqul/vscode.nvim",
         lazy = false,
         priority = 1000,
-        enabled = true,
         opts = {},
         config = function(_, opts)
             require("vscode").setup(opts)
@@ -133,7 +148,6 @@ return {
     --     name = "catppuccin",
     --     lazy = false,
     --     priority = 1000,
-    --     enabled = true,
     --     opts = {},
     --     config = function(_, opts)
     --         require("catppuccin").setup(opts)
@@ -142,39 +156,36 @@ return {
     --     end,
     -- },
 
-    -- {
-    --     "wtfox/jellybeans.nvim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     enabled = true,
-    --     opts = {},
-    --     config = function(_, opts)
-    --         require("jellybeans").setup(opts)
-    --         if COLORSCHEME ~= "jellybeans-muted" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
-    --     end,
-    -- },
+    {
+        "wtfox/jellybeans.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function(_, opts)
+            require("jellybeans").setup(opts)
+            if COLORSCHEME ~= "jellybeans-muted" then return end
+            vim.cmd.colorscheme(COLORSCHEME)
+        end,
+    },
 
-    -- {
-    --     "thesimonho/kanagawa-paper.nvim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     enabled = true,
-    --     opts = {
-    --         cache = true,
-    --     },
-    --     config = function(_, opts)
-    --         require("kanagawa-paper").setup(opts)
-    --         if COLORSCHEME ~= "kanagawa-paper" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
-    --     end,
-    -- },
+    {
+        "thesimonho/kanagawa-paper.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            cache = true,
+        },
+        config = function(_, opts)
+            require("kanagawa-paper").setup(opts)
+            if COLORSCHEME ~= "kanagawa-paper" then return end
+            vim.cmd.colorscheme(COLORSCHEME)
+        end,
+    },
 
     -- {
     --     "olimorris/onedarkpro.nvim",
     --     lazy = false,
     --     priority = 1000,
-    --     enabled = true,
     --     opts = {},
     --     config = function(_, opts)
     --         require("onedarkpro").setup(opts)
@@ -187,12 +198,76 @@ return {
     --     "folke/tokyonight.nvim",
     --     lazy = false,
     --     priority = 1000,
-    --     enabled = true,
     --     opts = {},
     --     config = function(_, opts)
     --         require("tokyonight").setup(opts)
     --         if COLORSCHEME ~= "tokyonight-night" then return end
     --         vim.cmd.colorscheme(COLORSCHEME)
     --     end,
+    -- },
+
+    -- {
+    --     "EdenEast/nightfox.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require("nightfox").setup(opts)
+    --         if COLORSCHEME ~= "nightfox" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end,
+    -- },
+
+    {
+        "gbprod/nord.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function(_, opts)
+            require("nord").setup(opts)
+            if COLORSCHEME ~= "nord" then return end
+            vim.cmd.colorscheme(COLORSCHEME)
+        end,
+    },
+
+    -- {
+    --     'AlexvZyl/nordic.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require("nordic").setup(opts)
+    --         if COLORSCHEME ~= "nordic" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end,
+    --     init = function()
+    --         customizer_hl_functors["nordic"] = function()
+    --             vim.cmd.highlight("FloatBorder guifg=#54546d")
+    --             vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
+    --         end
+    --     end
+    -- },
+
+    -- {
+    --     "ramojus/mellifluous.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require("mellifluous").setup(opts)
+    --         if COLORSCHEME ~= "mellifluous" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end
+    -- },
+
+    -- {
+    --     "xero/miasma.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         if COLORSCHEME ~= "miasma" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end
     -- },
 }
