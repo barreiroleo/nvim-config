@@ -1,5 +1,8 @@
 local M = {}
 
+local last_program = nil
+local last_args = nil
+
 M.adapter = {
     type = 'server',
     port = "${port}",
@@ -34,9 +37,14 @@ M.configurations = {
         stopAtEntry = true,
         setupCommands = common.setupCommands,
         program = function()
-            return vim.fn.input('ctrl-d: list matches\nctrl-a: complete\n path to executable: ',
-                vim.fn.getcwd() .. "/build/", 'file')
-        end
+            last_program = vim.fn.input('ctrl-d: list matches\nctrl-a: complete\n path to executable: ',
+                last_program or vim.fn.getcwd() .. "/build/", 'file')
+            return last_program
+        end,
+        args = function()
+            last_args = vim.fn.input('Arguments: ', last_args or "")
+            return vim.split(last_args, " +")
+        end,
     },
 
     {
