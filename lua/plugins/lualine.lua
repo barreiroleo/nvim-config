@@ -50,7 +50,7 @@ return {
             lualine_z = { { 'location', --[[ separator = { right = '' }, left_padding = 2 ]] } },
         },
         tabline = {
-            lualine_b = { 'buffers' },
+            lualine_b = { { 'buffers', buffers_color = { active = 'lualine_b_insert' } } },
             lualine_z = { 'tabs' }
         }
     },

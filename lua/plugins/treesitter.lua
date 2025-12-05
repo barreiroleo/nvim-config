@@ -16,7 +16,7 @@ return {
             "lua", "luadoc", "vim", "vimdoc",
             "rust", "java", "python", "bash",
             "markdown",
-            "json", "jsonc", "toml", "yaml", "sql", "dockerfile",
+            "json", "toml", "yaml", "sql", "dockerfile",
         },
         ignore_install = { "javascript" },
         auto_install = true,

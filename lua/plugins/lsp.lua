@@ -13,22 +13,20 @@ return {
                 capabilities = require("core.lsp.capabilities").extend_capabilities()
             })
 
+            local servers = { "clangd", "lua_ls", "sqruff"  }
+            local to_install = vim.tbl_filter(function(s)
+                local is_installed = vim.fn.executable(s) == 1
+                vim.lsp.enable(s, is_installed)
+                return not is_installed
+            end, servers)
+
             require("core.lsp.ui")
-
             require('mason').setup({
-                -- registries = {
-                --     "file:~/develop/mason-registry/"
-                -- }
+                -- registries = { "file:~/develop/mason-registry/" }
             })
-
             require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "clangd",
-                    "lua_ls",
-                },
-                automatic_enable = {
-                    exclude = { "rust_analyzer" }
-                },
+                ensure_installed = to_install,
+                automatic_enable = { exclude = { "rust_analyzer" } },
             })
         end,
     },

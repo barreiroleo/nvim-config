@@ -9,15 +9,6 @@
 --     '--use-dirty-headers=true',
 -- }
 
--- NOTE: Legacy lsp-config
--- on_attach = function(_client, bufnr)
---     local commands = require("lspconfig.configs.clangd").commands
---     vim.keymap.set({ "n", "i" }, "<A-o>", commands.ClangdSwitchSourceHeader[1],
---         { desc = "Clang: Switch source/header", buffer = bufnr })
---     vim.keymap.set({ "n", "i" }, "<leader>k", commands.ClangdShowSymbolInfo[1],
---         { desc = "Clang: Show symbol info", buffer = bufnr })
--- end,
-
 --- https://clangd.llvm.org/extensions.html#file-status
 local function force_diagnostics(bufnr)
     -- Clangd diagnostics sometimes get behind. This sends a textDocument/didChange notify with an extra arg.
@@ -59,24 +50,20 @@ return {
         completeUnimported = true,
         clangdFileStatus = true,
         -- Controls the flags used when no compile command is found. Like compile_flags.txt
-        fallbackFlags = { '-std=c++23', "-stdlib=libc++" }
+        fallbackFlags = { '-std=c++23' }
     },
 
     cmd = {
-        -- vim.fn.stdpath("data") .. "/mason/bin/clangd",
-        "/usr/bin/clangd",
-        "-j=10",
+        vim.fn.exepath("clangd") or vim.fn.stdpath("data") .. "/mason/bin/clangd",
+        "-j=6",
         "--background-index",
         "--background-index-priority=background",
         "--clang-tidy", -- Run through nvim-lint. See comment on top.
         "--completion-style=detailed",
-        "--function-arg-placeholders",
         "--header-insertion=never",
         "--log=error",
         "--malloc-trim",
         "--pch-storage=memory",
-
         "--fallback-style=webkit",
-        '--offset-encoding=utf-16',
     },
 }

@@ -1,6 +1,11 @@
 return {
     { "nvim-lua/plenary.nvim", },
 
+    {
+        "tpope/vim-dispatch",
+        cmd = { "Make", "Copen", "Dispatch", "Start", "Spawn" }
+    },
+
     -- {
     --     'mbbill/undotree',
     --     cmd = "UndotreeShow"
