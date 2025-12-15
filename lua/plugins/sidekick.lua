@@ -19,6 +19,7 @@ return {
                 if not require("sidekick").nes_jump_or_apply() then return "<Tab>" end
             end,
             expr = true,
+            mode = { "n", "x" },
             desc = "Goto/Apply Next Edit Suggestion",
         },
         {
@@ -42,7 +43,7 @@ return {
         },
         {
             "<M-.>",
-            function() require("sidekick.cli").focus({ name = "opencode" }) end,
+            function() require("sidekick.cli").toggle() end,
             mode = { "n", "x", "i", "t" },
             desc = "Sidekick Switch Focus",
         },
