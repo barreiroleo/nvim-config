@@ -1,7 +1,7 @@
 return {
     "nvim-neotest/neotest",
     event = "LspAttach",
-    enabled = false,
+    -- enabled = false,
     dependencies = {
         "alfaix/neotest-gtest",
         "nvim-neotest/neotest-plenary",

@@ -54,7 +54,7 @@ return {
     },
 
     cmd = {
-        vim.fn.exepath("clangd") or vim.fn.stdpath("data") .. "/mason/bin/clangd",
+        vim.fn.exepath("/usr/bin/clangd") or vim.fn.stdpath("data") .. "/mason/bin/clangd",
         "-j=6",
         "--background-index",
         "--background-index-priority=background",
