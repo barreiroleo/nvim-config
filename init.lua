@@ -41,5 +41,3 @@ require("lazy").setup({
         require = true,
     }
 })
-
--- require('vim._extui').enable {}

@@ -5,6 +5,10 @@ return {
         "tpope/vim-dispatch",
         cmd = { "Make", "Copen", "Dispatch", "Start", "Spawn" }
     },
+    {
+        "andymass/vim-matchup",
+        event = { 'BufNewFile', 'BufReadPre' },
+    },
 
     -- {
     --     'mbbill/undotree',
@@ -22,7 +26,7 @@ return {
         "kkoomen/vim-doge",
         event = { 'BufNewFile', 'BufReadPre' },
         build = "<cmd>call doge#install()",
-        config = function ()
+        config = function()
             vim.g.doge_doc_standard_cpp = "doxygen_cpp_comment_slash"
         end,
         keys = {

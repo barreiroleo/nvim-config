@@ -4,6 +4,12 @@ return {
     -- { import = "plugins.langs.plantuml" },
 
     {
+        'brianhuster/live-preview.nvim',
+        cmd = "LivePreview",
+        opts = {},
+    },
+
+    {
         'mrcjkb/rustaceanvim',
         ft = { "rust" },
         -- version = '^4',

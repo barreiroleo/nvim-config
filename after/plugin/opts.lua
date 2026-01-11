@@ -19,7 +19,7 @@ vim.opt.spelllang = { "en", "es" }
 
 -- Searching
 vim.opt.incsearch = true
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.inccommand = "split" -- Shows all effects of subtitutions in a preview window

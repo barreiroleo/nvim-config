@@ -2,7 +2,7 @@
 local COLORSCHEME = "kanagawa-paper"
 
 ---@alias Theme
----| "catpuccin-mocha"
+---| "catppuccin-mocha"
 ---| "default"
 ---| "gruvbox-material"
 ---| "jellybeans-muted"
@@ -22,6 +22,14 @@ local COLORSCHEME = "kanagawa-paper"
 ---Repository to store functors to customizer highlights according the colorscheme
 ---@type table<Theme, function?>
 local customizer_hl_functors = {}
+
+---Special case for default.
+customizer_hl_functors["default"] = function()
+    vim.cmd.highlight("ColorColumn guibg=#303236")
+end
+if COLORSCHEME == "default" then
+    customizer_hl_functors[COLORSCHEME]()
+end
 
 ---Reaply custom highlights every time a colorscheme is loaded or switched.
 vim.api.nvim_create_autocmd("ColorScheme", {
@@ -47,6 +55,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 
 return {
+    -- I've found gruvbox's highlight to enoying bright. Specially with LSP references and copilot.
     {
         "sainnhe/gruvbox-material",
         lazy = false,
@@ -75,6 +84,7 @@ return {
         end
     },
 
+    -- Still love kanagawa dragon, but I'm tired of it.
     {
         "rebelot/kanagawa.nvim",
         lazy = false,
@@ -93,10 +103,10 @@ return {
                     -- https://github.com/rebelot/kanagawa.nvim#dark-completion-popup-menu
                     Pmenu                   = { link = "Normal" },
                     -- PmenuSel                = { link = "CursorLine" },
-                    -- TODO: Send a PR. There's a typo in BlinkCmpLabelDetail.
                     -- https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/highlights/plugins.lua#L196
                     BlinkCmpMenuBorder      = { link = "Pmenu" },
                     BlinkCmpLabelDetail     = { fg = colors.theme.syn.comment },
+                    LineNr                  = { bg = "#1c1b1b" },
                 }
             end,
         },
@@ -107,6 +117,30 @@ return {
         end,
     },
 
+    {
+        "thesimonho/kanagawa-paper.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            cache = true,
+        },
+        config = function(_, opts)
+            require("kanagawa-paper").setup(opts)
+            if COLORSCHEME ~= "kanagawa-paper" then return end
+            vim.cmd.colorscheme(COLORSCHEME)
+        end,
+        init = function()
+            customizer_hl_functors["kanagawa-paper"] = function()
+                vim.cmd.highlight("Normal guibg=#16161d")
+                vim.cmd.highlight("NormalNC guibg=#131319")
+                vim.cmd.highlight("ColorColumn guibg=#21212b")
+                vim.cmd.highlight("NormalFloat guibg=#21212b")
+                vim.cmd.highlight("FloatBorder guibg=#21212b")
+            end
+        end
+    },
+
+    -- Still prefeer vague over rose-pine
     {
         "vague2k/vague.nvim",
         lazy = false,
@@ -166,20 +200,11 @@ return {
             if COLORSCHEME ~= "jellybeans-muted" then return end
             vim.cmd.colorscheme(COLORSCHEME)
         end,
-    },
-
-    {
-        "thesimonho/kanagawa-paper.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {
-            cache = true,
-        },
-        config = function(_, opts)
-            require("kanagawa-paper").setup(opts)
-            if COLORSCHEME ~= "kanagawa-paper" then return end
-            vim.cmd.colorscheme(COLORSCHEME)
-        end,
+        init = function()
+            customizer_hl_functors["jellybeans-muted"] = function()
+                vim.api.nvim_set_hl(0, "SnacksPickerPreviewBorder", { default = true, link = "FloatBorder" })
+            end
+        end
     },
 
     -- {
@@ -218,18 +243,19 @@ return {
     --     end,
     -- },
 
-    {
-        "gbprod/nord.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-        config = function(_, opts)
-            require("nord").setup(opts)
-            if COLORSCHEME ~= "nord" then return end
-            vim.cmd.colorscheme(COLORSCHEME)
-        end,
-    },
+    -- {
+    --     "gbprod/nord.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function(_, opts)
+    --         require("nord").setup(opts)
+    --         if COLORSCHEME ~= "nord" then return end
+    --         vim.cmd.colorscheme(COLORSCHEME)
+    --     end,
+    -- },
 
+    -- I've tweaked background more gruvbox-ish. Interesting.
     -- {
     --     'AlexvZyl/nordic.nvim',
     --     lazy = false,
@@ -242,32 +268,11 @@ return {
     --     end,
     --     init = function()
     --         customizer_hl_functors["nordic"] = function()
+    --             vim.cmd.highlight("Normal guibg=#0f1115")
+    --             vim.cmd.highlight("NormalNC guibg=##0a0c0f")
     --             vim.cmd.highlight("FloatBorder guifg=#54546d")
     --             vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
     --         end
-    --     end
-    -- },
-
-    -- {
-    --     "ramojus/mellifluous.nvim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     opts = {},
-    --     config = function(_, opts)
-    --         require("mellifluous").setup(opts)
-    --         if COLORSCHEME ~= "mellifluous" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
-    --     end
-    -- },
-
-    -- {
-    --     "xero/miasma.nvim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     opts = {},
-    --     config = function(_, opts)
-    --         if COLORSCHEME ~= "miasma" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end
     -- },
 }
