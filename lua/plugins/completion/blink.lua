@@ -53,10 +53,15 @@ return {
         'saghen/blink.cmp',
         event = "InsertEnter",
         dependencies = {
+            "saghen/blink.lib",
             "fang2hou/blink-copilot",
             "kristijanhusak/vim-dadbod-completion",
-            'rafamadriz/friendly-snippets',
+            "rafamadriz/friendly-snippets",
         },
+        -- build = function()
+        --     -- Build rust fuzzy, Use `gb` in `:Lazy` to rebuild the plugin as needed
+        --     require('blink.cmp').build():wait(60000)
+        -- end,
         -- version = '1.*', -- Release tag to download pre-built binaries
 
         ---@module 'blink.cmp'
