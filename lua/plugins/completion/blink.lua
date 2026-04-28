@@ -40,21 +40,21 @@ local copilot_tab_nes = {
 }
 
 return {
-    {
-        "fang2hou/blink-copilot",
-        lazy = true,
-        opts = {
-            max_completions = 3,
-            max_attempts = 4,
-        }
-    },
+    -- {
+    --     "fang2hou/blink-copilot",
+    --     lazy = true,
+    --     opts = {
+    --         max_completions = 3,
+    --         max_attempts = 4,
+    --     }
+    -- },
 
     {
         'saghen/blink.cmp',
         event = "InsertEnter",
         dependencies = {
             "saghen/blink.lib",
-            "fang2hou/blink-copilot",
+            -- "fang2hou/blink-copilot",
             "kristijanhusak/vim-dadbod-completion",
             "rafamadriz/friendly-snippets",
         },
@@ -84,7 +84,7 @@ return {
             signature = { enabled = true },
             -- snippets = { preset = "luasnip" },
             sources = {
-                default = { "lsp", "path", "snippets", "buffer", --[[ "omni", ]] "copilot" },
+                default = { "lsp", "path", "snippets", "buffer", --[[ "omni", "copilot" ]] },
                 per_filetype = {
                     lua = { inherit_defaults = true, 'lazydev' },
                     sql = { inherit_defaults = true, 'dadbod' },
@@ -95,12 +95,12 @@ return {
                         module = "lazydev.integrations.blink",
                         score_offset = 100,
                     },
-                    copilot = {
-                        name = "copilot",
-                        module = "blink-copilot",
-                        score_offset = -1,
-                        async = true,
-                    },
+                    -- copilot = {
+                    --     name = "copilot",
+                    --     module = "blink-copilot",
+                    --     score_offset = -1,
+                    --     async = true,
+                    -- },
                     dadbod = {
                         name = "Dadbod",
                         module = "vim_dadbod_completion.blink",

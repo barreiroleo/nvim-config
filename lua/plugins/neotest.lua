@@ -10,10 +10,10 @@ return {
     config = function(_, opts)
         local adapters = {
             require("neotest-gtest").setup({
-                -- TODO: I don't like this global approach. Need to read about neotest projects settings
-                filter_dir = function(name, _rel_path, _root)
-                    return name ~= "external" and name ~= "third-party" and name ~= "build"
-                end
+                -- -- TODO: I don't like this global approach. Need to read about neotest projects settings
+                -- filter_dir = function(name, _rel_path, _root)
+                --     return name ~= "external" and name ~= "third-party" and name ~= "build"
+                -- end
             }),
             require('rustaceanvim.neotest'),
             require("neotest-plenary"),
