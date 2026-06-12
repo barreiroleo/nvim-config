@@ -5,6 +5,7 @@ return {
     dependencies = {
         "alfaix/neotest-gtest",
         "nvim-neotest/neotest-plenary",
+        'arthur944/neotest-bun',
     },
 
     config = function(_, opts)
@@ -17,6 +18,7 @@ return {
             }),
             require('rustaceanvim.neotest'),
             require("neotest-plenary"),
+            require("neotest-bun"),
         }
 
         ---@diagnostic disable-next-line: missing-fields

@@ -3,12 +3,13 @@ return {
         'nvim-mini/mini.nvim',
         version = false,
         lazy = false,
-        config = function()
+        init = function()
+            require("mini.files").setup()
+            require("mini.icons").setup()
             require("mini.pairs").setup()
+            require("plugins.mini.diff").setup()
             require("plugins.mini.hipatterns").setup()
             require("plugins.mini.surround").setup()
-            require("plugins.mini.diff").setup()
-            require("plugins.mini.mini_files").setup()
         end,
         keys = { {
             "<leader>E",

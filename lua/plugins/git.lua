@@ -4,9 +4,27 @@ return {
         cmd = { "Git" }
     },
 
+    -- {
+    --     "barreiroleo/diff-tools.nvim",
+    --     opts = {}
+    -- },
+
     {
-        "barreiroleo/diff-tools.nvim",
-        opts = {}
+        'kokusenz/deltaview.nvim',
+        opts = {
+            line_numbers = true,
+            keyconfig = {
+                -- Remove global keybinds
+                dm_toggle_keybind = "", -- <leader>dm
+                dv_toggle_keybind = "", -- <leader>dl
+                d_toggle_keybind = "",  -- <leader>da
+                -- Navigate between hunks in a diff
+                next_hunk = "<Tab>",
+                prev_hunk = "<S-Tab>",
+                -- Open help legend
+                help_legend = "d?"
+            }
+        }
     }
 
     -- {

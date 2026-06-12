@@ -1,58 +1,37 @@
----@type Theme
-local COLORSCHEME = "kanagawa-paper"
-
----@alias Theme
----| "catppuccin-mocha"
----| "default"
----| "gruvbox-material"
----| "jellybeans-muted"
----| "kanagawa-dragon"
----| "kanagawa-paper"
----| "kanagawa-wave"
----| "miasma"
----| "nightfox"
----| "nord"
----| "nordic"
----| "onedark"
----| "tokyonight-night"
----| "vague"
----| "vscode"
----| "rose-pine"
+--- Dark and Light colorschemes
+local COLORSCHEME_DARK = "kanagawa-paper"
+local COLORSCHEME_LIGHT = "vscode"
 
 ---Repository to store functors to customizer highlights according the colorscheme
----@type table<Theme, function?>
-local customizer_hl_functors = {}
-
----Special case for default.
-customizer_hl_functors["default"] = function()
-    vim.cmd.highlight("ColorColumn guibg=#303236")
-end
-if COLORSCHEME == "default" then
-    customizer_hl_functors[COLORSCHEME]()
-end
-
----Reaply custom highlights every time a colorscheme is loaded or switched.
-vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function(args)
-        ---@type Theme
-        local colorscheme = args.match
-
+---@type table<string, function?>
+local CUSTOM_HIGHLIGHT_MAP = {
+    ["common"] = function()
         -- DAP UI highlights
         vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-
         -- Diagnostic highlights
         if vim.o.background == "dark" then
             vim.cmd.highlight("ErrorMsg guibg=#250000 guifg=0")
             vim.cmd.highlight("WarningMsg guibg=#252500 guifg=0")
         end
+    end,
 
-        -- Custom highlights per colorscheme
-        if customizer_hl_functors[colorscheme] ~= nil then
-            customizer_hl_functors[colorscheme]()
-        end
+    ["default"] = function()
+        vim.cmd.highlight("ColorColumn guibg=#303236")
+    end
+}
+
+---Reaply custom highlights every time a colorscheme is loaded or switched.
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function(args)
+        local colorscheme = args.match
+        return CUSTOM_HIGHLIGHT_MAP[colorscheme] and CUSTOM_HIGHLIGHT_MAP[colorscheme]()
     end,
 })
 
+require("core.utils.auto-switch-theme").lazy_setup({
+    dark = COLORSCHEME_DARK,
+    light = COLORSCHEME_LIGHT,
+})
 
 return {
     -- I've found gruvbox's highlight to enoying bright. Specially with LSP references and copilot.
@@ -70,7 +49,7 @@ return {
             vim.g.gruvbox_material_enable_italic = true
             vim.g.gruvbox_material_transparent_background = false
 
-            customizer_hl_functors["gruvbox-material"] = function()
+            CUSTOM_HIGHLIGHT_MAP["gruvbox-material"] = function()
                 vim.cmd.highlight("LspInlayHint cterm=italic,underline guifg=#686868")
                 vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
                 vim.cmd.highlight("Normal guifg=#c5c9c5 guibg=#181616")
@@ -78,9 +57,6 @@ return {
                 vim.cmd.highlight("NormalFloat guifg=#c8c093 guibg=#0d0c0c")
                 vim.cmd.highlight("FloatBorder guifg=#54546d guibg=#0d0c0c")
             end
-
-            if COLORSCHEME ~= "gruvbox-material" then return end
-            vim.cmd.colorscheme(COLORSCHEME)
         end
     },
 
@@ -112,8 +88,6 @@ return {
         },
         config = function(_, opts)
             require("kanagawa").setup(opts)
-            if COLORSCHEME ~= "kanagawa-dragon" and COLORSCHEME ~= "kanagawa-wave" then return end
-            vim.cmd.colorscheme(COLORSCHEME)
         end,
     },
 
@@ -126,11 +100,9 @@ return {
         },
         config = function(_, opts)
             require("kanagawa-paper").setup(opts)
-            if COLORSCHEME ~= "kanagawa-paper" then return end
-            vim.cmd.colorscheme(COLORSCHEME)
         end,
         init = function()
-            customizer_hl_functors["kanagawa-paper"] = function()
+            CUSTOM_HIGHLIGHT_MAP["kanagawa-paper"] = function()
                 vim.cmd.highlight("Normal guibg=#16161d")
                 vim.cmd.highlight("NormalNC guibg=#131319")
                 vim.cmd.highlight("ColorColumn guibg=#21212b")
@@ -148,8 +120,6 @@ return {
         opts = {},
         config = function(_, opts)
             require("vague").setup(opts)
-            if COLORSCHEME ~= "vague" then return end
-            vim.cmd("colorscheme vague")
         end
     },
 
@@ -160,8 +130,6 @@ return {
     --     opts = {},
     --     config = function(_, opts)
     --         require("rose-pine").setup(opts)
-    --         if COLORSCHEME ~= "rose-pine" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end
     -- },
 
@@ -172,8 +140,6 @@ return {
         opts = {},
         config = function(_, opts)
             require("vscode").setup(opts)
-            if COLORSCHEME ~= "vscode" then return end
-            vim.cmd.colorscheme(COLORSCHEME)
         end
     },
 
@@ -185,8 +151,6 @@ return {
     --     opts = {},
     --     config = function(_, opts)
     --         require("catppuccin").setup(opts)
-    --         if COLORSCHEME ~= "catpuccin-mocha" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end,
     -- },
 
@@ -197,11 +161,9 @@ return {
         opts = {},
         config = function(_, opts)
             require("jellybeans").setup(opts)
-            if COLORSCHEME ~= "jellybeans-muted" then return end
-            vim.cmd.colorscheme(COLORSCHEME)
         end,
         init = function()
-            customizer_hl_functors["jellybeans-muted"] = function()
+            CUSTOM_HIGHLIGHT_MAP["jellybeans-muted"] = function()
                 vim.api.nvim_set_hl(0, "SnacksPickerPreviewBorder", { default = true, link = "FloatBorder" })
             end
         end
@@ -214,8 +176,6 @@ return {
     --     opts = {},
     --     config = function(_, opts)
     --         require("onedarkpro").setup(opts)
-    --         if COLORSCHEME ~= "onedark" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end,
     -- },
 
@@ -226,8 +186,6 @@ return {
     --     opts = {},
     --     config = function(_, opts)
     --         require("tokyonight").setup(opts)
-    --         if COLORSCHEME ~= "tokyonight-night" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end,
     -- },
 
@@ -238,8 +196,6 @@ return {
     --     opts = {},
     --     config = function(_, opts)
     --         require("nightfox").setup(opts)
-    --         if COLORSCHEME ~= "nightfox" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end,
     -- },
 
@@ -250,8 +206,6 @@ return {
     --     opts = {},
     --     config = function(_, opts)
     --         require("nord").setup(opts)
-    --         if COLORSCHEME ~= "nord" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end,
     -- },
 
@@ -263,8 +217,6 @@ return {
     --     opts = {},
     --     config = function(_, opts)
     --         require("nordic").setup(opts)
-    --         if COLORSCHEME ~= "nordic" then return end
-    --         vim.cmd.colorscheme(COLORSCHEME)
     --     end,
     --     init = function()
     --         customizer_hl_functors["nordic"] = function()

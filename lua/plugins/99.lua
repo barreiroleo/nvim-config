@@ -6,7 +6,7 @@ return {
         },
         -- opencode models --refresh | grep opencode
         -- model = "github-copilot/gpt-5.1-codex-mini",
-        model = "opencode/minimax-m2.5-free" -- opencode/big-pickle
+        model = "opencode-go/minimax-m2.7" -- opencode/big-pickle
     },
 
     keys = {

@@ -50,11 +50,21 @@ return {
     -- },
 
     {
+        "supermaven-inc/supermaven-nvim",
+        opts = {
+            disable_inline_completion = false, -- disables inline completion for use with cmp
+            disable_keymaps = false            -- disables built in keymaps for more manual control
+        }
+    },
+
+    {
         'saghen/blink.cmp',
         event = "InsertEnter",
         dependencies = {
+            "supermaven-inc/supermaven-nvim",
             "saghen/blink.lib",
             -- "fang2hou/blink-copilot",
+            "huijiro/blink-cmp-supermaven",
             "kristijanhusak/vim-dadbod-completion",
             "rafamadriz/friendly-snippets",
         },
@@ -84,7 +94,7 @@ return {
             signature = { enabled = true },
             -- snippets = { preset = "luasnip" },
             sources = {
-                default = { "lsp", "path", "snippets", "buffer", --[[ "omni", "copilot" ]] },
+                default = { "lsp", "path", "snippets", "buffer", "supermaven" --[[ "omni", "copilot" ]] },
                 per_filetype = {
                     lua = { inherit_defaults = true, 'lazydev' },
                     sql = { inherit_defaults = true, 'dadbod' },
@@ -105,6 +115,11 @@ return {
                         name = "Dadbod",
                         module = "vim_dadbod_completion.blink",
                         score_offset = 100
+                    },
+                    supermaven = {
+                        name = "supermaven",
+                        module = "blink-cmp-supermaven",
+                        async = true
                     },
                 },
             },
