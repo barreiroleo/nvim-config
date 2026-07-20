@@ -97,8 +97,8 @@ return {
         { "<leader>m",         function() Snacks.notifier.show_history() end, desc = "Snacks(notifier): Open messages history" },
         { "<leader>z",         function() Snacks.zen.zen() end,               desc = "Snacks(zen): Toogle Zen mode" },
 
-        { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },
-        { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find content. Usage: SearchThing--*.ft" },
+        -- { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },
+        -- { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find content. Usage: SearchThing--*.ft" },
         { "<leader>fb",        function() Snacks.picker.buffers() end,        desc = "Snacks(picker): Find buffer" },
         { "<leader>fh",        function() Snacks.picker.help() end,           desc = "Snacks(picker): Find help tag (vimdoc)" },
         { "<leader>f/",        function() Snacks.picker.grep_buffers() end,   desc = "Snacks(picker): Find in open buffers" },
