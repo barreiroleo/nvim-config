@@ -56,6 +56,7 @@ return {
                 vim.cmd.highlight("NormalNC guifg=#c8c093 guibg=#12120f")
                 vim.cmd.highlight("NormalFloat guifg=#c8c093 guibg=#0d0c0c")
                 vim.cmd.highlight("FloatBorder guifg=#54546d guibg=#0d0c0c")
+                vim.api.nvim_set_hl(0, "LazyDimmed", { default = true, link = "Comment" })
             end
         end
     },
@@ -219,7 +220,7 @@ return {
     --         require("nordic").setup(opts)
     --     end,
     --     init = function()
-    --         customizer_hl_functors["nordic"] = function()
+    --         CUSTOM_HIGHLIGHT_MAP["nordic"] = function()
     --             vim.cmd.highlight("Normal guibg=#0f1115")
     --             vim.cmd.highlight("NormalNC guibg=##0a0c0f")
     --             vim.cmd.highlight("FloatBorder guifg=#54546d")
