@@ -9,6 +9,39 @@ local function get_target_path()
     return path
 end
 
+local collapse_action = {
+    name = "collapse_except_focused",
+    key = "zz",
+    action = function(picker)
+        local item = picker:current()
+        if not item then
+            return
+        end
+
+        local Tree = require("snacks.explorer.tree")
+        local Actions = require("snacks.explorer.actions")
+        local cwd = picker:cwd()
+
+        -- Store the current item's file path
+        local target_file = item.file
+
+        -- Close all directories first
+        Tree:close_all(cwd)
+
+        -- Then open the path to the current item
+        if target_file then
+            Tree:open(target_file)
+        end
+
+        -- Refresh and restore focus to the current item
+        picker:find({
+            on_done = function()
+                Actions.reveal(picker, target_file)
+            end,
+        })
+    end
+}
+
 return {
     "folke/snacks.nvim",
     priority = 1000,
@@ -74,6 +107,16 @@ return {
             enabled = true,
             sources = {
                 explorer = {
+                    win = {
+                        list = {
+                            keys = {
+                                [collapse_action.key] = collapse_action.name,
+                            }
+                        }
+                    },
+                    actions = {
+                        [collapse_action.name] = collapse_action.action,
+                    },
                     layout = {
                         layout = { position = "left" },
                         preview = { main = true, enabled = false }
@@ -97,8 +140,8 @@ return {
         { "<leader>m",         function() Snacks.notifier.show_history() end, desc = "Snacks(notifier): Open messages history" },
         { "<leader>z",         function() Snacks.zen.zen() end,               desc = "Snacks(zen): Toogle Zen mode" },
 
-        -- { "<leader>ff",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },
-        -- { "<leader>fg",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find content. Usage: SearchThing--*.ft" },
+        { "<leader>fF",        function() Snacks.picker.files() end,          desc = "Snacks(picker): Find file or path" },
+        { "<leader>fG",        function() Snacks.picker.grep() end,           desc = "Snacks(picker): Find content. Usage: SearchThing--*.ft" },
         { "<leader>fb",        function() Snacks.picker.buffers() end,        desc = "Snacks(picker): Find buffer" },
         { "<leader>fh",        function() Snacks.picker.help() end,           desc = "Snacks(picker): Find help tag (vimdoc)" },
         { "<leader>f/",        function() Snacks.picker.grep_buffers() end,   desc = "Snacks(picker): Find in open buffers" },
