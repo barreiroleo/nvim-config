@@ -1,5 +1,5 @@
 --- Dark and Light colorschemes
-local COLORSCHEME_DARK = "kanagawa-paper"
+local COLORSCHEME_DARK = "gruvbox-material"
 local COLORSCHEME_LIGHT = "vscode"
 
 ---Repository to store functors to customizer highlights according the colorscheme
@@ -20,17 +20,10 @@ local CUSTOM_HIGHLIGHT_MAP = {
     end
 }
 
----Reaply custom highlights every time a colorscheme is loaded or switched.
-vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function(args)
-        local colorscheme = args.match
-        return CUSTOM_HIGHLIGHT_MAP[colorscheme] and CUSTOM_HIGHLIGHT_MAP[colorscheme]()
-    end,
-})
-
 require("core.utils.auto-switch-theme").lazy_setup({
     dark = COLORSCHEME_DARK,
     light = COLORSCHEME_LIGHT,
+    overrides_map_cb = CUSTOM_HIGHLIGHT_MAP
 })
 
 return {
@@ -149,7 +142,12 @@ return {
     --     name = "catppuccin",
     --     lazy = false,
     --     priority = 1000,
-    --     opts = {},
+    --     opts = {
+    --         flavour = "mocha",
+    --         color_overrides = {
+    --             mocha = { base = "#0a0a0a", mantle = "#0a0a0a", crust = "#0a0a0a", },
+    --         },
+    --      },
     --     config = function(_, opts)
     --         require("catppuccin").setup(opts)
     --     end,
@@ -184,7 +182,7 @@ return {
     --     "folke/tokyonight.nvim",
     --     lazy = false,
     --     priority = 1000,
-    --     opts = {},
+    --     opts = { style = "night", },
     --     config = function(_, opts)
     --         require("tokyonight").setup(opts)
     --     end,
@@ -211,21 +209,43 @@ return {
     -- },
 
     -- I've tweaked background more gruvbox-ish. Interesting.
+    {
+        'AlexvZyl/nordic.nvim',
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function(_, opts)
+            require("nordic").setup(opts)
+        end,
+        init = function()
+            CUSTOM_HIGHLIGHT_MAP["nordic"] = function()
+                vim.cmd.highlight("Normal guibg=#0f1115")
+                vim.cmd.highlight("NormalNC guibg=##0a0c0f")
+                vim.cmd.highlight("FloatBorder guifg=#54546d")
+                vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
+            end
+        end
+    },
+
     -- {
-    --     'AlexvZyl/nordic.nvim',
+    --     "loctvl842/monokai-pro.nvim",
     --     lazy = false,
     --     priority = 1000,
-    --     opts = {},
-    --     config = function(_, opts)
-    --         require("nordic").setup(opts)
+    --     config = function()
+    --         require("monokai-pro").setup()
     --     end,
-    --     init = function()
-    --         CUSTOM_HIGHLIGHT_MAP["nordic"] = function()
-    --             vim.cmd.highlight("Normal guibg=#0f1115")
-    --             vim.cmd.highlight("NormalNC guibg=##0a0c0f")
-    --             vim.cmd.highlight("FloatBorder guifg=#54546d")
-    --             vim.cmd.highlight("TreesitterContextBottom gui=underline guisp=Grey")
-    --         end
-    --     end
     -- },
+
+    {
+        "barreiroleo/kintsugi.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            compile = true,
+            background = { dark = "dark_flared" },
+        },
+        config = function(_, opts)
+            require("kintsugi").setup(opts)
+        end,
+    },
 }
