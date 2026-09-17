@@ -1,4 +1,14 @@
 -- Diagnostic message display. Error lens
+local function set_line_hl_from_existing()
+    local error_hl = vim.api.nvim_get_hl(0, { name = 'ErrorMsg' })
+    local warn_hl  = vim.api.nvim_get_hl(0, { name = 'WarningMsg' })
+    vim.api.nvim_set_hl(0, 'DiagnosticLineErrorBg', { bg = error_hl.bg or "#3c1f1e" })
+    vim.api.nvim_set_hl(0, 'DiagnosticLineWarnBg', { bg = warn_hl.bg or "#352e1e" })
+end
+
+set_line_hl_from_existing()
+vim.api.nvim_create_autocmd('ColorScheme', { callback = set_line_hl_from_existing })
+
 vim.diagnostic.config {
     -- virtual_lines = { current_line = true },
     virtual_text = {
@@ -19,8 +29,8 @@ vim.diagnostic.config {
             [vim.diagnostic.severity.HINT] = '',
         },
         linehl = {
-            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-            [vim.diagnostic.severity.WARN] = 'WarningMsg',
+            [vim.diagnostic.severity.ERROR] = 'DiagnosticLineErrorBg',
+            [vim.diagnostic.severity.WARN]  = 'DiagnosticLineWarnBg',
         },
         numhl = {
             [vim.diagnostic.severity.ERROR] = 'ErrorMsg',

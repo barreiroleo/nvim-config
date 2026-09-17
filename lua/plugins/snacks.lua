@@ -95,7 +95,7 @@ return {
         },
         bigfile = { enabled = true },
         indent = {
-            enabled = true,
+            enabled = false,
             indent = { char = '┆' },
             animate = { enabled = false },
         },

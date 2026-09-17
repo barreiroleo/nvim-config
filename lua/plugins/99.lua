@@ -10,7 +10,7 @@ return {
     },
 
     keys = {
-        { mode = "v",          "<leader>9v", function() require("99").visual() end,            desc = "Visual select and send to 99" },
+        { mode = "v",          "<leader>9v", function() require("99").visual({}) end,          desc = "Visual select and send to 99" },
         { mode = { "n", "v" }, "<leader>9s", function() require("99").stop_all_requests() end, desc = "Stop all 99 requests" },
     },
 
